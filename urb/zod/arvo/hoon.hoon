@@ -6435,7 +6435,7 @@
       +>
     ==
       %etch  etch
-      %open  open
+::       %open  open
       %rake  rake
     ==
   |_  gen=twig
@@ -6564,8 +6564,8 @@
         [%sgbc *]  [%sggr [%live [%dtzz %$ p.gen]] q.gen]
         [%sgls *]  [%sggr [%memo %dtzz %$ p.gen] q.gen]
         [%sgpm *]
-      :+  %sggr
-        [%slog [%dtzy %$ p.gen] [%cnhp [%cnzy %cain] [%zpgr q.gen] ~]]
+::       :+  %sggr
+::         [%slog [%dtzy %$ p.gen] [%cnhp [%cnzy %cain] [%zpgr q.gen] ~]]
       r.gen
     ::
         [%sgts *]  [%sggr [%germ p.gen] q.gen]
