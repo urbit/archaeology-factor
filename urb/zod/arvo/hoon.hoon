@@ -9395,8 +9395,8 @@
 ++  cage  (cask vase)                                   ::  global metadata
 ++  cask  |*(a=$+(* *) (pair mark a))                   ::  global data
 ++  cuff                                                ::  permissions
-          $:  p=kirk                                    ::  readers
-              q=(set monk)                              ::  authors
+          $:  p=(unit (set monk))                       ::  can be read by
+              q=(set monk)                              ::  caused or created by
           ==                                            ::
 ++  curd  ,[p=@tas q=*]                                 ::  typeless card
 ++  duct  (list wire)                                   ::  causal history
@@ -9406,18 +9406,6 @@
                 imp=path                                ::  app instance
             ==                                          ::  
             cub=(map span term)                         ::  offspring
-            sup=(map bone (pair ship path))             ::  subscription set
-            pus=(jug path bone)                         ::  noitpircsbus set
-            $:  act=@ud                                 ::  change number
-                eny=@uvI                                ::  entropy
-                lat=@da                                 ::  date of last tick
-        ==  ==                                          ::
-++  hyde                                                ::  new app state
-        $:  $:  our=ship                                ::  owner/operator
-                dap=dude                                ::  app identity
-            ==                                          ::  
-            gest
-            
             sup=(map bone (pair ship path))             ::  subscription set
             pus=(jug path bone)                         ::  noitpircsbus set
             $:  act=@ud                                 ::  change number

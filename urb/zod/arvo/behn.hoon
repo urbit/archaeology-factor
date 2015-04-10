@@ -117,7 +117,11 @@
       bum=(map dude seat)                               ::  running agents
       wub=(map dude sofa)                               ::  waiting queue
   ==                                                    ::
-++  prey  (pair volt cuff)                              ::  privilege
+++  ffuc                                                ::  new cuff
+    $:  p=(unit (set monk))                             ::  can be read by
+        q=monk                                          ::  caused or created by
+    ==                                                  ::
+++  prey  (pair volt ffuc)                              ::  privilege
 ++  scad                                                ::  opaque for foreign
   $:  p=@ud                                             ::  index
       q=(map duct ,@ud)                                 ::  by duct
@@ -266,6 +270,16 @@
       ^-  tare
       [%leaf (weld "behn: {<dap>}:" msg)]~
     ::
+    ++  ap-soot                                         ::  note to vane
+      |=  vax=vase
+      ^-  (each ,@tas tare)
+      ?.  &(?=([@ *] q.vax) ((sane %tas) -.q.vax))
+        [%| (ap-suck "same: malformed note"]
+      ?+  -.q.vax 
+               [%| (ap-suck "same: unknown note {(trip -.q.vax)})]
+        %exec  [%& %f]    ::  XX etc
+      == 
+    ::
     ++  ap-safe                                         ::  process move list
       |=  vax=vase
       ^-  (each (list move) tare)
@@ -311,12 +325,18 @@
       :-  %meta
       :-  [%cell [%cube %rush %atom %tas] p.vax]
       [%rush q.vax]
-    :: 
+    ::
+    ++  ap-same-pass
+      |=  [neh=duct vax=vase]
+      ^-  (each move tare)
+      =+  toh=(ap-soot vax)
+      ?:  ?=(%| -.toh)  toh
+      [%& neh %pass 
     ::
     ++  ap-save                                         ::  verify core
       |=  vax=vase
       ^-  (each vase tare)
-      [%& vax)
+      [%& vax]
     ::
     ++  ap-sake                                         ::  handle result
       |=  vax=vase
@@ -334,7 +354,7 @@
       ==
     ::
     ++  ap-poke                                         ::  apply message
-      |=  [her=ship cag=cage]
+      |=  cag=cage
       ^+  +>
       =+  spy=(cat 3 'poke-' p.cag)
       =+  [reh sto]=[!>(`@p`her) !>(`@ud`ost)]
