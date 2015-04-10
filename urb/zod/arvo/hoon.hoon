@@ -9412,6 +9412,18 @@
                 eny=@uvI                                ::  entropy
                 lat=@da                                 ::  date of last tick
         ==  ==                                          ::
+++  hyde                                                ::  new app state
+        $:  $:  our=ship                                ::  owner/operator
+                dap=dude                                ::  app identity
+            ==                                          ::  
+            gest
+            
+            sup=(map bone (pair ship path))             ::  subscription set
+            pus=(jug path bone)                         ::  noitpircsbus set
+            $:  act=@ud                                 ::  change number
+                eny=@uvI                                ::  entropy
+                lat=@da                                 ::  date of last tick
+        ==  ==                                          ::
 ++  hypo  |*(a=$+(* *) (pair type a))                   ::  type associated
 ++  hobo  |*  a=$+(* *)                                 ::  kiss wrapper
           $?  $%  [%soft p=*]                           ::

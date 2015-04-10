@@ -32,8 +32,8 @@
   ::  for any sole state +>, obeys
   ::
   ::      =+  [x=(transmute a b) y=(transmute b a)]
-  ::      .=  (apply:(apply b) x) 
-  ::          (apply:(apply a) y)
+  ::      .=  (apply:(apply a) x) 
+  ::          (apply:(apply b) y)
   ::
   ++  transmute                                         ::  dex as after sin
     |=  [sin=sole-edit dex=sole-edit]
@@ -104,7 +104,7 @@
     ^-  [sole-edit sole-share]
     ?>  &(=(his.ler his.ven) (lte own.ler own.ven))
     ?>  &(=(his.ler his.ven) (lte own.ler own.ven))
-    ?>  |(!=(own.ler own.ven) =(haw (sham buf)))
+    ?>  |(!=(own.ler own.ven) =(0 haw) =(haw (sham buf)))
     =.  leg  (scag (sub own.ven own.ler) leg)
     ::  ~?  !=(own.ler own.ven)  [%miss-leg leg]
     =+  dat=(transmute [%mor leg] ted)
