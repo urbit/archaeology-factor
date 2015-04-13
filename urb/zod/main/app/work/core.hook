@@ -1,0 +1,20 @@
+::
+::::  /hook/core/talk/app
+  ::
+/?  314
+::
+::::
+  :: 
+!:
+=>  |%                                                  ::  data structures
+    ++  axle  
+      $:  upcoming=(list pending)
+          following=(list pending)
+          incoming=(list pending)
+          open=(list pending)
+      ==
+    ++  gift
+      $%  [%rush ~]
+          [%nice ~]
+      ==
+    --

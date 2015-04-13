@@ -1,0 +1,51 @@
+::
+::::  /hook/core/talk/sur
+  ::
+/*  talk
+!:
+|%
+::
+++  command
+  $%  [%create todo]                                    ::  create for me
+      [%send (pair path todo)]                          ::  send to ether
+  ==
+++  report
+  $%  [%list (list todo)]
+  ==
+::
+++  action
+  $?
+    %claimed
+    %released
+  ==
+++  comment
+  $%
+    [%action p=@p q=action]
+    [%speech p=@tas]
+  ==
+++  comments
+  $:
+    created=@da
+    modified=@da
+    author=@p
+    body=comment
+  ==
+++  pending
+  $:
+    sort=@ud
+    task=todo
+  ==
+++  tagg  @t                                             ::  xx without spaces 
+++  todo
+  $:
+    serial=@uvH
+    title=@tas
+    created=@da
+    modified=@da
+    due=(unit ,@da)
+    comments=(list comment)
+    tags=(list ,tagg)
+    attn=(list ,@p)
+    owner=(unit ,@p)
+  ==
+--
