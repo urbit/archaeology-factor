@@ -1,0 +1,17 @@
+::
+::::  /hook/door/work-command/mar
+  ::
+/?  314
+/-  *work
+!:
+|_  cod=command
+:: s
+++  grab
+  |%
+  ++  noun  command
+  ++  json
+    |=  a=^json
+    ^-  command-l
+    (need ((of create/(ot task/ni title/so ~) ~):jo a))
+  --
+--

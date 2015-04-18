@@ -1,14 +1,8 @@
 ::
 ::
-::::  /hook/hymn/fab/chat/pub/
+::::  /hook/hymn/fab/talk/pub/
   ::
-|%
-++  cdnj
-  |=  a=wall  ^-  marl
-  %+  turn  a
-  |=  lib=tape
-  ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/{lib}");
---
+/+  www-util
 ::
 ::::
   ::
@@ -26,7 +20,7 @@
     ;meta(name "viewport", content "width=device-width, height=device-height, ".
      "initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0");
     ;link(type "text/css", rel "stylesheet", href "/main/pub/talk/src/css/main.css");
-    ;title: Radio
+    ;title: Talk
   ==
   ;body
     ;div#c;

@@ -1,0 +1,16 @@
+::
+::::  /hook/core/talk/lib
+  ::  
+  ::  This file is in the public domain.
+  ::
+/?    314
+::
+::::
+  ::
+|%
+++  cdnj
+  |=  a=wall  ^-  marl
+  %+  turn  a
+  |=  lib=tape
+  ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/{lib}");
+--

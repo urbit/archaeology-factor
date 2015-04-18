@@ -2,19 +2,30 @@
 ::::  /hook/core/talk/app
   ::
 /?  314
+/-  *work
 ::
 ::::
   :: 
 !:
-=>  |%                                                  ::  data structures
-    ++  axle  
-      $:  upcoming=(list pending)
-          following=(list pending)
-          incoming=(list pending)
-          open=(list pending)
-      ==
-    ++  gift
-      $%  [%rush ~]
-          [%nice ~]
-      ==
-    --
+|%                                                  ::  data structures
+++  axle  ,[%0 todo]
+++  todo  
+  $:  upcoming=(list ,pending-l)
+      following=(list ,pending)
+      incoming=(list ,pending)
+      open=(list ,pending)
+  ==
+++  gift
+  $%  [%rush ~]
+      [%nice ~]
+  ==
+--
+!:
+::::
+  ::
+|_  [hid=hide axle]
+++  poke-work-command
+  |=  [ost=bone you=ship mez=command-l]
+  
+  [~[[ost %give %nice ~]] +>.$]
+--

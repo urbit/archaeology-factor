@@ -1,13 +1,17 @@
 ::
-::::  /hook/core/talk/sur
+::::  /hook/core/work/sur
   ::
-/*  talk
 !:
 |%
-::
+:: s
 ++  command
   $%  [%create todo]                                    ::  create for me
       [%send (pair path todo)]                          ::  send to ether
+  ==
+++  command-l
+  $%  [%create todo-l]                                    ::  create for me
+      [%update todo-l]
+      [%send (pair path todo-l)]                          ::  send to ether
   ==
 ++  report
   $%  [%list (list todo)]
@@ -35,7 +39,17 @@
     sort=@ud
     task=todo
   ==
-++  tagg  @t                                             ::  xx without spaces 
+++  pending-l
+  $:
+    sort=@ud
+    task=todo-l
+  ==
+++  tagg  ,@t                                             ::  xx without spaces 
+++  todo-l
+  $:
+    task=@ud
+    title=@t
+  ==
 ++  todo
   $:
     serial=@uvH
@@ -44,7 +58,7 @@
     modified=@da
     due=(unit ,@da)
     comments=(list comment)
-    tags=(list ,tagg)
+    tags=(list tagg)
     attn=(list ,@p)
     owner=(unit ,@p)
   ==
