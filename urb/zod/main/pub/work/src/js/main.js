@@ -1,5 +1,13 @@
 $(function() {
   console.log('ready')  
+  window.urb.subscribe({
+    appl:"work",
+    path:"/r"
+  },function(err,res) {
+    console.log('sub')
+    console.log(err)
+    console.log(res)
+  })
   $('body').on('click',function() {
     window.urb.send({
       appl:"work",

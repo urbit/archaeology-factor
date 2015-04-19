@@ -16,14 +16,37 @@
       open=(list ,pending)
   ==
 ++  gift
-  $%  [%rush ~]
+  $%  [%rush rasp]
+      [%rust rasp]
       [%nice ~]
+  ==
+++  rasp
+  $%  [%json p=json]
+      [%work-report p=report-l]
   ==
 --
 !:
 ::::
   ::
 |_  [hid=hide vat=axle]
+++  peer
+  |=  [ost=bone her=ship pax=path]
+  :_  +>.$
+  :_  ~
+  ?+  -.pax
+    [ost %give %mean `[%not-found [%leaf "you need to specify a path"]~]]
+  %r
+    [ost %give %rush %work-report [%list vat]]
+  ==
+::
+++  spam
+  %+  turn  
+    %+  skim  (~(tap by sup.hid))
+      |=  [ost=bone his=ship pax=path]
+    ?=([%r ~] pax)
+  |=  [ost=bone his=ship pax=path]
+    [ost %give %rush %work-report [%list vat]]
+::
 ++  poke-work-command
   |=  [ost=bone you=ship mez=command-l]
   ~&  vat
@@ -35,7 +58,7 @@
       %+  skip
         vat
       |=  p=pending-l
-        =(task.task.p +.mez)
+        =(serial.task.p +.mez)
   ==
-  [~[[ost %give %nice ~]] +>.$]
+  [[[ost %give %nice ~] spam] +>.$]
 --

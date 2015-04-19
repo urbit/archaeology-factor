@@ -15,10 +15,10 @@
     ^-  command-l
     =-  (need ((of -) a))
     =<  :~  create/that
-            delete/ni
+            delete/(ci (slat %uv) so)
     ==
     |%
-    ++  that  (ot sort/ni task/(ot task/ni title/so ~) ~)
+    ++  that  (ot sort/ni task/(ot serial/(ci (slat %uv) so) title/so ~) ~)
     --
   --
 --

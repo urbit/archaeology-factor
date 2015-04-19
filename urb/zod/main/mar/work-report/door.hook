@@ -1,0 +1,27 @@
+::
+::::  /hook/door/work-report/mar
+  ::
+/?    314
+/-    *work
+!:
+|_  rep=report-l
+::
+++  grab                                                ::  convert from
+  |%
+  ++  noun  report-l                                    ::  clam from %noun
+  --
+++  grow
+  |%
+  ++  mime  [/text/json (taco (crip (pojo json)))]
+  ++  json
+    :-  %a
+    %+  turn  +.rep
+    |=  item=pending-l
+      %-  jobe
+    :~
+      sort/(jone sort.item)
+      serial/(jape <serial.task.item>)
+      title/[%s title.task.item]
+    ==
+  --
+--
