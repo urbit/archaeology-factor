@@ -10,8 +10,15 @@
   |%
   ++  noun  command
   ++  json
-    |=  a=^json
+    =>  [jo ..command-l]
+    |=  a=json
     ^-  command-l
-    (need ((of create/(ot task/ni title/so ~) ~):jo a))
+    =-  (need ((of -) a))
+    =<  :~  create/that
+            delete/ni
+    ==
+    |%
+    ++  that  (ot sort/ni task/(ot task/ni title/so ~) ~)
+    --
   --
 --

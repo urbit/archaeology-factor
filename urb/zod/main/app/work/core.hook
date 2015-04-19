@@ -8,7 +8,7 @@
   :: 
 !:
 |%                                                  ::  data structures
-++  axle  ,[%0 todo]
+++  axle  (list pending-l)
 ++  todo  
   $:  upcoming=(list ,pending-l)
       following=(list ,pending)
@@ -23,9 +23,19 @@
 !:
 ::::
   ::
-|_  [hid=hide axle]
+|_  [hid=hide vat=axle]
 ++  poke-work-command
   |=  [ost=bone you=ship mez=command-l]
-  
+  ~&  vat
+  ~&  -.mez  
+  =.  vat
+  ?-  -.mez
+    %create  [+.mez vat]
+    %delete
+      %+  skip
+        vat
+      |=  p=pending-l
+        =(task.task.p +.mez)
+  ==
   [~[[ost %give %nice ~]] +>.$]
 --

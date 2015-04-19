@@ -9,9 +9,8 @@
       [%send (pair path todo)]                          ::  send to ether
   ==
 ++  command-l
-  $%  [%create todo-l]                                    ::  create for me
-      [%update todo-l]
-      [%send (pair path todo-l)]                          ::  send to ether
+  $%  [%create pending-l]                               ::  create for me
+      [%delete @ud]
   ==
 ++  report
   $%  [%list (list todo)]

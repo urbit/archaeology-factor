@@ -7,8 +7,11 @@ $(function() {
       mark:"work-command",
       data:{
         'create':{
-          'task':1,
-          'title':'go and!'
+          'sort':1,
+          'task':{
+            'task':1,
+            'title':'go and!'
+          }
         }
       }
     },function(err,res) {
