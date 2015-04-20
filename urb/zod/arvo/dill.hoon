@@ -270,7 +270,7 @@
         =+  myt=(flop (need tem))
         =.  tem  ~
         =.  moz  :_(moz [hen %pass ~ %g %show [our [ram ~]] our ~])
-        =.  moz  :_(moz [hen %pass ~ %b %conf [our %soul %load our %main]])
+        ::  =.  moz  :_(moz [hen %pass ~ %b %conf [our %soul %load our %main]])
         |-  ^+  +>
         ?~  myt  +>
         $(myt t.myt, +> (send i.myt))

@@ -39,7 +39,6 @@
       ==                                                ::
     ++  hapt  ,[p=ship q=path]                          ::  
     ++  move  ,[p=bone q=(mold note gift)]              ::
-    ++  note-behn
     ++  note-gall                                       ::  note to %gall
       $%  [%mess p=[p=ship q=path] q=ship r=cage]       ::
           [%show p=[p=ship q=path] q=ship r=path]       ::

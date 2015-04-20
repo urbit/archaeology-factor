@@ -515,7 +515,7 @@
         %poke   (ap-poke +.cub)
         %peer   (ap-peer +.cub)
         %pull   ap-pull
-        %pump   ?^(p.cub ~&([%club-fall p.cub] +>.$)ap-fall)
+        %pump   ?^(p.cub ~&([%club-fall p.cub] +>.$) ap-fall)
       ==
     ::
     ++  ap-find                                         ::  general arm
