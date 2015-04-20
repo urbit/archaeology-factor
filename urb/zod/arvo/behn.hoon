@@ -52,25 +52,23 @@
   ==                                                    ::
 ++  volt  ?(%low %high)                                 ::  voltage
 ++  torc  $|(?(%iron %gold) [%lead p=ship])             ::  security control
-++  roon                                                ::  foreign response
-          $%  [%d p=mark q=*]                           ::  diff (rush)
-              [%e p=ares]                               ::  error
-              [%f p=mark q=*]                           ::  full refresh (rust)
-              [%k ~]                                    ::  message response
-          ==                                            ::
-++  rook                                                ::  foreign request
-          $%  [%m p=mark q=*]                           ::  message
-              [%s p=path]                               ::  subscribe
-              [%u ~]                                    ::  cancel/unsubscribe
-          ==                                            ::
+++  roon                                                ::  reverse ames msg
+  $%  [%d p=mark q=*]                                   ::  diff (rush)
+      [%x ~]                                            ::
+  ==                                                    ::
+++  rook                                                ::  forward ames msg
+  $%  [%m p=mark q=*]                                   ::  message
+      [%s p=path]                                       ::  subscribe
+      [%u ~]                                            ::  cancel/unsubscribe
+  ==                                                    ::
 --                                                      ::
 |%  ::::::::::::::::::::::::::::::::::::::::::::::::::::::    local arvo
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  club                                                ::  agent action
   $%  [%peer p=path]                                    ::  subscribe
       [%poke p=cage]                                    ::  apply
-      [%pull p=path]                                    ::  unsubscribe
-      [%took ~]                                         ::  acknowledge rush
+      [%pull ~]                                         ::  unsubscribe
+      [%pump p=(unit tang)]                             ::  pump yes/no
   ==                                                    ::
 ++  culm                                                ::  config action
   $%  [%load p=scup]                                    ::  load/reload
@@ -103,6 +101,8 @@
   $%  [%conf p=ship q=dude r=culm]                      ::  configure app
       [%deal p=sock q=cuss]                             ::  full transmission
       [%init p=ship]                                    ::  set owner
+      [%rote p=sack q=path r=*]                         ::  remote request
+      [%roth p=sack q=path r=*]                         ::  remote response
   ==                                                    ::
 ++  kiss-ford                                           ::
   $%  [%exec p=@p q=(unit silk)]                        ::  make / kill
@@ -129,7 +129,6 @@
   $%  [%a kiss-ames]                                    ::
       [%b kiss-behn]                                    ::
       [%f kiss-ford]                                    ::
-      [%g kiss-behn]                                    :: 
   ==  ==                                                ::
 ++  move  ,[p=duct q=(mold note-behn gift-behn)]        ::  typed move
 --                                                      ::
@@ -155,7 +154,7 @@
         q=ship                                          ::  attributed to
     ==                                                  ::
 ++  prey  (pair volt ffuc)                              ::  privilege
-++  scad                                                ::  opaque for foreign
+++  scad                                                ::  foreign connection
   $:  p=@ud                                             ::  index
       q=(map duct ,@ud)                                 ::  by duct
       r=(map ,@ud duct)                                 ::  by index
@@ -186,10 +185,8 @@
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 .  ==
 =|  all=axle                                            ::  all vane state
-|=  $:  $:  now=@da                                     ::  urban time
-            eny=@uvI                                    ::  entropy
-        ::  our=@p                                      ::  identity (future)
-        ==                                              ::
+|=  $:  now=@da                                         ::  urban time
+        eny=@uvI                                        ::  entropy
         ska=sled                                        ::  activate
     ==                                                  ::  opaque core
 |%  ::::::::::::::::::::::::::::::::::::::::::::::::::::::  state machine
@@ -239,7 +236,7 @@
         %&
       =.  +>  (mo-give %onto ~)
       =.  +>  (mo-bold dap pup dep)
-      ap-abet:(ap-abbe:ap dap [%high [~ our]] pup q.p.cux)
+      ap-abet:(ap-prep:(ap-abbe:ap dap [%high [~ our]] pup q.p.cux) ~)
     ==
   ::
   ++  mo-boon                                           ::  complete old boot
@@ -251,7 +248,7 @@
     =.  +>  (mo-bold dap pup dep)
     ?-  -.cux
       %|  (mo-give %onto `p.cux)
-      %&  ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) pup q.p.cux)
+      %&  ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) `q.p.cux)
     ==
   ::
   ++  mo-bold                                           ::  wait for dep
@@ -263,16 +260,73 @@
   ++  mo-boot                                           ::  create ship
     |=  [dap=dude how=?(%new %old) pup=scup]
     ^+  +>
+    ~&  [%mo-boot dap how pup]
     %+  mo-pass  [%sys how dap (scot %p p.pup) q.pup ~]
     ^-  note-behn
-    [%f %exec our `[%boil %gate [[p.pup q.pup [%da now]] [dap %ape ~]] ~]]
+    [%f %exec our `[%boil %gate [[p.pup q.pup [%da now]] [dap %zap ~]] ~]]
   ::
   ++  mo-away                                           ::  foreign request
     |=  [him=ship caz=cuss]                             ::  
-    %+  mo-pass  [%sys %way ~] 
-    [%a %wont [our him] [p.caz ~] q.caz]
+    ^+  +>
+    ~&  [%mo-away him caz]
+    ?<  ?=(%pump -.q.caz)
+    =^  num  +>.$  (mo-bale him)
+    =+  ^=  roc  ^-  rook
+        ?-  -.q.caz
+          %poke  [%m p.p.q.caz q.q.p.q.caz]
+          %pull  [%u ~]
+          %peer  [%s p.q.caz]
+        ==
+    %+  mo-pass  
+      [%sys %way -.q.caz ~]
+    `note-behn`[%a %wont [him our] [%q %be p.caz ~] [num roc]]
   ::
-  ++  mo-come
+  ++  mo-baal                                           ::  error convert a
+    |=  art=(unit ares)
+    ^-  ares
+    ?~(art ~ ?~(u.art `[%blank ~] u.art))
+  ::
+  ++  mo-baba                                           ::  error convert b
+    |=  ars=ares
+    ^-  (unit tang)
+    ?~  ars  ~
+    `[[%leaf (trip p.u.ars)] q.u.ars]
+  ::
+  ++  mo-awed                                           ::  foreign response
+    |=  [him=ship why=?(%peer %poke %pull) art=(unit ares)]
+    ^+  +>
+    ~&  [%mo-awed why art]
+    =+  tug=(mo-baba (mo-baal art))
+    ?-  why
+      %peer  (mo-give %unto %reap tug)
+      %poke  (mo-give %unto %coup tug)
+      %pull  ~&  [%pull-fail tug]
+             +>.$
+    ==
+  ::
+  ++  mo-bale                                           ::  assign outbone
+    |=  him=ship 
+    ^-  [@ud _+>]
+    =+  sad=(fall (~(get by sap) him) `scad`[1 ~ ~])
+    =+  nom=(~(get by q.sad) hen)
+    ?^  nom  [u.nom +>.$]
+    :-  p.sad
+    %_    +>.$
+        sap
+      %+  ~(put by sap)  him
+      %_  sad
+        p  +(p.sad)
+        q  (~(put by q.sad) hen p.sad)
+        r  (~(put by r.sad) p.sad hen)
+      ==
+    ==
+  ::
+  ++  mo-ball                                           ::  find outbone
+    |=  [him=ship num=@ud]
+    ^-  duct
+    (~(got by r:(~(got by sap) him)) num)
+  ::
+  ++  mo-come                                           ::  handle locally
     |=  [her=ship caz=cuss]
     ^+  +>
     =+  pry=`prey`[%high [~ her]]
@@ -288,23 +342,72 @@
     |=  [pax=path sih=sign-behn]
     ^+  +>
     ?+    -.pax  !!
-        %old  
+        %old                                            ::  reload old
       ?>  ?=([%f %made *] sih)
-      ?>  ?=([@ @ @ ~] pax)
-      (mo-boon i.t.pax [(slav %p i.pax) i.t.t.pax] +>.sih)
+      ?>  ?=([@ @ @ ~] t.pax)
+      (mo-boon i.t.pax [(slav %p i.t.t.pax) i.t.t.t.pax] +>.sih)
+    ::
+        %way                                            ::  outbound request
+      ?>  ?=([%a %woot *] sih)
+      ?>  ?=([@ @ ~] t.pax)
+      ?>  =(p.+>.sih (slav %p i.t.pax))
+      %-  mo-awed
+      :*  p.+>.sih
+          (?(%peer %poke %pull) i.t.pax)
+          +>+.sih
+      ==
+    ::
+        %rep                                            ::  reverse request
+      ?>  ?=([@ @ @ ~] t.pax)
+      ?>  ?=([%f %made *] sih)
+      =+  :*  him=(slav %p i.t.pax)
+              dap=i.t.t.pax
+              num=(slav %ud i.t.t.t.pax)
+          ==
+      ?-  -.q.+>.sih
+        %|  ~&  [%rush-crash p.q.+>.sih]                ::  crash is correct
+            !!
+        %&  (mo-give(hen (mo-ball him num)) %unto %rush `cage`p.q.+>.sih)
+      ==
+    ::
+        %req                                            ::  inbound request
+      ?>  ?=([@ @ @ ~] t.pax)
+      =+  :*  him=(slav %p i.t.pax)
+              dap=i.t.t.pax
+              num=(slav %ud i.t.t.t.pax)
+          ==
+      ?:  ?=([%f %made *] sih)
+        ?-  -.q.+>.sih
+          %|  (mo-give %unto %coup `p.q.+>.sih)         ::  XX should crash
+          %&  (mo-pass pax %b %deal [him our] i.t.t.pax %poke p.q.+>.sih)
+        ==
+      ?:  ?=([%a %woot *] sih)
+        ?~  q.+>.sih  +>.$
+        ~&  [%behn-woot-lost pax +>.sih]
+        +>.$
+      ?>  ?=([%b %unto *] sih)
+      =+  cuf=`cuft`+>.sih
+      ?-    -.cuf
+        %coup  (mo-give %unto %coup p.cuf)
+        %rush  %+  mo-pass  pax
+               [%a %wont [him our] [%q %bh dap ~] [num %d p.p.cuf q.q.p.cuf]]
+        %quit  %+  mo-pass  pax
+               [%a %wont [him our] [%q %bh dap ~] [num %x ~]]
+        %reap  (mo-give %unto %reap p.cuf)
+      ==
     ::
         %new
       ?>  ?=([%f %made *] sih)
-      ?>  ?=([@ @ @ ~] pax)
-      (mo-boom i.t.pax [(slav %p i.pax) i.t.t.pax] +>.sih)
+      ?>  ?=([@ @ @ ~] t.pax)
+      (mo-boom i.t.pax [(slav %p i.t.t.pax) i.t.t.t.pax] +>.sih)
     ::
         %way
       ?>  ?=([%a %woot *] sih)
-      ?>  ?=([@ @ ~] pax)
+      ?>  ?=([@ @ ~] t.pax)
       =+  suz=`(unit ares)`+>+.sih
       %^    mo-coup
-          i.t.pax
-        (slav %p i.pax)
+          i.t.t.pax
+        (slav %p i.t.pax)
       ?~(suz ~ ?~(u.suz `[%woot-no-way ~] u.suz))
     ==
   ::
@@ -325,13 +428,27 @@
     |=  [dap=dude pry=prey cub=club]
     ap-abet:(ap-club:(ap-abed:ap dap pry) cub)
   ::
-  ++  mo-gawk                                           ::  ames response
-    |=  [saq=sack imp=path num=@ud ron=roon]
-    !!
+  ++  mo-gawk                                           ::  ames forward
+    |=  [him=@p dap=dude num=@ud rok=rook]
+    %+  mo-pass  
+      [%sys %req (scot %p him) dap (scot %ud num) ~]
+    ^-  note-behn
+    ?-  -.rok
+      %m  [%f %exec our ~ %vale p.rok our q.rok]        ::  XX use build beak
+      %s  [%b %deal [him our] dap %peer p.rok]
+      %u  [%b %deal [him our] dap %pull ~]
+    ==
   ::
-  ++  mo-gawd                                           ::  ames request
-    |=  [saq=sack imp=path num=@ud rok=rook]
-    !!
+  ++  mo-gawd                                           ::  ames backward
+    |=  [him=@p dap=dude num=@ud ron=roon]
+    ?-    -.ron
+        %d
+      %+  mo-pass  
+        [%sys %rep (scot %p him) dap (scot %ud num) ~]
+      [%f %exec our ~ %vale p.ron our q.ron]
+    ::
+        %x  (mo-give %unto %quit ~)
+    ==
   ::
   ++  ap
     |_  $:  $:  dap=dude
@@ -386,7 +503,7 @@
           %pass
         :+  %pass  `path`[%use dap p.q.cov]
         ?-  -.q.q.cov
-          %send  `note-behn`[%g %deal [our p.q.q.cov] q.q.q.cov]
+          %send  `note-behn`[%b %deal [our p.q.q.cov] q.q.q.cov]
           %meta  `note-behn`[`@tas`p.q.q.cov %meta `vase`q.q.q.cov]
         ==
       ==
@@ -394,10 +511,11 @@
     ++  ap-club                                         ::  apply effect
       |=  cub=club
       ^+  +>
-      ?+  -.cub  !!
+      ?-  -.cub
         %poke   (ap-poke +.cub)
         %peer   (ap-peer +.cub)
-        %took   ap-fall
+        %pull   ap-pull
+        %pump   ?^(p.cub ~&([%club-fall p.cub] +>.$)ap-fall)
       ==
     ::
     ++  ap-find                                         ::  general arm
@@ -423,6 +541,11 @@
       =+  suy=(fall (~(get by qel.ged) ost) 0)
       ?:  =(10 suy)  [%| +]
       [%& +(qel.ged (~(put by qel.ged) ost +(suy)))]
+    ::
+    ++  ap-pull                                         ::  pull subscription
+      ^+  .
+      ~&  %ap-pull
+      !!
     ::
     ++  ap-fond                                         ::  check for arm
       |=  cog=term
@@ -460,9 +583,19 @@
       ==
     ::
     ++  ap-prep                                         ::  call to install
-      |=  [pup=scup vax=vase]
+      |=  vux=(unit vase)
       ^+  +>
-      !!
+      =^  tur  +>.$
+          %+  ap-call  %prep
+          ;:  slop
+            !>(`@p`q.q.pry)
+            !>(`@ud`ost)
+            ?~  vux  !>(~)
+            (slop !>(~) u.vux)
+          ==
+      ?~  tur  +>.$
+      ~&  [%ap-prep-bad tur]
+      +>.$
     ::
     ++  ap-suck                                         ::  standard tang
       |=  msg=tape
@@ -690,9 +823,10 @@
   |=  [hen=duct hic=(hypo (hobo kiss-behn))]
   ^-  [p=(list move) q=_..^$]
   =>  .(q.hic ?.(?=(%soft -.q.hic) q.hic ((hard kiss-behn) p.q.hic)))
+  ~&  [%behn-call q.hic]
   ?-    -.q.hic
       %conf
-    ?.  (~(has in pol.all) p.q.hic)
+    ?.  (~(has by pol.all) p.q.hic)
       ~&  [%behn-not-ours p.q.hic]
       [~ ..^$]
     mo-abet:(mo-conf:(mo-abed:mo p.q.hic hen) q.q.hic r.q.hic)
@@ -705,14 +839,34 @@
     (mo-come:(mo-abed:mo q.p.q.hic hen) p.p.q.hic q.q.hic)
   ::
       %init 
+    ~&  [%behn-init p.q.hic]
     [~ ..^$(pol.all (~(put by pol.all) p.q.hic [hen ~ ~ ~]))]
   ::
-    ::  %rote
-    ::mo-abet:(mo-gawk:mo-abed:mo p.q.hic q.q.hic ((hard ,[@ud rook]) r.q.hic))
+      %rote
+    ~&  [%behn-rote p.q.hic]
+    ?.  (~(has by pol.all) p.p.q.hic)
+      ~&  [%behn-not-ours p.q.hic]
+      [~ ..^$]
+    ?>  ?=([@ ~] q.q.hic)
+    =+  dap=i.q.q.hic
+    =+  our=p.p.q.hic
+    =+  him=q.p.q.hic
+    =+  mes=((hard ,[@ud rook]) r.q.hic)
+    =<  mo-abet
+    (mo-gawk:(mo-abed:mo our hen) him dap mes)
   ::
-    ::%roth
-    :: !!
-    ::  mo-abet:(mo-gawd p.q.hic q.q.hic ((hard ,[@ud roon]) r.q.hic))
+      %roth
+    ~&  [%behn-roth p.q.hic]
+    ?.  (~(has by pol.all) p.p.q.hic)
+      ~&  [%behn-not-ours p.q.hic]
+      [~ ..^$]
+    ?>  ?=([@ ~] q.q.hic)
+    =+  dap=i.q.q.hic
+    =+  our=p.p.q.hic
+    =+  him=q.p.q.hic
+    =+  mes=((hard ,[@ud roon]) r.q.hic)
+    =<  mo-abet
+    (mo-gawd:(mo-abed:mo our hen) him dap mes)
   ==
 ::
 ++  doze                                                ::  sleep until
@@ -745,6 +899,6 @@
   =+  our=(need (slaw %p i.tea))
   =+  mow=(mo-abed:mo our hen)
   ?:  ?=(%sys i.t.tea)
-    mo-abet:(mo-cyst:mow t.tea q.hin)
+    mo-abet:(mo-cyst:mow t.t.tea q.hin)
   mo-abet:(mo-cook:mow t.tea hin)
 --

@@ -8,6 +8,10 @@
           $%  [%crud p=@tas q=(list tank)]              ::
               [%text p=tape]                            ::
           ==                                            ::
+++  cuft                                                ::  behn gift
+          $%  [%coup p=(unit (list tank))]              ::  poke result
+              [%reap p=(unit (list tank))]              ::  peer result
+          ==                                            ::
 ++  gift                                                ::  out result <-$
           $%  [%hear p=lane q=@]                        ::  receive packet
               [%init p=@p]                              ::  report install
@@ -40,6 +44,11 @@
               $:  %a                                    ::  to %ames
           $%  [%kick p=@da]                             ::
           ==  ==                                        ::
+              $:  %b                                    ::  to %behn
+          $%  [%rote p=sack q=path r=*]                 ::
+              [%roth p=sack q=path r=*]                 ::
+              [%mess p=[@p %ye ~] q=@p r=cage]          ::
+          ==  ==                                        ::
               $:  %g                                    ::  to %gall
           $%  [%rote p=sack q=path r=*]                 ::
               [%roth p=sack q=path r=*]                 ::
@@ -53,6 +62,9 @@
 ++  sign                                                ::  in result $<-
           $?  $:  %a                                    ::  from %ames
           $%  [%went p=ship q=cape]                     ::
+          ==  ==                                        ::
+              $:  %b                                    ::  from %gall
+          $%  [%unto p=cuft]                            ::
           ==  ==                                        ::
               $:  %g                                    ::  from %gall
           $%  [%mean p=ares]                            ::
@@ -1667,6 +1679,7 @@
           [hen [%slip %a %kick now]]
           [hen [%slip %e %init p.bon]]
           [hen [%slip %g %init p.bon]]
+          [hen [%slip %b %init p.bon]]                  ::  temporary %behn
           [hen [%slip %d %init p.bon]]                  ::  must be after gall
           ~
       ==
@@ -1773,6 +1786,24 @@
             [%sick %wart p.bon i.t.q.q.bon t.t.q.q.bon r.bon]
         ==
       ::
+          %be                                         ::  %behn request
+        =*  imp  t.t.q.q.bon
+        ?>  (levy imp (sane %ta))
+        =+  ^=  pax
+            :+  (scot %p p.p.bon)
+              (scot %p q.p.bon)
+            q.q.bon
+        :_  fox  [hen %pass pax %b %rote p.bon imp r.bon]~
+      ::
+          %bh                                         ::  %behn response
+        =*  imp  t.t.q.q.bon
+        ?>  (levy imp (sane %ta))
+        =+  ^=  pax
+            :+  (scot %p p.p.bon)
+              (scot %p q.p.bon)
+            q.q.bon
+        :_  fox  [hen %pass pax %b %roth p.bon imp r.bon]~
+      ::
           %ge                                         ::  %gall request
         =*  imp  t.t.q.q.bon
         ?>  (levy imp (sane %ta))
@@ -1819,6 +1850,18 @@
     ?-  +<.sih
         %crud  [[[hen [%slip %d %flog +.sih]] ~] +>]
         %went  [~ +>]
+        %unto  %=    $
+                   sih
+                 ^-  sign
+                 ?-  +>-.sih
+                   %coup  ?~  p.+>+.sih 
+                            [%g %nice ~] 
+                          [%g %mean `[%coup u.p.+>+.sih]]
+                   %reap  ?~  p.+>+.sih 
+                            [%g %nice ~] 
+                          [%g %mean `[%reap u.p.+>+.sih]]
+                 ==
+               ==
         ?(%mean %nice)
       ?:  ?=([%ye ~] tea)
         [~ +>.$]

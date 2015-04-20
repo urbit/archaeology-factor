@@ -154,8 +154,12 @@
       [%show p=[p=ship q=path] q=ship r=path]           ::
       [%took p=[p=ship q=path] q=ship]                  ::
   ==                                                    ::
-++  note                                                ::
-  $%  [%a note-ames]                                    ::  out request $->
+++  note-behn                                           ::
+  $%  [%conf ship term %load ship term]                 ::
+  ==                                                    ::
+++  note                                                ::  out request $->
+  $%  [%a note-ames]                                    ::
+      [%b note-behn]                                    ::
       [%c note-clay]                                    ::
       [%d note-dill]                                    ::
       [%g note-gall]                                    ::
@@ -164,6 +168,9 @@
 ++  sign-ames                                           ::
   $%  [%nice ~]                                         ::
       [%init p=ship]                                    ::
+  ==                                                    ::
+++  sign-behn                                           ::  see %behn
+  $%  [%onto p=(unit tang)]                             ::
   ==                                                    ::
 ++  sign-clay                                           ::
   $%  [%note p=@tD q=tank]                              ::
@@ -263,6 +270,7 @@
         =+  myt=(flop (need tem))
         =.  tem  ~
         =.  moz  :_(moz [hen %pass ~ %g %show [our [ram ~]] our ~])
+        =.  moz  :_(moz [hen %pass ~ %b %conf [our %soul %load our %main]])
         |-  ^+  +>
         ?~  myt  +>
         $(myt t.myt, +> (send i.myt))

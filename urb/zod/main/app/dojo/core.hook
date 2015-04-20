@@ -24,6 +24,7 @@
           [%pill p=path q=dojo-source]                  ::  noun to unix pill
           ::  [%tree p=path q=dojo-source]              ::  noun to unix tree
           [%poke p=goal q=dojo-source]                  ::  make and poke
+          [%boke p=goal q=dojo-source]                  ::  make and boke
           [%show p=dojo-source]                         ::  print
           [%verb p=term q=dojo-source]                  ::  store variable
       ==                                                ::
@@ -77,6 +78,12 @@
       ==                                                ::
     ++  hapt  ,[p=ship q=path]                          ::  
     ++  move  ,[p=bone q=(mold note gift)]              ::
+    ++  club                                            ::  agent action
+      $%  [%peer p=path]                                ::  subscribe
+          [%poke p=cage]                                ::  apply
+          [%pull p=path]                                ::  unsubscribe
+          [%took ~]                                     ::  acknowledge rush
+      ==                                                ::
     ++  hood                                            ::  assembly plan
       $:  zus=@ud                                       ::  zuse kelvin
           sur=(list hoot)                               ::  structures
@@ -128,6 +135,9 @@
     ++  note-gall                                       ::  note to %gall
       $%  [%mess p=[p=ship q=path] q=ship r=cage]       ::
       ==                                                ::
+    ++  note-behn                                       ::  note to %behn
+      $%  [%deal sock term club]                        ::
+      ==                                                ::
     ++  sign-gall                                       ::  sign from %gall
       $%  [%mean p=ares]                                ::
           [%nice ~]                                     ::
@@ -138,6 +148,7 @@
     ++  note                                            ::  out request $->
       $%  [%f note-ford]                                ::
           [%g note-gall]                                ::
+          [%b note-behn]                                ::
       ==                                                ::
     ++  sign                                            ::  in result $<-
       $%  [%f sign-ford]                                ::
@@ -159,6 +170,38 @@
       ;~  pose
         %+  stag  %poke
         ;~  pfix  col
+          %+  cook
+            |=  [a=goal b=(each dojo-source (trel term path dojo-config))]
+            ^-  (pair goal dojo-source)
+            :-  a
+            ?-  -.b
+              %&  p.b
+              %|  ?+  p.p.b  !!
+                    %di  [0 %di [0 [%dog q.a q.p.b]] r.p.b]
+                    %ge  [0 %ge [0 [%cat q.a q.p.b]] r.p.b]
+                    %sc  [0 %sc [0 [%pig q.a q.p.b]] r.p.b]
+                  ==
+            == 
+          ;~  plug
+            dp-goal
+            ;~  pose
+              (stag %& ;~(pfix ace dp-source))
+              %+  stag  %|
+              ;~  plug
+                ;~  pose
+                  (cold %di wut)
+                  (cold %ge lus)
+                  (cold %sc pam)
+                ==
+                (most fas sym)
+                dp-config
+              ==
+            ==
+          ==
+        ==
+      ::
+        %+  stag  %boke
+        ;~  pfix  hax
           %+  cook
             |=  [a=goal b=(each dojo-source (trel term path dojo-config))]
             ^-  (pair goal dojo-source)
@@ -299,6 +342,7 @@
         %flat  =^(src +>.$ (dy-init-source q.mad) [[%flat p.mad src] +>.$])
         %pill  =^(src +>.$ (dy-init-source q.mad) [[%pill p.mad src] +>.$])
         %poke  =^(src +>.$ (dy-init-source q.mad) [[%poke p.mad src] +>.$])
+        %boke  =^(src +>.$ (dy-init-source q.mad) [[%boke p.mad src] +>.$])
         %show  =^(src +>.$ (dy-init-source p.mad) [[%show src] +>.$])
         %verb  =^(src +>.$ (dy-init-source q.mad) [[%verb p.mad src] +>.$])
       ==
@@ -419,6 +463,17 @@
             %mess
             [p.p.mad [q.p.mad ~]]
             our.hid 
+            (~(got by rez) p.q.mad)
+        ==
+      ::
+          %boke       
+        %-  he-pass(poy ~)
+        :*  /poke
+            %b
+            %deal
+            [our.hid p.p.mad]
+            q.p.mad
+            %poke
             (~(got by rez) p.q.mad)
         ==
       ::
