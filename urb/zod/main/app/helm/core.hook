@@ -39,7 +39,7 @@
       ==                                                ::
     ++  hapt  ,[p=ship q=path]                          ::  
     ++  move  ,[p=bone q=(mold note gift)]              ::
-    ++  note-gall                                       ::  note to %gall
+    ++  note-gall                                       ::  note to %gal  l
       $%  [%mess p=[p=ship q=path] q=ship r=cage]       ::
           [%show p=[p=ship q=path] q=ship r=path]       ::
           [%took p=[p=ship q=path] q=ship]              ::
@@ -47,8 +47,12 @@
     ++  note-dill                                       ::  system command
       $%  [%flog p=dill-flog]                           ::
       ==                                                ::
+    ++  note-behn                                       ::
+      $%  [%conf ship term %load ship term]             ::
+      ==                                                ::
     ++  note                                            ::  out request $->
-      $%  [%d note-dill]                                ::
+      $%  [%b note-behn]                                ::
+          [%d note-dill]                                ::
           [%g note-gall]                                ::
       ==                                                ::
     --                                                  ::
@@ -66,6 +70,10 @@
   ++  he-give                                           ::  emit gift
     |=  git=gift
     %_(+> moz [[ost %give git] moz])
+  ::
+  ++  he-wish-bento
+    |=  dap=term
+    %_(+> moz :_(moz [ost %pass ~ %b %conf our.hid dap %load our.hid %main]))
   ::
   ++  he-wish-reset
     ^+  .
@@ -156,6 +164,11 @@
   |=  [ost=bone her=ship all=(list term)]
   ~&  %poke-helm-reload
   he-abet:(he-wish-reload:(hake ost her) all)
+::
+++  poke-helm-bento
+  |=  [ost=bone her=ship dap=term]
+  ~&  [%poke-helm dap]
+  he-abet:(he-wish-bento:(hake ost her) dap)
 ::
 ++  poke-helm-begin
   |=  [ost=bone you=ship begs]

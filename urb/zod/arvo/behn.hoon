@@ -232,23 +232,44 @@
     |=  [dap=dude pup=scup dep=@uvH cux=(each cage tang)]
     ^+  +>
     ?-    -.cux
-        %|  (mo-give %onto `p.cux)
+        %|  ~&  [%mo-boom-lame p.cux]
+            (mo-give %onto `p.cux)
         %&
       =.  +>  (mo-give %onto ~)
       =.  +>  (mo-bold dap pup dep)
-      ap-abet:(ap-prep:(ap-abbe:ap dap [%high [~ our]] pup q.p.cux) ~)
+      =.  +>  (mo-born dap pup q.p.cux)
+      ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) ~)
+    ==
+  ::
+  ++  mo-born                                           ::  new seat
+    |=  [dap=dude pup=scup hav=vase]
+    =+  sat=*seat
+    %_    +>.$
+        bum
+      %+  ~(put by bum)  dap
+      %_  sat
+        mom  hen
+        pup  pup
+        hav  hav
+        p.zam  1
+        q.zam  [[~ 0] ~ ~]
+        r.zam  [[0 ~] ~ ~]
+      ==
     ==
   ::
   ++  mo-boon                                           ::  complete old boot
     |=  [dap=dude pup=scup dep=@uvH cux=(each cage tang)]
     ^+  +>
+    ~&  [%mo-boon dap pup]
     ?.  (~(has by bum) dap)  
       ~&  [%behn-old-boon dap]
       +>
     =.  +>  (mo-bold dap pup dep)
     ?-  -.cux
-      %|  (mo-give %onto `p.cux)
-      %&  ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) `q.p.cux)
+      %|  ~&  [%mo-boon-lame p.cux]
+          (mo-give %onto `p.cux)
+      %&  ~&  %mo-boon-prep
+          ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) `q.p.cux)
     ==
   ::
   ++  mo-bold                                           ::  wait for dep
@@ -263,7 +284,7 @@
     ~&  [%mo-boot dap how pup]
     %+  mo-pass  [%sys how dap (scot %p p.pup) q.pup ~]
     ^-  note-behn
-    [%f %exec our `[%boil %gate [[p.pup q.pup [%da now]] [dap %zap ~]] ~]]
+    [%f %exec our `[%boil %core [[p.pup q.pup [%da now]] [dap %zap ~]] ~]]
   ::
   ++  mo-away                                           ::  foreign request
     |=  [him=ship caz=cuss]                             ::  
@@ -458,17 +479,6 @@
             ==
             seat
         ==
-    ++  ap-abbe                                         ::  create
-      |=  [dap=dude pry=prey pup=scup hav=vase]
-      =.  +>  (ap-abed dap pry)
-      %_  +>
-        mom    hen
-        pup    pup
-        hav    hav 
-        p.zam  1
-        q.zam  (~(put by q.zam) ~ 0)
-        r.zam  (~(put by r.zam) 0 ~)
-      ==
     ::
     ++  ap-abed                                         ::  initialize
       |=  [dap=dude pry=prey]
@@ -484,6 +494,7 @@
         p.zam  +(p.zam)
         q.zam  (~(put by q.zam) hen p.zam)
         r.zam  (~(put by r.zam) p.zam hen)
+        +<+    `seat`(~(got by bum) dap)
       ==
     ::
     ++  ap-abet                                         ::  resolve
@@ -565,19 +576,26 @@
       ^+  +>
       +>(zip :_(zip [(~(got by r.zam) ost) %pass pax coh]))
     ::
-    ++  ap-call                                         ::  call into vase
-      |=  [cog=term vax=vase]
+    ++  ap-call                                         ::  call into agent
+      |=  [cog=term arg=vase]
       ^-  [(unit tang) _+>]
-      =+  puz=(mule |.((~(mint ut p.vax) [%noun [%cnzy cog]])))
+      =+  puz=(mule |.((~(mint ut p.hav) [%noun [%cnzy cog]])))
       ?:  ?=(%| -.puz)  [`p.puz +>.$]
+      =+  wiz=(mule |.((slit p.p.puz p.arg)))
+      ?:  ?=(%| -.wiz)  [`p.wiz +>.$]
       =-  ?-  -.zep
             %|  [`p.zep +>.$]
-            %&  (ap-sake p.p.puz +.zep)
+            %&  (ap-sake p.wiz +.zep)
           ==
       ^=  zep  ^-  (each noun tang)
-      =+  ton=(mock [q.vax q.p.puz] |=(* ~))
+      =+  ton=(mock [q.hav q.p.puz] |=(* ~))
       ?-  -.ton
-        %0  [%& p.ton]
+        %0  =+  ton=(mong [p.ton q.arg] |=(* ~))
+            ?-  -.ton
+              %0  [%& p.ton]
+              %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
+              %2  [%| p.ton]
+              ==
         %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
         %2  [%| p.ton]
       ==
@@ -588,13 +606,13 @@
       =^  tur  +>.$
           %+  ap-call  %prep
           ;:  slop
-            !>(`@p`q.q.pry)
             !>(`@ud`ost)
+            !>(`@p`q.q.pry)
             ?~  vux  !>(~)
             (slop !>(~) u.vux)
           ==
-      ?~  tur  +>.$
-      ~&  [%ap-prep-bad tur]
+      ?~  tur  
+        +>.$
       +>.$
     ::
     ++  ap-suck                                         ::  standard tang
@@ -701,6 +719,8 @@
     ++  ap-save                                         ::  verify core
       |=  vax=vase
       ^-  (each vase tang)
+      ?:  (~(nest ut p.hav) %| p.vax)
+        [%| (ap-suck "bad core")]
       [%& vax]
     ::
     ++  ap-sake                                         ::  handle result
@@ -727,8 +747,8 @@
       =^  tur  +>.$
           %+  ap-call  q.u.cug
           ;:  slop
-            !>(`@p`q.q.pry)
             !>(`@ud`ost)
+            !>(`@p`q.q.pry)
             ?.  =(0 p.u.cug)  q.cag
             (slop (ap-term %tas p.cag) q.cag)
           ==
@@ -771,8 +791,8 @@
       =^  cam  +>.$
           %+  ap-call  q.u.cug
           ;:  slop
-            !>(`@p`q.q.pry)
             !>(`@ud`ost)
+            !>(`@p`q.q.pry)
             ?:  =(0 p.u.cug)
               (slop !>(`path`pax) !>(vax))
             (slop !>(`path`(slag (dec p.u.cug) pax)) (slot 3 vax))
@@ -797,7 +817,7 @@
       =+  cug=(ap-find [wut pax])
       ?~  cug
         (ap-pour-fail wut (ap-suck "pour: no punk"))
-      =^  cam  +>.$  (ap-call q.u.cug :(slop !>(`@p`q.q.pry) !>(`@ud`ost) vax))
+      =^  cam  +>.$  (ap-call q.u.cug :(slop !>(`@ud`ost) !>(`@p`q.q.pry) vax))
       ?^  cam  (ap-pour-fail q.u.cug u.cam)
       +>.$
     ::
@@ -874,14 +894,10 @@
   ^-  (unit ,@da)
   ~
 ::
-++  load                                                ::  highly forgiving
-  |=  old=*
-  =+  lox=((soft axle) old)
+++  load                                                ::  recreate vane
+  |=  old=axle
   ^+  ..^$
-  ?~  lox
-    ~&  %gall-reset
-    ..^$
-  ..^$(+>- u.lox)
+  ..^$(all old)
 ::
 ++  scry
   |=  [fur=(unit (set monk)) ren=@tas who=ship syd=desk lot=coin tyl=path]
