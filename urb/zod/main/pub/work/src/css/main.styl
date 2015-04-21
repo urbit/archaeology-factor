@@ -1,0 +1,90 @@
+//
+// fonts first
+//
+
+@import 'fonts'
+
+html
+body
+  font-family "bau"
+  font-size 18px
+
+#c
+  position absolute
+  top 0rem
+  left 50%
+  width 58rem
+  margin-left -29rem
+  margin-bottom 12rem
+
+.item
+  display block
+  max-height 2rem
+  overflow hidden
+
+.item .comments
+  height 0
+
+.item.expand
+  max-height 12rem
+
+.item.expand .comments
+  height 10rem
+
+.item .sort
+.item .title
+.item .date
+.item .tags
+  line-height 2rem
+
+.item .sort
+  width 2rem
+  font-size .6rem
+  color #ccc
+  text-align center
+
+.item .title
+  min-width 16rem
+
+.item .date
+  min-width 6rem
+
+.item .tags
+  min-width 6rem
+
+.item .comp
+  width 3rem
+  opacity 0
+
+.item .comp .a
+  display block
+  font-size .7rem
+  font-weight 500
+  line-height .9rem
+
+.item:hover .comp
+  opacity 1
+
+/* global */
+
+.top
+  vertical-align top
+  
+.ib
+  display inline-block
+
+.hidden
+  display none
+
+.a
+  display inline
+  cursor pointer
+  text-decoration underline
+
+.input
+  outline none
+  display inline-block
+  min-width 1rem
+  
+.input:focus
+  background-color #f9f9f9

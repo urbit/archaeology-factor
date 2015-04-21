@@ -10,13 +10,14 @@
   ==
 ++  command-l
   $%  [%create pending-l]                               ::  create for me
-      [%delete @ud]
+      [%update pending-l]
+      [%delete @uvH]
   ==
 ++  report
   $%  [%list (list todo)]
   ==
 ++  report-l
-  $%  [%list (list pending-l)]
+  $%  [%list (list todo-l)]
   ==
 ::
 ++  action

@@ -4,21 +4,23 @@
 /?  314
 /-  *work
 !:
-|_  cod=command
-:: s
+|_  cod=command-l
+::
 ++  grab
   |%
-  ++  noun  command
+  ++  noun  command-l
   ++  json
     =>  [jo ..command-l]
     |=  a=json
     ^-  command-l
     =-  (need ((of -) a))
     =<  :~  create/that
-            delete/(ci (slat %uv) so)
+            update/that
+            delete/seri
     ==
     |%
-    ++  that  (ot sort/ni task/(ot serial/(ci (slat %uv) so) title/so ~) ~)
+    ++  seri  (ci (slat %uv) so)
+    ++  that  (ot sort/ni task/(ot serial/seri title/so ~) ~)
     --
   --
 --

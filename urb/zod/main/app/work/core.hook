@@ -8,7 +8,7 @@
   :: 
 !:
 |%                                                  ::  data structures
-++  axle  (list pending-l)
+++  axle  (list todo-l)
 ++  todo  
   $:  upcoming=(list ,pending-l)
       following=(list ,pending)
@@ -36,6 +36,7 @@
   ?+  -.pax
     [ost %give %mean `[%not-found [%leaf "you need to specify a path"]~]]
   %r
+    ~&  [%give-vat vat]
     [ost %give %rush %work-report [%list vat]]
   ==
 ::
@@ -47,18 +48,39 @@
   |=  [ost=bone his=ship pax=path]
     [ost %give %rush %work-report [%list vat]]
 ::
+++  insert
+  |=  [vet=axle pos=@ud tod=todo-l]
+    ;:  weld
+      (swag [0 pos] vet)
+      (limo [tod ~])
+      (swag [pos (lent vet)] vet)
+    ==
 ++  poke-work-command
   |=  [ost=bone you=ship mez=command-l]
-  ~&  vat
-  ~&  -.mez  
   =.  vat
   ?-  -.mez
-    %create  [+.mez vat]
+    %create
+      %^  insert  vat
+        sort.+.mez
+      task.+.mez
+    %update  
+      ~&  %update
+      =+  ^=  vet
+        %+  murn  vat
+        |=  t=todo-l
+        ^-  (unit todo-l)
+        ?:  =(serial.t serial.task.+.mez)
+          ~
+        `t
+      %^  insert  vet
+        sort.+.mez
+      task.+.mez
     %delete
       %+  skip
         vat
-      |=  p=pending-l
-        =(serial.task.p +.mez)
+      |=  t=todo-l
+        =(serial.t +.mez)
   ==
+  ~&  [%give-vat vat]
   [[[ost %give %nice ~] spam] +>.$]
 --

@@ -5,23 +5,23 @@
 /-    *work
 !:
 |_  rep=report-l
-::
-++  grab                                                ::  convert from
+:: s
+++  grab                                                 ::  convert from
   |%
-  ++  noun  report-l                                    ::  clam from %noun
+  ++  noun  report-l                                     ::  clam from %noun
   --
 ++  grow
   |%
   ++  mime  [/text/json (taco (crip (pojo json)))]
   ++  json
+    ~&  rep
     :-  %a
     %+  turn  +.rep
-    |=  item=pending-l
+    |=  item=todo-l
       %-  jobe
     :~
-      sort/(jone sort.item)
-      serial/(jape <serial.task.item>)
-      title/[%s title.task.item]
+      serial/(jape <serial.item>)
+      title/[%s title.item]
     ==
   --
 --

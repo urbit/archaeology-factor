@@ -13,14 +13,16 @@
     ;meta(name "viewport", content "width=device-width, height=device-height, ".
      "initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0");
     ;*  %-  cdnj  :~
+      "react/0.13.1/react.js"
       "jquery/2.1.1/jquery.js"
       "lodash.js/2.4.1/lodash.min.js"
     ==
     ;script(type "text/javascript", src "/~~/~/at/main/lib/urb.js");
-    ;title: Works
+    ;link(type "text/css", rel "stylesheet", href "/main/pub/work/src/css/main.css");
+    ;title: work
   ==
   ;body
-    ;div#c: hi
+    ;div#c;
     ;script(type "text/javascript", src "/main/pub/work/src/js/main.js");
   ==
 ==
