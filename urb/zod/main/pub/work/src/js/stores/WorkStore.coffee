@@ -54,8 +54,8 @@ WorkStore = assign {},EventEmitter.prototype,{
 
   loadItems: ({list,items}) ->
     # for now, we need to upgrade these incoming ones
-    for i in items
-      i = _.merge @getItem(i.serial,i.index),i
+    for k,i of items
+      items[k] = _.merge @getItem(i.serial,k),i
     lists[list] = items
 }
 

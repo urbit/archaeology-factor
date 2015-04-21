@@ -23,6 +23,8 @@ module.exports = recl
 
   _blur: (e,i) -> @update i
 
+  _click: -> if @state.list.length is 0 then WorkActions.newItem 0,@props.list
+
   _dragStart: (e,i) -> @dragged = i.dragged
 
   _dragEnd: (e,i) -> 
@@ -37,7 +39,7 @@ module.exports = recl
     if not @dragged.hasClass('hidden') then @dragged.addClass 'hidden'
     @placeholder.insertBefore $i
 
-  _keyDown: (e) ->
+  _keyDown: (e,i) ->
     kc = e.keyCode
 
     switch kc
@@ -55,7 +57,7 @@ module.exports = recl
         e.target.innerText.length is 0
           if @state.selected isnt 0
             @setState {selected:@state.selected-1,select:"end"}
-          WorkActions.removeItem @state.selected,@props.list
+          WorkActions.removeItem @state.selected,@props.list,i.props.item.serial
           e.preventDefault()
       # up
       when 38
@@ -80,7 +82,6 @@ module.exports = recl
   componentDidMount: -> 
     @placeholder = $ "<div class='item placeholder'><div class='sort'>x</div></div>"
     WorkStore.addChangeListener @_onChangeStore
-    if @state.list.length is 0 then WorkActions.newItem 0,@props.list
     @alias()
 
   componentDidUpdate: -> 
@@ -105,6 +106,7 @@ module.exports = recl
       (div {
         className:'items'
         onDragOver:@_dragOver
+        onClick:@_click
         }, [
           _.map @state.list,(item,index) => 
             rece(ItemComponent,{

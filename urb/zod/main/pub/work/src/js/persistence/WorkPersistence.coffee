@@ -1,4 +1,4 @@
-WorkActions = '../actions/WorkActions.coffee'
+WorkActions = require '../actions/WorkActions.coffee'
 
 module.exports = 
   listen: () ->
@@ -6,7 +6,9 @@ module.exports =
       appl:'work'
       path:'/r'
     }, (err,res) ->
-      if not err and res.list then WorkActions.load res.list
+      console.log 'sub'
+      console.log arguments
+      if not err and not res.data?.ok then WorkActions.loadItems res.data
   
   createItem: (sort,serial,title) ->
     window.urb.send {
@@ -36,7 +38,7 @@ module.exports =
         console.log 'sent'
         console.log arguments
 
-  deleteItem: (serial) ->
+  removeItem: (serial) ->
     window.urb.send {
       appl:'work'
       mark:'work-command'

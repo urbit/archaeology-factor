@@ -14,5 +14,5 @@ $ ->
 
   window.work =
     WorkPersistence:WorkPersistence
-  # window.work.WorkPersistence.listen()
+  window.work.WorkPersistence.listen()
   React.render React.createElement(WorkComponent),$('#c')[0]

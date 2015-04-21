@@ -204,6 +204,11 @@ module.exports = recl({
   _blur: function(e, i) {
     return this.update(i);
   },
+  _click: function() {
+    if (this.state.list.length === 0) {
+      return WorkActions.newItem(0, this.props.list);
+    }
+  },
   _dragStart: function(e, i) {
     return this.dragged = i.dragged;
   },
@@ -222,7 +227,7 @@ module.exports = recl({
     }
     return this.placeholder.insertBefore($i);
   },
-  _keyDown: function(e) {
+  _keyDown: function(e, i) {
     var ins, kc, last, next;
     kc = e.keyCode;
     switch (kc) {
@@ -246,7 +251,7 @@ module.exports = recl({
               select: "end"
             });
           }
-          WorkActions.removeItem(this.state.selected, this.props.list);
+          WorkActions.removeItem(this.state.selected, this.props.list, i.props.item.serial);
           e.preventDefault();
         }
         break;
@@ -282,9 +287,6 @@ module.exports = recl({
   componentDidMount: function() {
     this.placeholder = $("<div class='item placeholder'><div class='sort'>x</div></div>");
     WorkStore.addChangeListener(this._onChangeStore);
-    if (this.state.list.length === 0) {
-      WorkActions.newItem(0, this.props.list);
-    }
     return this.alias();
   },
   componentDidUpdate: function() {
@@ -314,7 +316,8 @@ module.exports = recl({
     return div({}, [
       h1({}, this.props.list), div({
         className: 'items',
-        onDragOver: this._dragOver
+        onDragOver: this._dragOver,
+        onClick: this._click
       }, [
         _.map(this.state.list, (function(_this) {
           return function(item, index) {
@@ -406,6 +409,7 @@ $(function() {
   window.work = {
     WorkPersistence: WorkPersistence
   };
+  window.work.WorkPersistence.listen();
   return React.render(React.createElement(WorkComponent), $('#c')[0]);
 });
 
@@ -772,7 +776,7 @@ module.exports = Object.assign || function (target, source) {
 },{}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/persistence/WorkPersistence.coffee":[function(require,module,exports){
 var WorkActions;
 
-WorkActions = '../actions/WorkActions.coffee';
+WorkActions = require('../actions/WorkActions.coffee');
 
 module.exports = {
   listen: function() {
@@ -780,8 +784,11 @@ module.exports = {
       appl: 'work',
       path: '/r'
     }, function(err, res) {
-      if (!err && res.list) {
-        return WorkActions.load(res.list);
+      var ref;
+      console.log('sub');
+      console.log(arguments);
+      if (!err && !((ref = res.data) != null ? ref.ok : void 0)) {
+        return WorkActions.loadItems(res.data);
       }
     });
   },
@@ -821,7 +828,7 @@ module.exports = {
       return console.log(arguments);
     });
   },
-  deleteItem: function(serial) {
+  removeItem: function(serial) {
     return window.urb.send({
       appl: 'work',
       mark: 'work-command',
@@ -834,7 +841,7 @@ module.exports = {
 
 
 
-},{}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/stores/WorkStore.coffee":[function(require,module,exports){
+},{"../actions/WorkActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/stores/WorkStore.coffee":[function(require,module,exports){
 var Dispatcher, EventEmitter, WorkStore, _following, _incoming, _upcoming, assign, lists;
 
 EventEmitter = require('events').EventEmitter;
@@ -912,11 +919,11 @@ WorkStore = assign({}, EventEmitter.prototype, {
     return list.splice(index, 1);
   },
   loadItems: function(arg) {
-    var i, items, j, len, list;
+    var i, items, k, list;
     list = arg.list, items = arg.items;
-    for (j = 0, len = items.length; j < len; j++) {
-      i = items[j];
-      i = _.merge(this.getItem(i.serial, i.index), i);
+    for (k in items) {
+      i = items[k];
+      items[k] = _.merge(this.getItem(i.serial, k), i);
     }
     return lists[list] = items;
   }
