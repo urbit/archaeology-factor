@@ -25,11 +25,12 @@ module.exports =
       list:list
       to:to
 
-  removeItem: (index,list) ->
+  removeItem: (index,list,serial) ->
     Dispatcher.handleViewAction
       type:'removeItem'
       index:index
       list:list
+    window.work.WorkPersistence.removeItem serial
 
   loadItems: (items) ->
     Dispatcher.handleViewAction

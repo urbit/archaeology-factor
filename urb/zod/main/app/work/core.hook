@@ -76,11 +76,11 @@
         sort.+.mez
       task.+.mez
     %delete
+      ~&  [%del mez]
       %+  skip
         vat
       |=  t=todo-l
         =(serial.t +.mez)
   ==
-  ~&  [%give-vat vat]
   [[[ost %give %nice ~] spam] +>.$]
 --

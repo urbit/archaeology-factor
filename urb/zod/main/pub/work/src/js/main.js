@@ -32,12 +32,13 @@ module.exports = {
       to: to
     });
   },
-  removeItem: function(index, list) {
-    return Dispatcher.handleViewAction({
+  removeItem: function(index, list, serial) {
+    Dispatcher.handleViewAction({
       type: 'removeItem',
       index: index,
       list: list
     });
+    return window.work.WorkPersistence.removeItem(serial);
   },
   loadItems: function(items) {
     return Dispatcher.handleViewAction({

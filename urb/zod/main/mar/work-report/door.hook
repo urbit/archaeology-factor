@@ -14,7 +14,6 @@
   |%
   ++  mime  [/text/json (taco (crip (pojo json)))]
   ++  json
-    ~&  rep
     :-  %a
     %+  turn  +.rep
     |=  item=todo-l
