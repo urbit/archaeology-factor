@@ -1,5 +1,5 @@
 ::                                                      ::  ::
-::::  /hook/core/soul/zap                               ::  ::
+::::  /hook/core/olleh/zap                              ::  ::
   ::                                                    ::  ::
 /?  314                                                 ::  zuse version
 ::                                                      ::  ::
@@ -10,12 +10,12 @@
     ==                                                  ::
 ++  prep
   |=  [ost=bone our=ship old=(unit ,*)]
-  ~&  [%soul-prep-who lat.hid]
+  ~&  [%olleh-prep-who lat.hid]
   [~ +>]
 ::
-++  poke-soul-run
+++  poke-olleh-run
   |=  [ost=bone her=ship dap=term]
   ^-  [(list move) _+>]
-  ~&  [%poke-soul-run ost her dap]
+  ~&  [%poke-olleh-run ost her dap]
   [~ +>]
 --

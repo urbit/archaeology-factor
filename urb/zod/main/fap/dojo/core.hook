@@ -690,6 +690,15 @@
           (he-rush(poy ~) %tan p.rey)
     ==
   ::
+  ++  he-unto                                           ::  result from behn
+    |=  cit=cuft
+    ^+  +>
+    ?>  ?=(%coup -.cit)
+    ?~  p.cit  
+      ~&  %he-unto-coup-ok
+      +>
+    (he-rush %tan u.p.cit)
+  ::
   ++  he-like                                           ::  accept line
     |=  buf=(list ,@c)
     =(%& -:(he-dope (tufa buf)))
@@ -784,8 +793,7 @@
   ::  ~&  [%dojo-pour pax]
   ?-    -.sih
       %b
-    ~&  [%dojo-pour-behn pax +<.sih]
-    [~ +>.$]
+    he-abet:(~(he-unto he [[ost ~] (~(got by hoc) ost)]) +>.sih)
   ::
       %f
     he-abet:(~(he-made he [[ost ~] (~(got by hoc) ost)]) pax +>.sih)

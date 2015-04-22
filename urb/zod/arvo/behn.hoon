@@ -241,7 +241,7 @@
             (mo-give %onto `p.cux)
         %&
       ?.  (mo-okay q.p.cux)
-        (mo-give %onto `[%leaf "{<dap>}: bad core"]~)
+        (mo-give %onto `[%leaf "{<dap>}: bogus core"]~)
       =.  +>  (mo-give %onto ~)
       =.  +>  (mo-bold dap dep)
       =.  +>  (mo-born dap pup q.p.cux)
@@ -291,7 +291,7 @@
     ~&  [%mo-boot dap how pup]
     %+  mo-pass  [%sys how dap (scot %p p.pup) q.pup ~]
     ^-  note-behn
-    [%f %exec our `[%boil %core [[p.pup q.pup [%da now]] [dap %zap ~]] ~]]
+    [%f %exec our `[%boil %core [[p.pup q.pup [%da now]] [dap %ape ~]] ~]]
   ::
   ++  mo-away                                           ::  foreign request
     |=  [him=ship caz=cuss]                             ::  
@@ -609,7 +609,7 @@
             tyc
         ==
       ==
-    ::
+    ++  ap-sled  (mole (slod ska))                      ::  namespace view
     ++  ap-call                                         ::  call into agent
       |=  [cog=term arg=vase]
       ^-  [(unit tang) _+>]
@@ -623,9 +623,9 @@
             %&  (ap-sake p.wiz +.zep)
           ==
       ^=  zep  ^-  (each noun tang)
-      =+  ton=(mock [q.hav q.p.puz] |=(* ~))
+      =+  ton=(mock [q.hav q.p.puz] ap-sled)
       ?-  -.ton
-        %0  =+  ton=(mong [p.ton q.arg] |=(* ~))
+        %0  =+  ton=(mong [p.ton q.arg] ap-sled)
             ?-  -.ton
               %0  [%& p.ton]
               %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
@@ -674,8 +674,8 @@
       ?@  +.q.vax  [%| (ap-suck "move: invalid move (card)")]
       =+  hun=(~(get by r.zam) -.q.vax)
       ?~  hun  [%| (ap-suck "move: invalid card (bone)")]
-      =+  cav=(slot 7 vax)
-      ?+  +<.q.vax  [%| (ap-suck "move: invalid card (stem)")]
+      =+  cav=(spec (slot 3 (spec (slot 3 vax))))
+      ?+  +<.q.vax  [%| (ap-suck "move: invalid card ({(trip (,@ +<.q.vax))})")]
         %rush  (ap-move-rush u.hun cav)
         %send  (ap-move-send u.hun cav)
         %pass  (ap-move-pass u.hun cav)
@@ -733,8 +733,12 @@
       ^-  (unit ,@tas)
       ?+  sep  ~&  [%ap-vain sep]
                ~
+        %cash  `%a
+        %conf  `%b
         %exec  `%f
-        ::  etc
+        %flog  `%d
+        %plug  `%c
+        %want  `%a
       ==
     ::
     ++  ap-move-pass                                    ::  pass general move 
@@ -750,13 +754,13 @@
         [%| (ap-suck "move: unknown note {(trip +<.q.vax)}")]
       :^  %&  neh  %pass 
       :-  [(scot %p q.q.pry) %inn u.pux]
-      [%meta u.huj (slot 7 vax)]
+      [%meta u.huj (spec (slot 3 vax))]
     ::
     ++  ap-save                                         ::  verify core
       |=  vax=vase
       ^-  (each vase tang)
-      ?:  (~(nest ut p.hav) %| p.vax)
-        [%| (ap-suck "bad core")]
+      ?.  (~(nest ut p.hav) %| p.vax)
+        [%| (ap-suck "invalid core")]
       [%& vax]
     ::
     ++  ap-sake                                         ::  handle result
@@ -778,7 +782,6 @@
       |=  cag=cage
       ^+  +>
       =+  cug=(ap-find %poke p.cag ~)
-      ~&  [%ap-poke cug]
       ?~  cug
         (ap-give %coup `(ap-suck "no poke arm"))
       =^  tur  +>.$
@@ -880,7 +883,6 @@
   |=  [hen=duct hic=(hypo (hobo kiss-behn))]
   ^-  [p=(list move) q=_..^$]
   =>  .(q.hic ?.(?=(%soft -.q.hic) q.hic ((hard kiss-behn) p.q.hic)))
-  ~&  [%behn-call q.hic]
   ?-    -.q.hic
       %conf
     ?.  (~(has by pol.all) p.q.hic)

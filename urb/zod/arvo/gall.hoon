@@ -160,7 +160,8 @@
               [%went p=ship q=cape]                     ::  only for apps
           ==  ==                                        ::
               $:  %b                                    ::  by %behn
-          $%  [%unto p=cuft]                            ::  
+          $%  [%onto p=(unit tang)]                     ::
+              [%unto p=cuft]                            ::
           ==  ==                                        ::
               $:  %g                                    ::  by %gall
           $%  [%init p=@p]                              ::
