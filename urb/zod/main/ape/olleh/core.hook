@@ -1,0 +1,21 @@
+::                                                      ::  ::
+::::  /hook/core/soul/zap                               ::  ::
+  ::                                                    ::  ::
+/?  314                                                 ::  zuse version
+::                                                      ::  ::
+::::                                                    ::  ::
+  ::                                                    ::  ::
+|_  $:  hid=hide                                        ::  system state
+        ~                                               ::  program state
+    ==                                                  ::
+++  prep
+  |=  [ost=bone our=ship old=(unit ,*)]
+  ~&  [%soul-prep-who lat.hid]
+  [~ +>]
+::
+++  poke-soul-run
+  |=  [ost=bone her=ship dap=term]
+  ^-  [(list move) _+>]
+  ~&  [%poke-soul-run ost her dap]
+  [~ +>]
+--

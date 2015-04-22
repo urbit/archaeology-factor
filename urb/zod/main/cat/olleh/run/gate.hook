@@ -1,0 +1,9 @@
+::
+::::  /hook/gate/run/helm/cat
+  ::
+/?  314
+::
+::::
+  !:
+|=  [* [[arg=term ~] ~]]
+[%soul-run arg]
