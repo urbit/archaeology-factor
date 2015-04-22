@@ -99,8 +99,8 @@
   ==                                                    ::
 ++  kiss-behn                                           ::  incoming request
   $%  [%conf p=ship q=dude r=culm]                      ::  configure app
-      [%deal p=sock q=cuss]                             ::  full transmission
       [%init p=ship]                                    ::  set owner
+      [%deal p=sock q=cuss]                             ::  full transmission
       [%rote p=sack q=path r=*]                         ::  remote request
       [%roth p=sack q=path r=*]                         ::  remote response
   ==                                                    ::
@@ -228,6 +228,11 @@
     |=  git=gift-behn
     %_(+> moz :_(moz [hen %give git]))
   ::
+  ++  mo-okay                                           ::  valid agent core
+    |=  vax=vase
+    ^-  ?
+    (~(nest ut -:!>(*hide)) %| p:(slot 12 vax))
+  ::
   ++  mo-boom                                           ::  complete new boot
     |=  [dap=dude pup=scup dep=@uvH cux=(each cage tang)]
     ^+  +>
@@ -235,8 +240,10 @@
         %|  ~&  [%mo-boom-lame p.cux]
             (mo-give %onto `p.cux)
         %&
+      ?.  (mo-okay q.p.cux)
+        (mo-give %onto `[%leaf "{<dap>}: bad core"]~)
       =.  +>  (mo-give %onto ~)
-      =.  +>  (mo-bold dap pup dep)
+      =.  +>  (mo-bold dap dep)
       =.  +>  (mo-born dap pup q.p.cux)
       ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) ~)
     ==
@@ -264,18 +271,18 @@
     ?.  (~(has by bum) dap)  
       ~&  [%behn-old-boon dap]
       +>
-    =.  +>  (mo-bold dap pup dep)
+    =.  +>  (mo-bold dap dep)
     ?-  -.cux
       %|  ~&  [%mo-boon-lame p.cux]
           (mo-give %onto `p.cux)
-      %&  ~&  %mo-boon-prep
+      %&  =.  +>  (mo-give %onto ~)
           ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) `q.p.cux)
     ==
   ::
   ++  mo-bold                                           ::  wait for dep
-    |=  [dap=dude pup=scup dep=@uvH]
+    |=  [dap=dude dep=@uvH]
     ^+  +>
-    %+  mo-pass  [%sys %old dap (scot %p p.pup) q.pup ~] 
+    %+  mo-pass  [%sys %dep dap ~] 
     [%f %wasp our dep]
   ::
   ++  mo-boot                                           ::  create ship
@@ -363,6 +370,15 @@
     |=  [pax=path sih=sign-behn]
     ^+  +>
     ?+    -.pax  !!
+        %dep                                            ::  update
+      ?>  ?=([%f %news *] sih)
+      ?>  ?=([@ ~] t.pax)
+      =+  sot=(~(get by bum) i.t.pax)
+      ?~  sot
+        ~&  [%mo-cyst-none i.t.pax]
+        +>.$
+      (mo-boot i.t.pax %old pup.u.sot)
+    ::
         %old                                            ::  reload old
       ?>  ?=([%f %made *] sih)
       ?>  ?=([@ @ @ ~] t.pax)
@@ -483,18 +499,21 @@
     ++  ap-abed                                         ::  initialize
       |=  [dap=dude pry=prey]
       ^+  +>
-      =:  ^dap  dap
-          ^pry  pry
+      =:  ^dap   dap
+          ^pry   pry
+          +>+<+  `seat`(~(got by bum) dap)
         ==
       =+  unt=(~(get by q.zam) hen)
       ?^  unt
         +>.$(ost u.unt)
       %=  +>.$
-        ost  p.zam
-        p.zam  +(p.zam)
-        q.zam  (~(put by q.zam) hen p.zam)
-        r.zam  (~(put by r.zam) p.zam hen)
-        +<+    `seat`(~(got by bum) dap)
+        ost      p.zam
+        p.zam    +(p.zam)
+        q.zam    (~(put by q.zam) hen p.zam)
+        r.zam    (~(put by r.zam) p.zam hen)
+        act.tyc  +(act.tyc)
+        eny.tyc  (shax (mix (add dap act.tyc) eny))
+        lat.tyc  now
       ==
     ::
     ++  ap-abet                                         ::  resolve
@@ -537,7 +556,7 @@
           ?~  pax  ~ 
           $(pax t.pax, dep +(dep), cog (ap-hype cog i.pax))
       ?^  spu  spu
-      ?:((ap-fond cog) ~ `[dep cog])
+      ?.((ap-fond cog) ~ `[dep cog])
     ::
     ++  ap-fall                                         ::  drop from queue
       ^+  .
@@ -576,9 +595,25 @@
       ^+  +>
       +>(zip :_(zip [(~(got by r.zam) ost) %pass pax coh]))
     ::
+    ++  ap-hide                                         ::  set up hide
+      %_    .
+          +12.q.hav
+        ^-  hide
+        :*  :*  our
+                dap
+                ~
+            ==
+            ~
+            sup.ged
+            pus.ged
+            tyc
+        ==
+      ==
+    ::
     ++  ap-call                                         ::  call into agent
       |=  [cog=term arg=vase]
       ^-  [(unit tang) _+>]
+      =.  +>  ap-hide
       =+  puz=(mule |.((~(mint ut p.hav) [%noun [%cnzy cog]])))
       ?:  ?=(%| -.puz)  [`p.puz +>.$]
       =+  wiz=(mule |.((slit p.p.puz p.arg)))
@@ -603,6 +638,7 @@
     ++  ap-prep                                         ::  call to install
       |=  vux=(unit vase)
       ^+  +>
+      ::?.  (ap-fond %prep) ?~
       =^  tur  +>.$
           %+  ap-call  %prep
           ;:  slop
@@ -742,6 +778,7 @@
       |=  cag=cage
       ^+  +>
       =+  cug=(ap-find %poke p.cag ~)
+      ~&  [%ap-poke cug]
       ?~  cug
         (ap-give %coup `(ap-suck "no poke arm"))
       =^  tur  +>.$
@@ -853,8 +890,8 @@
   ::
       %deal
     =<  mo-abet
-    ?.  (~(has in pol.all) q.p.q.hic)                   ::  either to us
-      ?>  (~(has in pol.all) p.p.q.hic)                 ::  or from us
+    ?.  (~(has by pol.all) q.p.q.hic)                   ::  either to us
+      ?>  (~(has by pol.all) p.p.q.hic)                 ::  or from us
       (mo-away:(mo-abed:mo p.p.q.hic hen) q.p.q.hic q.q.hic)
     (mo-come:(mo-abed:mo q.p.q.hic hen) p.p.q.hic q.q.hic)
   ::

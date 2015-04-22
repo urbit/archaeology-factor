@@ -26,7 +26,8 @@
       $%  [%reload p=(list term)]                       ::  reload vanes
       ==                                                ::
     ++  dill-flog                                       ::  sent to %dill
-      $%  [%crud p=%hax-init [%leaf p=tape] ~]          ::  initialize ship
+      $%  [%crud p=term q=(list tank)]                  ::  fat report
+          [%text p=tape]                                ::  thin report
           [%veer p=@ta q=path r=@t]                     ::  install vane
           [%vega p=path]                                ::  reboot by path
           [%verb ~]                                     ::  verbose mode
@@ -55,6 +56,12 @@
           [%d note-dill]                                ::
           [%g note-gall]                                ::
       ==                                                ::
+    ++  sign-behn                                       ::  sign from %behn
+      $%  [%onto p=(unit tang)]                         ::
+      ==                                                ::
+    ++  sign                                            ::  in result $<-
+      $%  [%b sign-behn]                                ::
+      ==                                                ::
     --                                                  ::
 ::                                                      ::
 ::::                                                    ::
@@ -71,9 +78,9 @@
     |=  git=gift
     %_(+> moz [[ost %give git] moz])
   ::
-  ++  he-wish-bento
+  ++  he-wish-run
     |=  dap=term
-    %_(+> moz :_(moz [ost %pass ~ %b %conf our.hid dap %load our.hid %main]))
+    %_(+> moz :_(moz [ost %pass /run %b %conf our.hid dap %load our.hid %main]))
   ::
   ++  he-wish-reset
     ^+  .
@@ -165,10 +172,9 @@
   ~&  %poke-helm-reload
   he-abet:(he-wish-reload:(hake ost her) all)
 ::
-++  poke-helm-bento
+++  poke-helm-run
   |=  [ost=bone her=ship dap=term]
-  ~&  [%poke-helm dap]
-  he-abet:(he-wish-bento:(hake ost her) dap)
+  he-abet:(he-wish-run:(hake ost her) dap)
 ::
 ++  poke-helm-begin
   |=  [ost=bone you=ship begs]
@@ -194,5 +200,18 @@
       [ost %pass / %c %plug our.hid %arvo (sein our.hid) %arvo]
       [ost %pass / %c %plug our.hid %try (sein our.hid) %try]
       [ost %give %nice ~]
+  ==
+::
+++  pour
+  |=  [ost=bone pax=path sih=sign]
+  ^-  [(list move) _+>]
+  ~&  [%helm-pour pax]
+  ?-    sih
+      [%b %onto *]
+    :_  +>.$
+    :_  ~
+    ?^  +>.sih
+      `move`[ost %pass ~ %d %flog %crud `@tas`-.pax `(list tank)`+>+.sih]
+    `move`[ost %pass ~ %d %flog %text "<{(trip -.pax)}>"]
   ==
 --

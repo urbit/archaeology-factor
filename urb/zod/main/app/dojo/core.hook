@@ -81,8 +81,14 @@
     ++  club                                            ::  agent action
       $%  [%peer p=path]                                ::  subscribe
           [%poke p=cage]                                ::  apply
-          [%pull p=path]                                ::  unsubscribe
-          [%took ~]                                     ::  acknowledge rush
+          [%pull ~]                                     ::  unsubscribe
+          [%pump p=(unit tang)]                         ::  pump yes/no
+      ==                                                ::
+    ++  cuft                                            ::  internal gift
+      $%  [%coup p=(unit tang)]                         ::  poke result
+          [%quit ~]                                     ::  close subscription
+          [%reap p=(unit tang)]                         ::  peer result
+          [%rush p=cage]                                ::  subscription output
       ==                                                ::
     ++  hood                                            ::  assembly plan
       $:  zus=@ud                                       ::  zuse kelvin
@@ -138,6 +144,9 @@
     ++  note-behn                                       ::  note to %behn
       $%  [%deal sock term club]                        ::
       ==                                                ::
+    ++  sign-behn                                       ::
+      $%  [%unto p=cuft]                                ::
+      ==                                                ::
     ++  sign-gall                                       ::  sign from %gall
       $%  [%mean p=ares]                                ::
           [%nice ~]                                     ::
@@ -151,7 +160,8 @@
           [%b note-behn]                                ::
       ==                                                ::
     ++  sign                                            ::  in result $<-
-      $%  [%f sign-ford]                                ::
+      $%  [%b sign-behn]                                ::
+          [%f sign-ford]                                ::
           [%g sign-gall]                                ::
       ==                                                ::
     --                                                  ::
@@ -269,6 +279,7 @@
           ;~(pfix fas sym)
         ==
         (cook |=(a=term `goal`[our.hid a]) sym)
+        (easy [our.hid %helm])
       ==
     ++  dp-model-cat  ;~(plug dp-server-cat dp-config)  ::  ++dojo-model
     ++  dp-model-dog  ;~(plug dp-server-dog dp-config)  ::  ++dojo-model
@@ -772,6 +783,10 @@
   ^-  [(list move) _+>]
   ::  ~&  [%dojo-pour pax]
   ?-    -.sih
+      %b
+    ~&  [%dojo-pour-behn pax +<.sih]
+    [~ +>.$]
+  ::
       %f
     he-abet:(~(he-made he [[ost ~] (~(got by hoc) ost)]) pax +>.sih)
   ::
