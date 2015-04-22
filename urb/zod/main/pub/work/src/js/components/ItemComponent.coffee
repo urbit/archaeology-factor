@@ -9,6 +9,8 @@ module.exports = recl
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData 'text/html',e.currentTarget
     @props._dragStart e,@
+
+  _expand: -> @setState {expand:!@state.expand}
   
   _dragEnd: (e) -> @props._dragEnd e,@
 
@@ -20,28 +22,46 @@ module.exports = recl
     switch kc
       # tab - expand
       when 9
-        @setState {expand:!@state.expand}
+        if !@state.expand is true and not e.shiftKey
+          @setState {expand:true}
+          e.preventDefault()
+        else
+          return true
       # esc - collapse
       when 27
         @setState {expand:false}
+        e.preventDefault()
 
-    if (kc is 9) or (kc is 27) then e.preventDefault()
-
+  _keyUp: (e) ->
     $t = $(e.target)
     $p = $t.closest('.input').parent()
-
-    if $p.hasClass 'title'
-      @setState {title:$t.text()}
+    if $p.hasClass 'title' then @setState {title:$t.text()}
 
   _blur: (e) -> @props._blur e,@
 
   _focus: (e) -> @props._focus e,@
 
+  comment:
+    _keyUp: (e) -> console.log 'comment key'
+    submit: (e) -> console.log 'comment submit'
+      
   getInitialState: -> {expand:false}
 
   render: ->
     itemClass = 'item'
     if @state.expand then itemClass += ' expand'
+
+    comments = _.map @props.item.comments, (comment) ->
+      (div {className:'comment'}, comment)
+    comments.push (div {className:'comment-submit'}, [
+        (div {
+          className:'input'
+          onKeyUp:@comment._keyUp
+          contentEditable:true}, ""),
+        (div {
+          className:'submit'
+          onClick:@comment.submit
+          })])
 
     (div {
       className:itemClass
@@ -57,18 +77,21 @@ module.exports = recl
             onFocus:@_focus
             onBlur:@_blur
             onKeyDown:@_keyDown
+            onKeyUp:@_keyUp
             className:'input'
           },@props.item.title)
         ])
         (div {className:'date ib top'}, [
           (div {
             contentEditable:true
+            onKeyDown:@_keyDown
             className:'input'
             },@props.item.date)
         ])
         (div {className:'tags ib top'},[
           (div {
             contentEditable:true
+            onKeyDown:@_keyDown
             className:'input'
             },@props.item.tags.join(" "))
         ])
@@ -76,6 +99,11 @@ module.exports = recl
           (div {className:'done a'},"Done")
           (div {className:'rele a'},"Release")
         ])
-        (div {className:'caret ib'},"")
-        (div {className:"comments"},"comments")
+        (div {
+          className:'caret-container ib p'
+          onClick:@_expand
+        },[
+          (div {className:'caret'},"")
+        ])
+        (div {className:"comments"},comments)
     ])

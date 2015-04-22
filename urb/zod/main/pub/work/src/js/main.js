@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee":[function(require,module,exports){
 var Dispatcher;
 
 Dispatcher = require('../dispatcher/Dispatcher.coffee');
@@ -24,14 +24,6 @@ module.exports = {
     });
     return window.work.WorkPersistence.updateItem(index, item.serial, item.title);
   },
-  swapItems: function(from, list, to) {
-    return Dispatcher.handleViewAction({
-      type: 'swapItem',
-      from: from,
-      list: list,
-      to: to
-    });
-  },
   removeItem: function(index, list, serial) {
     Dispatcher.handleViewAction({
       type: 'removeItem',
@@ -51,7 +43,7 @@ module.exports = {
 
 
 
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/dispatcher/Dispatcher.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/components/ItemComponent.coffee":[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/dispatcher/Dispatcher.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/components/ItemComponent.coffee":[function(require,module,exports){
 var WorkActions, div, recl;
 
 recl = React.createClass;
@@ -67,27 +59,38 @@ module.exports = recl({
     e.dataTransfer.setData('text/html', e.currentTarget);
     return this.props._dragStart(e, this);
   },
+  _expand: function() {
+    return this.setState({
+      expand: !this.state.expand
+    });
+  },
   _dragEnd: function(e) {
     return this.props._dragEnd(e, this);
   },
   _keyDown: function(e) {
-    var $p, $t, kc;
+    var kc;
     this.props._keyDown(e, this);
     kc = e.keyCode;
     switch (kc) {
       case 9:
-        this.setState({
-          expand: !this.state.expand
-        });
+        if (!this.state.expand === true && !e.shiftKey) {
+          this.setState({
+            expand: true
+          });
+          return e.preventDefault();
+        } else {
+          return true;
+        }
         break;
       case 27:
         this.setState({
           expand: false
         });
+        return e.preventDefault();
     }
-    if ((kc === 9) || (kc === 27)) {
-      e.preventDefault();
-    }
+  },
+  _keyUp: function(e) {
+    var $p, $t;
     $t = $(e.target);
     $p = $t.closest('.input').parent();
     if ($p.hasClass('title')) {
@@ -102,17 +105,42 @@ module.exports = recl({
   _focus: function(e) {
     return this.props._focus(e, this);
   },
+  comment: {
+    _keyUp: function(e) {
+      return console.log('comment key');
+    },
+    submit: function(e) {
+      return console.log('comment submit');
+    }
+  },
   getInitialState: function() {
     return {
       expand: false
     };
   },
   render: function() {
-    var itemClass;
+    var comments, itemClass;
     itemClass = 'item';
     if (this.state.expand) {
       itemClass += ' expand';
     }
+    comments = _.map(this.props.item.comments, function(comment) {
+      return div({
+        className: 'comment'
+      }, comment);
+    });
+    comments.push(div({
+      className: 'comment-submit'
+    }, [
+      div({
+        className: 'input',
+        onKeyUp: this.comment._keyUp,
+        contentEditable: true
+      }, ""), div({
+        className: 'submit',
+        onClick: this.comment.submit
+      })
+    ]));
     return div({
       className: itemClass,
       draggable: true,
@@ -130,6 +158,7 @@ module.exports = recl({
           onFocus: this._focus,
           onBlur: this._blur,
           onKeyDown: this._keyDown,
+          onKeyUp: this._keyUp,
           className: 'input'
         }, this.props.item.title)
       ]), div({
@@ -137,6 +166,7 @@ module.exports = recl({
       }, [
         div({
           contentEditable: true,
+          onKeyDown: this._keyDown,
           className: 'input'
         }, this.props.item.date)
       ]), div({
@@ -144,6 +174,7 @@ module.exports = recl({
       }, [
         div({
           contentEditable: true,
+          onKeyDown: this._keyDown,
           className: 'input'
         }, this.props.item.tags.join(" "))
       ]), div({
@@ -155,17 +186,22 @@ module.exports = recl({
           className: 'rele a'
         }, "Release")
       ]), div({
-        className: 'caret ib'
-      }, ""), div({
+        className: 'caret-container ib p',
+        onClick: this._expand
+      }, [
+        div({
+          className: 'caret'
+        }, "")
+      ]), div({
         className: "comments"
-      }, "comments")
+      }, comments)
     ]);
   }
 });
 
 
 
-},{"../actions/WorkActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/components/ListComponent.coffee":[function(require,module,exports){
+},{"../actions/WorkActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/components/ListComponent.coffee":[function(require,module,exports){
 var ItemComponent, WorkActions, WorkStore, div, h1, input, rece, recl, ref, textarea;
 
 recl = React.createClass;
@@ -214,19 +250,46 @@ module.exports = recl({
     return this.dragged = i.dragged;
   },
   _dragEnd: function(e, i) {
-    WorkActions.swapItems(this.dragged.attr('data-index'), this.props.list, this.over);
+    var from, to, update;
+    from = Number(this.dragged.attr('data-index'));
+    to = Number(this.over.attr('data-index'));
+    if (from < to) {
+      to--;
+    }
+    if (this.drop === 'after') {
+      to++;
+    }
+    i.setState({
+      index: String(to)
+    });
+    update = this.update;
+    setTimeout(function() {
+      return update(i);
+    }, 0);
     this.dragged.removeClass('hidden');
     return this.placeholder.remove();
   },
   _dragOver: function(e, i) {
-    var $i;
+    var $t;
     e.preventDefault();
-    $i = $(e.target).closest('.item');
-    this.over = Number($i.attr('data-index'));
+    $t = $(e.target).closest('.item');
+    if ($t.hasClass('placeholder')) {
+      return;
+    }
+    if (!$t[0]) {
+      return;
+    }
     if (!this.dragged.hasClass('hidden')) {
       this.dragged.addClass('hidden');
     }
-    return this.placeholder.insertBefore($i);
+    if ((e.clientY - $t[0].offsetTop) < ($t[0].offsetHeight / 2)) {
+      this.drop = 'before';
+      this.placeholder.insertBefore($t);
+    } else {
+      this.drop = 'after';
+      this.placeholder.insertAfter($t);
+    }
+    return this.over = $t;
   },
   _keyDown: function(e, i) {
     var ins, kc, last, next;
@@ -281,9 +344,19 @@ module.exports = recl({
     }
   },
   update: function(i) {
-    var item;
-    item = _.merge(i.props.item, i.state);
-    return WorkActions.updateItem(i.props.index, this.props.list, item);
+    var item, k, ref1, v;
+    item = {};
+    ref1 = i.props.item;
+    for (k in ref1) {
+      v = ref1[k];
+      if (i.state[k] !== void 0 && i.state[k] !== i.props.item[k]) {
+        item[k] = i.state[k];
+      }
+    }
+    if (Object.keys(item).length > 0) {
+      item = _.merge(i.props.item, item);
+      return WorkActions.updateItem(item.index, this.props.list, item);
+    }
   },
   componentDidMount: function() {
     this.placeholder = $("<div class='item placeholder'><div class='sort'>x</div></div>");
@@ -314,7 +387,9 @@ module.exports = recl({
     }
   },
   render: function() {
-    return div({}, [
+    return div({
+      className: 'list'
+    }, [
       h1({}, this.props.list), div({
         className: 'items',
         onDragOver: this._dragOver,
@@ -341,7 +416,7 @@ module.exports = recl({
 
 
 
-},{"../actions/WorkActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee","../stores/WorkStore.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/stores/WorkStore.coffee","./ItemComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/components/ItemComponent.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/components/WorkComponent.coffee":[function(require,module,exports){
+},{"../actions/WorkActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee","../stores/WorkStore.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/stores/WorkStore.coffee","./ItemComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/components/ItemComponent.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/components/WorkComponent.coffee":[function(require,module,exports){
 var ListComponent, div, input, rece, recl, ref, textarea;
 
 recl = React.createClass;
@@ -364,7 +439,7 @@ module.exports = recl({
 
 
 
-},{"./ListComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/components/ListComponent.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/dispatcher/Dispatcher.coffee":[function(require,module,exports){
+},{"./ListComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/components/ListComponent.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/dispatcher/Dispatcher.coffee":[function(require,module,exports){
 var Dispatcher;
 
 Dispatcher = require('flux').Dispatcher;
@@ -386,7 +461,7 @@ module.exports = _.merge(new Dispatcher(), {
 
 
 
-},{"flux":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/flux/index.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/main.coffee":[function(require,module,exports){
+},{"flux":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/flux/index.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/main.coffee":[function(require,module,exports){
 var WorkComponent, WorkPersistence;
 
 WorkPersistence = require('./persistence/WorkPersistence.coffee');
@@ -416,7 +491,7 @@ $(function() {
 
 
 
-},{"./components/WorkComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/components/WorkComponent.coffee","./persistence/WorkPersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/persistence/WorkPersistence.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/flux/index.js":[function(require,module,exports){
+},{"./components/WorkComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/components/WorkComponent.coffee","./persistence/WorkPersistence.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/persistence/WorkPersistence.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/flux/index.js":[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -428,7 +503,7 @@ $(function() {
 
 module.exports.Dispatcher = require('./lib/Dispatcher')
 
-},{"./lib/Dispatcher":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/flux/lib/Dispatcher.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/flux/lib/Dispatcher.js":[function(require,module,exports){
+},{"./lib/Dispatcher":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/flux/lib/Dispatcher.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/flux/lib/Dispatcher.js":[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -680,7 +755,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-},{"./invariant":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/flux/lib/invariant.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/flux/lib/invariant.js":[function(require,module,exports){
+},{"./invariant":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/flux/lib/invariant.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/flux/lib/invariant.js":[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -735,7 +810,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/object-assign/index.js":[function(require,module,exports){
+},{}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/object-assign/index.js":[function(require,module,exports){
 'use strict';
 
 function ToObject(val) {
@@ -774,7 +849,7 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/persistence/WorkPersistence.coffee":[function(require,module,exports){
+},{}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/persistence/WorkPersistence.coffee":[function(require,module,exports){
 var WorkActions;
 
 WorkActions = require('../actions/WorkActions.coffee');
@@ -799,7 +874,7 @@ module.exports = {
       mark: 'work-command',
       data: {
         create: {
-          sort: sort,
+          sort: Number(sort),
           task: {
             serial: serial,
             title: title
@@ -817,7 +892,7 @@ module.exports = {
       mark: 'work-command',
       data: {
         update: {
-          sort: sort,
+          sort: Number(sort),
           task: {
             serial: serial,
             title: title
@@ -842,7 +917,7 @@ module.exports = {
 
 
 
-},{"../actions/WorkActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/stores/WorkStore.coffee":[function(require,module,exports){
+},{"../actions/WorkActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/actions/WorkActions.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/stores/WorkStore.coffee":[function(require,module,exports){
 var Dispatcher, EventEmitter, WorkStore, _following, _incoming, _upcoming, assign, lists;
 
 EventEmitter = require('events').EventEmitter;
@@ -880,7 +955,7 @@ WorkStore = assign({}, EventEmitter.prototype, {
     var item;
     item = {
       serial: serial,
-      sort: index,
+      index: index,
       title: ' ',
       modified: new Date(),
       created: new Date(),
@@ -907,11 +982,6 @@ WorkStore = assign({}, EventEmitter.prototype, {
     });
     list.splice(list.indexOf(_item), 1);
     return list.splice(index, 0, _item);
-  },
-  swapItem: function(arg) {
-    var from, list, to;
-    from = arg.from, list = arg.list, to = arg.to;
-    return console.log('swap');
   },
   removeItem: function(arg) {
     var index, list;
@@ -945,7 +1015,7 @@ module.exports = WorkStore;
 
 
 
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","object-assign":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/node_modules/object-assign/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","object-assign":"/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/node_modules/object-assign/index.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1250,4 +1320,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},["/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/work/src/js/main.coffee"]);
+},{}]},{},["/Users/galen/src/urbit/urb/zod/main/pub/work/src/js/main.coffee"]);

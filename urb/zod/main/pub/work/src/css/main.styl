@@ -17,23 +17,35 @@ body
   margin-left -29rem
   margin-bottom 12rem
 
+h1
+  font-weight 500
+  font-size 1.6rem
+  letter-spacing .1rem
+  text-transform capitalize
+
+.list
+  padding-left 2rem
+
 .items
   min-width 2rem
   min-height 2rem
+  margin-left -2rem
 
 .item
   display block
   max-height 2rem
   overflow hidden
-
-.item .comments
-  height 0
+  margin-bottom .3rem
+  -webkit-transition max-height .2s
 
 .item.expand
   max-height 12rem
+  -webkit-transition max-height .2s
 
-.item.expand .comments
+.item .comments
   height 10rem
+  margin-top 1rem
+  margin-left 2rem
 
 .item .sort
 .item .title
@@ -66,8 +78,13 @@ body
   font-weight 500
   line-height .9rem
 
+.item.expand .comp
 .item:hover .comp
   opacity 1
+
+.item .caret-container
+  padding-top .6rem
+  margin-left 1rem
 
 /* global */
 
@@ -80,6 +97,26 @@ body
 .hidden
   display none
 
+.caret
+  width 0
+  height 0
+  border-top .3rem solid transparent
+  border-right .3rem solid transparent
+  border-bottom .3rem solid transparent
+  border-left .3rem solid #000
+  -webkit-transform rotate(0deg)
+  -webkit-transform-origin 0 50%
+  -webkit-transition -webkit-transform .2s
+
+.expand .caret
+  transform rotate(90deg)
+  transform-origin 0 50%
+  -webkit-transform rotate(90deg)
+  -webkit-transition -webkit-transform .2s
+
+.p
+  cursor pointer
+
 .a
   display inline
   cursor pointer
@@ -89,6 +126,9 @@ body
   outline none
   display inline-block
   min-width 1rem
+  background-color #f9f9f9
+  padding-left .1rem
+  padding-right .1rem
   
 .input:focus
-  background-color #f9f9f9
+  background-color #ededed

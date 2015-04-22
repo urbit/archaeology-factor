@@ -27,17 +27,32 @@ module.exports = recl
 
   _dragStart: (e,i) -> @dragged = i.dragged
 
-  _dragEnd: (e,i) -> 
-    WorkActions.swapItems @dragged.attr('data-index'),@props.list,@over
+  _dragEnd: (e,i) ->
+    from = Number @dragged.attr('data-index')
+    to = Number @over.attr('data-index')
+    if from<to then to--
+    if @drop is 'after' then to++
+    i.setState {index:String(to)} # 0 fucks up comparison
+    update = @update
+    setTimeout () -> # wait for state update
+        update i
+      ,0
     @dragged.removeClass 'hidden'
     @placeholder.remove()
 
   _dragOver: (e,i) ->
     e.preventDefault()
-    $i = $(e.target).closest('.item')
-    @over = Number $i.attr 'data-index'
+    $t = $(e.target).closest('.item')
+    if $t.hasClass 'placeholder' then return
+    if not $t[0] then return
     if not @dragged.hasClass('hidden') then @dragged.addClass 'hidden'
-    @placeholder.insertBefore $i
+    if (e.clientY - $t[0].offsetTop) < ($t[0].offsetHeight / 2)
+      @drop = 'before'
+      @placeholder.insertBefore $t
+    else
+      @drop = 'after'
+      @placeholder.insertAfter $t
+    @over = $t
 
   _keyDown: (e,i) ->
     kc = e.keyCode
@@ -76,8 +91,13 @@ module.exports = recl
     if (kc is 13) or (kc is 38) or (kc is 40) then e.preventDefault()
 
   update: (i) -> 
-    item = _.merge i.props.item,i.state
-    WorkActions.updateItem i.props.index,@props.list,item
+    item = {}
+    for k,v of i.props.item
+      if i.state[k] isnt undefined and i.state[k] isnt i.props.item[k]
+        item[k] = i.state[k]
+    if Object.keys(item).length > 0
+      item = _.merge i.props.item,item
+      WorkActions.updateItem item.index,@props.list,item
 
   componentDidMount: -> 
     @placeholder = $ "<div class='item placeholder'><div class='sort'>x</div></div>"
@@ -101,7 +121,7 @@ module.exports = recl
       @setState {select:false}
 
   render: ->
-    (div {}, [
+    (div {className:'list'}, [
       (h1 {}, @props.list),
       (div {
         className:'items'

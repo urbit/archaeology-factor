@@ -16,7 +16,7 @@ module.exports =
         mark:'work-command'
         data:
           create:
-            sort:sort
+            sort:Number sort
             task:
               serial:serial
               title:title
@@ -30,7 +30,7 @@ module.exports =
         mark:'work-command'
         data:
           update:
-            sort:sort
+            sort:Number sort
             task:
               serial:serial
               title:title

@@ -23,7 +23,7 @@ WorkStore = assign {},EventEmitter.prototype,{
   getItem: (serial,index) ->
     item =
       serial:serial
-      sort:index
+      index:index
       title:' '
       modified: new Date()
       created: new Date()
@@ -44,9 +44,6 @@ WorkStore = assign {},EventEmitter.prototype,{
       _item.serial is item.serial
     list.splice list.indexOf(_item),1
     list.splice index,0,_item 
-
-  swapItem: ({from,list,to}) ->
-    console.log 'swap'
 
   removeItem: ({index,list}) -> 
     list = lists[list]

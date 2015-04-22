@@ -18,13 +18,6 @@ module.exports =
       item:item
     window.work.WorkPersistence.updateItem index,item.serial,item.title
 
-  swapItems: (from,list,to) ->
-    Dispatcher.handleViewAction
-      type:'swapItem'
-      from:from
-      list:list
-      to:to
-
   removeItem: (index,list,serial) ->
     Dispatcher.handleViewAction
       type:'removeItem'
