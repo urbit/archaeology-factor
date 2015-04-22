@@ -41,12 +41,14 @@
   ==
 ::
 ++  spam
-  %+  turn  
-    %+  skim  (~(tap by sup.hid))
-      |=  [ost=bone his=ship pax=path]
-    ?=([%r ~] pax)
-  |=  [ost=bone his=ship pax=path]
-    [ost %give %rush %work-report [%list vat]]
+  |=  vet=axle
+    ~&  [%spam vet]
+    %+  turn  
+      %+  skim  (~(tap by sup.hid))
+        |=  [ost=bone his=ship pax=path]
+      ?=([%r ~] pax)
+    |=  [ost=bone his=ship pax=path]
+      [ost %give %rush %work-report [%list vet]]
 ::
 ++  insert
   |=  [vet=axle pos=@ud tod=todo-l]
@@ -82,5 +84,5 @@
       |=  t=todo-l
         =(serial.t +.mez)
   ==
-  [[[ost %give %nice ~] spam] +>.$]
+  [[[ost %give %nice ~] (spam vat)] +>.$]
 --

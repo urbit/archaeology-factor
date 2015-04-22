@@ -18,11 +18,12 @@
       "lodash.js/2.4.1/lodash.min.js"
     ==
     ;script(type "text/javascript", src "/~~/~/at/main/lib/urb.js");
-    ;link(type "text/css", rel "stylesheet", href "/main/pub/work/src/css/main.css");
+    ;link(type "text/css", rel "stylesheet", href "http://localhost:8000/css/main.css");
     ;title: work
   ==
   ;body
     ;div#c;
-    ;script(type "text/javascript", src "/main/pub/work/src/js/main.js");
+    ::;script(type "text/javascript", src "/main/pub/work/src/js/main.js");
+    ;script(type "text/javascript", src "http://localhost:8000/js/main.js");
   ==
 ==
