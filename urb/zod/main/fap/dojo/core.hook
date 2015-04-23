@@ -695,8 +695,7 @@
     ^+  +>
     ?>  ?=(%coup -.cit)
     ?~  p.cit  
-      ~&  %he-unto-coup-ok
-      +>
+      (he-rush %txt ">=")
     (he-rush %tan u.p.cit)
   ::
   ++  he-like                                           ::  accept line

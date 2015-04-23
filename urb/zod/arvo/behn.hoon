@@ -90,6 +90,7 @@
 ++  cove  (pair duct (mold cote cuft))                  ::  internal move 
 ++  dude  term                                          ::  local identity
 ++  scup  (pair ship desk)                              ::  autoupdate
+++  suss  (trel dude ,@tas ,@da)                        ::  config report
 ++  tang  (list tank)                                   ::  error abstraction
 --                                                      ::
 |%  ::::::::::::::::::::::::::::::::::::::::::::::::::::::    %behn cards
@@ -276,7 +277,7 @@
       %|  ~&  [%mo-boon-lame p.cux]
           (mo-give %onto `p.cux)
       %&  =.  +>  (mo-give %onto ~)
-          ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) `q.p.cux)
+          ap-abet:(ap-peep:(ap-abed:ap dap [%high [~ our]]) q.p.cux)
     ==
   ::
   ++  mo-bold                                           ::  wait for dep
@@ -635,17 +636,28 @@
         %2  [%| p.ton]
       ==
     ::
-    ++  ap-prep                                         ::  call to install
+    ++  ap-peep                                         ::  reinstall
+      |=  vax=vase
+      ^+  +>
+      (ap-prep(hav vax) `hav)
+    ::
+    ++  ap-prep                                         ::  install
       |=  vux=(unit vase)
       ^+  +>
-      ::?.  (ap-fond %prep) ?~
+      ?.  (ap-fond %prep) 
+        ?~  vux
+          +>.$
+        ?.  (~(nest ut p:(slot 13 hav)) %| p:(slot 13 u.vux))
+          ~&  %ap-prep-mismatch
+          +>.$
+        +>.$(+13.q.hav +13.q.u.vux)
       =^  tur  +>.$
           %+  ap-call  %prep
           ;:  slop
             !>(`@ud`ost)
             !>(`@p`q.q.pry)
             ?~  vux  !>(~)
-            (slop !>(~) u.vux)
+            (slop !>(~) (slot 13 u.vux))
           ==
       ?~  tur  
         +>.$
