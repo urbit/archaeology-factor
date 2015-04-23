@@ -19,6 +19,7 @@
       ==                                                ::
     ++  funk  (pair ,@ ,@)                              ::
     ++  begs  ,[his=@p tic=@p eny=@t ges=gens]          ::  begin data
+    ++  suss  ,[term ,@tas ,@da]                        ::  config report
     ++  helm-wish                                       ::
       $|  $?  %reset                                    ::  reset kernel
               %verb                                     ::  verbose mode
@@ -57,7 +58,7 @@
           [%g note-gall]                                ::
       ==                                                ::
     ++  sign-behn                                       ::  sign from %behn
-      $%  [%onto p=(unit tang)]                         ::
+      $%  [%onto p=(each suss tang)]                    ::
       ==                                                ::
     ++  sign                                            ::  in result $<-
       $%  [%b sign-behn]                                ::
@@ -78,7 +79,7 @@
     |=  git=gift
     %_(+> moz [[ost %give git] moz])
   ::
-  ++  he-wish-run
+  ++  he-wish-start
     |=  dap=term
     %_(+> moz :_(moz [ost %pass /run %b %conf our.hid dap %load our.hid %main]))
   ::
@@ -172,9 +173,9 @@
   ~&  %poke-helm-reload
   he-abet:(he-wish-reload:(hake ost her) all)
 ::
-++  poke-helm-run
+++  poke-helm-start
   |=  [ost=bone her=ship dap=term]
-  he-abet:(he-wish-run:(hake ost her) dap)
+  he-abet:(he-wish-start:(hake ost her) dap)
 ::
 ++  poke-helm-begin
   |=  [ost=bone you=ship begs]
@@ -205,13 +206,14 @@
 ++  pour
   |=  [ost=bone pax=path sih=sign]
   ^-  [(list move) _+>]
-  ~&  [%helm-pour pax]
+  ~&  [%helm-fap-pour pax]
   ?-    sih
       [%b %onto *]
     :_  +>.$
     :_  ~
-    ?^  +>.sih
-      `move`[ost %pass ~ %d %flog %crud `@tas`-.pax `(list tank)`+>+.sih]
-    `move`[ost %pass ~ %d %flog %text "<{(trip -.pax)}>"]
+    ?-  -.+>.sih
+      %|  [ost %pass ~ %d %flog %crud `@tas`-.pax `tang`p.p.+>.sih]
+      %&  [ost %pass ~ %d %flog %text "<{<p.+>.sih>}>"]
+    ==
   ==
 --

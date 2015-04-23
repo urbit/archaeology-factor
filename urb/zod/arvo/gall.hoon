@@ -23,6 +23,7 @@
       [%rush p=cage]                                    ::  subscription output
   ==                                                    ::
 ++  cuss  (pair term club)                              ::  internal kiss
+++  suss  (trel term ,@tas ,@da)                        ::  config report
 ++  gift                                                ::  out result <-$
           $%  [%back p=?]                               ::  %mess ack good/bad
               [%crud p=@tas q=(list tank)]              ::  physical error
@@ -160,7 +161,7 @@
               [%went p=ship q=cape]                     ::  only for apps
           ==  ==                                        ::
               $:  %b                                    ::  by %behn
-          $%  [%onto p=(unit tang)]                     ::
+          $%  [%onto p=(each suss tang)]                ::
               [%unto p=cuft]                            ::
           ==  ==                                        ::
               $:  %g                                    ::  by %gall

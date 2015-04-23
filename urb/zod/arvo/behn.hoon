@@ -113,7 +113,7 @@
   $%  [%woot p=ship q=(unit ares)]                      ::  e2e reaction message
   ==                                                    ::
 ++  gift-behn                                           ::  outgoing result
-  $%  [%onto p=(unit tang)]                             ::  about agent
+  $%  [%onto p=(each suss tang)]                        ::  about agent
       [%unto p=cuft]                                    ::  within agent
   ==                                                    ::
 ++  gift-ford                                           ::  out result <-$
@@ -238,12 +238,10 @@
     |=  [dap=dude pup=scup dep=@uvH cux=(each cage tang)]
     ^+  +>
     ?-    -.cux
-        %|  ~&  [%mo-boom-lame p.cux]
-            (mo-give %onto `p.cux)
+        %|  (mo-give %onto %| p.cux)
         %&
       ?.  (mo-okay q.p.cux)
-        (mo-give %onto `[%leaf "{<dap>}: bogus core"]~)
-      =.  +>  (mo-give %onto ~)
+        (mo-give %onto %| [%leaf "{<dap>}: bogus core"]~)
       =.  +>  (mo-bold dap dep)
       =.  +>  (mo-born dap pup q.p.cux)
       ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) ~)
@@ -274,10 +272,8 @@
       +>
     =.  +>  (mo-bold dap dep)
     ?-  -.cux
-      %|  ~&  [%mo-boon-lame p.cux]
-          (mo-give %onto `p.cux)
-      %&  =.  +>  (mo-give %onto ~)
-          ap-abet:(ap-peep:(ap-abed:ap dap [%high [~ our]]) q.p.cux)
+      %|  (mo-give %onto %| p.cux)
+      %&  ap-abet:(ap-peep:(ap-abed:ap dap [%high [~ our]]) q.p.cux)
     ==
   ::
   ++  mo-bold                                           ::  wait for dep
@@ -488,11 +484,12 @@
         %x  (mo-give %unto %quit ~)
     ==
   ::
-  ++  ap
+  ++  ap                                                ::  agent engine
     |_  $:  $:  dap=dude
                 pry=prey
                 ost=bone
                 zip=(list cove)
+                dub=(list (each suss tang))
             ==
             seat
         ==
@@ -521,7 +518,7 @@
       ^+  +>
       %_  +>  
         bum  (~(put by bum) dap +<+)
-        moz  (weld (turn zip ap-aver) moz)
+        moz  :(weld (turn zip ap-aver) (turn dub ap-avid) moz)
       ==
     ::
     ++  ap-aver                                         ::  cove to move
@@ -538,6 +535,9 @@
           %meta  `note-behn`[`@tas`p.q.q.cov %meta `vase`q.q.q.cov]
         ==
       ==
+    ::
+    ++  ap-avid                                         ::  onto results
+      |=([a=(each suss tang)] [ost a %give %onto b])
     ::
     ++  ap-club                                         ::  apply effect
       |=  cub=club
@@ -648,8 +648,7 @@
         ?~  vux
           +>.$
         ?.  (~(nest ut p:(slot 13 hav)) %| p:(slot 13 u.vux))
-          ~&  %ap-prep-mismatch
-          +>.$
+          +>.$(dub :_(dub [%| (ap-suck "prep mismatch")]))
         +>.$(+13.q.hav +13.q.u.vux)
       =^  tur  +>.$
           %+  ap-call  %prep
@@ -660,8 +659,8 @@
             (slop !>(~) (slot 13 u.vux))
           ==
       ?~  tur  
-        +>.$
-      +>.$
+        +>.$(dub :_(dub [%& dap ?~(vux %boot %bump) now]
+      +>.$(dub :_(dub [%| u.tur]))
     ::
     ++  ap-suck                                         ::  standard tang
       |=  msg=tape
