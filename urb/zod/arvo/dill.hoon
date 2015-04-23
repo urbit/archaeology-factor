@@ -132,6 +132,20 @@
 ++  mess                                                ::
   $%  [%dill-belt p=(hypo dill-belt)]                   ::
   ==                                                    ::
+++  club                                                ::  agent action
+  $%  [%peer p=path]                                    ::  subscribe
+      [%poke p=cage]                                    ::  apply
+      [%pull ~]                                         ::  unsubscribe
+      [%pump p=(unit tang)]                             ::  pump yes/no
+  ==                                                    ::
+++  cuft                                                ::  internal gift
+  $%  [%coup p=(unit tang)]                             ::  poke result
+      [%quit ~]                                         ::  close subscription
+      [%reap p=(unit tang)]                             ::  peer result
+      [%rush p=cage]                                    ::  subscription output
+  ==                                                    ::
+++  cuss  (pair term club)                              ::  internal kiss
+++  suss  (trel term ,@tas ,@da)                        ::  config report
 ++  move  ,[p=duct q=(mold note gift)]                  ::  local move
 ++  note-ames                                           ::  weird ames move
   $%  [%make p=(unit ,@t) q=@ud r=@ s=?]                ::
@@ -156,6 +170,7 @@
   ==                                                    ::
 ++  note-behn                                           ::
   $%  [%conf ship term %load ship term]                 ::
+      [%deal p=sock q=cuss]                             ::
   ==                                                    ::
 ++  note                                                ::  out request $->
   $%  [%a note-ames]                                    ::
@@ -178,6 +193,10 @@
   ==                                                    ::
 ++  sign-dill                                           ::
   $%  [%blit p=(list blit)]                             ::
+  ==                                                    ::
+++  sign-behn                                           ::
+  $%  [%onto p=(each suss tang)]                        ::
+      [%unto p=cuft]                                    ::
   ==                                                    ::
 ++  sign-gall                                           ::
   $%  [%crud p=@tas q=(list tank)]                      ::
@@ -270,7 +289,7 @@
         =+  myt=(flop (need tem))
         =.  tem  ~
         =.  moz  :_(moz [hen %pass ~ %g %show [our [ram ~]] our ~])
-        ::  =.  moz  :_(moz [hen %pass ~ %b %conf [our %soul %load our %main]])
+        ::  =.  moz  :_(moz [hen %pass ~ %b %conf [our ram %load our %main]])
         |-  ^+  +>
         ?~  myt  +>
         $(myt t.myt, +> (send i.myt))

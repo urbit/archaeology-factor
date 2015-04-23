@@ -537,7 +537,7 @@
       ==
     ::
     ++  ap-avid                                         ::  onto results
-      |=([a=(each suss tang)] [ost a %give %onto b])
+      |=([a=(each suss tang)] [hen %give %onto a])
     ::
     ++  ap-club                                         ::  apply effect
       |=  cub=club
@@ -646,10 +646,13 @@
       ^+  +>
       ?.  (ap-fond %prep) 
         ?~  vux
-          +>.$
+          +>.$(dub :_(dub [%& dap %boot now]))
         ?.  (~(nest ut p:(slot 13 hav)) %| p:(slot 13 u.vux))
           +>.$(dub :_(dub [%| (ap-suck "prep mismatch")]))
-        +>.$(+13.q.hav +13.q.u.vux)
+        %=  +>.$
+          +13.q.hav  +13.q.u.vux
+          dub        :_(dub [%& dap %bump now])
+        ==
       =^  tur  +>.$
           %+  ap-call  %prep
           ;:  slop
@@ -659,7 +662,7 @@
             (slop !>(~) (slot 13 u.vux))
           ==
       ?~  tur  
-        +>.$(dub :_(dub [%& dap ?~(vux %boot %bump) now]
+        +>.$(dub :_(dub [%& dap ?~(vux %boot %bump) now]))
       +>.$(dub :_(dub [%| u.tur]))
     ::
     ++  ap-suck                                         ::  standard tang
@@ -748,6 +751,10 @@
         %conf  `%b
         %exec  `%f
         %flog  `%d
+        %mess  `%g
+        %nuke  `%g
+        %show  `%g
+        %took  `%g
         %plug  `%c
         %want  `%a
       ==

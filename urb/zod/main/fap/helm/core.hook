@@ -19,7 +19,7 @@
       ==                                                ::
     ++  funk  (pair ,@ ,@)                              ::
     ++  begs  ,[his=@p tic=@p eny=@t ges=gens]          ::  begin data
-    ++  suss  ,[term ,@tas ,@da]                        ::  config report
+    ++  suss  ,[term @tas @da]                          ::  config report
     ++  helm-wish                                       ::
       $|  $?  %reset                                    ::  reset kernel
               %verb                                     ::  verbose mode
@@ -213,7 +213,7 @@
     :_  ~
     ?-  -.+>.sih
       %|  [ost %pass ~ %d %flog %crud `@tas`-.pax `tang`p.p.+>.sih]
-      %&  [ost %pass ~ %d %flog %text "<{<p.+>.sih>}>"]
+      %&  [ost %pass ~ %d %flog %text "<{<p.p.+>.sih>}>"]
     ==
   ==
 --

@@ -1,5 +1,5 @@
 ::                                                      ::  ::
-::::  /hook/core/helm/app                               ::  ::
+::::  /hook/core/helm/ape                               ::  ::
   ::                                                    ::  ::
 /?  314                                                 ::  zuse version
 /-  *sole                                               ::  structures
@@ -19,7 +19,7 @@
       ==                                                ::
     ++  funk  (pair ,@ ,@)                              ::
     ++  begs  ,[his=@p tic=@p eny=@t ges=gens]          ::  begin data
-    ++  suss  ,[term ,@tas ,@da]                        ::  config report
+    ++  suss  ,[term @tas @da]                          ::  config report
     ++  helm-wish                                       ::
       $|  $?  %reset                                    ::  reset kernel
               %verb                                     ::  verbose mode

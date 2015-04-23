@@ -1,5 +1,5 @@
 ::                                                      ::  ::
-::::  /hook/core/sole/app                               ::  ::
+::::  /hook/core/sole/ape                               ::  ::
   ::                                                    ::  ::
 /?  314                                                 ::  zuse version
 /-  *sole                                               ::  console structures
@@ -65,7 +65,7 @@
           [%took p=[p=ship q=path] q=ship]              ::
       ==                                                ::
     ++  note                                            ::  out request $->
-      $%  [%g note-gall]                                ::
+      $%  note-gall                                     ::
       ==                                                ::
     --                                                  ::
 |_  $:  hid=hide                                        ::  system state
@@ -590,7 +590,7 @@
 ++  peer
   |=  [ost=bone her=ship pax=path]
   ^-  [(list move) _+>]
-  ::  ~&  [%sole-peer ost her pax]
+  ~&  [%sole-peer ost her pax]
   ?<  (~(has by bin) ost)
   :-  [ost %give %rush %dill-blit %pro [`@c`0x23 `@c`0x20 ~]]~
   %=    +>
@@ -615,7 +615,7 @@
 ++  poke-dill-belt
   |=  [ost=bone her=ship bet=dill-belt]
   ^-  [(list move) _+>]
-  ::  ~&  [%sole-poke ost her bet]
+  ~&  [%sole-poke ost her bet]
   =+  yog=(~(get by bin) ost)
   ?~  yog
     ~&  [%sole-poke-stale ost]
