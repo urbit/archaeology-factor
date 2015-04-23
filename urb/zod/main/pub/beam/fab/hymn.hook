@@ -1,0 +1,31 @@
+::
+::
+::::  /hook/hymn/fab/beam/pub/
+  ::
+/+  www-util
+::
+::::
+  ::
+^-  manx
+;html
+  ;head
+    ;meta(charset "utf-8");
+    ;meta(name "viewport", content "width=device-width, height=device-height, ".
+     "initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0");
+    ;*  %-  cdnj  :~
+      "react/0.13.1/react.js"
+      "react-router/0.13.2/ReactRouter.min.js"
+      "jquery/2.1.1/jquery.js"
+      "lodash.js/2.4.1/lodash.min.js"
+    ==
+    ;script(type "text/javascript", src "/~~/~/at/main/lib/urb.js");
+    ;link(type "text/css", rel "stylesheet", href "http://localhost:8000/main/pub/beam/src/css/main.css");
+    ::;link(type "text/css", rel "stylesheet", href "/main/pub/beam/src/css/main.css");
+    ;title: beam
+  ==
+  ;body
+    ;div#c;
+    ::;script(type "text/javascript", src "/main/pub/beam/src/js/main.js");
+    ;script(type "text/javascript", src "http://localhost:8000/main/pub/beam/src/js/main.js");
+  ==
+==

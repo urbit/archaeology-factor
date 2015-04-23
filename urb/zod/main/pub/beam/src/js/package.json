@@ -1,0 +1,14 @@
+{
+  "name": "urbit-beam",
+  "version": "0.0.0",
+  "repository": {
+    "type":"git",
+    "url":"https://github.com/urbit/urbit"
+  },
+  "description": "urbit beam controller",
+  "main": "main.js",
+  "dependencies": {
+    "coffeeify": "~0.7.0",
+    "react-router": "0.13.2"
+  }
+}
