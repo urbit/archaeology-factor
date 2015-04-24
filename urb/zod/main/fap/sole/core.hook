@@ -175,7 +175,9 @@
   ++  se-nuke                                           ::  active drop
     |=  gyl=gill
     ^+  +>
-    (se-drop:(se-send(liv.maz |) gyl %nuke [p.gyl ~[q.gyl]] her) gyl)
+    ?:  =(%cujo q.gyl)
+      (se-drop:(se-send(liv.maz |) gyl %b %deal [her p.gyl] q.gyl %pull ~) gyl)
+    (se-drop:(se-send(liv.maz |) gyl %g %nuke [p.gyl ~[q.gyl]] her) gyl)
   ::
   ++  se-like                                           ::  act in master
     |=  kus=ukase
@@ -221,7 +223,9 @@
     ^+  +>
     %.  gyl
     =<  se-join
-    (se-send gyl %show [p.gyl ~[q.gyl]] her /sole)
+    ?:  =(%cujo q.gyl)
+      (se-send gyl %b %deal [her p.gyl] q.gyl %peer /sole)
+    (se-send gyl %g %show [p.gyl ~[q.gyl]] her /sole)
   ::
   ++  se-blit                                           ::  give output
     |=  bil=dill-blit
@@ -260,8 +264,8 @@
     %_(+> moz [mov moz])
   ::
   ++  se-send                                           ::  send a message
-    |=  [gyl=gill nog=note-gall]
-    (se-emit ost %pass [(scot %p her) (scot %p p.gyl) q.gyl ~] %g nog)
+    |=  [gyl=gill nut=note]
+    (se-emit ost %pass [(scot %p her) (scot %p p.gyl) q.gyl ~] nut)
   ::
   ++  se-tame
     |=  gyl=gill
@@ -287,14 +291,14 @@
     ::
         [%b %unto %diff *]
       =<  ta-abet
-      ta-rap:(ta-fec:(se-tame gyl) ((hard sole-effect) +>+>-.sih))
+      ta-rap:(ta-fec:(se-tame gyl) ((hard sole-effect) +>+>+.sih))
     ::
         [%b %unto %coup *]
-      ~&  [%se-pour-coup +>+.sih]
+      ~?  ?=(^ +>+.sih)  [%se-pour-coup +>+.sih]
       +>.$
     ::
         [%b %unto %reap *]
-      ~&  [%se-pour-reap +>+.sih]
+      ~?  ?=(^ +>+.sih)  [%se-pour-reap +>+.sih]
       +>.$
     ::
         [%b %unto %quit *]
@@ -343,7 +347,9 @@
         +>.$
       %_    +> 
           +> 
-        (se-send gyl %mess [p.gyl ~[q.gyl]] her %sole-action !>(act))
+        ?:  =(%cujo q.gyl)
+          (se-send gyl %b %deal [her p.gyl] q.gyl %poke %sole-action !>(act))
+        (se-send gyl %g %mess [p.gyl ~[q.gyl]] her %sole-action !>(act))
       ==
     ::
     ++  ta-aro                                          ::  hear arrow
@@ -487,7 +493,9 @@
       ==
     ::
     ++  ta-rap                                          ::  send %took
-      .(+> (se-send gyl %took [p.gyl ~[q.gyl]] her))
+      ?:  =(%cujo q.gyl)
+        .(+> (se-send gyl %b %deal [her p.gyl] q.gyl %pump ~))
+      .(+> (se-send gyl %g %took [p.gyl ~[q.gyl]] her))
     ::
     ++  ta-dog                                          ::  change cursor
       |=  ted=sole-edit
@@ -668,13 +676,12 @@
   (~(se-belt se [[ost %give %nice ~]~ ~] [her ost] u.yog) bet)
 ::
 ++  pour
-  |=  [ost=bone pax=path sih=*]
+  |=  [ost=bone pax=path sih=sign]
   ^-  [(list move) _+>]
   =+  yog=(~(get by bin) ost)
   ?~  yog
     ~&  [%sole-pour-stale ost pax]
     [~ +>.$] 
-  =+  sih=((hard sign) sih)
   ?>  ?=([@ @ @ ~] pax)
   =<  se-abet
   =<  se-view

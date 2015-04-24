@@ -421,8 +421,10 @@
           [[p.q.hic %dojo] ~]
         ?:  =(%earl myr)
           =+  fap=(sein p.q.hic)
-          [[fap %dojo] [fap %talk] ~]
-        [[p.q.hic %dojo] [p.q.hic %talk] ~]
+          [[fap %dojo] ~]
+        [[p.q.hic %dojo] ~]
+          ::  [[fap %dojo] [fap %talk] ~]
+        ::  [[p.q.hic %dojo] [p.q.hic %talk] ~]
     =^  moz  all  abet:(need (ax (need hey.all) [%flow %sole flo]))
     ?:  |((lth p.q.hic 256) (gte p.q.hic (bex 64)))  [moz ..^$] ::  XX HORRIBLE
     [:_(moz [(need hey.all) %give %init p.q.hic]) ..^$]

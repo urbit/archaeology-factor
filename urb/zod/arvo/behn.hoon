@@ -79,9 +79,9 @@
 ++  cuss  (pair dude club)                              ::  internal kiss
 ++  cuft                                                ::  internal gift
   $%  [%coup p=(unit tang)]                             ::  poke result
+      [%diff p=cage]                                    ::  subscription output
       [%quit ~]                                         ::  close subscription
       [%reap p=(unit tang)]                             ::  peer result
-      [%diff p=cage]                                    ::  subscription output
   ==                                                    ::
 ++  cote                                                ::  ++ap note
   $%  [%meta p=@tas q=vase]                             ::  
@@ -461,11 +461,12 @@
       !!
     =+  dap=`@tas`i.pax
     =+  pry=`prey`[%high [~ (slav %p i.t.pax)]]
-    =+  pap=(ap-abed:ap i.t.pax pry) 
+    =+  pap=(ap-abed:ap dap pry) 
+    =+  vax=(slot 3 `vase`hin)
     =<  ap-abet
     ?-  i.t.t.pax
-      %inn  (ap-pour:pap t.t.t.pax `vase`hin)
-      %out  (ap-pout:pap t.t.t.pax `vase`hin)
+      %inn  (ap-pour:pap t.t.t.pax vax)
+      %out  (ap-pout:pap t.t.t.pax vax)
     ==
   ::
   ++  mo-claw                                           ::  clear queue
@@ -588,7 +589,7 @@
     ++  ap-fall                                         ::  drop from queue
       ^+  .
       =+  soy=(~(get by qel.ged) ost)
-      ?~  soy  ~&(%ap-fall-underflow +)
+      ?~  soy  +  ::  ~&(%ap-fall-underflow +)
       ?:  =(0 u.soy)  
         +(qel.ged (~(del by qel.ged) ost))
       +(qel.ged (~(put by qel.ged) ost (dec u.soy)))
@@ -600,9 +601,13 @@
       [%& +(qel.ged (~(put by qel.ged) ost +(suy)))]
     ::
     ++  ap-pull                                         ::  pull subscription
-      ^+  .
-      ~&  %ap-pull
-      !!
+      =+  wim=(~(get by sup.ged) ost)
+      ?~  wim  ~&(%ap-pull-none +)
+      %_  +
+        sup.ged  (~(del by sup.ged) ost)
+        pus.ged  (~(del ju pus.ged) q.u.wim ost)
+        qel.ged  (~(del by qel.ged) ost)
+      ==
     ::
     ++  ap-fond                                         ::  check for arm
       |=  cog=term
@@ -644,7 +649,10 @@
       =+  puz=(mule |.((~(mint ut p.hav) [%noun [%cnzy cog]])))
       ?:  ?=(%| -.puz)  [`p.puz +>.$]
       =+  wiz=(mule |.((slit p.p.puz p.arg)))
-      ?:  ?=(%| -.wiz)  [`p.wiz +>.$]
+      ?:  ?=(%| -.wiz)  
+        ~&  %ap-call-mismatch 
+        ~>  %slog.[0 ~(duck ut p.arg)]
+        [`(ap-suck "call: {<cog>}: type mismatch") +>.$]
       =-  ?-  -.zep
             %|  [`p.zep +>.$]
             %&  (ap-sake p.wiz +.zep)
@@ -698,7 +706,7 @@
     ++  ap-suck                                         ::  standard tang
       |=  msg=tape
       ^-  tang
-      [%leaf (weld "behn: {<dap>}:" msg)]~
+      [%leaf (weld "behn: {<dap>}: " msg)]~
     ::
     ++  ap-safe                                         ::  process move list
       |=  vax=vase
@@ -742,7 +750,7 @@
       ^-  (each cove tang)
       ?.  &(?=(^ q.vax) ?=(@ -.q.vax) ((sane %tas) -.q.vax))
         [%| (ap-suck "move: improper diff")]
-      [%& neh %give %diff `cage`[-.q.vax vax]]
+      [%& neh %give %diff `cage`[-.q.vax (slot 3 vax)]]
     ::
     ++  ap-move-send                                    ::  pass gall action
       |=  [neh=duct vax=vase]
@@ -779,6 +787,7 @@
                ~
         %cash  `%a
         %conf  `%b
+        %deal  `%b
         %exec  `%f
         %flog  `%d
         %mess  `%g
@@ -882,7 +891,7 @@
             !>(`@ud`ost)
             !>(`@p`q.q.pry)
             ?:  =(0 p.u.cug)
-              (slop !>(`path`pax) !>(vax))
+              (slop !>(`path`pax) vax)
             (slop !>(`path`(slag (dec p.u.cug) pax)) (slot 3 vax))
           ==
       ?^  cam  (ap-pour-fail -.q.vax u.cam)
@@ -1003,5 +1012,6 @@
   =+  mow=(mo-abed:mo our hen)
   ?:  ?=(%sys i.t.tea)
     mo-abet:(mo-cyst:mow t.t.tea q.hin)
-  mo-abet:(mo-cook:mow t.tea hin)
+  ?>  ?=(%use i.t.tea)
+  mo-abet:(mo-cook:mow t.t.tea hin)
 --
