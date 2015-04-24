@@ -580,7 +580,38 @@ module.exports = recl({
 
 
 
-},{"../actions/StationActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/StationStore.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee":[function(require,module,exports){
+},{"../actions/StationActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/StationStore.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/TalkComponent.coffee":[function(require,module,exports){
+var MessagesComponent, StationComponent, WritingComponent, div, recf, recl;
+
+recl = React.createClass;
+
+recf = React.createFactory;
+
+div = [React.DOM.div][0];
+
+StationComponent = recf(require('./StationComponent.coffee'));
+
+MessagesComponent = recf(require('./MessagesComponent.coffee'));
+
+WritingComponent = recf(require('./WritingComponent.coffee'));
+
+module.exports = recl({
+  render: function() {
+    return div({}, [
+      div({
+        id: "station-container"
+      }, StationComponent), div({
+        id: "messages-container"
+      }, MessagesComponent), div({
+        id: "writing-container"
+      }, WritingComponent)
+    ]);
+  }
+});
+
+
+
+},{"./MessagesComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee","./StationComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee","./WritingComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee":[function(require,module,exports){
 var Member, MessageActions, MessageStore, StationActions, StationStore, br, div, input, recl, ref, textarea;
 
 recl = React.createClass;
@@ -845,221 +876,124 @@ module.exports = _.merge(new Dispatcher(), {
 
 
 
-},{"flux":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/main.coffee":[function(require,module,exports){
-$(function() {
-  var $c, MessagesComponent, StationActions, StationComponent, WritingComponent, clean, ldy, rend, setSo, so;
-  StationActions = require('./actions/StationActions.coffee');
-  rend = React.render;
-  window.talk = {};
-  window.talk.MessagePersistence = require('./persistence/MessagePersistence.coffee');
-  window.talk.StationPersistence = require('./persistence/StationPersistence.coffee');
-  window.util = {
-    mainStations: ["court", "floor", "porch"],
-    mainStationPath: function(user) {
-      return "~" + user + "/" + (window.util.mainStation(user));
-    },
-    mainStation: function(user) {
-      if (!user) {
-        user = window.urb.user;
-      }
-      switch (user.length) {
-        case 3:
-          return "court";
-        case 6:
-          return "floor";
-        case 13:
-          return "porch";
-      }
-    },
-    clipAudi: function(audi) {
-      var ms, regx;
-      audi = audi.join(" ");
-      ms = window.util.mainStationPath(window.urb.user);
-      regx = new RegExp("/" + ms, "g");
-      audi = audi.replace(regx, "");
-      return audi.split(" ");
-    },
-    expandAudi: function(audi) {
-      var ms;
-      audi = audi.join(" ");
-      ms = window.util.mainStationPath(window.urb.user);
-      if (audi.indexOf(ms) === -1) {
-        if (audi.length > 0) {
-          audi += " ";
-        }
-        audi += "" + ms;
-      }
-      return audi.split(" ");
-    },
-    create: function(name) {
-      return window.talk.StationPersistence.createStation(name, function(err, res) {});
-    },
-    subscribe: function(name) {
-      return window.talk.StationPersistence.addSource("main", window.urb.ship, ["~zod/" + name]);
-    },
-    uuid32: function() {
-      var _str, i, j, str;
-      str = "0v";
-      str += Math.ceil(Math.random() * 8) + ".";
-      for (i = j = 0; j <= 5; i = ++j) {
-        _str = Math.ceil(Math.random() * 10000000).toString(32);
-        _str = ("00000" + _str).substr(-5, 5);
-        str += _str + ".";
-      }
-      return str.slice(0, -1);
-    },
-    populate: function(station, number) {
-      var c, send;
-      c = 0;
-      send = function() {
-        var _audi, _message;
-        if (c < number) {
-          c++;
-        } else {
-          console.log('done');
-          return true;
-        }
-        _audi = {};
-        _audi[station] = "pending";
-        _message = {
-          serial: window.util.uuid32(),
-          audience: _audi,
-          statement: {
-            speech: {
-              say: "Message " + c
-            },
-            time: Date.now(),
-            now: Date.now()
-          }
-        };
-        return window.talk.MessagePersistence.sendMessage(_message, send);
-      };
-      return send();
-    },
-    getScroll: function() {
-      return this.writingPosition = $('#c').outerHeight(true) + $('#c').offset().top - $(window).height();
-    },
-    setScroll: function() {
-      window.util.getScroll();
-      return $(window).scrollTop($("#c").height());
-    },
-    checkScroll: function() {
-      if (!window.util.writingPosition) {
-        window.util.getScroll();
-      }
-      if ($(window).scrollTop() < window.util.writingPosition) {
-        return $('body').addClass('scrolling');
-      } else {
-        return $('body').removeClass('scrolling');
-      }
-    }
-  };
-  so = {};
-  so.ls = $(window).scrollTop();
-  so.cs = $(window).scrollTop();
-  so.w = null;
-  so.$d = $('#nav > div');
-  setSo = function() {
-    so.$n = $('#station-container');
-    so.w = $(window).width();
-    so.h = $(window).height();
-    so.dh = $("#c").height();
-    return so.nh = so.$n.outerHeight(true);
-  };
-  setSo();
-  setInterval(setSo, 200);
-  $(window).on('resize', function(e) {
-    if (so.w > 1170) {
-      return so.$n.removeClass('m-up m-down m-fixed');
-    }
-  });
-  ldy = 0;
-  $(window).on('scroll', function(e) {
-    var dy, sto, top;
-    so.cs = $(window).scrollTop();
-    if (so.w > 1170) {
-      so.$n.removeClass('m-up m-down m-fixed');
-    }
-    if (so.w < 1170) {
-      dy = so.ls - so.cs;
-      if (so.cs <= 0) {
-        so.$n.removeClass('m-up');
-        so.$n.addClass('m-down m-fixed');
-        return;
-      }
-      if (so.cs + so.h > so.dh) {
-        return;
-      }
-      if (so.$n.hasClass('m-fixed' && so.w < 1024)) {
-        so.$n.css({
-          left: -1 * $(window).scrollLeft()
-        });
-      }
-      if (dy > 0 && ldy > 0) {
-        if (!so.$n.hasClass('m-down')) {
-          so.$n.removeClass('m-up').addClass('m-down');
-          top = so.cs - so.nh;
-          if (top < 0) {
-            top = 0;
-          }
-          so.$n.offset({
-            top: top
-          });
-        }
-        if (so.$n.hasClass('m-down') && !so.$n.hasClass('m-fixed') && so.$n.offset().top >= so.cs) {
-          so.$n.addClass('m-fixed');
-          so.$n.attr({
-            style: ''
-          });
-        }
-      }
-      if (dy < 0 && ldy < 0) {
-        if (!so.$n.hasClass('m-up')) {
-          so.$n.removeClass('open');
-          so.$n.removeClass('m-down m-fixed').addClass('m-up');
-          so.$n.attr({
-            style: ''
-          });
-          top = so.cs;
-          sto = so.$n.offset().top;
-          if (top < 0) {
-            top = 0;
-          }
-          if (top > sto && top < sto + so.nh) {
-            top = sto;
-          }
-          so.$n.offset({
-            top: top
-          });
-        }
-      }
-    }
-    ldy = dy;
-    return so.ls = so.cs;
-  });
-  $(window).on('scroll', window.util.checkScroll);
-  window.talk.StationPersistence.listen();
-  StationComponent = require('./components/StationComponent.coffee');
-  MessagesComponent = require('./components/MessagesComponent.coffee');
-  WritingComponent = require('./components/WritingComponent.coffee');
-  $c = $('#c');
-  clean = function() {
-    React.unmountComponentAtNode($('#station-container')[0]);
-    React.unmountComponentAtNode($('#messages-container')[0]);
-    return React.unmountComponentAtNode($('#writing-container')[0]);
-  };
-  $c.append("<div id='station-container'></div>");
-  $c.append("<div id='messages-container'></div>");
-  $c.append("<div id='writing-container'></div>");
-  $c.append("<div id='scrolling'>BOTTOM</div>");
-  rend(React.createElement(StationComponent, {}), $('#station-container')[0]);
-  rend(React.createElement(MessagesComponent, {}), $('#messages-container')[0]);
-  return rend(React.createElement(WritingComponent, {}), $('#writing-container')[0]);
+},{"flux":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/module.coffee":[function(require,module,exports){
+require('./util.coffee');
+
+require('./move.coffee');
+
+window.talk = {
+  Component: require('./components/TalkComponent.coffee'),
+  MessagePersistence: require('./persistence/MessagePersistence.coffee'),
+  StationPersistence: require('./persistence/StationPersistence.coffee'),
+  init: function(el) {
+    return this.StationPersistence.listen();
+  }
+};
+
+
+
+},{"./components/TalkComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/TalkComponent.coffee","./move.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/move.coffee","./persistence/MessagePersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee","./persistence/StationPersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee","./util.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/util.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/move.coffee":[function(require,module,exports){
+var ldy, setSo, so;
+
+so = {};
+
+so.ls = $(window).scrollTop();
+
+so.cs = $(window).scrollTop();
+
+so.w = null;
+
+so.$d = $('#nav > div');
+
+setSo = function() {
+  so.$n = $('#station-container');
+  so.w = $(window).width();
+  so.h = $(window).height();
+  so.dh = $("#c").height();
+  return so.nh = so.$n.outerHeight(true);
+};
+
+setSo();
+
+setInterval(setSo, 200);
+
+$(window).on('resize', function(e) {
+  if (so.w > 1170) {
+    return so.$n.removeClass('m-up m-down m-fixed');
+  }
 });
 
+ldy = 0;
+
+$(window).on('scroll', function(e) {
+  var dy, sto, top;
+  so.cs = $(window).scrollTop();
+  if (so.w > 1170) {
+    so.$n.removeClass('m-up m-down m-fixed');
+  }
+  if (so.w < 1170) {
+    dy = so.ls - so.cs;
+    if (so.cs <= 0) {
+      so.$n.removeClass('m-up');
+      so.$n.addClass('m-down m-fixed');
+      return;
+    }
+    if (so.cs + so.h > so.dh) {
+      return;
+    }
+    if (so.$n.hasClass('m-fixed' && so.w < 1024)) {
+      so.$n.css({
+        left: -1 * $(window).scrollLeft()
+      });
+    }
+    if (dy > 0 && ldy > 0) {
+      if (!so.$n.hasClass('m-down')) {
+        so.$n.removeClass('m-up').addClass('m-down');
+        top = so.cs - so.nh;
+        if (top < 0) {
+          top = 0;
+        }
+        so.$n.offset({
+          top: top
+        });
+      }
+      if (so.$n.hasClass('m-down') && !so.$n.hasClass('m-fixed') && so.$n.offset().top >= so.cs) {
+        so.$n.addClass('m-fixed');
+        so.$n.attr({
+          style: ''
+        });
+      }
+    }
+    if (dy < 0 && ldy < 0) {
+      if (!so.$n.hasClass('m-up')) {
+        so.$n.removeClass('open');
+        so.$n.removeClass('m-down m-fixed').addClass('m-up');
+        so.$n.attr({
+          style: ''
+        });
+        top = so.cs;
+        sto = so.$n.offset().top;
+        if (top < 0) {
+          top = 0;
+        }
+        if (top > sto && top < sto + so.nh) {
+          top = sto;
+        }
+        so.$n.offset({
+          top: top
+        });
+      }
+    }
+  }
+  ldy = dy;
+  return so.ls = so.cs;
+});
+
+$(window).on('scroll', window.util.checkScroll);
 
 
-},{"./actions/StationActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","./components/MessagesComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee","./components/StationComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee","./components/WritingComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee","./persistence/MessagePersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee","./persistence/StationPersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js":[function(require,module,exports){
+
+},{}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js":[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -6009,7 +5943,116 @@ module.exports = StationStore;
 
 
 
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js"}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/util.coffee":[function(require,module,exports){
+if (!window.util) {
+  window.util = {};
+}
+
+_.merge(window.util, {
+  mainStations: ["court", "floor", "porch"],
+  mainStationPath: function(user) {
+    return "~" + user + "/" + (window.util.mainStation(user));
+  },
+  mainStation: function(user) {
+    if (!user) {
+      user = window.urb.user;
+    }
+    switch (user.length) {
+      case 3:
+        return "court";
+      case 6:
+        return "floor";
+      case 13:
+        return "porch";
+    }
+  },
+  clipAudi: function(audi) {
+    var ms, regx;
+    audi = audi.join(" ");
+    ms = window.util.mainStationPath(window.urb.user);
+    regx = new RegExp("/" + ms, "g");
+    audi = audi.replace(regx, "");
+    return audi.split(" ");
+  },
+  expandAudi: function(audi) {
+    var ms;
+    audi = audi.join(" ");
+    ms = window.util.mainStationPath(window.urb.user);
+    if (audi.indexOf(ms) === -1) {
+      if (audi.length > 0) {
+        audi += " ";
+      }
+      audi += "" + ms;
+    }
+    return audi.split(" ");
+  },
+  create: function(name) {
+    return window.talk.StationPersistence.createStation(name, function(err, res) {});
+  },
+  subscribe: function(name) {
+    return window.talk.StationPersistence.addSource("main", window.urb.ship, ["~zod/" + name]);
+  },
+  uuid32: function() {
+    var _str, i, j, str;
+    str = "0v";
+    str += Math.ceil(Math.random() * 8) + ".";
+    for (i = j = 0; j <= 5; i = ++j) {
+      _str = Math.ceil(Math.random() * 10000000).toString(32);
+      _str = ("00000" + _str).substr(-5, 5);
+      str += _str + ".";
+    }
+    return str.slice(0, -1);
+  },
+  populate: function(station, number) {
+    var c, send;
+    c = 0;
+    send = function() {
+      var _audi, _message;
+      if (c < number) {
+        c++;
+      } else {
+        console.log('done');
+        return true;
+      }
+      _audi = {};
+      _audi[station] = "pending";
+      _message = {
+        serial: window.util.uuid32(),
+        audience: _audi,
+        statement: {
+          speech: {
+            say: "Message " + c
+          },
+          time: Date.now(),
+          now: Date.now()
+        }
+      };
+      return window.talk.MessagePersistence.sendMessage(_message, send);
+    };
+    return send();
+  },
+  getScroll: function() {
+    return this.writingPosition = $('#c').outerHeight(true) + $('#c').offset().top - $(window).height();
+  },
+  setScroll: function() {
+    window.util.getScroll();
+    return $(window).scrollTop($("#c").height());
+  },
+  checkScroll: function() {
+    if (!window.util.writingPosition) {
+      window.util.getScroll();
+    }
+    if ($(window).scrollTop() < window.util.writingPosition) {
+      return $('body').addClass('scrolling');
+    } else {
+      return $('body').removeClass('scrolling');
+    }
+  }
+});
+
+
+
+},{}],"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -6314,4 +6357,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},["/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/main.coffee"]);
+},{}]},{},["/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/module.coffee"]);

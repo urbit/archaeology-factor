@@ -8,7 +8,7 @@ module.exports =
       index:index
       list:list
       serial:serial
-    window.work.WorkPersistence.createItem index,serial,' '
+    window.work.Persistence.createItem index,serial,' '
 
   updateItem: (index,list,item) ->
     Dispatcher.handleViewAction
@@ -16,14 +16,14 @@ module.exports =
       index:index
       list:list
       item:item
-    window.work.WorkPersistence.updateItem index,item.serial,item.title
+    window.work.Persistence.updateItem index,item.serial,item.title
 
   removeItem: (index,list,serial) ->
     Dispatcher.handleViewAction
       type:'removeItem'
       index:index
       list:list
-    window.work.WorkPersistence.removeItem serial
+    window.work.Persistence.removeItem serial
 
   loadItems: (items) ->
     Dispatcher.handleViewAction

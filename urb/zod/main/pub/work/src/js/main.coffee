@@ -13,6 +13,6 @@ $ ->
       str.slice(0,-1)
 
   window.work =
-    WorkPersistence:WorkPersistence
-  window.work.WorkPersistence.listen()
+    Persistence:WorkPersistence
+  window.work.Persistence.listen()
   React.render React.createElement(WorkComponent),$('#c')[0]

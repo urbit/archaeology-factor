@@ -19,6 +19,10 @@
       "lodash.js/2.4.1/lodash.min.js"
     ==
     ;script(type "text/javascript", src "/~~/~/at/main/lib/urb.js");
+    ;script(type "text/javascript", src "http://localhost:8000/main/pub/work/src/js/module.js");
+    ;script(type "text/javascript", src "http://localhost:8000/main/pub/talk/src/js/module.js");
+    ;link(type "text/css", rel "stylesheet", href "http://localhost:8000/main/pub/work/src/css/main.css");
+    ;link(type "text/css", rel "stylesheet", href "http://localhost:8000/main/pub/talk/src/css/main.css");
     ;link(type "text/css", rel "stylesheet", href "http://localhost:8000/main/pub/beam/src/css/main.css");
     ::;link(type "text/css", rel "stylesheet", href "/main/pub/beam/src/css/main.css");
     ;title: beam
