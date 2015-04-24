@@ -53,7 +53,7 @@
 ++  volt  ?(%low %high)                                 ::  voltage
 ++  torc  $|(?(%iron %gold) [%lead p=ship])             ::  security control
 ++  roon                                                ::  reverse ames msg
-  $%  [%d p=mark q=*]                                   ::  diff (rush)
+  $%  [%d p=mark q=*]                                   ::  diff (diff)
       [%x ~]                                            ::
   ==                                                    ::
 ++  rook                                                ::  forward ames msg
@@ -81,7 +81,7 @@
   $%  [%coup p=(unit tang)]                             ::  poke result
       [%quit ~]                                         ::  close subscription
       [%reap p=(unit tang)]                             ::  peer result
-      [%rush p=cage]                                    ::  subscription output
+      [%diff p=cage]                                    ::  subscription output
   ==                                                    ::
 ++  cote                                                ::  ++ap note
   $%  [%meta p=@tas q=vase]                             ::  
@@ -175,7 +175,9 @@
       pup=scup                                          ::  update control
       zam=scar                                          ::  opaque ducts
   ==                                                    ::
-++  sofa  (qeu (pair duct kiss-behn))                   ::  waiting kisses
+++  sofa                                                ::  queue for blocked
+  $:  kys=(qeu (trel duct prey club))                   ::  queued kisses
+  ==                                                    ::
 ++  stic                                                ::  statistics
   $:  act=@ud                                           ::  change number
       eny=@uvI                                          ::  entropy
@@ -244,7 +246,13 @@
         (mo-give %onto %| [%leaf "{<dap>}: bogus core"]~)
       =.  +>  (mo-bold dap dep)
       =.  +>  (mo-born dap pup q.p.cux)
-      ap-abet:(ap-prep:(ap-abed:ap dap [%high [~ our]]) ~)
+      =+  old=+>.$
+      =+  wag=(ap-prop:(ap-abed:ap dap [%high [~ our]]) ~)
+      ?^  -.wag
+        =.  +>.$  old
+        (mo-give %onto %| u.-.wag)
+      =.  +>.$  ap-abet:+.wag
+      (mo-give:(mo-claw dap) %onto %& dap %boot now)
     ==
   ::
   ++  mo-born                                           ::  new seat
@@ -399,9 +407,9 @@
               num=(slav %ud i.t.t.t.pax)
           ==
       ?-  -.q.+>.sih
-        %|  ~&  [%rush-crash p.q.+>.sih]                ::  crash is correct
+        %|  ~&  [%diff-crash p.q.+>.sih]                ::  crash is correct
             !!
-        %&  (mo-give(hen (mo-ball him num)) %unto %rush `cage`p.q.+>.sih)
+        %&  (mo-give(hen (mo-ball him num)) %unto %diff `cage`p.q.+>.sih)
       ==
     ::
         %req                                            ::  inbound request
@@ -423,7 +431,7 @@
       =+  cuf=`cuft`+>.sih
       ?-    -.cuf
         %coup  (mo-give %unto %coup p.cuf)
-        %rush  %+  mo-pass  pax
+        %diff  %+  mo-pass  pax
                [%a %wont [him our] [%q %bh dap ~] [num %d p.p.cuf q.q.p.cuf]]
         %quit  %+  mo-pass  pax
                [%a %wont [him our] [%q %bh dap ~] [num %x ~]]
@@ -448,7 +456,9 @@
   ++  mo-cook                                           ::  take in /use
     |=  [pax=path hin=(hypo sign-behn)]
     ^+  +>
-    ?>  ?=([@ @ ?(%inn %out) *] pax)
+    ?.  ?=([@ @ ?(%inn %out) *] pax)
+      ~&  [%mo-cook-bad-pax pax]
+      !!
     =+  dap=`@tas`i.pax
     =+  pry=`prey`[%high [~ (slav %p i.t.pax)]]
     =+  pap=(ap-abed:ap i.t.pax pry) 
@@ -458,8 +468,24 @@
       %out  (ap-pout:pap t.t.t.pax `vase`hin)
     ==
   ::
+  ++  mo-claw                                           ::  clear queue
+    |=  dap=dude
+    ^+  +>
+    ?.  (~(has by bum) dap)  +>
+    =+  suf=(~(get by wub) dap)
+    ?~  suf  +>.$
+    |-  ^+  +>.^$(wub (~(del by wub) dap))
+    =^  lep  kys.u.suf  [p q]:~(get to kys.u.suf)
+    ~&  [%mo-claw-play dap r.lep]
+    $(+>.^$ ap-abet:(ap-club:(ap-abed:ap(hen p.lep) dap q.lep) r.lep))
+  ::
   ++  mo-club                                           ::  local action
     |=  [dap=dude pry=prey cub=club]
+    ^+  +>
+    ?:  |(!(~(has by bum) dap) (~(has by wub) dap))
+      ~&  [%mo-club-qeu dap cub]
+      =+  syf=(fall (~(get by wub) dap) *sofa)
+      +>.$(wub (~(put by wub) dap syf(kys (~(put to kys.syf) [hen pry cub]))))
     ap-abet:(ap-club:(ap-abed:ap dap pry) cub)
   ::
   ++  mo-gawk                                           ::  ames forward
@@ -641,18 +667,15 @@
       ^+  +>
       (ap-prep(hav vax) `hav)
     ::
-    ++  ap-prep                                         ::  install
+    ++  ap-prop                                         ::  install
       |=  vux=(unit vase)
-      ^+  +>
+      ^-  [(unit tang) _+>]
       ?.  (ap-fond %prep) 
         ?~  vux
-          +>.$(dub :_(dub [%& dap %boot now]))
+          `+>.$
         ?.  (~(nest ut p:(slot 13 hav)) %| p:(slot 13 u.vux))
-          +>.$(dub :_(dub [%| (ap-suck "prep mismatch")]))
-        %=  +>.$
-          +13.q.hav  +13.q.u.vux
-          dub        :_(dub [%& dap %bump now])
-        ==
+          :_(+>.$ `(ap-suck "prep mismatch"))
+        `+>.$(+13.q.hav +13.q.u.vux)
       =^  tur  +>.$
           %+  ap-call  %prep
           ;:  slop
@@ -661,9 +684,16 @@
             ?~  vux  !>(~)
             (slop !>(~) (slot 13 u.vux))
           ==
-      ?~  tur  
-        +>.$(dub :_(dub [%& dap ?~(vux %boot %bump) now]))
-      +>.$(dub :_(dub [%| u.tur]))
+      ?~(tur `+>.$ :_(+>.$ `u.tur))
+    ::
+    ++  ap-prep                                         ::  install
+      |=  vux=(unit vase)
+      ^+  +>
+      =^  gac  +>.$  (ap-prop vux)
+      %=    +>.$
+          dub
+        :_(dub ?~(gac [%& dap ?~(vux %boot %bump) now] [%| u.gac]))
+      ==
     ::
     ++  ap-suck                                         ::  standard tang
       |=  msg=tape
@@ -690,7 +720,7 @@
       ?~  hun  [%| (ap-suck "move: invalid card (bone)")]
       =+  cav=(spec (slot 3 (spec (slot 3 vax))))
       ?+  +<.q.vax  [%| (ap-suck "move: invalid card ({(trip (,@ +<.q.vax))})")]
-        %rush  (ap-move-rush u.hun cav)
+        %diff  (ap-move-diff u.hun cav)
         %send  (ap-move-send u.hun cav)
         %pass  (ap-move-pass u.hun cav)
         %quit  (ap-move-quit u.hun cav)
@@ -707,12 +737,12 @@
       ^-  vase
       [[%cube b %atom a] a]
     ::
-    ++  ap-move-rush                                    ::  give rush move
+    ++  ap-move-diff                                    ::  give diff move
       |=  [neh=duct vax=vase]
       ^-  (each cove tang)
       ?.  &(?=(^ q.vax) ?=(@ -.q.vax) ((sane %tas) -.q.vax))
-        [%| (ap-suck "move: improper rush")]
-      [%& neh %give %rush `cage`[-.q.vax vax]]
+        [%| (ap-suck "move: improper diff")]
+      [%& neh %give %diff `cage`[-.q.vax vax]]
     ::
     ++  ap-move-send                                    ::  pass gall action
       |=  [neh=duct vax=vase]
@@ -864,12 +894,12 @@
       ?>  &(?=([@ *] pax) ((sane %tas) i.pax))
       ?>  &(?=([@ *] q.vax) ((sane %tas) -.q.vax))
       =+  ape=i.pax 
-      ?:  ?=(%rush -.q.vax)
+      ?:  ?=(%diff -.q.vax)
         ?>  &(?=([@ *] +.q.vax) ((sane %tas) +<.q.vax))
-        (ap-rush q.q.pry ape t.pax [+<.q.vax (slot 7 vax)])
+        (ap-diff q.q.pry ape t.pax [+<.q.vax (slot 7 vax)])
       (ap-punk q.q.pry ape t.pax -.q.vax (slot 3 vax))
     ::
-    ++  ap-punk                                         ::  non-rush gall take
+    ++  ap-punk                                         ::  non-diff gall take
       |=  [her=ship ape=term pax=path wut=term vax=vase]
       ^+  +>
       =+  cug=(ap-find [wut pax])
@@ -879,11 +909,11 @@
       ?^  cam  (ap-pour-fail q.u.cug u.cam)
       +>.$
     ::
-    ++  ap-rush                                         ::  pour a rush
+    ++  ap-diff                                         ::  pour a diff
       |=  [her=ship ape=term pax=path cag=cage]
-      =+  cug=(ap-find [%rush p.cag pax])
+      =+  cug=(ap-find [%diff p.cag pax])
       ?~  cug
-        (ap-pour-fail %rush (ap-suck "pour: no rush"))
+        (ap-pour-fail %diff (ap-suck "pour: no diff"))
       =^  cam  +>.$
           %+  ap-call  q.u.cug
           ;:  slop

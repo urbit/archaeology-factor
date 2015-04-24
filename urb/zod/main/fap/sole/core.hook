@@ -49,15 +49,37 @@
           [%nice ~]                                     ::
           [%rush %dill-blit dill-blit]                  ::
       ==                                                ::
+    ++  club                                            ::  behn action
+      $%  [%peer p=path]                                ::  subscribe
+          [%poke p=cage]                                ::  apply
+          [%pull ~]                                     ::  unsubscribe
+          [%pump p=(unit tang)]                         ::  pump yes/no
+      ==                                                ::
+    ++  cuss  (pair term club)                          ::  behn kiss
+    ++  cuft                                            ::  behn gift
+      $%  [%coup p=(unit tang)]                         ::  poke result
+          [%diff p=cage]                                ::  subscription output
+          [%quit ~]                                     ::  close subscription
+          [%reap p=(unit tang)]                         ::  peer result
+      ==                                                ::
+    ++  suss  (trel term ,@tas ,@da)                    ::  config report
     ++  sign-gall                                       ::  sign from %gall
       $%  [%mean p=ares]                                ::
           [%nice ~]                                     ::
           [%rush %sole-effect sole-effect]              ::
       ==                                                ::
+    ++  sign-behn                                       ::
+      $%  [%onto p=(each suss tang)]                    ::
+          [%unto p=cuft]                                ::
+      ==                                                ::
     ++  sign                                            ::  in result $<-
-      $%  [%g sign-gall]                                ::
+      $%  [%b sign-behn]                                ::
+          [%g sign-gall]                                ::
       ==                                                ::
     ++  move  ,[p=bone q=(mold note gift)]              ::
+    ++  note-behn                                       ::  incoming request
+      $%  [%deal p=sock q=cuss]                         ::  full transmission
+      ==                                                ::
     ++  note-gall                                       ::  note to %gall
       $%  [%mess p=[p=ship q=path] q=ship r=cage]       ::
           [%nuke p=[p=ship q=path] q=ship]              ::
@@ -65,7 +87,8 @@
           [%took p=[p=ship q=path] q=ship]              ::
       ==                                                ::
     ++  note                                            ::  out request $->
-      $%  [%g note-gall]                                ::
+      $%  [%b note-behn]                                ::
+          [%g note-gall]                                ::
       ==                                                ::
     --                                                  ::
 |_  $:  hid=hide                                        ::  system state
@@ -246,17 +269,37 @@
     ~(. ta [& %| gyl] (~(got by feg) gyl))
   ::
   ++  se-pour                                           ::  receive results
-    |=  [gyl=gill sil=sign-gall]
+    |=  [gyl=gill sih=sign]
     ^+  +>
-    ?-    -.sil
-        %mean  
+    ?-    sih
+        [%g %mean *]
       +>.$
     ::  
-        %nice  
+        [%g %nice *]
       +>.$
     ::
-        %rush
-      ta-abet:ta-rap:(ta-fec:(se-tame gyl) +>.sil)
+        [%g %rush *]
+      ta-abet:ta-rap:(ta-fec:(se-tame gyl) +>+.sih)
+    ::
+        [%b %onto *]
+      ~&  [%se-pour-onto +>.sih]
+      +>.$
+    ::
+        [%b %unto %diff *]
+      =<  ta-abet
+      ta-rap:(ta-fec:(se-tame gyl) ((hard sole-effect) +>+>-.sih))
+    ::
+        [%b %unto %coup *]
+      ~&  [%se-pour-coup +>+.sih]
+      +>.$
+    ::
+        [%b %unto %reap *]
+      ~&  [%se-pour-reap +>+.sih]
+      +>.$
+    ::
+        [%b %unto %quit *]
+      ~&  [%se-pour-quit +>+.sih]
+      +>.$
     ==
   ::
   ++  ta                                                ::  per target
@@ -636,7 +679,7 @@
   =<  se-abet
   =<  se-view
   =+  gyl=[(slav %p i.t.pax) i.t.t.pax]
-  (~(se-pour se [~ ~] [(slav %p i.pax) ost] u.yog) gyl +.sih)
+  (~(se-pour se [~ ~] [(slav %p i.pax) ost] u.yog) gyl sih)
 ::
 ++  pull
   |=  ost=bone

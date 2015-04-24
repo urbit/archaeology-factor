@@ -206,7 +206,6 @@
 ++  pour
   |=  [ost=bone pax=path sih=sign]
   ^-  [(list move) _+>]
-  ~&  [%helm-fap-pour pax]
   ?-    sih
       [%b %onto *]
     :_  +>.$

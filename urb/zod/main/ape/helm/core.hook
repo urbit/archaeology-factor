@@ -37,7 +37,6 @@
     ++  gift                                            ::  out result <-$
       $%  [%mean p=ares]                                ::  error
           [%nice ~]                                     ::  acknowledge
-          [%rush %sole-effect sole-effect]              ::  effect 
       ==                                                ::
     ++  hapt  ,[p=ship q=path]                          ::  
     ++  move  ,[p=bone q=(mold note gift)]              ::

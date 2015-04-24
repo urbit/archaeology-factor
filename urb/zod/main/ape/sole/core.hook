@@ -47,7 +47,7 @@
     ++  gift                                            ::  out result <-$
       $%  [%mean p=ares]                                ::  
           [%nice ~]                                     ::
-          [%rush %dill-blit dill-blit]                  ::
+          [%diff %dill-blit dill-blit]                  ::
       ==                                                ::
     ++  sign-gall                                       ::  sign from %gall
       $%  [%mean p=ares]                                ::
@@ -107,7 +107,7 @@
     %+  welp  (flop moz) 
     ^-  (list move)
     ?~  biz  ~
-    [ost %give %rush %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]~
+    [ost %give %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]~
   ::
   ++  se-belt                                           ::  handle input
     |=  bet=dill-belt
@@ -592,7 +592,7 @@
   ^-  [(list move) _+>]
   ~&  [%sole-peer ost her pax]
   ?<  (~(has by bin) ost)
-  :-  [ost %give %rush %dill-blit %pro [`@c`0x23 `@c`0x20 ~]]~
+  :-  [ost %give %diff %dill-blit %pro [`@c`0x23 `@c`0x20 ~]]~
   %=    +>
       bin
     %+  ~(put by bin)  ost

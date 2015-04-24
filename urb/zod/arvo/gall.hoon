@@ -18,9 +18,9 @@
   ==                                                    ::
 ++  cuft                                                ::  internal gift
   $%  [%coup p=(unit tang)]                             ::  poke result
+      [%diff p=cage]                                    ::  subscription output
       [%quit ~]                                         ::  close subscription
       [%reap p=(unit tang)]                             ::  peer result
-      [%rush p=cage]                                    ::  subscription output
   ==                                                    ::
 ++  cuss  (pair term club)                              ::  internal kiss
 ++  suss  (trel term ,@tas ,@da)                        ::  config report
