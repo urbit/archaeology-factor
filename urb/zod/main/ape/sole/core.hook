@@ -49,24 +49,16 @@
           [%nice ~]                                     ::
           [%diff %dill-blit dill-blit]                  ::
       ==                                                ::
-    ++  sign-gall                                       ::  sign from %gall
-      $%  [%mean p=ares]                                ::
-          [%nice ~]                                     ::
-          [%rush %sole-effect sole-effect]              ::
+    ++  clap                                            ::  action, user
+      $%  [%peer p=path]                                ::  subscribe
+          [%poke p=cask]                                ::  apply
+          [%pull ~]                                     ::  unsubscribe
       ==                                                ::
-    ++  sign                                            ::  in result $<-
-      $%  [%g sign-gall]                                ::
+    ++  card                                            ::  general card
+      $%  [%diff %dill-blit dill-blit]                  ::
+          [%send path ship term clap]                   ::
       ==                                                ::
-    ++  move  ,[p=bone q=(mold note gift)]              ::
-    ++  note-gall                                       ::  note to %gall
-      $%  [%mess p=[p=ship q=path] q=ship r=cage]       ::
-          [%nuke p=[p=ship q=path] q=ship]              ::
-          [%show p=[p=ship q=path] q=ship r=path]       ::
-          [%took p=[p=ship q=path] q=ship]              ::
-      ==                                                ::
-    ++  note                                            ::  out request $->
-      $%  note-gall                                     ::
-      ==                                                ::
+    ++  move  (pair bone card)                          ::  user-level move
     --                                                  ::
 |_  $:  hid=hide                                        ::  system state
         house                                           ::  program state
@@ -245,19 +237,10 @@
     ^+  ta
     ~(. ta [& %| gyl] (~(got by feg) gyl))
   ::
-  ++  se-pour                                           ::  receive results
-    |=  [gyl=gill sil=sign-gall]
+  ++  se-diff                                           ::  receive results
+    |=  [gyl=gill fec=sole-effect]
     ^+  +>
-    ?-    -.sil
-        %mean  
-      +>.$
-    ::  
-        %nice  
-      +>.$
-    ::
-        %rush
-      ta-abet:ta-rap:(ta-fec:(se-tame gyl) +>.sil)
-    ==
+    ta-abet:ta-rap:(ta-fec:(se-tame gyl) fec)
   ::
   ++  ta                                                ::  per target
     |_  $:  $:  liv=?                                   ::  don't delete
@@ -622,21 +605,29 @@
     [~ +>.$]
   =<  se-abet
   =<  se-view
-  (~(se-belt se [[ost %give %nice ~]~ ~] [her ost] u.yog) bet)
+  (~(se-belt se [~ ~] [her ost] u.yog) bet)
 ::
-++  pour
-  |=  [ost=bone pax=path sih=*]
+++  diff
+  |=  [ost=bone her=ship fec=sole-effect]
+  (~(se-diff se [~ ~] [(slav %p i.pax) ost] u.yog) gyl fec)
+::
+++  pour-coup
+  |=  [ost=bone pax=path sih=(unit tang)]
   ^-  [(list move) _+>]
-  =+  yog=(~(get by bin) ost)
-  ?~  yog
-    ~&  [%sole-pour-stale ost pax]
-    [~ +>.$] 
-  =+  sih=((hard sign) sih)
-  ?>  ?=([@ @ @ ~] pax)
-  =<  se-abet
-  =<  se-view
-  =+  gyl=[(slav %p i.t.pax) i.t.t.pax]
-  (~(se-pour se [~ ~] [(slav %p i.pax) ost] u.yog) gyl +.sih)
+  ~&  [%pour-coup sih]
+  [~ +>]
+::
+++  pour-reap
+  |=  [ost=bone pax=path sih=(unit tang)]
+  ^-  [(list move) _+>]
+  ~&  [%pour-reap sih]
+  [~ +>]
+::
+++  pour-quit
+  |=  [ost=bone pax=path sih=(unit tang)]
+  ^-  [(list move) _+>]
+  ~&  [%pour-quit sih]
+  [~ +>]
 ::
 ++  pull
   |=  ost=bone

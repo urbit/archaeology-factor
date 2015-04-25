@@ -142,7 +142,7 @@
   $%  [%coup p=(unit tang)]                             ::  poke result
       [%quit ~]                                         ::  close subscription
       [%reap p=(unit tang)]                             ::  peer result
-      [%rush p=cage]                                    ::  subscription output
+      [%diff p=cage]                                    ::  subscription output
   ==                                                    ::
 ++  cuss  (pair term club)                              ::  internal kiss
 ++  suss  (trel term ,@tas ,@da)                        ::  config report
@@ -305,7 +305,7 @@
           [hen %pass ~ %b %deal [our our] ram %poke [%dill-belt -:!>(bet) bet]]
         ==
       ::
-      ++  pump                                          ::  send rush ack
+      ++  pump                                          ::  send diff ack
         %_    .
             moz 
           :_(moz [hen %pass ~ %b %deal [our our] ram %pump ~])
@@ -335,7 +335,7 @@
             %coup  ?~(p.p.+>.sih +>.$ (crud %coup u.p.p.+>.sih))
             %quit  !! :: ??
             %reap  ?~(p.p.+>.sih +>.$ (crud %reap u.p.p.+>.sih))
-            %rush  pump:(from ((hard dill-blit) q:`vase`+>+>.sih))
+            %diff  pump:(from ((hard dill-blit) q:`vase`+>+>.sih))
           ==
         ::
             [%c %note *]

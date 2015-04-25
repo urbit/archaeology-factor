@@ -926,8 +926,8 @@
       =^  cam  +>.$
           %+  ap-call  q.u.cug
           ;:  slop
-            !>(`@p`q.q.pry)
             !>(`@ud`ost)
+            !>(`@p`q.q.pry)
             ?:  =(0 p.u.cug)
               :(slop !>(`path`pax) !>(cag))
             :(slop !>(`path`(slag (dec p.u.cug) pax)) q.cag)
