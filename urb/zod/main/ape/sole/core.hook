@@ -1,5 +1,5 @@
 ::                                                      ::  ::
-::::  /hook/core/sole/ape                               ::  ::
+::::  /hook/core/sole/app                               ::  ::
   ::                                                    ::  ::
 /?  314                                                 ::  zuse version
 /-  *sole                                               ::  console structures
@@ -44,18 +44,19 @@
       $%  [%add p=(list gill)]                          ::  add agents
           [%del p=(list gill)]                          ::  delete agents
       ==                                                ::
-    ++  gift                                            ::  out result <-$
-      $%  [%mean p=ares]                                ::  
-          [%nice ~]                                     ::
-          [%diff %dill-blit dill-blit]                  ::
-      ==                                                ::
     ++  clap                                            ::  action, user
       $%  [%peer p=path]                                ::  subscribe
-          [%poke p=cask]                                ::  apply
+          [%poke p=pear]                                ::  apply
           [%pull ~]                                     ::  unsubscribe
       ==                                                ::
+    ++  pear                                            ::  request
+      $%  [%sole-action p=sole-action]                  ::
+      ==                                                ::
+    ++  plum                                            ::  result
+      $%  [%dill-blit dill-blit]                        ::
+      ==                                                ::
     ++  card                                            ::  general card
-      $%  [%diff %dill-blit dill-blit]                  ::
+      $%  [%diff plum]                                  ::
           [%send path ship term clap]                   ::
       ==                                                ::
     ++  move  (pair bone card)                          ::  user-level move
@@ -99,7 +100,7 @@
     %+  welp  (flop moz) 
     ^-  (list move)
     ?~  biz  ~
-    [ost %give %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]~
+    [ost %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]~
   ::
   ++  se-belt                                           ::  handle input
     |=  bet=dill-belt
@@ -144,7 +145,7 @@
   ++  se-nuke                                           ::  active drop
     |=  gyl=gill
     ^+  +>
-    (se-drop:(se-send(liv.maz |) gyl %nuke [p.gyl ~[q.gyl]] her) gyl)
+    (se-drop:(se-send(liv.maz |) gyl %pull ~) gyl)
   ::
   ++  se-like                                           ::  act in master
     |=  kus=ukase
@@ -188,9 +189,7 @@
   ++  se-link                                           ::  connect to app
     |=  gyl=gill
     ^+  +>
-    %.  gyl
-    =<  se-join
-    (se-send gyl %show [p.gyl ~[q.gyl]] her /sole)
+    (se-join:(se-send gyl %peer /sole) gyl)
   ::
   ++  se-blit                                           ::  give output
     |=  bil=dill-blit
@@ -229,8 +228,13 @@
     %_(+> moz [mov moz])
   ::
   ++  se-send                                           ::  send a message
-    |=  [gyl=gill nog=note-gall]
-    (se-emit ost %pass [(scot %p her) (scot %p p.gyl) q.gyl ~] %g nog)
+    |=  [gyl=gill cop=clap]
+    %^  se-emit  ost  %send
+    :*  `path`[(scot %p her) (scot %p p.gyl) q.gyl ~]
+        p.gyl
+        q.gyl
+        cop
+    ==
   ::
   ++  se-tame
     |=  gyl=gill
@@ -240,7 +244,7 @@
   ++  se-diff                                           ::  receive results
     |=  [gyl=gill fec=sole-effect]
     ^+  +>
-    ta-abet:ta-rap:(ta-fec:(se-tame gyl) fec)
+    ta-abet:(ta-fec:(se-tame gyl) fec)
   ::
   ++  ta                                                ::  per target
     |_  $:  $:  liv=?                                   ::  don't delete
@@ -281,10 +285,7 @@
       ^+  +>
       ?:  mav  
         +>.$
-      %_    +> 
-          +> 
-        (se-send gyl %mess [p.gyl ~[q.gyl]] her %sole-action !>(act))
-      ==
+      +>.$(+> (se-send gyl %poke %sole-action act))
     ::
     ++  ta-aro                                          ::  hear arrow
       |=  key=?(%d %l %r %u)
@@ -425,9 +426,6 @@
         %sav  +>(+> (se-blit fec))
         %txt  $(fec [%tan [%leaf p.fec]~])
       ==
-    ::
-    ++  ta-rap                                          ::  send %took
-      .(+> (se-send gyl %took [p.gyl ~[q.gyl]] her))
     ::
     ++  ta-dog                                          ::  change cursor
       |=  ted=sole-edit
@@ -573,9 +571,9 @@
 ++  peer
   |=  [ost=bone her=ship pax=path]
   ^-  [(list move) _+>]
-  ~&  [%sole-peer ost her pax]
+  ::  ~&  [%sole-peer ost her pax]
   ?<  (~(has by bin) ost)
-  :-  [ost %give %diff %dill-blit %pro [`@c`0x23 `@c`0x20 ~]]~
+  :-  [ost %diff %dill-blit %pro [`@c`0x23 `@c`0x20 ~]]~
   %=    +>
       bin
     %+  ~(put by bin)  ost
@@ -598,7 +596,7 @@
 ++  poke-dill-belt
   |=  [ost=bone her=ship bet=dill-belt]
   ^-  [(list move) _+>]
-  ~&  [%sole-poke ost her bet]
+  ::  ~&  [%sole-poke ost her bet]
   =+  yog=(~(get by bin) ost)
   ?~  yog
     ~&  [%sole-poke-stale ost]
@@ -608,7 +606,16 @@
   (~(se-belt se [~ ~] [her ost] u.yog) bet)
 ::
 ++  diff
-  |=  [ost=bone her=ship fec=sole-effect]
+  |=  [ost=bone her=ship pax=path fec=sole-effect]
+  ^-  [(list move) _+>]
+  =+  yog=(~(get by bin) ost)
+  ?~  yog
+    ~&  [%sole-diff-stale ost pax]
+    [~ +>.$]
+  ?>  ?=([@ @ @ ~] pax)
+  =<  se-abet
+  =<  se-view
+  =+  gyl=[(slav %p i.t.pax) i.t.t.pax]
   (~(se-diff se [~ ~] [(slav %p i.pax) ost] u.yog) gyl fec)
 ::
 ++  pour-coup
@@ -628,6 +635,7 @@
   ^-  [(list move) _+>]
   ~&  [%pour-quit sih]
   [~ +>]
+::
 ::
 ++  pull
   |=  ost=bone
