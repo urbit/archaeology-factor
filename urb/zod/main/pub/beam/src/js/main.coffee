@@ -18,11 +18,6 @@ $ ->
   for k,v of modules
     v.init()
 
-  talk = recl
-    render: ->
-      (div {}, [
-        (h1 {}, "talk")])
-
   blan = recl
     render: ->
       (div {}, "")
@@ -30,10 +25,14 @@ $ ->
   beam = recl
     render: ->
       (div {}, [
-        (h1 {}, "beam")
-        (link {to:"talk"}, "talk")
-        (link {to:"work"}, "work")
-        (rece roth,null)])
+        (div {id:"beam"},[
+          (link {to:"talk"}, "talk")
+          (link {to:"work"}, "work")
+        ])
+        (div {id:"c"}, [
+          (rece roth,null)
+        ])
+      ])
 
   routes =
     (rout {
@@ -45,5 +44,4 @@ $ ->
         (dero {name:"root", handler:blan},"")
       ])
 
-  Rout.run routes, (h) -> 
-    React.render (rece h),$('#c')[0]
+  Rout.run routes, (h) -> React.render (rece h),document.body
