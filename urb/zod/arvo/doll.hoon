@@ -323,14 +323,14 @@
           +>(moz :_(moz [hen %give +.sih]))
         ::
             [%b %onto *]
-          ~&  [%take-behn-onto +>.sih]
+          ::  ~&  [%take-behn-onto +>.sih]
           ?-  -.+>.sih
             %|  (crud %onto p.p.+>.sih)
             %&  (done %blit [%lin (tuba "{<p.p.sih>}")]~)
           ==
         ::
             [%b %unto *]
-          ~&  [%take-behn-unto +>.sih]
+          ::  ~&  [%take-behn-unto +>.sih]
           ?-  -.+>.sih
             %coup  ?~(p.p.+>.sih +>.$ (crud %coup u.p.p.+>.sih))
             %quit  !! :: ??
@@ -404,13 +404,14 @@
         dug.all   ~
       ==
     =+  ^=  flo  ^-  (list (pair ship term))
-        =+  myr=(clan p.q.hic)
-        ?:  =(%pawn myr)
-          [[p.q.hic %dojo] ~]
-        ?:  =(%earl myr)
-          =+  fap=(sein p.q.hic)
-          [[fap %dojo] [fap %talk] ~]
-        [[p.q.hic %dojo] [p.q.hic %talk] ~]
+        ~
+::        =+  myr=(clan p.q.hic)
+::        ?:  =(%pawn myr)
+::          [[p.q.hic %dojo] ~]
+::        ?:  =(%earl myr)
+::          =+  fap=(sein p.q.hic)
+::          [[fap %dojo] [fap %talk] ~]
+::        [[p.q.hic %dojo] [p.q.hic %talk] ~]
     =^  moz  all  abet:(need (ax (need hey.all) [%flow %sole flo]))
     ?:  |((lth p.q.hic 256) (gte p.q.hic (bex 64)))  [moz ..^$] ::  XX HORRIBLE
     [:_(moz [(need hey.all) %give %init p.q.hic]) ..^$]

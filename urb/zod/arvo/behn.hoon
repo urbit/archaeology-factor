@@ -475,16 +475,18 @@
     ?.  (~(has by bum) dap)  +>
     =+  suf=(~(get by wub) dap)
     ?~  suf  +>.$
-    |-  ^+  +>.^$(wub (~(del by wub) dap))
+    |-  ^+  +>.^$
+    ?:  =(~ kys.u.suf)
+      +>.^$(wub (~(del by wub) dap))
     =^  lep  kys.u.suf  [p q]:~(get to kys.u.suf)
-    ~&  [%mo-claw-play dap r.lep]
+    ::  ~&  [%mo-claw-play dap r.lep]
     $(+>.^$ ap-abet:(ap-club:(ap-abed:ap(hen p.lep) dap q.lep) r.lep))
   ::
   ++  mo-club                                           ::  local action
     |=  [dap=dude pry=prey cub=club]
     ^+  +>
     ?:  |(!(~(has by bum) dap) (~(has by wub) dap))
-      ~&  [%mo-club-qeu dap cub]
+      ::  ~&  [%mo-club-qeu dap cub]
       =+  syf=(fall (~(get by wub) dap) *sofa)
       +>.$(wub (~(put by wub) dap syf(kys (~(put to kys.syf) [hen pry cub]))))
     ap-abet:(ap-club:(ap-abed:ap dap pry) cub)
