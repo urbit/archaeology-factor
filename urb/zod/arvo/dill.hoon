@@ -142,7 +142,7 @@
   $%  [%coup p=(unit tang)]                             ::  poke result
       [%quit ~]                                         ::  close subscription
       [%reap p=(unit tang)]                             ::  peer result
-      [%rush p=cage]                                    ::  subscription output
+      [%diff p=cage]                                    ::  subscription output
   ==                                                    ::
 ++  cuss  (pair term club)                              ::  internal kiss
 ++  suss  (trel term ,@tas ,@da)                        ::  config report
@@ -162,12 +162,6 @@
       [%vega p=path]                                    ::  reboot by path
       [%verb ~]                                         ::  verbose mode
   ==                                                    ::
-++  note-gall                                           ::  outbound message
-  $%  [%mess p=[ship q=path] q=ship r=mess]             ::
-      [%nuke p=[p=ship q=path] q=ship]                  ::
-      [%show p=[p=ship q=path] q=ship r=path]           ::
-      [%took p=[p=ship q=path] q=ship]                  ::
-  ==                                                    ::
 ++  note-behn                                           ::
   $%  [%conf ship term %load ship term]                 ::
       [%deal p=sock q=cuss]                             ::
@@ -177,7 +171,6 @@
       [%b note-behn]                                    ::
       [%c note-clay]                                    ::
       [%d note-dill]                                    ::
-      [%g note-gall]                                    ::
   ==                                                    ::
 ++  riff  ,[p=desk q=(unit rave)]                       ::  see %clay
 ++  sign-ames                                           ::
@@ -198,20 +191,14 @@
   $%  [%onto p=(each suss tang)]                        ::
       [%unto p=cuft]                                    ::
   ==                                                    ::
-++  sign-gall                                           ::
-  $%  [%crud p=@tas q=(list tank)]                      ::
-      [%mean p=ares]                                    ::
-      [%nice ~]                                         ::
-      [%rush %dill-blit dill-blit]                      ::
-  ==                                                    ::
 ++  sign-time                                           ::
   $%  [%wake ~]                                         ::
   ==                                                    ::
 ++  sign                                                ::  in result $<-
   $%  [%a sign-ames]                                    ::
+      [%b sign-behn]                                    ::
       [%c sign-clay]                                    ::
       [%d sign-dill]                                    ::  
-      [%g sign-gall]                                    ::
       [%t sign-time]                                    ::
   ==                                                    ::
 ::::::::                                                ::  dill tiles
@@ -288,8 +275,8 @@
         ~&  [%dill-init our]
         =+  myt=(flop (need tem))
         =.  tem  ~
-        =.  moz  :_(moz [hen %pass ~ %g %show [our [ram ~]] our ~])
-        ::  =.  moz  :_(moz [hen %pass ~ %b %conf [our ram %load our %main]])
+        =.  moz  :_(moz [hen %pass ~ %b %conf [our ram %load our %main]])
+        =.  moz  :_(moz [hen %pass ~ %b %deal [our our] ram %peer ~])
         |-  ^+  +>
         ?~  myt  +>
         $(myt t.myt, +> (send i.myt))
@@ -315,13 +302,13 @@
         %_    +>
             moz
           :_  moz
-          [hen %pass ~ %g %mess [our [ram ~]] our [%dill-belt -:!>(bet) bet]]
+          [hen %pass ~ %b %deal [our our] ram %poke [%dill-belt -:!>(bet) bet]]
         ==
       ::
-      ++  took                                          ::  send rush ack
+      ++  pump                                          ::  send diff ack
         %_    .
             moz 
-          :_(moz [hen %pass ~ %g %took [our [ram ~]] our])
+          :_(moz [hen %pass ~ %b %deal [our our] ram %pump ~])
         ==
       ::
       ++  take                                          ::  receive
@@ -335,6 +322,22 @@
             [%a %init *]
           +>(moz :_(moz [hen %give +.sih]))
         ::
+            [%b %onto *]
+          ::  ~&  [%take-behn-onto +>.sih]
+          ?-  -.+>.sih
+            %|  (crud %onto p.p.+>.sih)
+            %&  (done %blit [%lin (tuba "{<p.p.sih>}")]~)
+          ==
+        ::
+            [%b %unto *]
+          ::  ~&  [%take-behn-unto +>.sih]
+          ?-  -.+>.sih
+            %coup  ?~(p.p.+>.sih +>.$ (crud %coup u.p.p.+>.sih))
+            %quit  !! :: ??
+            %reap  ?~(p.p.+>.sih +>.$ (crud %reap u.p.p.+>.sih))
+            %diff  pump:(from ((hard dill-blit) q:`vase`+>+>.sih))
+          ==
+        ::
             [%c %note *]
           (from %out (tuba ~(ram re q.+.sih)))
         ::
@@ -343,21 +346,6 @@
         ::
             [%d %blit *]
           (done +.sih)
-        ::
-            [%g %crud *]
-          (crud p.+.sih q.+.sih)
-        ::  (send %cru p.+.sih q.+.sih)  
-        ::
-            [%g %mean *]
-          ~&  %dill-take-mean 
-          +>
-        ::
-            [%g %nice *]
-          ::  ~&  [%take-nice sih]
-          +>
-        ::
-            [%g %rush %dill-blit *]
-          took:(from +>+.sih)
         ::
             [%t %wake *]
           ::  ~&  %dill-wake 
@@ -421,10 +409,10 @@
           [[p.q.hic %dojo] ~]
         ?:  =(%earl myr)
           =+  fap=(sein p.q.hic)
-          [[fap %dojo] ~]
-        [[p.q.hic %dojo] ~]
-          ::  [[fap %dojo] [fap %talk] ~]
-        ::  [[p.q.hic %dojo] [p.q.hic %talk] ~]
+          [[fap %dojo] [fap %helm] ~]
+        [[p.q.hic %dojo] [p.q.hic %helm] ~]
+        ::  [[fap %dojo] [fap %talk] ~]
+        ::[[p.q.hic %dojo] [p.q.hic %talk] ~]
     =^  moz  all  abet:(need (ax (need hey.all) [%flow %sole flo]))
     ?:  |((lth p.q.hic 256) (gte p.q.hic (bex 64)))  [moz ..^$] ::  XX HORRIBLE
     [:_(moz [(need hey.all) %give %init p.q.hic]) ..^$]

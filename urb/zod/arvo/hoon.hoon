@@ -9792,6 +9792,7 @@
     |=  [lac=? gum=muse]
     ^-  [[p=(list ovum) q=(list muse)] _niz]
     ::  =.  lac  |(lac ?=(?(%g %f) p.gum))
+    ::  =.  lac  &(lac !?=(%b p.gum))
     %+  fire
       p.gum 
     ?-    -.r.gum

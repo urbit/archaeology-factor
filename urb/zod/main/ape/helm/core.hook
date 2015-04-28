@@ -172,7 +172,7 @@
 ::
 ++  poke-helm-begin
   |=  [ost=bone you=ship begs]
-  ~&  %poke-helm-begin
+  ~&  %behn-helm-begin
   ?>  ?=(~ bur)
   =+  buz=(shax :(mix (jam ges) eny))
   =+  loy=(bruw 2.048 buz)
@@ -193,17 +193,12 @@
       [ost %pass / %plug our.hid %arvo (sein our.hid) %arvo]
       [ost %pass / %plug our.hid %try (sein our.hid) %try]
   ==
-++  pour
-  |=  [ost=bone pax=path sih=sign]
-  ^-  [(list move) _+>]
-  ~&  [%helm-pour pax]
-  ?-    sih
-      [%b %onto *]
-    :_  +>.$
-    :_  ~
-    ?-  -.+>.sih
-      %|  [ost %pass ~ %flog %crud `@tas`-.pax `tang`p.p.+>.sih]
-      %&  [ost %pass ~ %flog %text "<{<p.p.+>.sih>}>"]
-    ==
+::
+++  onto
+  |=  [ost=bone src=ship pax=path saw=(each suss tang)]
+  :_  +>  :_  ~
+  ?-  -.saw
+    %|  [ost %pass ~ %flog %crud `@tas`-.pax `tang`p.saw]
+    %&  [ost %pass ~ %flog %text "<{<p.saw>}>"]
   ==
 --

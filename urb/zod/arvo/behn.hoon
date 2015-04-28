@@ -293,7 +293,7 @@
   ++  mo-boot                                           ::  create ship
     |=  [dap=dude how=?(%new %old) pup=scup]
     ^+  +>
-    ~&  [%mo-boot dap how pup]
+    ::  ~&  [%mo-boot dap how pup]
     %+  mo-pass  [%sys how dap (scot %p p.pup) q.pup ~]
     ^-  note-behn
     [%f %exec our `[%boil %core [[p.pup q.pup [%da now]] [dap %ape ~]] ~]]
@@ -463,10 +463,13 @@
     =+  pry=`prey`[%high [~ (slav %p i.t.pax)]]
     =+  pap=(ap-abed:ap dap pry) 
     =+  vax=(slot 3 `vase`hin)
-    =<  ap-abet
     ?-  i.t.t.pax
-      %inn  (ap-pour:pap t.t.t.pax vax)
-      %out  (ap-pout:pap t.t.t.pax vax)
+      %inn  ap-abet:(ap-pour:pap t.t.t.pax (slot 3 `vase`hin))
+      %out  ?.  ?=([%b %unto *] q.hin)
+              ~&  [%mo-cook-weird q.hin]
+              ~&  [%mo-cook-weird-path pax]
+              +>.$
+            ap-abet:(ap-pout:pap t.t.t.pax +>.q.hin)
     ==
   ::
   ++  mo-claw                                           ::  clear queue
@@ -474,10 +477,11 @@
     ^+  +>
     ?.  (~(has by bum) dap)  +>
     =+  suf=(~(get by wub) dap)
+    =+  neh=hen
     ?~  suf  +>.$
     |-  ^+  +>.^$
     ?:  =(~ kys.u.suf)
-      +>.^$(wub (~(del by wub) dap))
+      +>.^$(hen neh, wub (~(del by wub) dap))
     =^  lep  kys.u.suf  [p q]:~(get to kys.u.suf)
     ::  ~&  [%mo-claw-play dap r.lep]
     $(+>.^$ ap-abet:(ap-club:(ap-abed:ap(hen p.lep) dap q.lep) r.lep))
@@ -654,6 +658,7 @@
       ?:  ?=(%| -.wiz)  
         ~&  %ap-call-mismatch 
         ~>  %slog.[0 ~(duck ut p.arg)]
+        ~>  %slog.[0 ~(duck ut (~(peek ut p.p.puz) %free 6))]
         [`(ap-suck "call: {<cog>}: type mismatch") +>.$]
       =-  ?-  -.zep
             %|  [`p.zep +>.$]
@@ -714,6 +719,7 @@
       |=  vax=vase
       ^-  (each (list cove) tang)
       ?~  q.vax  [%& ~]
+      ?@  q.vax  [%| (ap-suck "move: malformed list")]
       =+  sud=(ap-move (slot 2 vax))
       ?:  ?=(%| -.sud)  sud
       =+  res=$(vax (slot 3 vax))
@@ -757,7 +763,6 @@
     ++  ap-move-send                                    ::  pass gall action
       |=  [neh=duct vax=vase]
       ^-  (each cove tang)
-          ::        2 3  6 7 14 15 30  31
       ?.  ?&  ?=([p=* [q=@ [r=@ [s=@ t=*]]]] q.vax)
               (gte 1 (met 7 q.q.vax))
               ((sane %tas) r.q.vax)
@@ -767,6 +772,8 @@
       ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
         [%| (ap-suck "move: malformed path")]
       ?:  ?=(%poke s.q.vax)
+        =+  gav=(spec (slot 15 vax))
+        ?>  =(%poke -.q.gav)
         ?.  ?&  ?=([p=@ q=*] t.q.vax)
                 ((sane %tas) p.t.q.vax)
             ==
@@ -774,12 +781,14 @@
         :^  %&  neh  %pass
         :-  [(scot %p q.q.vax) %out r.q.vax u.pux]
         ^-  cote
-        [%send q.q.vax r.q.vax %poke p.t.q.vax (slot 31 vax)]
+        ::  ~&  [%ap-move-send `path`[(scot %p q.q.vax) %out r.q.vax u.pux]]
+        [%send q.q.vax r.q.vax %poke p.t.q.vax (slot 3 (spec (slot 3 gav)))]
       =+  cob=((soft club) [s t]:q.vax)
       ?~  cob
         [%| (ap-suck "move: malformed club")]
       :^  %&  neh  %pass
       :-  [(scot %p q.q.vax) %out r.q.vax u.pux]
+      ::  ~&  [%ap-move-send `path`[(scot %p q.q.vax) %out r.q.vax u.pux]]
       [%send q.q.vax r.q.vax u.cob]
     ::
     ++  ap-vain                                         ::  card to vane
@@ -811,6 +820,7 @@
       =+  huj=(ap-vain +<.q.vax)
       ?~  huj
         [%| (ap-suck "move: unknown note {(trip +<.q.vax)}")]
+      ::  ~&  [%ap-move-pass u.huj u.pux]
       :^  %&  neh  %pass 
       :-  [(scot %p q.q.pry) %inn u.pux]
       [%meta u.huj (spec (slot 3 vax))]
@@ -843,6 +853,7 @@
       =+  cug=(ap-find %poke p.cag ~)
       ?~  cug
         (ap-give %coup `(ap-suck "no poke arm"))
+      ::  ~&  [%ap-poke dap p.cag cug]
       =^  tur  +>.$
           %+  ap-call  q.u.cug
           ;:  slop
@@ -884,44 +895,43 @@
       ^+  +>
       ?.  &(?=([@ *] q.vax) ((sane %tas) -.q.vax))
         (ap-pour-fail %pour (ap-suck "pour: malformed card"))
-      =+  cug=(ap-find [%pour -.q.vax pax])
+      =+  cug=(ap-find [-.q.vax pax])
       ?~  cug
-        (ap-pour-fail -.q.vax (ap-suck "pour: no (trip -.q.vax)}: {<pax>}"))
+        (ap-pour-fail -.q.vax (ap-suck "pour: no {(trip -.q.vax)}: {<pax>}"))
       =^  cam  +>.$
           %+  ap-call  q.u.cug
           ;:  slop
             !>(`@ud`ost)
             !>(`@p`q.q.pry)
-            ?:  =(0 p.u.cug)
-              (slop !>(`path`pax) vax)
-            (slop !>(`path`(slag (dec p.u.cug) pax)) (slot 3 vax))
+            (slop !>(`path`(slag p.u.cug pax)) (slot 3 vax))
           ==
       ?^  cam  (ap-pour-fail -.q.vax u.cam)
       +>.$
     ::
     ++  ap-pout                                         ::  specific take
-      |=  [pax=path vax=vase]
+      |=  [pax=path cuf=cuft]
       ^+  +>
-      ?>  &(?=([@ *] pax) ((sane %tas) i.pax))
-      ?>  &(?=([@ *] q.vax) ((sane %tas) -.q.vax))
-      =+  ape=i.pax 
-      ?:  ?=(%diff -.q.vax)
-        ?>  &(?=([@ *] +.q.vax) ((sane %tas) +<.q.vax))
-        (ap-diff q.q.pry ape t.pax [+<.q.vax (slot 7 vax)])
-      (ap-punk q.q.pry ape t.pax -.q.vax (slot 3 vax))
+      ?-  -.cuf
+        %coup  (ap-punk q.q.pry +.pax %coup !>([pax p.cuf]))
+        %diff  (ap-diff q.q.pry +.pax p.cuf)
+        %quit  (ap-punk q.q.pry +.pax %quit !>(pax))
+        %reap  (ap-punk q.q.pry +.pax -.cuf !>([pax p.cuf]))
+      ==
     ::
     ++  ap-punk                                         ::  non-diff gall take
-      |=  [her=ship ape=term pax=path wut=term vax=vase]
+      |=  [her=ship pax=path wut=term end=vase]
       ^+  +>
       =+  cug=(ap-find [wut pax])
       ?~  cug
-        (ap-pour-fail wut (ap-suck "pour: no punk"))
-      =^  cam  +>.$  (ap-call q.u.cug :(slop !>(`@ud`ost) !>(`@p`q.q.pry) vax))
+        ~&  [%ap-punk-none wut]
+        +>.$
+      =^  cam  +>.$  
+        (ap-call q.u.cug :(slop !>(`@ud`ost) !>(`@p`q.q.pry) end))
       ?^  cam  (ap-pour-fail q.u.cug u.cam)
       +>.$
     ::
     ++  ap-diff                                         ::  pour a diff
-      |=  [her=ship ape=term pax=path cag=cage]
+      |=  [her=ship pax=path cag=cage]
       =+  cug=(ap-find [%diff p.cag pax])
       ?~  cug
         (ap-pour-fail %diff (ap-suck "pour: no diff"))
@@ -995,6 +1005,7 @@
 ++  load                                                ::  recreate vane
   |=  old=axle
   ^+  ..^$
+  ~&  %behn-reload
   ..^$(all old)
 ::
 ++  scry

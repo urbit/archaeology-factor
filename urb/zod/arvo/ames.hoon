@@ -1066,7 +1066,7 @@
       %-  ~(chew la:(ho:(um q.p.kec) p.p.kec) kay ryn %none (shaf %flap pac))
       [q.kec r.kec]
     ::
-    ++  goop
+    ++  goop                                            ::  blacklist
       |=  him=ship
       |
     ::
@@ -1710,7 +1710,7 @@
               :+  (scot %p p.p.bon)
                 (scot %p q.p.bon)
               q.q.bon
-          [hen %pass pax %g %rote p.bon /helm 0 %m %will wil]~
+          [hen %pass pax %b %rote p.bon /helm 0 %m %will wil]~
         ?>  ?=([@ @ *] t.q.q.bon)
         :_  fox
         =+  [cak=i.t.q.q.bon ven=i.t.t.q.q.bon]
@@ -1793,6 +1793,7 @@
             :+  (scot %p p.p.bon)
               (scot %p q.p.bon)
             q.q.bon
+        ~&  [%ames-behn-request p.bon imp pax]
         :_  fox  [hen %pass pax %b %rote p.bon imp r.bon]~
       ::
           %bh                                         ::  %behn response
@@ -1802,6 +1803,7 @@
             :+  (scot %p p.p.bon)
               (scot %p q.p.bon)
             q.q.bon
+        ~&  [%ames-behn-response p.bon imp pax]
         :_  fox  [hen %pass pax %b %roth p.bon imp r.bon]~
       ::
           %ge                                         ::  %gall request
