@@ -24,10 +24,21 @@ $ ->
 
   beam = recl
     render: ->
+      if window.urb.user is window.urb.ship
+        whom = [(div {className:'user ship'}, "~"+window.urb.user)]
+      else
+        whom = [(div {className:'user'}, "~"+window.urb.user)
+                (div {className:'ship'}, "~"+window.urb.ship)]
       (div {}, [
         (div {id:"beam"},[
-          (link {to:"talk"}, "talk")
-          (link {to:"work"}, "work")
+          (div {className:"mods"},[
+            (div {className:"links"}, [
+              (link {to:"talk"}, "talk")
+              (link {to:"work"}, "work")
+            ])
+            (div {className:"caret"}, "")
+          ])
+          (div {className:"whom"}, whom)
         ])
         (div {id:"c"}, [
           (rece roth,null)

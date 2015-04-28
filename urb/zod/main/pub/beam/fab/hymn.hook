@@ -27,7 +27,7 @@
     ::;link(type "text/css", rel "stylesheet", href "/main/pub/beam/src/css/main.css");
     ;title: beam
   ==
-  ;body
+  ;body.beam
     ::;script(type "text/javascript", src "/main/pub/beam/src/js/main.js");
     ;script(type "text/javascript", src "http://localhost:8000/main/pub/beam/src/js/main.js");
   ==
