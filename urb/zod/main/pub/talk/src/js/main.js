@@ -333,8 +333,10 @@ module.exports = recl({
   _focus: function() {
     this.focussed = true;
     this.lastSeen = null;
-    $('.message.new').removeClass('new');
-    return document.title = document.title.replace(/\ \([0-9]*\)/, "");
+    return setTimeout(function() {
+      $('.message.new').removeClass('new');
+      return document.title = document.title.replace(/\ \([0-9]*\)/, "");
+    }, 1000);
   },
   checkMore: function() {
     var end;
@@ -1329,7 +1331,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 },{}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/data/packed/latest.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"version": "2014j",
 	"zones": [
 		"Africa/Abidjan|LMT GMT|g.8 0|01|-2ldXH.Q",

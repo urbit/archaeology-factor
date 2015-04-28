@@ -80,8 +80,10 @@ module.exports = recl
   _focus: ->
     @focussed = true
     @lastSeen = null
-    $('.message.new').removeClass 'new'
-    document.title = document.title.replace /\ \([0-9]*\)/, ""
+    setTimeout () ->
+        $('.message.new').removeClass 'new'
+        document.title = document.title.replace /\ \([0-9]*\)/, ""
+      , 1000
 
   checkMore: ->
     if $(window).scrollTop() < @paddingTop &&
