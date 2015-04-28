@@ -1633,6 +1633,7 @@
     ++  load
       |=  old=fort
       ^+  ..^$
+      ~&  %ames-reload
       ..^$(fox old)
     ::
     ++  scry

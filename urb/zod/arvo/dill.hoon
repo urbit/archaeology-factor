@@ -1,5 +1,5 @@
 !:
-::  dill (4d), terminal handling
+::  dill (4d), terminal handling   
 ::
 |=  pit=vase
 =>  |%                                                  ::  interface tiles
@@ -461,3 +461,5 @@
     abet:(~(take as [~ hen our] (~(got by dug.all) hen)) q.hin)
   [moz ..^$]
 --
+
+::  good test

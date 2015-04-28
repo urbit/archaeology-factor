@@ -312,7 +312,7 @@
         ==
     %+  mo-pass  
       [%sys %way -.q.caz ~]
-    `note-behn`[%a %wont [him our] [%q %be p.caz ~] [num roc]]
+    `note-behn`[%a %wont [our him] [%q %be p.caz ~] [num roc]]
   ::
   ++  mo-baal                                           ::  error convert a
     |=  art=(unit ares)
@@ -535,6 +535,10 @@
           +>+<+  `seat`(~(got by bum) dap)
         ==
       =+  unt=(~(get by q.zam) hen)
+      =:  act.tyc  +(act.tyc)
+          eny.tyc  (shax (mix (add dap act.tyc) eny))
+          lat.tyc  now
+        ==
       ?^  unt
         +>.$(ost u.unt)
       %=  +>.$
@@ -542,9 +546,6 @@
         p.zam    +(p.zam)
         q.zam    (~(put by q.zam) hen p.zam)
         r.zam    (~(put by r.zam) p.zam hen)
-        act.tyc  +(act.tyc)
-        eny.tyc  (shax (mix (add dap act.tyc) eny))
-        lat.tyc  now
       ==
     ::
     ++  ap-abet                                         ::  resolve
@@ -1005,7 +1006,6 @@
 ++  load                                                ::  recreate vane
   |=  old=axle
   ^+  ..^$
-  ~&  %behn-reload
   ..^$(all old)
 ::
 ++  scry
