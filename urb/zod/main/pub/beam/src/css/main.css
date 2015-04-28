@@ -95,29 +95,53 @@ body {
   margin-left: -29rem;
   margin-bottom: 12rem;
 }
+.beam #c {
+  top: 2rem;
+}
 #beam {
   position: absolute;
-  left: -8rem;
-  top: 50%;
-  height: auto;
-  width: 6rem;
-  text-align: right;
-  margin-top: -2rem;
-  border-right: 0.2rem solid #000;
-  padding: 1rem;
-  line-height: 1.4rem;
-  background-color: #000;
-  -webkit-transition: left 0.2s;
+  left: 50%;
+  margin-left: -28rem;
+  top: 0;
+  max-height: 2rem;
+  width: 12rem;
+  text-align: left;
+  padding: 0.3rem 0rem;
+  background-color: #fff;
+  border-bottom: 1px solid #000;
+  z-index: 100;
 }
-#beam:hover {
-  left: 0;
-  -webkit-transition: left 0.2s;
+#beam .mods .links {
+  height: 1rem;
+  overflow: hidden;
+}
+#beam .mods .links,
+#beam .mods .caret {
+  display: inline-block;
+  vertical-align: top;
+}
+#beam .mods .caret {
+  border-left-color: #f00;
+  margin-top: 1px;
+}
+#beam .mods {
+  float: left;
+}
+#beam .whom {
+  float: right;
+}
+#beam .user,
+#beam .ship {
+  font-family: "scp";
+  font-size: 0.7rem;
 }
 #beam a {
+  line-height: 1rem;
   font-weight: 500;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.05rem;
   display: block;
-  color: #fff;
+  color: #000;
   text-decoration: none;
   text-transform: uppercase;
 }
