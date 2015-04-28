@@ -1,4 +1,5 @@
 *.o
+.*.js
 .DS_Store
 /bin/vere
 /urb/*/
