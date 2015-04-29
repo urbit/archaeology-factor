@@ -587,14 +587,14 @@
       |=  [her=ship pax=path cag=cage]
       =+  cug=(ap-find [%diff p.cag pax])
       ?~  cug
-        (ap-pour-fail %diff (ap-suck "pour: no diff"))
+        (ap-lame %diff (ap-suck "pour: no diff"))
       =+  ^=  arg  ^-  vase
           %-  slop
           ?:  =(0 p.u.cug)
             [!>([`@ud`ost `@p`q.q.pry `path`pax]) !>(cag)]
           [!>([`@ud`ost `@p`q.q.pry `path`(slag (dec p.u.cug) pax)]) q.cag]
       =^  cam  +>.$  (ap-call q.u.cug arg)
-      ?^  cam  (ap-pour-fail q.u.cug u.cam)
+      ?^  cam  (ap-lame q.u.cug u.cam)
       +>.$
     ::
     ++  ap-fall                                         ::  drop from queue
@@ -755,7 +755,7 @@
         (ap-peon pax)
       =^  cam  +>.$ 
           %+  ap-call  q.u.cug
-          !>([`@ud`ost `@p`q.q.pry `path`(slag p.u.cug pax)])
+          !>([[`@ud`ost `@p`q.q.pry] `path`(slag p.u.cug pax)])
       ?^  cam
         (ap-give %reap cam)
       (ap-give:(ap-peon pax) %reap ~)
@@ -776,46 +776,50 @@
       ::  ~&  [%ap-poke dap p.cag cug]
       =^  tur  +>.$
           %+  ap-call  q.u.cug
-          ;:  slop
-            !>(`@ud`ost)
-            !>(`@p`q.q.pry)
-            ?.  =(0 p.u.cug)  q.cag
-            (slop (ap-term %tas p.cag) q.cag)
-          ==
+          %+  slop
+            !>([`@ud`ost `@p`q.q.pry])
+          ?.  =(0 p.u.cug)  q.cag
+          (slop (ap-term %tas p.cag) q.cag)
       (ap-give %coup tur)
     ::
-    ++  ap-pour-fail                                    ::  pour error
+    ++  ap-lame                                         ::  pour error
       |=  [wut=@tas why=tang]
       ^+  +>
-      ~&  [%ap-pour-fail wut why]
-      +>   
+      =+  cug=(ap-find /lame)
+      ?~  cug
+        ~&  [%ap-lame wut why]
+        +>.$
+      =^  cam  +>.$
+        %+  ap-call  q.u.cug
+        !>([[`@ud`ost `@p`q.q.pry] wut why])
+      ?^  cam
+        ~&([%ap-lame-lame u.cam] +>.$)
+      +>.$
     ::
     ++  ap-pour                                         ::  generic take
       |=  [pax=path vax=vase]
       ^+  +>
       ?.  &(?=([@ *] q.vax) ((sane %tas) -.q.vax))
-        (ap-pour-fail %pour (ap-suck "pour: malformed card"))
+        (ap-lame %pour (ap-suck "pour: malformed card"))
       =+  cug=(ap-find [-.q.vax pax])
       ?~  cug
-        (ap-pour-fail -.q.vax (ap-suck "pour: no {(trip -.q.vax)}: {<pax>}"))
+        (ap-lame -.q.vax (ap-suck "pour: no {(trip -.q.vax)}: {<pax>}"))
       =^  cam  +>.$
           %+  ap-call  q.u.cug
-          ;:  slop
-            !>(`@ud`ost)
-            !>(`@p`q.q.pry)
-            (slop !>(`path`(slag p.u.cug pax)) (slot 3 vax))
-          ==
-      ?^  cam  (ap-pour-fail -.q.vax u.cam)
+          %+  slop
+            !>([`@ud`ost `@p`q.q.pry `path`(slag p.u.cug pax)])
+          (slot 3 vax)
+      ?^  cam  (ap-lame -.q.vax u.cam)
       +>.$
     ::
     ++  ap-pout                                         ::  specific take
       |=  [pax=path cuf=cuft]
       ^+  +>
       ?-  -.cuf
-        %coup  (ap-punk q.q.pry +.pax %coup !>([pax p.cuf]))
+        %coup  (ap-punk q.q.pry %coup +.pax `!>(p.cuf))
         %diff  (ap-diff q.q.pry +.pax p.cuf)
-        %quit  (ap-punk q.q.pry +.pax %quit !>(pax))
-        %reap  (ap-punk q.q.pry +.pax -.cuf !>([pax p.cuf]))
+        %quit  (ap-punk q.q.pry %quit +.pax ~)
+        %reap  (ap-punk q.q.pry %reap +.pax `!>(p.cuf))
       ==
     ::
     ++  ap-prep                                         ::  install
@@ -838,12 +842,9 @@
         `+>.$(+13.q.hav +13.q.u.vux)
       =^  tur  +>.$
           %+  ap-call  %prep
-          ;:  slop
-            !>(`@ud`ost)
-            !>(`@p`q.q.pry)
-            ?~  vux  !>(~)
-            (slop !>(~) (slot 13 u.vux))
-          ==
+          %+  slop
+            !>([`@ud`ost `@p`q.q.pry])
+          ?~(vux !>(~) (slop !>(~) (slot 13 u.vux)))
       ?~(tur `+>.$ :_(+>.$ `u.tur))
     ::
     ++  ap-pull                                         ::  pull subscription
@@ -856,15 +857,17 @@
       ==
     ::
     ++  ap-punk                                         ::  non-diff gall take
-      |=  [her=ship pax=path wut=term end=vase]
+      |=  [her=ship cog=term pax=path vux=(unit vase)]
       ^+  +>
-      =+  cug=(ap-find [wut pax])
+      =+  cug=(ap-find cog pax)
       ?~  cug
-        ~&  [%ap-punk-none wut]
+        ~&  [%ap-punk-none pax]
         +>.$
       =^  cam  +>.$  
-        (ap-call q.u.cug :(slop !>(`@ud`ost) !>(`@p`q.q.pry) end))
-      ?^  cam  (ap-pour-fail q.u.cug u.cam)
+        %+  ap-call  q.u.cug
+        =+  den=!>([`@ud`ost `@p`q.q.pry (slag p.u.cug pax)])
+        ?~(vux den (slop den u.vux))
+      ?^  cam  (ap-lame q.u.cug u.cam)
       +>.$
     ::
     ++  ap-safe                                         ::  process move list

@@ -587,8 +587,8 @@
     --
   --
 ++  peer
-  |=  [ost=bone src=ship pax=path]
-  ^-  [(list move) _+>]
+  |=  [from pax=path]
+  ^-  (quip move +>)
   ::  ~&  [%sole-peer ost src pax]
   ?<  (~(has by bin) ost)
   :-  [ost %diff %dill-blit %pro [`@c`0x23 `@c`0x20 ~]]~
@@ -612,8 +612,8 @@
   ==
 ::
 ++  poke-dill-belt
-  |=  [ost=bone src=ship bet=dill-belt]
-  ^-  [(list move) _+>]
+  |=  [from bet=dill-belt]
+  ^-  (quip move +>)
   ::  ~&  [%sole-poke ost src bet]
   =+  yog=(~(get by bin) ost)
   ?~  yog
@@ -638,26 +638,26 @@
   (~(se-diff se [~ ~] [(slav %p i.way) ost] u.yog) gyl fec)
 ::
 ++  coup
-  |=  [ost=bone src=ship way=wire saw=(unit tang)]
-  ^-  [(list move) _+>]
+  |=  [then saw=(unit tang)]
+  ^-  (quip move +>)
   ?~  saw  [~ +>]
   :_  +>  :_  ~
   [ost %pass ~ %flog %crud %coup u.saw]
 ::
 ++  reap
-  |=  [ost=bone src=ship way=wire saw=(unit tang)]
-  ^-  [(list move) _+>]
+  |=  [then saw=(unit tang)]
+  ^-  (quip move +>)
   ?~  saw  [~ +>]
   :_  +>  :_  ~
   `move`[ost %pass ~ %flog %crud %reap u.saw]
 ::
 ++  quit
-  |=  [ost=bone src=ship way=wire]
-  ^-  [(list move) _+>]
+  |=  then
+  ^-  (quip move +>)
   [~ +>]
 ::
 ++  onto
-  |=  [ost=bone src=ship way=wire saw=(each suss tang)]
+  |=  [then saw=(each suss tang)]
   :_  +>  :_  ~
   ?-  -.saw
     %|  [ost %pass ~ %flog %crud `@tas`-.way `tang`p.saw]
@@ -665,8 +665,8 @@
   ==
 ::
 ++  pull
-  |=  ost=bone
-  ^-  [(list move) _+>]
+  |=  from
+  ^-  (quip move +>)
   ::  ~&  [%sole-pull ost]
   =^  moz  +>  
     =<  se-abet

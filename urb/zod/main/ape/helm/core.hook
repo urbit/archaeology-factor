@@ -149,30 +149,30 @@
   ~(. he [ost ~] (fall (~(get by hoc) ost) *helm-session))
 ::
 ++  poke-helm-reset
-  |=  [ost=bone src=ship ~]
+  |=  [from ~]
   ~&  %poke-helm-reset
   he-abet:he-wish-reset:(hake ost src)
 ::
 ++  poke-helm-verb
-  |=  [ost=bone src=ship ~]
+  |=  [from ~]
   ~&  %poke-helm-verb
   he-abet:he-wish-verb:(hake ost src)
 ::
 ++  poke-helm-init
-  |=  [ost=bone src=ship him=ship]
+  |=  [from him=ship]
   ~&  %poke-helm-init
   he-abet:(he-wish-init:(hake ost src) him)
 ::
 ++  poke-helm-reload
-  |=  [ost=bone src=ship all=(list term)]
+  |=  [from all=(list term)]
   he-abet:(he-wish-reload:(hake ost src) all)
 ::
 ++  poke-helm-start
-  |=  [ost=bone src=ship dap=term]
+  |=  [from dap=term]
   he-abet:(he-wish-start:(hake ost src) dap)
 ::
 ++  poke-helm-begin
-  |=  [ost=bone you=ship begs]
+  |=  [from begs]
   ~&  %behn-helm-begin
   ?>  ?=(~ bur)
   =+  buz=(shax :(mix (jam ges) eny))
@@ -184,7 +184,7 @@
   ==
 ::
 ++  poke-will
-  |=  [ost=bone you=ship wil=(unit will)]
+  |=  [from wil=(unit will)]
   ?>  ?=(^ bur)
   :_  +>.$(bur ~)
   ?~  wil
@@ -196,7 +196,7 @@
   ==
 ::
 ++  onto
-  |=  [ost=bone src=ship way=wire saw=(each suss tang)]
+  |=  [then saw=(each suss tang)]
   :_  +>  :_  ~
   ?-  -.saw
     %|  [ost %pass ~ %flog %crud `@tas`-.way `tang`p.saw]
