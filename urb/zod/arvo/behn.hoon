@@ -573,6 +573,18 @@
       ?:  ?=(%| -.zem)  [`p.zem +>.$]
       (ap-sake p.zem) 
     ::
+    ++  ap-call-two                                     ::  curried call
+      |=  [cog=term one=vase two=vase]
+      ^-  [(unit tang) _+>]
+      =.  +>  ap-hide
+      =+  arm=(ap-farm cog)
+      ?:  ?=(%| -.arm)  [`p.arm +>.$]
+      =+  zem=(ap-slam cog p.arm one)
+      ?:  ?=(%| -.zem)  [`p.zem +>.$]
+      =+  zib=(ap-slam cog p.zem two)
+      ?:  ?=(%| -.zib)  [`p.zib +>.$]
+      (ap-sake p.zib) 
+    ::
     ++  ap-club                                         ::  apply effect
       |=  cub=club
       ^+  +>

@@ -9410,6 +9410,7 @@
           ==                                            ::
 ++  curd  ,[p=@tas q=*]                                 ::  typeless card
 ++  duct  (list wire)                                   ::  causal history
+++  from  ,[ost=bone src=ship]                          ::  forward problem
 ++  hide                                                ::  standard app state
         $:  $:  our=ship                                ::  owner/operator
                 app=term                                ::  app identity
@@ -9459,6 +9460,7 @@
 ++  sled  $+  [(unit (set monk)) term beam]             ::  namespace function
           (unit (unit cage))                            ::
 ++  slut  $+(* (unit (unit)))                           ::  old namespace
+++  then  ,[ost=bone src=ship way=wire]                 ::  backward problem
 ++  vile                                                ::  reflexive constants
           $:  typ=type                                  ::  -:!>(*type)
               duc=type                                  ::  -:!>(*duct)

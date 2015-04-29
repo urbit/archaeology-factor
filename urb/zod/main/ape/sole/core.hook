@@ -624,43 +624,43 @@
   (~(se-belt se [~ ~] [src ost] u.yog) bet)
 ::
 ++  diff-sole-effect
-  |=  [ost=bone src=ship pax=path fec=sole-effect]
+  |=  [ost=bone src=ship way=wire fec=sole-effect]
   ^-  [(list move) _+>]
-  ::  ~&  [%diff-sole-effect pax]
+  ::  ~&  [%diff-sole-effect way]
   =+  yog=(~(get by bin) ost)
   ?~  yog
-    ~&  [%sole-diff-stale ost pax]
+    ~&  [%sole-diff-stale ost way]
     [~ +>.$]
-  ?>  ?=([@ @ @ ~] pax)
+  ?>  ?=([@ @ @ ~] way)
   =<  se-abet
   =<  se-view
-  =+  gyl=[(slav %p i.t.pax) i.t.t.pax]
-  (~(se-diff se [~ ~] [(slav %p i.pax) ost] u.yog) gyl fec)
+  =+  gyl=[(slav %p i.t.way) i.t.t.way]
+  (~(se-diff se [~ ~] [(slav %p i.way) ost] u.yog) gyl fec)
 ::
 ++  coup
-  |=  [ost=bone src=ship pax=path saw=(unit tang)]
+  |=  [ost=bone src=ship way=wire saw=(unit tang)]
   ^-  [(list move) _+>]
   ?~  saw  [~ +>]
   :_  +>  :_  ~
   [ost %pass ~ %flog %crud %coup u.saw]
 ::
 ++  reap
-  |=  [ost=bone src=ship pax=path saw=(unit tang)]
+  |=  [ost=bone src=ship way=wire saw=(unit tang)]
   ^-  [(list move) _+>]
   ?~  saw  [~ +>]
   :_  +>  :_  ~
   `move`[ost %pass ~ %flog %crud %reap u.saw]
 ::
 ++  quit
-  |=  [ost=bone src=ship pax=path]
+  |=  [ost=bone src=ship way=wire]
   ^-  [(list move) _+>]
   [~ +>]
 ::
 ++  onto
-  |=  [ost=bone src=ship pax=path saw=(each suss tang)]
+  |=  [ost=bone src=ship way=wire saw=(each suss tang)]
   :_  +>  :_  ~
   ?-  -.saw
-    %|  [ost %pass ~ %flog %crud `@tas`-.pax `tang`p.saw]
+    %|  [ost %pass ~ %flog %crud `@tas`-.way `tang`p.saw]
     %&  [ost %pass ~ %flog %text "<{<p.saw>}>"]
   ==
 ::
