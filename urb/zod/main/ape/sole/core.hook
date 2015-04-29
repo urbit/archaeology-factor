@@ -69,7 +69,7 @@
       ==                                                ::
     ++  card                                            ::  general card
       $%  [%diff plum]                                  ::
-          [%send path ship term clap]                   ::
+          [%send path [ship term] clap]                 ::
           [%pass path note]                             ::
       ==                                                ::
     ++  move  (pair bone card)                          ::  user-level move
@@ -248,7 +248,7 @@
   ::
   ++  se-send                                           ::  send a message
     |=  [gyl=gill cop=clap]
-    (se-emit ost %send (se-path gyl) p.gyl q.gyl cop)
+    (se-emit ost %send (se-path gyl) gyl cop)
   ::
   ++  se-pass                                           ::  pass an action
     |=  [gyl=gill noh=note]

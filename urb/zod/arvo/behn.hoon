@@ -709,7 +709,7 @@
     ++  ap-move-send                                    ::  pass gall action
       |=  [neh=duct vax=vase]
       ^-  (each cove tang)
-      ?.  ?&  ?=([p=* [q=@ [r=@ [s=@ t=*]]]] q.vax)
+      ?.  ?&  ?=([p=* [q=@ r=@] [s=@ t=*]] q.vax)
               (gte 1 (met 7 q.q.vax))
               ((sane %tas) r.q.vax)
           ==
@@ -718,7 +718,7 @@
       ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
         [%| (ap-suck "move: malformed path")]
       ?:  ?=(%poke s.q.vax)
-        =+  gav=(spec (slot 15 vax))
+        =+  gav=(spec (slot 7 vax))
         ?>  =(%poke -.q.gav)
         ?.  ?&  ?=([p=@ q=*] t.q.vax)
                 ((sane %tas) p.t.q.vax)

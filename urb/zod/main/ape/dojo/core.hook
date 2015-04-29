@@ -87,7 +87,7 @@
       ==                                                ::
     ++  card                                            ::  general card
       $%  [%diff %sole-effect sole-effect]              ::
-          [%send path ship term clap]                   ::
+          [%send path [ship term] clap]                   ::
           [%pass path note]                             ::
       ==                                                ::
     ++  move  (pair bone card)                          ::  user-level move
@@ -587,7 +587,7 @@
   ++  he-send
     |=  [way=wire him=ship dap=term cop=clap]
     ^+  +>
-    (he-card %send way him dap cop)
+    (he-card %send way [him dap] cop)
   ::
   ++  he-diff                                           ::  emit update
     |=  fec=sole-effect 
