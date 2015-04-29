@@ -202,10 +202,6 @@
   =+  gib=(wox p.n.r.arc)
   ?~(gib rac [[u.gib p.n.r.arc] rac])
 ::
-++  slob                                                ::  XX  belongs in h/h
-  |=  [cog=@tas typ=type]
-  (~(has in (sa (sloe typ))) cog)
-::
 ++  za                                                  ::  per event
   =|  $:  $:  $:  our=ship                              ::  computation owner
                   hen=duct                              ::  event floor

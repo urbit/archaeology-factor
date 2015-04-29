@@ -101,6 +101,8 @@
 ++  nail  ,[p=hair q=tape]                              ::  parsing input
 ++  numb  ,@                                            ::  just a number
 ++  pair  |*([a=$+(* *) b=$+(* *)] ,[p=a q=b])          ::  just a pair
+++  quid  |*([a=$+(* *) b=*] ,[a _b])                   ::  for =^
+++  quip  |*([a=$+(* *) b=*] ,[(list a) _b])            ::  for =^
 ++  wand  |*  a=(pole $+(* *))                          ::  hetero list
           |=  b=*                                       ::
           ?~  a  ~                                      ::
@@ -5778,6 +5780,14 @@
 ++  slab                                                
   |=  [cog=@tas typ=type]
   !=(~ q:(~(fino ut typ) 0 %free cog))
+::
+++  slob                                                ::  superficial arm
+  |=  [cog=@tas typ=type]
+  ^-  ?
+  ?+  typ  |
+    [%hold *]  $(typ ~(repo ut typ))
+    [%core *]  (~(has by q.r.q.typ) cog)
+  ==
 ::
 ++  sloe                                                ::  get arms in core
   |=  typ=type

@@ -609,7 +609,7 @@
     ++  ap-fond                                         ::  check for arm
       |=  cog=term
       ^-  ?
-      (slab cog p.hav)
+      (slob cog p.hav)
     ::
     ++  ap-hype                                         ::  hyphenate
       |=([a=term b=term] `term`(cat 3 a (cat 3 '-' b)))
@@ -639,6 +639,10 @@
         ==
       ==
     ++  ap-sled  (mole (slod ska))                      ::  namespace view
+    ++  ap-cull
+      |=  [cog=term one=vase two=vase]
+      ^-  [(unit tang) _+>]
+      !!
     ++  ap-call                                         ::  call into agent
       |=  [cog=term arg=vase]
       ^-  [(unit tang) _+>]
