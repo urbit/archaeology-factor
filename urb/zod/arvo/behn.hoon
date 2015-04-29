@@ -575,7 +575,7 @@
     ::
     ++  ap-call-two                                     ::  curried call
       |=  [cog=term one=vase two=vase]
-      ^-  [(unit tang) _+>]
+      ^-  (quid (unit tang) +>)
       =.  +>  ap-hide
       =+  arm=(ap-farm cog)
       ?:  ?=(%| -.arm)  [`p.arm +>.$]
@@ -600,15 +600,11 @@
       =+  cug=(ap-find [%diff p.cag pax])
       ?~  cug
         (ap-pour-fail %diff (ap-suck "pour: no diff"))
-      =^  cam  +>.$
-          %+  ap-call  q.u.cug
-          ;:  slop
-            !>(`@ud`ost)
-            !>(`@p`q.q.pry)
-            ?:  =(0 p.u.cug)
-              :(slop !>(`path`pax) !>(cag))
-            :(slop !>(`path`(slag (dec p.u.cug) pax)) q.cag)
-          ==
+      =+  ^=  arg  ^-  [vase vase]
+          ?:  =(0 p.u.cug) 
+            [!>([`@ud`ost `@p`q.q.pry `path`pax]) !>(cag)]
+          [!>([`@ud`ost `@p`q.q.pry `path`(slag (dec p.u.cug) pax)]) q.cag]
+      =^  cam  +>.$  (ap-call-two q.u.cug arg)
       ?^  cam  (ap-pour-fail q.u.cug u.cam)
       +>.$
     ::

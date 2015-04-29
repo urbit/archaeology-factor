@@ -9024,7 +9024,7 @@
     ++  expv  |.(;~(gunk lobe wisp))                    ::  tile, core tail
     ++  expw  |.(;~(gunk lobe teak))                    ::  tile and tiki
     ++  expx  |.((butt ;~(gunk teak race)))             ::  tiki, [tile twig]s
-    ++  expy  |.((butt ;~(gunk teak loaf race)))        :: tiki twig [tile twig]s
+    ++  expy  |.((butt ;~(gunk teak loaf race)))        ::  tk twig [tile twig]s
     ++  expz  |.(loaf(bug &))                           ::  twig with tracing
     ::    Hint syntaces  (nock 10)
     ++  hinb  |.(;~(gunk bont loaf))                    ::  hint and twig
