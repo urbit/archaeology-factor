@@ -563,7 +563,7 @@
     ++  ap-avid                                         ::  onto results
       |=([a=(each suss tang)] [hen %give %onto a])
     ::
-    ++  ap-call                                         ::  call into agent
+    ++  ap-call                                         ::  call into server
       |=  [cog=term arg=vase]
       ^-  [(unit tang) _+>]
       =.  +>  ap-hide
@@ -572,18 +572,6 @@
       =+  zem=(ap-slam cog p.arm arg)
       ?:  ?=(%| -.zem)  [`p.zem +>.$]
       (ap-sake p.zem) 
-    ::
-    ++  ap-call-two                                     ::  curried call
-      |=  [cog=term one=vase two=vase]
-      ^-  (quid (unit tang) +>)
-      =.  +>  ap-hide
-      =+  arm=(ap-farm cog)
-      ?:  ?=(%| -.arm)  [`p.arm +>.$]
-      =+  zem=(ap-slam cog p.arm one)
-      ?:  ?=(%| -.zem)  [`p.zem +>.$]
-      =+  zib=(ap-slam cog p.zem two)
-      ?:  ?=(%| -.zib)  [`p.zib +>.$]
-      (ap-sake p.zib) 
     ::
     ++  ap-club                                         ::  apply effect
       |=  cub=club
@@ -600,11 +588,12 @@
       =+  cug=(ap-find [%diff p.cag pax])
       ?~  cug
         (ap-pour-fail %diff (ap-suck "pour: no diff"))
-      =+  ^=  arg  ^-  [vase vase]
-          ?:  =(0 p.u.cug) 
+      =+  ^=  arg  ^-  vase
+          %-  slop
+          ?:  =(0 p.u.cug)
             [!>([`@ud`ost `@p`q.q.pry `path`pax]) !>(cag)]
           [!>([`@ud`ost `@p`q.q.pry `path`(slag (dec p.u.cug) pax)]) q.cag]
-      =^  cam  +>.$  (ap-call-two q.u.cug arg)
+      =^  cam  +>.$  (ap-call q.u.cug arg)
       ?^  cam  (ap-pour-fail q.u.cug u.cam)
       +>.$
     ::

@@ -624,14 +624,13 @@
   (~(se-belt se [~ ~] [src ost] u.yog) bet)
 ::
 ++  diff-sole-effect
-  |=  then
-  |=  fec=sole-effect
-  ^-  (quip move +>+>)
+  |=  [then fec=sole-effect]
+  ^-  (quip move +>)
   ::  ~&  [%diff-sole-effect way]
   =+  yog=(~(get by bin) ost)
   ?~  yog
     ~&  [%sole-diff-stale ost way]
-    [~ +>+>.$]
+    [~ +>.$]
   ?>  ?=([@ @ @ ~] way)
   =<  se-abet
   =<  se-view
