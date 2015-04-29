@@ -667,39 +667,15 @@
         %2  [%| p.ton]
       ==
     ::
-    ++  ap-cull
-      |=  [cog=term one=vase two=vase]
-      ^-  [(unit tang) _+>]
-      =.  +>  ap-hide
-      !!
     ++  ap-call                                         ::  call into agent
       |=  [cog=term arg=vase]
       ^-  [(unit tang) _+>]
       =.  +>  ap-hide
-      =+  puz=(mule |.((~(mint ut p.hav) [%noun [%cnzy cog]])))
-      ?:  ?=(%| -.puz)  [`p.puz +>.$]
-      =+  wiz=(mule |.((slit p.p.puz p.arg)))
-      ?:  ?=(%| -.wiz)  
-        ~&  %ap-call-mismatch 
-        ~>  %slog.[0 ~(duck ut p.arg)]
-        ~>  %slog.[0 ~(duck ut (~(peek ut p.p.puz) %free 6))]
-        [`(ap-suck "call: {<cog>}: type mismatch") +>.$]
-      =-  ?-  -.zep
-            %|  [`p.zep +>.$]
-            %&  (ap-sake p.wiz +.zep)
-          ==
-      ^=  zep  ^-  (each noun tang)
-      =+  ton=(mock [q.hav q.p.puz] ap-sled)
-      ?-  -.ton
-        %0  =+  ton=(mong [p.ton q.arg] ap-sled)
-            ?-  -.ton
-              %0  [%& p.ton]
-              %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
-              %2  [%| p.ton]
-              ==
-        %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
-        %2  [%| p.ton]
-      ==
+      =+  arm=(ap-farm cog)
+      ?:  ?=(%| -.arm)  [`p.arm +>.$]
+      =+  zem=(ap-slam cog p.arm arg)
+      ?:  ?=(%| -.zem)  [`p.zem +>.$]
+      (ap-sake p.zem) 
     ::
     ++  ap-peep                                         ::  reinstall
       |=  vax=vase
