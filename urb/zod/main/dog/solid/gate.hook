@@ -10,7 +10,7 @@
         [~ ~]
     ==
 %+  sole-so  %noun
-=+  top=`path`/(scot %p p.bec)/arvo/(scot %da now)
+=+  top=`path`/(scot %p p.bec)/main/(scot %da now)/arvo
 =+  pax=`path`(weld top `path`[%hoon ~])
 ~&  %solid-start
 =+  gen=(reck pax)

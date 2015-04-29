@@ -105,7 +105,7 @@
     ::                                                  ::
     ++  work                                            ::  interface action
       $%  [%number p=? q=@ud]                           ::  activate by number
-          [%join p=(set partner)]                     ::  
+          [%join p=(set partner)]                       ::  
           [%say p=speech]                               ::
           [%invite p=span q=(list partner)]             ::
           [%banish p=span q=(list partner)]             ::
@@ -1751,6 +1751,9 @@
       ?:  oug
         (weld "@ " txt)
       (weld " " txt)
+    ::
+        %app
+      [' ' (trip p.sep)]
     ==
   -- 
 ::
@@ -1820,17 +1823,21 @@
   |=  [ost=bone you=ship ~]
   ^-  [(list move) _+>]
   :_  +>.$
-  =+  paf=/(scot %p our.hid)/try/(scot %da lat.hid)/talk/backlog/jam
-  [ost %pass /jamfile %c %info our.hid (foal paf (jam +<+.+>.$))]~
+  =+  paf=/(scot %p our.hid)/main/(scot %da lat.hid)/talk/backlog/mime
+  :_  ~
+  :*  ost  %pass  /jamfile  %c  %info  our.hid
+      (foal paf %mime !>([/mime/jam (taco (jam +<+.+>.$))]))
+  ==
 ::
 ++  prep
   |=  old=(unit (unit house-any))
   ^-  [(list move) _+>]
+  ~&  %talk-prep
   ?>  ?=(^ old)
   =|  moz=(list move)
   |-
   ?~  u.old
-    =+  paf=/(scot %p our.hid)/try/(scot %da lat.hid)/talk/backlog/jam
+    =+  paf=/(scot %p our.hid)/main/(scot %da lat.hid)/talk/backlog/mime
     ?.  ?=([%0 %0 %0] [.^(%cy paf)])
       ~&  %talk-prep-restore
       $(u.old (some ((hard house-any) (cue ((hard ,@) .^(%cx paf))))))

@@ -123,7 +123,7 @@
           [%vale p=mark q=ship r=*]                     ::  validate [our his]
       ==                                                ::
     ++  note-ford                                       ::  note to ford
-      $%  [%exec p=@p q=(unit silk)]                    ::  make / kill
+      $%  [%exec p=@p q=beak r=(unit silk)]             ::  make / kill
       ==                                                ::
     ++  note-gall                                       ::  note to %gall
       $%  [%mess p=[p=ship q=path] q=ship r=cage]       ::
@@ -133,7 +133,7 @@
           [%nice ~]                                     ::
       ==                                                ::
     ++  sign-ford                                       ::  sign from ford
-      $%  [%made p=@uvH q=(each cage tang)]             ::  computed result
+      $%  [%made p=@uvH q=(each gage tang)]             ::  computed result
       ==                                                ::
     ++  note                                            ::  out request $->
       $%  [%f note-ford]                                ::
@@ -270,12 +270,14 @@
       |=  [pax=path kas=silk]
       ^+  +>+>
       ?>  ?=(~ pux)
-      (he-pass(poy `+>+<(pux `pax)) pax %f %exec our.hid `kas)
+      =+  bek=[our.hid %main %da lat.hid]
+      (he-pass(poy `+>+<.$(pux `pax)) pax %f %exec our.hid bek `kas)
     ::
     ++  dy-stop                                         ::  stop work
       ^+  +>
       ?~  pux  +>
-      (he-pass(poy ~) u.pux %f %exec our.hid ~)
+      =+  bek=[our.hid %main %da lat.hid]
+      (he-pass(poy ~) u.pux %f %exec our.hid bek ~)
     ::
     ++  dy-slam                                         ::  call by ford
       |=  [pax=path gat=vase sam=vase]
@@ -607,12 +609,13 @@
     [& %$ "> "]
   ::
   ++  he-made                                           ::  result from ford
-    |=  [pax=path dep=@uvH rey=(each cage tang)]
+    |=  [pax=path dep=@uvH rey=(each gage tang)]
     ^+  +>
     ?>  ?=(^ poy)
     =<  he-pine
     ?-  -.rey
-      %&  %.  p.rey
+      %&  ?>  ?=(@ p.p.rey)
+          %.  p.rey
           =+  dye=~(. dy u.poy(pux ~))
           ?+  pax  !!
             [%hand ~]  dy-hand:dye

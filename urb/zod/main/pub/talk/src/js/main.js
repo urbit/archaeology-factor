@@ -333,10 +333,15 @@ module.exports = recl({
   _focus: function() {
     this.focussed = true;
     this.lastSeen = null;
+<<<<<<< HEAD
     return setTimeout(function() {
       $('.message.new').removeClass('new');
       return document.title = document.title.replace(/\ \([0-9]*\)/, "");
     }, 1000);
+=======
+    $('.message.new').removeClass('new');
+    return document.title = document.title.replace(/\ \([0-9]*\)/, "");
+>>>>>>> test
   },
   checkMore: function() {
     var end;
@@ -385,7 +390,11 @@ module.exports = recl({
       $window.scrollTop(st);
       this.lastLength = null;
     } else {
+<<<<<<< HEAD
       if ($('#writing-container').length > 0) {
+=======
+      if (!window.util.isScrolling()) {
+>>>>>>> test
         window.util.setScroll();
       }
     }
@@ -910,7 +919,11 @@ $(function() {
 
 
 
+<<<<<<< HEAD
 },{"./actions/StationActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","./components/MessagesComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee","./components/StationComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee","./components/WritingComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee","./move.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/move.coffee","./persistence/MessagePersistence.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee","./persistence/StationPersistence.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee","./util.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/util.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/move.coffee":[function(require,module,exports){
+=======
+},{"./actions/StationActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","./components/MessagesComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee","./components/StationComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee","./components/WritingComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee","./move.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/move.coffee","./persistence/MessagePersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee","./persistence/StationPersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee","./util.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/util.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/move.coffee":[function(require,module,exports){
+>>>>>>> test
 var ldy, setSo, so;
 
 so = {};
@@ -1011,9 +1024,13 @@ $(window).on('scroll', window.util.checkScroll);
 
 
 
+<<<<<<< HEAD
 },{}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js":[function(require,module,exports){
+=======
+},{}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js":[function(require,module,exports){
+>>>>>>> test
 /**
- * Copyright (c) 2014, Facebook, Inc.
+ * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -5960,7 +5977,11 @@ module.exports = StationStore;
 
 
 
+<<<<<<< HEAD
 },{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/util.coffee":[function(require,module,exports){
+=======
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/util.coffee":[function(require,module,exports){
+>>>>>>> test
 if (!window.util) {
   window.util = {};
 }
@@ -6055,11 +6076,22 @@ _.merge(window.util, {
     window.util.getScroll();
     return $(window).scrollTop($("#c").height());
   },
+<<<<<<< HEAD
   checkScroll: function() {
     if (!window.util.writingPosition) {
       window.util.getScroll();
     }
     if ($(window).scrollTop() < window.util.writingPosition) {
+=======
+  isScrolling: function() {
+    if (!window.util.writingPosition) {
+      window.util.getScroll();
+    }
+    return $(window).scrollTop() < window.util.writingPosition;
+  },
+  checkScroll: function() {
+    if (this.isScrolling()) {
+>>>>>>> test
       return $('body').addClass('scrolling');
     } else {
       return $('body').removeClass('scrolling');

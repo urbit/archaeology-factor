@@ -7,14 +7,14 @@
 /=    pit  /~  !>(+)                                    ::  kernel vase
 ::
 ::::  structures
-  ::
+  !:
 |%                                                      ::
 ++  axle                                                ::
   $:  %1                                                ::  version
       tiv=?                                             ::  typing?
       wit=[p=@u q=(map ,@u coma)]                       ::  waiting commands
       pid=@u                                            ::  next process id
-      pax=_`path`/=try=                                 ::  working directory
+      pax=_`path`/=main=/try                            ::  working directory
       act=(unit span)                                   ::  active child
       pip=(jar span span)                               ::  pipe out->in
       pop=(jar span span)                               ::  pipe in->out
@@ -85,7 +85,7 @@
 --
 ::
 ::::  parsers
-  ::
+  !:
 |%
 ++  maybe  |*(fel=_rule (cook |*(a=(unit) (fall a ~)) (opts fel)))
 ++  opts                                                ::  parse unit
@@ -145,7 +145,7 @@
 --
 ::
 ::::  per event
-  ::
+  !:
 |%
 ++  ve
   |=  [hid=hide ost=bone axle]
@@ -233,7 +233,8 @@
     ?^  (file paf)  (chew-file paf '! exists')
     %+  with  (fall gen [%bczp atom/%t])
     |=  new=vase
-    (chew-file paf (foal paf q.new))
+    =+  for=((hard mark) -:(flop paf))
+    (chew-file paf (foal paf for new))
   ::
   ++  eat-mut
     |=  [paf=path gen=(unit twig)]
@@ -243,7 +244,8 @@
       ?~  gen
         (blab (stray (crip ": {(spud paf)} {<(,@t u.fel)>}"))) 
       %+  with  u.gen  |=  new=vase
-      (chew-file paf (foal paf q.new))
+      =+  for=((hard mark) -:(flop paf))
+      (chew-file paf (foal paf for new))
     =+  ark=;;(arch .^(%cy paf))
     ?-  r.ark
       ~        (chew-file paf '! none')
@@ -510,7 +512,7 @@
 --
 ::
 ::::  formal interface
-  ::
+  !:
 |_  [hid=hide vat=axle]
 ::
 ++  peer                                                ::  handle subscription

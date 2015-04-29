@@ -126,7 +126,7 @@ module.exports = recl
       $window.scrollTop st
       @lastLength = null
     else
-      if $('#writing-container').length > 0
+      if not window.util.isScrolling()
         window.util.setScroll()
 
     if @focussed is false and @last isnt @lastSeen
