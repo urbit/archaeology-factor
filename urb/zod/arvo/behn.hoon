@@ -563,6 +563,16 @@
     ++  ap-avid                                         ::  onto results
       |=([a=(each suss tang)] [hen %give %onto a])
     ::
+    ++  ap-call                                         ::  call into agent
+      |=  [cog=term arg=vase]
+      ^-  [(unit tang) _+>]
+      =.  +>  ap-hide
+      =+  arm=(ap-farm cog)
+      ?:  ?=(%| -.arm)  [`p.arm +>.$]
+      =+  zem=(ap-slam cog p.arm arg)
+      ?:  ?=(%| -.zem)  [`p.zem +>.$]
+      (ap-sake p.zem) 
+    ::
     ++  ap-club                                         ::  apply effect
       |=  cub=club
       ^+  +>
@@ -572,6 +582,49 @@
         %pull   ap-pull
         %pump   ?^(p.cub ~&([%club-fall p.cub] +>.$) ap-fall)
       ==
+    ::
+    ++  ap-diff                                         ::  pour a diff
+      |=  [her=ship pax=path cag=cage]
+      =+  cug=(ap-find [%diff p.cag pax])
+      ?~  cug
+        (ap-pour-fail %diff (ap-suck "pour: no diff"))
+      =^  cam  +>.$
+          %+  ap-call  q.u.cug
+          ;:  slop
+            !>(`@ud`ost)
+            !>(`@p`q.q.pry)
+            ?:  =(0 p.u.cug)
+              :(slop !>(`path`pax) !>(cag))
+            :(slop !>(`path`(slag (dec p.u.cug) pax)) q.cag)
+          ==
+      ?^  cam  (ap-pour-fail q.u.cug u.cam)
+      +>.$
+    ::
+    ++  ap-fall                                         ::  drop from queue
+      ^+  .
+      =+  soy=(~(get by qel.ged) ost)
+      ?~  soy  +  ::  ~&(%ap-fall-underflow +)
+      ?:  =(0 u.soy)  
+        +(qel.ged (~(del by qel.ged) ost))
+      +(qel.ged (~(put by qel.ged) ost (dec u.soy)))
+    ::
+    ++  ap-farm                                         ::  produce arm
+      |=  cog=term
+      ^-  (each vase tang)
+      =+  puz=(mule |.((~(mint ut p.hav) [%noun [%cnzy cog]])))
+      ?:  ?=(%| -.puz)  [%| p.puz]
+      =+  ton=(mock [q.hav q.p.puz] ap-sled)
+      ?-  -.ton
+        %0  [%& p.p.puz p.ton]
+        %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
+        %2  [%| p.ton]
+      ==
+    ::
+    ++  ap-fill                                         ::  add to queue
+      ^-  [? _.]
+      =+  suy=(fall (~(get by qel.ged) ost) 0)
+      ?:  =(10 suy)  [%| +]
+      [%& +(qel.ged (~(put by qel.ged) ost +(suy)))]
     ::
     ++  ap-find                                         ::  general arm
       |=  [cog=term pax=path]
@@ -583,46 +636,15 @@
       ?^  spu  spu
       ?.((ap-fond cog) ~ `[dep cog])
     ::
-    ++  ap-fall                                         ::  drop from queue
-      ^+  .
-      =+  soy=(~(get by qel.ged) ost)
-      ?~  soy  +  ::  ~&(%ap-fall-underflow +)
-      ?:  =(0 u.soy)  
-        +(qel.ged (~(del by qel.ged) ost))
-      +(qel.ged (~(put by qel.ged) ost (dec u.soy)))
-    ::
-    ++  ap-fill                                         ::  add to queue
-      ^-  [? _.]
-      =+  suy=(fall (~(get by qel.ged) ost) 0)
-      ?:  =(10 suy)  [%| +]
-      [%& +(qel.ged (~(put by qel.ged) ost +(suy)))]
-    ::
-    ++  ap-pull                                         ::  pull subscription
-      =+  wim=(~(get by sup.ged) ost)
-      ?~  wim  ~&(%ap-pull-none +)
-      %_  +
-        sup.ged  (~(del by sup.ged) ost)
-        pus.ged  (~(del ju pus.ged) q.u.wim ost)
-        qel.ged  (~(del by qel.ged) ost)
-      ==
-    ::
     ++  ap-fond                                         ::  check for arm
       |=  cog=term
       ^-  ?
       (slob cog p.hav)
     ::
-    ++  ap-hype                                         ::  hyphenate
-      |=([a=term b=term] `term`(cat 3 a (cat 3 '-' b)))
-    ::
     ++  ap-give                                         ::  return result
       |=  cit=cuft
       ^+  +>
       +>(zip :_(zip [(~(got by r.zam) ost) %give cit]))
-    ::
-    ++  ap-pass                                         ::  request action
-      |=  [pax=path coh=cote]
-      ^+  +>
-      +>(zip :_(zip [(~(got by r.zam) ost) %pass pax coh]))
     ::
     ++  ap-hide                                         ::  set up hide
       %_    .
@@ -638,93 +660,9 @@
             tyc
         ==
       ==
-    ++  ap-sled  (mole (slod ska))                      ::  namespace view
-    ++  ap-farm                                         ::  produce arm
-      |=  cog=term
-      ^-  (each vase tang)
-      =+  puz=(mule |.((~(mint ut p.hav) [%noun [%cnzy cog]])))
-      ?:  ?=(%| -.puz)  [%| p.puz]
-      =+  ton=(mock [q.hav q.p.puz] ap-sled)
-      ?-  -.ton
-        %0  [%& p.p.puz p.ton]
-        %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
-        %2  [%| p.ton]
-      ==
     ::
-    ++  ap-slam                                         ::  virtual slam
-      |=  [cog=term gat=vase arg=vase]
-      ^-  (each vase tang)
-      =+  wiz=(mule |.((slit p.gat p.arg)))
-      ?:  ?=(%| -.wiz)  
-        ~&  %ap-slam-mismatch 
-        ~>  %slog.[0 ~(duck ut p.arg)]
-        ~>  %slog.[0 ~(duck ut (~(peek ut p.gat) %free 6))]
-        [%| (ap-suck "call: {<cog>}: type mismatch")]
-      =+  ton=(mong [q.gat q.arg] ap-sled)
-      ?-  -.ton
-        %0  [%& p.wiz p.ton]
-        %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
-        %2  [%| p.ton]
-      ==
-    ::
-    ++  ap-call                                         ::  call into agent
-      |=  [cog=term arg=vase]
-      ^-  [(unit tang) _+>]
-      =.  +>  ap-hide
-      =+  arm=(ap-farm cog)
-      ?:  ?=(%| -.arm)  [`p.arm +>.$]
-      =+  zem=(ap-slam cog p.arm arg)
-      ?:  ?=(%| -.zem)  [`p.zem +>.$]
-      (ap-sake p.zem) 
-    ::
-    ++  ap-peep                                         ::  reinstall
-      |=  vax=vase
-      ^+  +>
-      (ap-prep(hav vax) `hav)
-    ::
-    ++  ap-prop                                         ::  install
-      |=  vux=(unit vase)
-      ^-  [(unit tang) _+>]
-      ?.  (ap-fond %prep) 
-        ?~  vux
-          `+>.$
-        ?.  (~(nest ut p:(slot 13 hav)) %| p:(slot 13 u.vux))
-          :_(+>.$ `(ap-suck "prep mismatch"))
-        `+>.$(+13.q.hav +13.q.u.vux)
-      =^  tur  +>.$
-          %+  ap-call  %prep
-          ;:  slop
-            !>(`@ud`ost)
-            !>(`@p`q.q.pry)
-            ?~  vux  !>(~)
-            (slop !>(~) (slot 13 u.vux))
-          ==
-      ?~(tur `+>.$ :_(+>.$ `u.tur))
-    ::
-    ++  ap-prep                                         ::  install
-      |=  vux=(unit vase)
-      ^+  +>
-      =^  gac  +>.$  (ap-prop vux)
-      %=    +>.$
-          dub
-        :_(dub ?~(gac [%& dap ?~(vux %boot %bump) now] [%| u.gac]))
-      ==
-    ::
-    ++  ap-suck                                         ::  standard tang
-      |=  msg=tape
-      ^-  tang
-      [%leaf (weld "behn: {<dap>}: " msg)]~
-    ::
-    ++  ap-safe                                         ::  process move list
-      |=  vax=vase
-      ^-  (each (list cove) tang)
-      ?~  q.vax  [%& ~]
-      ?@  q.vax  [%| (ap-suck "move: malformed list")]
-      =+  sud=(ap-move (slot 2 vax))
-      ?:  ?=(%| -.sud)  sud
-      =+  res=$(vax (slot 3 vax))
-      ?:  ?=(%| -.res)  res
-      [%& p.sud p.res]
+    ++  ap-hype                                         ::  hyphenate
+      |=([a=term b=term] `term`(cat 3 a (cat 3 '-' b)))
     ::
     ++  ap-move                                         ::  process each move
       |=  vax=vase
@@ -748,17 +686,28 @@
       ?^  q.vax  [%| (ap-suck "move: improper quit")]
       [%& `cove`[neh %give `cuft`[%quit ~]]]
     ::
-    ++  ap-term                                         ::  atomic vase
-      |=  [a=@tas b=@]  
-      ^-  vase
-      [[%cube b %atom a] a]
-    ::
     ++  ap-move-diff                                    ::  give diff move
       |=  [neh=duct vax=vase]
       ^-  (each cove tang)
       ?.  &(?=(^ q.vax) ?=(@ -.q.vax) ((sane %tas) -.q.vax))
         [%| (ap-suck "move: improper diff")]
       [%& neh %give %diff `cage`[-.q.vax (slot 3 vax)]]
+    ::
+    ++  ap-move-pass                                    ::  pass general move 
+      |=  [neh=duct vax=vase]
+      ^-  (each cove tang)
+      ?.  &(?=([* @ *] q.vax) ((sane %tas) +<.q.vax))
+        [%| (ap-suck "move: malformed pass")]
+      =+  pux=((soft path) -.q.vax)
+      ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
+        [%| (ap-suck "move: malformed path")]
+      =+  huj=(ap-vain +<.q.vax)
+      ?~  huj
+        [%| (ap-suck "move: unknown note {(trip +<.q.vax)}")]
+      ::  ~&  [%ap-move-pass u.huj u.pux]
+      :^  %&  neh  %pass 
+      :-  [(scot %p q.q.pry) %inn u.pux]
+      [%meta u.huj (spec (slot 3 vax))]
     ::
     ++  ap-move-send                                    ::  pass gall action
       |=  [neh=duct vax=vase]
@@ -791,60 +740,34 @@
       ::  ~&  [%ap-move-send `path`[(scot %p q.q.vax) %out r.q.vax u.pux]]
       [%send q.q.vax r.q.vax u.cob]
     ::
-    ++  ap-vain                                         ::  card to vane
-      |=  sep=@tas
-      ^-  (unit ,@tas)
-      ?+  sep  ~&  [%ap-vain sep]
-               ~
-        %cash  `%a
-        %conf  `%b
-        %deal  `%b
-        %exec  `%f
-        %flog  `%d
-        %mess  `%g
-        %nuke  `%g
-        %show  `%g
-        %took  `%g
-        %plug  `%c
-        %want  `%a
-      ==
+    ++  ap-pass                                         ::  request action
+      |=  [pax=path coh=cote]
+      ^+  +>
+      +>(zip :_(zip [(~(got by r.zam) ost) %pass pax coh]))
     ::
-    ++  ap-move-pass                                    ::  pass general move 
-      |=  [neh=duct vax=vase]
-      ^-  (each cove tang)
-      ?.  &(?=([* @ *] q.vax) ((sane %tas) +<.q.vax))
-        [%| (ap-suck "move: malformed pass")]
-      =+  pux=((soft path) -.q.vax)
-      ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
-        [%| (ap-suck "move: malformed path")]
-      =+  huj=(ap-vain +<.q.vax)
-      ?~  huj
-        [%| (ap-suck "move: unknown note {(trip +<.q.vax)}")]
-      ::  ~&  [%ap-move-pass u.huj u.pux]
-      :^  %&  neh  %pass 
-      :-  [(scot %p q.q.pry) %inn u.pux]
-      [%meta u.huj (spec (slot 3 vax))]
-    ::
-    ++  ap-save                                         ::  verify core
+    ++  ap-peep                                         ::  reinstall
       |=  vax=vase
-      ^-  (each vase tang)
-      ?.  (~(nest ut p.hav) %| p.vax)
-        [%| (ap-suck "invalid core")]
-      [%& vax]
+      ^+  +>
+      (ap-prep(hav vax) `hav)
     ::
-    ++  ap-sake                                         ::  handle result
-      |=  vax=vase
-      ^-  [(unit tang) _+>]
-      ?:  ?=(@ q.vax)
-        [`(ap-suck "sake: invalid product (atom)") +>.$]
-      =+  muz=(ap-safe (slot 2 vax))
-      ?:  ?=(%| -.muz)  [`p.muz +>.$]
-      =+  sav=(ap-save (slot 3 vax))
-      ?:  ?=(%| -.sav)  [`p.sav +>.$]
-      :-  ~
+    ++  ap-peer                                         ::  apply %peer
+      |=  pax=path
+      ^+  +>
+      =+  cug=(ap-find %peer pax)
+      ?~  cug
+        (ap-peon pax)
+      =^  cam  +>.$ 
+          %+  ap-call  q.u.cug
+          !>([`@ud`ost `@p`q.q.pry `path`(slag p.u.cug pax)])
+      ?^  cam
+        (ap-give %reap cam)
+      (ap-give:(ap-peon pax) %reap ~)
+    ::
+    ++  ap-peon                                         ::  add subscriber
+      |=  pax=path
       %_  +>.$
-        zip  (weld (flop p.muz) zip)
-        hav  p.sav 
+        sup.ged  (~(put by sup.ged) ost [q.q.pry pax])
+        pus.ged  (~(put ju pus.ged) pax ost)
       ==
     ::
     ++  ap-poke                                         ::  apply %poke
@@ -863,26 +786,6 @@
             (slop (ap-term %tas p.cag) q.cag)
           ==
       (ap-give %coup tur)
-    ::
-    ++  ap-peon                                         ::  add subscriber
-      |=  pax=path
-      %_  +>.$
-        sup.ged  (~(put by sup.ged) ost [q.q.pry pax])
-        pus.ged  (~(put ju pus.ged) pax ost)
-      ==
-    ::
-    ++  ap-peer                                         ::  apply %peer
-      |=  pax=path
-      ^+  +>
-      =+  cug=(ap-find %peer pax)
-      ?~  cug
-        (ap-peon pax)
-      =^  cam  +>.$ 
-          %+  ap-call  q.u.cug
-          !>([`@ud`ost `@p`q.q.pry `path`(slag p.u.cug pax)])
-      ?^  cam
-        (ap-give %reap cam)
-      (ap-give:(ap-peon pax) %reap ~)
     ::
     ++  ap-pour-fail                                    ::  pour error
       |=  [wut=@tas why=tang]
@@ -918,6 +821,43 @@
         %reap  (ap-punk q.q.pry +.pax -.cuf !>([pax p.cuf]))
       ==
     ::
+    ++  ap-prep                                         ::  install
+      |=  vux=(unit vase)
+      ^+  +>
+      =^  gac  +>.$  (ap-prop vux)
+      %=    +>.$
+          dub
+        :_(dub ?~(gac [%& dap ?~(vux %boot %bump) now] [%| u.gac]))
+      ==
+    ::
+    ++  ap-prop                                         ::  install
+      |=  vux=(unit vase)
+      ^-  [(unit tang) _+>]
+      ?.  (ap-fond %prep) 
+        ?~  vux
+          `+>.$
+        ?.  (~(nest ut p:(slot 13 hav)) %| p:(slot 13 u.vux))
+          :_(+>.$ `(ap-suck "prep mismatch"))
+        `+>.$(+13.q.hav +13.q.u.vux)
+      =^  tur  +>.$
+          %+  ap-call  %prep
+          ;:  slop
+            !>(`@ud`ost)
+            !>(`@p`q.q.pry)
+            ?~  vux  !>(~)
+            (slop !>(~) (slot 13 u.vux))
+          ==
+      ?~(tur `+>.$ :_(+>.$ `u.tur))
+    ::
+    ++  ap-pull                                         ::  pull subscription
+      =+  wim=(~(get by sup.ged) ost)
+      ?~  wim  ~&(%ap-pull-none +)
+      %_  +
+        sup.ged  (~(del by sup.ged) ost)
+        pus.ged  (~(del ju pus.ged) q.u.wim ost)
+        qel.ged  (~(del by qel.ged) ost)
+      ==
+    ::
     ++  ap-punk                                         ::  non-diff gall take
       |=  [her=ship pax=path wut=term end=vase]
       ^+  +>
@@ -930,22 +870,83 @@
       ?^  cam  (ap-pour-fail q.u.cug u.cam)
       +>.$
     ::
-    ++  ap-diff                                         ::  pour a diff
-      |=  [her=ship pax=path cag=cage]
-      =+  cug=(ap-find [%diff p.cag pax])
-      ?~  cug
-        (ap-pour-fail %diff (ap-suck "pour: no diff"))
-      =^  cam  +>.$
-          %+  ap-call  q.u.cug
-          ;:  slop
-            !>(`@ud`ost)
-            !>(`@p`q.q.pry)
-            ?:  =(0 p.u.cug)
-              :(slop !>(`path`pax) !>(cag))
-            :(slop !>(`path`(slag (dec p.u.cug) pax)) q.cag)
-          ==
-      ?^  cam  (ap-pour-fail q.u.cug u.cam)
-      +>.$
+    ++  ap-safe                                         ::  process move list
+      |=  vax=vase
+      ^-  (each (list cove) tang)
+      ?~  q.vax  [%& ~]
+      ?@  q.vax  [%| (ap-suck "move: malformed list")]
+      =+  sud=(ap-move (slot 2 vax))
+      ?:  ?=(%| -.sud)  sud
+      =+  res=$(vax (slot 3 vax))
+      ?:  ?=(%| -.res)  res
+      [%& p.sud p.res]
+    ::
+    ++  ap-sake                                         ::  handle result
+      |=  vax=vase
+      ^-  [(unit tang) _+>]
+      ?:  ?=(@ q.vax)
+        [`(ap-suck "sake: invalid product (atom)") +>.$]
+      =+  muz=(ap-safe (slot 2 vax))
+      ?:  ?=(%| -.muz)  [`p.muz +>.$]
+      =+  sav=(ap-save (slot 3 vax))
+      ?:  ?=(%| -.sav)  [`p.sav +>.$]
+      :-  ~
+      %_  +>.$
+        zip  (weld (flop p.muz) zip)
+        hav  p.sav 
+      ==
+    ::
+    ++  ap-save                                         ::  verify core
+      |=  vax=vase
+      ^-  (each vase tang)
+      ?.  (~(nest ut p.hav) %| p.vax)
+        [%| (ap-suck "invalid core")]
+      [%& vax]
+    ::
+    ++  ap-slam                                         ::  virtual slam
+      |=  [cog=term gat=vase arg=vase]
+      ^-  (each vase tang)
+      =+  wiz=(mule |.((slit p.gat p.arg)))
+      ?:  ?=(%| -.wiz)  
+        ~&  %ap-slam-mismatch 
+        ~>  %slog.[0 ~(duck ut p.arg)]
+        ~>  %slog.[0 ~(duck ut (~(peek ut p.gat) %free 6))]
+        [%| (ap-suck "call: {<cog>}: type mismatch")]
+      =+  ton=(mong [q.gat q.arg] ap-sled)
+      ?-  -.ton
+        %0  [%& p.wiz p.ton]
+        %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
+        %2  [%| p.ton]
+      ==
+    ::
+    ++  ap-sled  (mole (slod ska))                      ::  namespace view
+    ++  ap-suck                                         ::  standard tang
+      |=  msg=tape
+      ^-  tang
+      [%leaf (weld "behn: {<dap>}: " msg)]~
+    ::
+    ++  ap-term                                         ::  atomic vase
+      |=  [a=@tas b=@]  
+      ^-  vase
+      [[%cube b %atom a] a]
+    ::
+    ++  ap-vain                                         ::  card to vane
+      |=  sep=@tas
+      ^-  (unit ,@tas)
+      ?+  sep  ~&  [%ap-vain sep]
+               ~
+        %cash  `%a
+        %conf  `%b
+        %deal  `%b
+        %exec  `%f
+        %flog  `%d
+        %mess  `%g
+        %nuke  `%g
+        %show  `%g
+        %took  `%g
+        %plug  `%c
+        %want  `%a
+      ==
     --
   --
 ++  call                                                ::  request
