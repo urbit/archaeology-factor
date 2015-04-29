@@ -639,9 +639,38 @@
         ==
       ==
     ++  ap-sled  (mole (slod ska))                      ::  namespace view
+    ++  ap-farm                                         ::  produce arm
+      |=  cog=term
+      ^-  (each vase tang)
+      =+  puz=(mule |.((~(mint ut p.hav) [%noun [%cnzy cog]])))
+      ?:  ?=(%| -.puz)  [%| p.puz]
+      =+  ton=(mock [q.hav q.p.puz] ap-sled)
+      ?-  -.ton
+        %0  [%& p.p.puz p.ton]
+        %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
+        %2  [%| p.ton]
+      ==
+    ::
+    ++  ap-slam                                         ::  virtual slam
+      |=  [cog=term gat=vase arg=vase]
+      ^-  (each vase tang)
+      =+  wiz=(mule |.((slit p.gat p.arg)))
+      ?:  ?=(%| -.wiz)  
+        ~&  %ap-slam-mismatch 
+        ~>  %slog.[0 ~(duck ut p.arg)]
+        ~>  %slog.[0 ~(duck ut (~(peek ut p.gat) %free 6))]
+        [%| (ap-suck "call: {<cog>}: type mismatch")]
+      =+  ton=(mong [q.gat q.arg] ap-sled)
+      ?-  -.ton
+        %0  [%& p.wiz p.ton]
+        %1  [%| (turn p.ton |=(a=* (smyt (path a))))]
+        %2  [%| p.ton]
+      ==
+    ::
     ++  ap-cull
       |=  [cog=term one=vase two=vase]
       ^-  [(unit tang) _+>]
+      =.  +>  ap-hide
       !!
     ++  ap-call                                         ::  call into agent
       |=  [cog=term arg=vase]
