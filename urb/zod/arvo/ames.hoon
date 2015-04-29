@@ -8,9 +8,11 @@
           $%  [%crud p=@tas q=(list tank)]              ::
               [%text p=tape]                            ::
           ==                                            ::
-++  cuft                                                ::  behn gift
-          $%  [%coup p=(unit (list tank))]              ::  poke result
-              [%reap p=(unit (list tank))]              ::  peer result
+++  cuft                                                ::  internal gift
+          $%  [%coup p=(unit tang)]                     ::  poke result
+              [%diff p=cage]                            ::  subscription output
+              [%quit ~]                                 ::  close subscription
+              [%reap p=(unit tang)]                     ::  peer result
           ==                                            ::
 ++  gift                                                ::  out result <-$
           $%  [%hear p=lane q=@]                        ::  receive packet
@@ -1794,7 +1796,7 @@
             :+  (scot %p p.p.bon)
               (scot %p q.p.bon)
             q.q.bon
-        ~&  [%ames-behn-request p.bon imp pax]
+        ::  ~&  [%ames-behn-request p.bon imp pax]
         :_  fox  [hen %pass pax %b %rote p.bon imp r.bon]~
       ::
           %bh                                         ::  %behn response
@@ -1804,7 +1806,7 @@
             :+  (scot %p p.p.bon)
               (scot %p q.p.bon)
             q.q.bon
-        ~&  [%ames-behn-response p.bon imp pax]
+        ::  ~&  [%ames-behn-response p.bon imp pax]
         :_  fox  [hen %pass pax %b %roth p.bon imp r.bon]~
       ::
           %ge                                         ::  %gall request
@@ -1860,6 +1862,10 @@
                    %coup  ?~  p.+>+.sih 
                             [%g %nice ~] 
                           [%g %mean `[%coup u.p.+>+.sih]]
+                   %diff  ~&  [%knap-diff tea]
+                          !!
+                   %quit  ~&  [%knap-quit tea]
+                          !!
                    %reap  ?~  p.+>+.sih 
                             [%g %nice ~] 
                           [%g %mean `[%reap u.p.+>+.sih]]
@@ -1871,7 +1877,6 @@
       ?>  ?=([@ @ @ *] tea)
       =+  soq=[(slav %p i.tea) (slav %p i.t.tea)]
       =+  pax=t.t.tea
-      ::  ~&  [%knap soq num pax]
       =+  ^=  fuy
           =<  zork  =<  zank
           %^  ~(rack am [now fox])  soq  pax

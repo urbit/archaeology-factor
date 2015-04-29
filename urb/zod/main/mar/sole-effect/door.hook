@@ -1,0 +1,13 @@
+::
+::::  /hook/door/sole-effect/mar
+  ::
+/?    310
+/-    *sole
+!:
+|_  cod=sole-effect
+::
+++  grab                                                ::  convert from
+  |%
+  ++  noun  sole-effect                                 ::  clam from %noun
+  --
+--

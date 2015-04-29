@@ -1,0 +1,13 @@
+::
+::::  /hook/door/sole-action/mar
+  ::
+/?    314
+/-    *sole
+!:
+|_  cod=sole-action
+::
+++  grab                                                ::  convert from
+  |%
+  ++  noun  sole-action                                 ::  clam from %noun
+  --
+--

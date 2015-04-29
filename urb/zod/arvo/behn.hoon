@@ -301,7 +301,7 @@
   ++  mo-away                                           ::  foreign request
     |=  [him=ship caz=cuss]                             ::  
     ^+  +>
-    ~&  [%mo-away him caz]
+    ::  ~&  [%mo-away him caz]
     ?<  ?=(%pump -.q.caz)
     =^  num  +>.$  (mo-bale him)
     =+  ^=  roc  ^-  rook
@@ -328,7 +328,6 @@
   ++  mo-awed                                           ::  foreign response
     |=  [him=ship why=?(%peer %poke %pull) art=(unit ares)]
     ^+  +>
-    ~&  [%mo-awed why art]
     =+  tug=(mo-baba (mo-baal art))
     ?-  why
       %peer  (mo-give %unto %reap tug)
@@ -384,20 +383,15 @@
         +>.$
       (mo-boot i.t.pax %old pup.u.sot)
     ::
+        %new
+      ?>  ?=([%f %made *] sih)
+      ?>  ?=([@ @ @ ~] t.pax)
+      (mo-boom i.t.pax [(slav %p i.t.t.pax) i.t.t.t.pax] +>.sih)
+    ::
         %old                                            ::  reload old
       ?>  ?=([%f %made *] sih)
       ?>  ?=([@ @ @ ~] t.pax)
       (mo-boon i.t.pax [(slav %p i.t.t.pax) i.t.t.t.pax] +>.sih)
-    ::
-        %way                                            ::  outbound request
-      ?>  ?=([%a %woot *] sih)
-      ?>  ?=([@ @ ~] t.pax)
-      ?>  =(p.+>.sih (slav %p i.t.pax))
-      %-  mo-awed
-      :*  p.+>.sih
-          (?(%peer %poke %pull) i.t.pax)
-          +>+.sih
-      ==
     ::
         %rep                                            ::  reverse request
       ?>  ?=([@ @ @ ~] t.pax)
@@ -409,7 +403,8 @@
       ?-  -.q.+>.sih
         %|  ~&  [%diff-crash p.q.+>.sih]                ::  crash is correct
             !!
-        %&  (mo-give(hen (mo-ball him num)) %unto %diff `cage`p.q.+>.sih)
+        %&  =.  +>.$  (mo-give %unto %coup ~)           ::  XX ames auto-ack
+            (mo-give(hen (mo-ball him num)) %unto %diff `cage`p.q.+>.sih)
       ==
     ::
         %req                                            ::  inbound request
@@ -421,7 +416,7 @@
       ?:  ?=([%f %made *] sih)
         ?-  -.q.+>.sih
           %|  (mo-give %unto %coup `p.q.+>.sih)         ::  XX should crash
-          %&  (mo-pass pax %b %deal [him our] i.t.t.pax %poke p.q.+>.sih)
+          %&  (mo-pass [%sys pax] %b %deal [him our] i.t.t.pax %poke p.q.+>.sih)
         ==
       ?:  ?=([%a %woot *] sih)
         ?~  q.+>.sih  +>.$
@@ -431,26 +426,21 @@
       =+  cuf=`cuft`+>.sih
       ?-    -.cuf
         %coup  (mo-give %unto %coup p.cuf)
-        %diff  %+  mo-pass  pax
-               [%a %wont [him our] [%q %bh dap ~] [num %d p.p.cuf q.q.p.cuf]]
-        %quit  %+  mo-pass  pax
-               [%a %wont [him our] [%q %bh dap ~] [num %x ~]]
+        %diff  %+  mo-pass  [%sys pax]
+               [%a %wont [our him] [%q %bh dap ~] [num %d p.p.cuf q.q.p.cuf]]
+        %quit  %+  mo-pass  [%sys pax]
+               [%a %wont [our him] [%q %bh dap ~] [num %x ~]]
         %reap  (mo-give %unto %reap p.cuf)
       ==
     ::
-        %new
-      ?>  ?=([%f %made *] sih)
-      ?>  ?=([@ @ @ ~] t.pax)
-      (mo-boom i.t.pax [(slav %p i.t.t.pax) i.t.t.t.pax] +>.sih)
-    ::
-        %way
+        %way                                            ::  outbound request
       ?>  ?=([%a %woot *] sih)
-      ?>  ?=([@ @ ~] t.pax)
-      =+  suz=`(unit ares)`+>+.sih
-      %^    mo-coup
-          i.t.t.pax
-        (slav %p i.t.pax)
-      ?~(suz ~ ?~(u.suz `[%woot-no-way ~] u.suz))
+      ?>  ?=([@ ~] t.pax)
+      %-  mo-awed
+      :*  p.+>.sih
+          (?(%peer %poke %pull) i.t.pax)
+          +>+.sih
+      ==
     ==
   ::
   ++  mo-cook                                           ::  take in /use
@@ -972,7 +962,7 @@
     [~ ..^$(pol.all (~(put by pol.all) p.q.hic [hen ~ ~ ~]))]
   ::
       %rote
-    ~&  [%behn-rote p.q.hic]
+    ::  ~&  [%behn-rote p.q.hic]
     ?.  (~(has by pol.all) p.p.q.hic)
       ~&  [%behn-not-ours p.q.hic]
       [~ ..^$]
@@ -985,7 +975,7 @@
     (mo-gawk:(mo-abed:mo our hen) him dap mes)
   ::
       %roth
-    ~&  [%behn-roth p.q.hic]
+    ::  ~&  [%behn-roth p.q.hic]
     ?.  (~(has by pol.all) p.p.q.hic)
       ~&  [%behn-not-ours p.q.hic]
       [~ ..^$]
