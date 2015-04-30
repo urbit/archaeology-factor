@@ -52,15 +52,6 @@
           [%vega p=path]                                ::  reboot by path
           [%verb ~]                                     ::  verbose mode
       ==                                                ::
-    ++  clap                                            ::  action, user
-      $%  [%peer p=path]                                ::  subscribe
-          [%poke p=pear]                                ::  apply
-          [%pull ~]                                     ::  unsubscribe
-      ==                                                ::
-    ++  note                                            ::  outgoing
-      $%  [%conf [ship term] %load ship term]           ::
-          [%flog p=dill]                                ::
-      ==                                                ::
     ++  pear                                            ::  request
       $%  [%sole-action p=sole-action]                  ::
       ==                                                ::
@@ -68,10 +59,12 @@
       $%  [%dill-blit dill-blit]                        ::
       ==                                                ::
     ++  card                                            ::  general card
-      $%  [%diff lime]                                  ::
-          [%peer wire [ship term] path]                 ::
-          [%poke wire [ship term] pear]                 ::
-          [%pull wire [ship term] ~]                    ::
+      $%  [%conf wire dock %load ship term]             ::
+          [%diff lime]                                  ::
+          [%flog wire dill]                             ::
+          [%peer wire dock path]                        ::
+          [%poke wire dock pear]                        ::
+          [%pull wire dock ~]                           ::
           [%pass wire note]                             ::
       ==                                                ::
     ++  move  (pair bone card)                          ::  user-level move
@@ -205,7 +198,7 @@
     |=  gyl=gill
     ^+  +>
     =.  +>  ?.  =(p.gyl src)  +>
-        (se-pass gyl [%conf gyl %load src %main])
+        (se-emit ost %conf (se-path gyl) gyl %load src %main)
     (se-join:(se-peer gyl /sole) gyl)
   ::
   ++  se-blit                                           ::  give output
@@ -652,14 +645,14 @@
   ^-  (quip move +>)
   ?~  saw  [~ +>]
   :_  +>  :_  ~
-  [ost %pass ~ %flog %crud %coup u.saw]
+  [ost %flog ~ %crud %coup u.saw]
 ::
 ++  reap
   |=  [then saw=(unit tang)]
   ^-  (quip move +>)
   ?~  saw  [~ +>]
   :_  +>  :_  ~
-  `move`[ost %pass ~ %flog %crud %reap u.saw]
+  `move`[ost %flog ~ %crud %reap u.saw]
 ::
 ++  quit
   |=  then
@@ -670,8 +663,8 @@
   |=  [then saw=(each suss tang)]
   :_  +>  :_  ~
   ?-  -.saw
-    %|  [ost %pass ~ %flog %crud `@tas`-.way `tang`p.saw]
-    %&  [ost %pass ~ %flog %text "<{<p.saw>}>"]
+    %|  [ost %flog ~ %crud `@tas`-.way `tang`p.saw]
+    %&  [ost %flog ~ %text "<{<p.saw>}>"]
   ==
 ::
 ++  pull

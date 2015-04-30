@@ -718,7 +718,7 @@
       ?~  huj  [%| (ap-suck "move: unknown note {(trip wut)}")]
       :^  %&  neh  %pass
       :-  [(scot %p q.q.pry) %inn u.pux]
-      [%meta u.huj (slot 3 vax)]
+      [%meta u.huj (slop (ap-term %tas wut) (slot 3 vax))]
     ::
     ++  ap-move-pass                                    ::  pass general move 
       |=  [neh=duct vax=vase]
@@ -993,7 +993,7 @@
     ++  ap-term                                         ::  atomic vase
       |=  [a=@tas b=@]  
       ^-  vase
-      [[%cube b %atom a] a]
+      [[%cube b %atom a] b]
     ::
     ++  ap-vain                                         ::  card to vane
       |=  sep=@tas

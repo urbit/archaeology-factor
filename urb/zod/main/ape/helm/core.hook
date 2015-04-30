@@ -26,42 +26,21 @@
           ==                                            ::
       $%  [%reload p=(list term)]                       ::  reload vanes
       ==                                                ::
-    ++  dill-flog                                       ::  sent to %dill
+    ++  dill                                            ::  sent to %dill
       $%  [%crud p=term q=(list tank)]                  ::  fat report
           [%text p=tape]                                ::  thin report
           [%veer p=@ta q=path r=@t]                     ::  install vane
           [%vega p=path]                                ::  reboot by path
           [%verb ~]                                     ::  verbose mode
       ==                                                ::
-    ::                                                  ::
-    ++  gift                                            ::  out result <-$
-      $%  [%mean p=ares]                                ::  error
-          [%nice ~]                                     ::  acknowledge
+    ++  card                                            ::
+      $%  [%cash wire p=@p q=buck]                      ::
+          [%conf wire dock %load ship term]             ::
+          [%flog wire dill]                             ::
+          [%plug wire @p @tas @p @tas]                  ::
+          [%want wire sock path *]                      ::  send message
       ==                                                ::
-    ++  hapt  ,[p=ship q=path]                          ::  
-    ++  move  ,[p=bone q=(mold note gift)]              ::
-    ++  note-gall                                       ::  note to %gall
-      $%  [%mess p=[p=ship q=path] q=ship r=cage]       ::
-          [%show p=[p=ship q=path] q=ship r=path]       ::
-          [%took p=[p=ship q=path] q=ship]              ::
-      ==                                                ::
-    ++  note-dill                                       ::  system command
-      $%  [%flog p=dill-flog]                           ::
-      ==                                                ::
-    ++  note-behn                                       ::
-      $%  [%conf ship term %load ship term]             ::
-      ==                                                ::
-    ++  note                                            ::  out request $->
-      $?  note-behn                                     ::
-          note-dill                                     ::
-          note-gall                                     ::
-      ==                                                ::
-    ++  sign-behn                                       ::  sign from %behn
-      $%  [%onto p=(each suss tang)]                    ::
-      ==                                                ::
-    ++  sign                                            ::  in result $<-
-      $%  [%b sign-behn]                                ::
-      ==                                                ::
+    ++  move  (pair bone card)                          ::  user-level move
     --                                                  ::
 ::                                                      ::
 ::::                                                    ::
@@ -76,14 +55,14 @@
   ::                                                    ::
   ++  he-wish-start
     |=  dap=term
-    %_(+> moz :_(moz [ost %pass /start %conf our.hid dap %load our.hid %main]))
+    %_(+> moz :_(moz [ost %conf /start [our.hid dap] %load our.hid %main]))
   ::
   ++  he-wish-reset
     ^+  .
     =-  %_(+ moz (weld zum moz))
     ^=  zum  %-  flop  ^-  (list move)
     =+  top=`path`/(scot %p our.hid)/arvo/(scot %da lat.hid)
-    :-  [ost %pass /reset %flog %vega (weld top `path`/hoon)]
+    :-  [ost %flog /reset %vega (weld top `path`/hoon)]
     %+  turn
       ^-  (list ,[p=@tas q=@tas])
       :~  [%$ %zuse]
@@ -98,7 +77,7 @@
     |=  [p=@tas q=@tas]
     =+  way=`path`(welp top /[q])
     =+  txt=((hard ,@) .^(%cx (welp way /hoon)))
-    [ost %pass /reset %flog %veer p way txt]
+    [ost %flog /reset %veer p way txt]
   ::
   ++  he-wish-reload 
     |=  all=(list term)
@@ -132,14 +111,14 @@
     %_    .
         moz
       :_  moz
-      [ost %pass /verb %flog %verb ~]
+      [ost %flog /verb %verb ~]
     ==
   ++  he-wish-init
     |=  him=ship
     %_    +>.$
         moz
       :_  moz
-      [ost %pass /init %flog %crud %hax-init leaf/(scow %p him) ~]
+      [ost %flog /init %crud %hax-init leaf/(scow %p him) ~]
     ==
   --
 ::
@@ -178,7 +157,7 @@
   =+  buz=(shax :(mix (jam ges) eny))
   =+  loy=(bruw 2.048 buz)
   :_  +>.$(bur `[his [0 sec:ex:loy]~])
-  :~  :*  ost  %pass  /ticketing  %want  [our.hid (sein his)]  /q/ta
+  :~  :*  ost  %want  /ticketing  [our.hid (sein his)]  /q/ta
           his  tic  ges  pub:ex:loy
       ==
   ==
@@ -189,10 +168,10 @@
   :_  +>.$(bur ~)
   ?~  wil
     !!
-  :~  [ost %pass / %cash p.u.bur q.u.bur u.wil]
-      [ost %pass / %plug our.hid %main (sein our.hid) %main]
-      [ost %pass / %plug our.hid %arvo (sein our.hid) %arvo]
-      [ost %pass / %plug our.hid %try (sein our.hid) %try]
+  :~  [ost %cash ~ p.u.bur q.u.bur u.wil]
+      [ost %plug ~ our.hid %main (sein our.hid) %main]
+      [ost %plug ~ our.hid %arvo (sein our.hid) %arvo]
+      [ost %plug ~ our.hid %try (sein our.hid) %try]
   ==
 ::
 ++  onto
