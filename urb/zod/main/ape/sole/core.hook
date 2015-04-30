@@ -58,19 +58,21 @@
           [%pull ~]                                     ::  unsubscribe
       ==                                                ::
     ++  note                                            ::  outgoing
-      $%  [%conf ship term %load ship term]             ::
+      $%  [%conf [ship term] %load ship term]           ::
           [%flog p=dill]                                ::
       ==                                                ::
     ++  pear                                            ::  request
       $%  [%sole-action p=sole-action]                  ::
       ==                                                ::
-    ++  plum                                            ::  result
+    ++  lime                                            ::  update
       $%  [%dill-blit dill-blit]                        ::
       ==                                                ::
     ++  card                                            ::  general card
-      $%  [%diff plum]                                  ::
-          [%send path [ship term] clap]                 ::
-          [%pass path note]                             ::
+      $%  [%diff lime]                                  ::
+          [%peer wire [ship term] path]                 ::
+          [%poke wire [ship term] pear]                 ::
+          [%pull wire [ship term] ~]                    ::
+          [%pass wire note]                             ::
       ==                                                ::
     ++  move  (pair bone card)                          ::  user-level move
     --                                                  ::
@@ -158,7 +160,7 @@
   ++  se-nuke                                           ::  active drop
     |=  gyl=gill
     ^+  +>
-    (se-drop:(se-send(liv.maz |) gyl %pull ~) gyl)
+    (se-drop:(se-pull(liv.maz |) gyl) gyl)
   ::
   ++  se-like                                           ::  act in master
     |=  kus=ukase
@@ -203,8 +205,8 @@
     |=  gyl=gill
     ^+  +>
     =.  +>  ?.  =(p.gyl src)  +>
-        (se-pass gyl [%conf p.gyl q.gyl %load src %main])
-    (se-join:(se-send gyl %peer /sole) gyl)
+        (se-pass gyl [%conf gyl %load src %main])
+    (se-join:(se-peer gyl /sole) gyl)
   ::
   ++  se-blit                                           ::  give output
     |=  bil=dill-blit
@@ -246,9 +248,17 @@
     |=  gyl=gill
     [(scot %p src) (scot %p p.gyl) q.gyl ~]
   ::
-  ++  se-send                                           ::  send a message
-    |=  [gyl=gill cop=clap]
-    (se-emit ost %send (se-path gyl) gyl cop)
+  ++  se-poke                                           ::  send a poke
+    |=  [gyl=gill par=pear]
+    (se-emit ost %poke (se-path gyl) gyl par)
+  ::
+  ++  se-peer
+    |=  [gyl=gill pax=path]
+    (se-emit ost %peer (se-path gyl) gyl pax)
+  ::
+  ++  se-pull
+    |=  gyl=gill
+    (se-emit ost %pull (se-path gyl) gyl ~)
   ::
   ++  se-pass                                           ::  pass an action
     |=  [gyl=gill noh=note]
@@ -303,7 +313,7 @@
       ^+  +>
       ?:  mav  
         +>.$
-      +>.$(+> (se-send gyl %poke %sole-action act))
+      +>.$(+> (se-poke gyl %sole-action act))
     ::
     ++  ta-aro                                          ::  hear arrow
       |=  key=?(%d %l %r %u)

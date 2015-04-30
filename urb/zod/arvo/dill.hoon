@@ -163,7 +163,7 @@
       [%verb ~]                                         ::  verbose mode
   ==                                                    ::
 ++  note-behn                                           ::
-  $%  [%conf ship term %load ship term]                 ::
+  $%  [%conf dock %load ship desk]                      ::
       [%deal p=sock q=cuss]                             ::
   ==                                                    ::
 ++  note                                                ::  out request $->
@@ -275,7 +275,7 @@
         ~&  [%dill-init our]
         =+  myt=(flop (need tem))
         =.  tem  ~
-        =.  moz  :_(moz [hen %pass ~ %b %conf [our ram %load our %main]])
+        =.  moz  :_(moz [hen %pass ~ %b %conf [[our ram] %load our %main]])
         =.  moz  :_(moz [hen %pass ~ %b %deal [our our] ram %peer ~])
         |-  ^+  +>
         ?~  myt  +>

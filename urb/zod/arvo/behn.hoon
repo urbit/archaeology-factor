@@ -99,7 +99,7 @@
   $%  [%wont p=sock q=path r=*]                         ::
   ==                                                    ::
 ++  kiss-behn                                           ::  incoming request
-  $%  [%conf p=ship q=dude r=culm]                      ::  configure app
+  $%  [%conf p=dock q=culm]                             ::  configure app
       [%init p=ship]                                    ::  set owner
       [%deal p=sock q=cuss]                             ::  full transmission
       [%rote p=sack q=path r=*]                         ::  remote request
@@ -669,9 +669,13 @@
       ?@  +.q.vax  [%| (ap-suck "move: invalid move (card)")]
       =+  hun=(~(get by r.zam) -.q.vax)
       ?~  hun  [%| (ap-suck "move: invalid card (bone)")]
-      =+  cav=(spec (slot 3 (spec (slot 3 vax))))
-      ?+  +<.q.vax  [%| (ap-suck "move: invalid card ({(trip (,@ +<.q.vax))})")]
+      =+  cav=(slot 3 (spec (slot 3 vax)))
+      ?+  +<.q.vax  
+               (ap-move-piss u.hun +<.q.vax cav)
         %diff  (ap-move-diff u.hun cav)
+        %peer  (ap-move-peer u.hun cav)
+        %pull  (ap-move-pull u.hun cav)
+        %poke  (ap-move-poke u.hun cav)
         %send  (ap-move-send u.hun cav)
         %pass  (ap-move-pass u.hun cav)
         %quit  (ap-move-quit u.hun cav)
@@ -690,6 +694,32 @@
         [%| (ap-suck "move: improper diff")]
       [%& neh %give %diff `cage`[-.q.vax (slot 3 vax)]]
     ::
+    ++  ap-move-mess                                    ::  extract path, target
+      |=  vax=vase
+      ^-  (each (trel path ship term) tang)
+      ?.  ?&  ?=([p=* [q=@ r=@] s=*] q.vax)
+              (gte 1 (met 7 q.q.vax))
+          ==
+        [%| (ap-suck "move: malformed target")]
+      =+  pux=((soft path) p.q.vax)
+      ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
+        [%| (ap-suck "move: malformed path")]
+      [%& [(scot %p q.q.vax) %out r.q.vax u.pux] q.q.vax r.q.vax]
+    ::
+    ++  ap-move-piss                                    ::  pass general move 
+      |=  [neh=duct wut=* vax=vase]
+      ^-  (each cove tang)
+      ?.  &(?=(@ wut) ((sane %tas) wut))
+        [%| (ap-suck "move: malformed card")]
+      =+  pux=((soft path) -.q.vax)
+      ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
+        [%| (ap-suck "move: malformed path")]
+      =+  huj=(ap-vain wut)
+      ?~  huj  [%| (ap-suck "move: unknown note {(trip wut)}")]
+      :^  %&  neh  %pass
+      :-  [(scot %p q.q.pry) %inn u.pux]
+      [%meta u.huj (slot 3 vax)]
+    ::
     ++  ap-move-pass                                    ::  pass general move 
       |=  [neh=duct vax=vase]
       ^-  (each cove tang)
@@ -705,6 +735,41 @@
       :^  %&  neh  %pass 
       :-  [(scot %p q.q.pry) %inn u.pux]
       [%meta u.huj (spec (slot 3 vax))]
+    ::
+    ++  ap-move-poke                                    ::  pass %poke
+      |=  [neh=duct vax=vase]
+      ^-  (each cove tang)
+      =+  yep=(ap-move-mess vax)
+      ?:  ?=(%| -.yep)  yep
+      =+  gaw=(slot 7 vax)
+      ?.  &(?=([p=@ q=*] q.gaw) ((sane %tas) p.q.gaw))
+        [%| (ap-suck "poke: malformed cage")]
+      :^  %&  neh  %pass
+      :-  p.p.yep
+      [%send q.p.yep r.p.yep %poke p.q.gaw (slot 3 (spec gaw))]
+    ::
+    ++  ap-move-peer                                    ::  pass %peer
+      |=  [neh=duct vax=vase]
+      ^-  (each cove tang)
+      =+  yep=(ap-move-mess vax)
+      ?:  ?=(%| -.yep)  yep
+      =+  pux=((soft path) +>.q.vax)
+      ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
+        [%| (ap-suck "peer: malformed path")]
+      :^  %&  neh  %pass
+      :-  p.p.yep
+      [%send q.p.yep r.p.yep %peer u.pux]
+    ::
+    ++  ap-move-pull                                    ::  pass %pull
+      |=  [neh=duct vax=vase]
+      ^-  (each cove tang)
+      =+  yep=(ap-move-mess vax)
+      ?:  ?=(%| -.yep)  yep
+      ?.  =(~ +>.q.vax)
+        [%| (ap-suck "pull: malformed card")]
+      :^  %&  neh  %pass
+      :-  p.p.yep
+      [%send q.p.yep r.p.yep %pull ~]
     ::
     ++  ap-move-send                                    ::  pass gall action
       |=  [neh=duct vax=vase]
@@ -955,10 +1020,10 @@
   =>  .(q.hic ?.(?=(%soft -.q.hic) q.hic ((hard kiss-behn) p.q.hic)))
   ?-    -.q.hic
       %conf
-    ?.  (~(has by pol.all) p.q.hic)
-      ~&  [%behn-not-ours p.q.hic]
+    ?.  (~(has by pol.all) p.p.q.hic)
+      ~&  [%behn-not-ours p.p.q.hic]
       [~ ..^$]
-    mo-abet:(mo-conf:(mo-abed:mo p.q.hic hen) q.q.hic r.q.hic)
+    mo-abet:(mo-conf:(mo-abed:mo p.p.q.hic hen) q.p.q.hic q.q.hic)
   ::
       %deal
     =<  mo-abet
