@@ -76,7 +76,4 @@
       [%text (list ,@t)]                                ::  text lines
       [%tank (list tank)]                               ::  tank list
   ==                                                    ::
-  ::  markdown
-  ::  image
-  ::  mime object
 --
