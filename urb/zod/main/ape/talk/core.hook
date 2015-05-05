@@ -1719,8 +1719,15 @@
 ::
 ++  poke-bit
   |=  [from ~]
-  ^-  [(list move) _+>]
+  ^-  (quip move +>)
   :_  +>.$
   =+  paf=/(scot %p our.hid)/try/(scot %da lat.hid)/talk/backlog/jam
   [ost %info /jamfile our.hid (foal paf (jam +<+.+>.$))]~
+::
+++  prep
+  |=  [from old=(unit house)]
+  ^-  (quip move +>)
+  ?~  old
+    ra-abet:~(ra-init ra 0 ~)
+  [~ +>(+<+ u.old)]
 --

@@ -87,8 +87,9 @@
       ==                                                ::
     ++  card                                            ::  general card
       $%  [%diff %sole-effect sole-effect]              ::
-          [%send path [ship term] clap]                   ::
-          [%pass path note]                             ::
+          [%send wire [ship term] clap]                 ::
+          [%exec wire @p (unit silk)]                   ::
+          [%deal wire sock term club]                   ::
       ==                                                ::
     ++  move  (pair bone card)                          ::  user-level move
     ++  hapt  ,[p=ship q=path]                          ::  
@@ -275,12 +276,12 @@
       |=  [way=wire kas=silk]
       ^+  +>+>
       ?>  ?=(~ pux)
-      (he-pass(poy `+>+<(pux `way)) way %exec our.hid `kas)
+      (he-card(poy `+>+<(pux `way)) %exec way our.hid `kas)
     ::
     ++  dy-stop                                         ::  stop work
       ^+  +>
       ?~  pux  +>
-      (he-pass(poy ~) u.pux %exec our.hid ~)
+      (he-card(poy ~) %exec u.pux our.hid ~)
     ::
     ++  dy-slam                                         ::  call by ford
       |=  [way=wire gat=vase sam=vase]
@@ -418,9 +419,9 @@
       ^+  +>
       ?-    -.mad
           %poke       
-        %-  he-pass(poy ~)
-        :*  /poke
-            %deal
+        %-  he-card(poy ~)
+        :*  %deal
+            /poke
             [our.hid p.p.mad]
             q.p.mad
             %poke
@@ -579,10 +580,6 @@
     |=  cad=card
     ^+  +>
     %_(+> moz [[ost cad] moz])
-  ::
-  ++  he-pass
-    |=  [way=wire noy=note]
-    %_(+> moz [[ost %pass way noy] moz])
   ::
   ++  he-send
     |=  [way=wire him=ship dap=term cop=clap]

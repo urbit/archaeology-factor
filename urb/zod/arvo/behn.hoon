@@ -274,7 +274,6 @@
   ++  mo-boon                                           ::  complete old boot
     |=  [dap=dude pup=scup dep=@uvH cux=(each cage tang)]
     ^+  +>
-    ~&  [%mo-boon dap pup]
     ?.  (~(has by bum) dap)  
       ~&  [%behn-old-boon dap]
       +>
@@ -585,6 +584,7 @@
     ::
     ++  ap-diff                                         ::  pour a diff
       |=  [her=ship pax=path cag=cage]
+      =.  q.cag  (spec q.cag)
       =+  cug=(ap-find [%diff p.cag pax])
       ?~  cug
         (ap-lame %diff (ap-suck "pour: no diff"))
