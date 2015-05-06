@@ -9,36 +9,23 @@
 =>  |%                                                  ::  board logic
     ++  board  ,@                                       ::  one-player bitfield
     ++  point  ,[x=@ y=@]                               ::  coordinate
-    ++  bo                                              ::  board object
+    ++  bo                                              ::  board core
       |_  bud=board                                     ::  state
       ++  off  |=(point (add x (mul 3 y)))              ::  bitfield address
       ++  get  |=(point =(1 (cut 0 [(off +<) 1] bud)))  ::  get point
       ++  set  |=(point (con bud (bex (off +<))))       ::  set point
-      ++  wit  |=  [a=point b=point c=point]            ::  winning line
-               &((get a) (get b) (get c))
-      ++  win  ^-  ?                                    ::  victory test
-               ?|  (wit 0^0 0^1 0^2)
-                   (wit 0^0 1^0 2^0)
-                   (wit 0^0 1^1 2^2)
-                   (wit 1^0 1^1 1^2)
-                   (wit 2^0 2^1 2^2)
-                   (wit 0^1 1^1 2^1)
-                   (wit 0^2 1^2 2^2)
-                   (wit 0^2 1^1 2^0)
-               == 
-      --
-    --
+      ++  win  %-  lien  :_  |=(a=@ =(a (dis a bud)))   ::  test for win
+               (rip 4 0wl04h0.4A0Aw.4A00s.0e070)        ::  with bitmasks
+      --                                                ::
+    --                                                  ::
 =>  |%                                                  ::  game logic
-    ++  game  ,[tun=? box=board boo=board]
-    ++  room  (pair sole-share game)
-    ++  go 
-      |_  game
-      ++  pro  ": {?:(tun "X" "O")} to move (x/y): "
-      ++  say  
-        |=  point
+    ++  game  ,[tun=? box=board boo=board]              ::  game state
+    ++  go                                              ::  game core
+      |_  game                                          ::
+      ++  pro  ": {?:(tun "X" "O")} to move (x/y): "    ::  prompt
+      ++  say  |=  point                                ::  point value
         ?:  (~(get bo box) +<)  'X'
-        ?:  (~(get bo boo) +<)  'O'
-        '.'
+        ?:  (~(get bo boo) +<)  'O'  '.'
       ::
       ++  mov                                           ::  move at
         |=  point  
@@ -52,8 +39,7 @@
       ++  res  ^-  (unit tape)                          ::  result
         ?:  ~(win bo box)  `"X wins!"
         ?:  ~(win bo boo)  `"O wins!"
-        ?:  =(511 (con boo box))  `"X and O tied."
-        ~
+        ?:  =(511 (con boo box))  `"X and O tied."  ~
       ::
       ++  ray                                           ::  render row
         |=  y=@  ^-  tape
@@ -62,13 +48,13 @@
             ' '  (say y 1)
             ' '  (say y 2)
         ==
-      ++  red  ^-  (list tape)                          ::  render board
-               ~["+ 1 2 3" (ray 0) (ray 1) (ray 2)]
+      ++  red  ~["+ 1 2 3" (ray 0) (ray 1) (ray 2)]     ::  render board
       --
     --
 =>  |%                                                  ::  arvo tools
-    ++  card  ,[%diff %sole-effect sole-effect]
-    ++  move  (pair bone card)
+    ++  card  ,[%diff %sole-effect sole-effect]         ::   
+    ++  move  (pair bone card)              
+    ++  room  (pair sole-share game)
     --
 |_  $:  hid=hide                                        ::  system state
         hoc=(map bone room)
@@ -92,7 +78,7 @@
     %+  emil  [%pro & %toe ~(pro go q.rom)]
     (turn ~(red go q.rom) |=(a=tape [%txt a]))
   ::
-  ++  wipe                                              ::  clear line
+  ++  wipe                                              ::  clear input line
     =^  cal  p.rom  (~(transmit cs p.rom) [%set ~])
     (emit %det cal)
   ::

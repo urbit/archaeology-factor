@@ -539,7 +539,7 @@
     ::
     ++  ap-abet                                         ::  resolve
       ^+  +>
-      ::  =>  ap-abut
+      =>  ap-abut
       %_  +>  
         bum  (~(put by bum) dap +<+)
         moz  :(weld (turn zip ap-aver) (turn dub ap-avid) moz)
@@ -628,10 +628,14 @@
     ++  ap-fall                                         ::  drop from queue
       ^+  .
       =+  soy=(~(get by qel.ged) ost)
-      ?~  soy  +  ::  ~&(%ap-fall-underflow +)
+      ?:  |(?=(~ soy) =(0 u.soy))  
+        ~&  [%ap-fall-duh [our dap] q.q.pry ost]
+        +
+      =.  u.soy  (dec u.soy)
+      ::  ~&  [%ap-fill-sub [[our dap] q.q.pry ost] u.soy]
       ?:  =(0 u.soy)  
         +(qel.ged (~(del by qel.ged) ost))
-      +(qel.ged (~(put by qel.ged) ost (dec u.soy)))
+      +(qel.ged (~(put by qel.ged) ost u.soy))
     ::
     ++  ap-farm                                         ::  produce arm
       |=  cog=term
@@ -650,6 +654,7 @@
       =+  suy=(fall (~(get by qel.ged) ost) 0)
       ::  ?:  =(10 suy)  [%| +]
       ~?  =(10 suy)  [%ap-fill-full ost]
+      ::  ~?  !=(10 suy)  [%ap-fill-add [[our dap] q.q.pry ost] +(suy)]
       [%& +(qel.ged (~(put by qel.ged) ost +(suy)))]
     ::
     ++  ap-find                                         ::  general arm

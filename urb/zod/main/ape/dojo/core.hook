@@ -736,7 +736,7 @@
   he-abet:(~(he-unto he [[ost ~] (~(got by hoc) ost)]) cit)
 ::
 ++  pull
-  |=  from
+  |=  [from pax=path]
   ^-  (quip move +>)
   =^  moz  +>
     he-abet:~(he-stop he [[ost ~] (~(got by hoc) ost)])
