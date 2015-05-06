@@ -83,7 +83,6 @@
       $%  [%peer p=path]                                ::  subscribe
           [%poke p=cage]                                ::  apply
           [%pull ~]                                     ::  unsubscribe
-          [%pump p=(unit tang)]                         ::  pump yes/no
       ==                                                ::
     ++  card                                            ::  general card
       $%  [%diff %sole-effect sole-effect]              ::

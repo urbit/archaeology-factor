@@ -67,6 +67,7 @@
           ==  ==                                        ::
               $:  %b                                    ::  from %gall
           $%  [%unto p=cuft]                            ::
+              [%mack p=(unit tang)]                     ::  message ack
           ==  ==                                        ::
               $:  %g                                    ::  from %gall
           $%  [%mean p=ares]                            ::
@@ -1855,22 +1856,9 @@
     ?-  +<.sih
         %crud  [[[hen [%slip %d %flog +.sih]] ~] +>]
         %went  [~ +>]
-        %unto  %=    $
-                   sih
-                 ^-  sign
-                 ?-  +>-.sih
-                   %coup  ?~  p.+>+.sih 
-                            [%g %nice ~] 
-                          [%g %mean `[%coup u.p.+>+.sih]]
-                   %diff  ~&  [%knap-diff tea]
-                          !!
-                   %quit  ~&  [%knap-quit tea]
-                          !!
-                   %reap  ?~  p.+>+.sih 
-                            [%g %nice ~] 
-                          [%g %mean `[%reap u.p.+>+.sih]]
-                 ==
-               ==
+        %mack  ?~  +>.sih  $(sih [%g %nice ~])
+               $(sih [%g %mean `[%mack +>+.sih]])
+        %unto  ~|([%ames-unto tea hen +>-.sih] !!)
         ?(%mean %nice)
       ?:  ?=([%ye ~] tea)
         [~ +>.$]

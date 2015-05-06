@@ -116,6 +116,7 @@
 ++  gift-behn                                           ::  outgoing result
   $%  [%onto p=(each suss tang)]                        ::  about agent
       [%unto p=cuft]                                    ::  within agent
+      [%mack p=(unit tang)]                             ::  message ack
   ==                                                    ::
 ++  gift-ford                                           ::  out result <-$
   $%  [%made p=@uvH q=(each cage tang)]                 ::  computed result
@@ -302,7 +303,10 @@
     |=  [him=ship caz=cuss]                             ::  
     ^+  +>
     ::  ~&  [%mo-away him caz]
-    ?<  ?=(%pump -.q.caz)
+    ?:  ?=(%pump -.q.caz)
+      ~&  [%mo-away-pump him caz]
+      +>
+    ::  ?<  ?=(%pump -.q.caz)
     =^  num  +>.$  (mo-bale him)
     =+  ^=  roc  ^-  rook
         ?-  -.q.caz
@@ -353,7 +357,7 @@
       ==
     ==
   ::
-  ++  mo-ball                                           ::  find outbone
+  ++  mo-ball                                           ::  outbone by index
     |=  [him=ship num=@ud]
     ^-  duct
     (~(got by r:(~(got by sap) him)) num)
@@ -401,9 +405,8 @@
               num=(slav %ud i.t.t.t.pax)
           ==
       ?-  -.q.+>.sih
-        %|  ~&  [%diff-crash p.q.+>.sih]                ::  crash is correct
-            !!
-        %&  =.  +>.$  (mo-give %unto %coup ~)           ::  XX ames auto-ack
+        %|  (mo-give %mack `p.q.+>.sih)                  ::  XX should crash
+        %&  ::  =.  +>.$  (mo-give %mack ~)             ::  XX pump should ack
             (mo-give(hen (mo-ball him num)) %unto %diff `cage`p.q.+>.sih)
       ==
     ::
@@ -415,22 +418,18 @@
           ==
       ?:  ?=([%f %made *] sih)
         ?-  -.q.+>.sih
-          %|  (mo-give %unto %coup `p.q.+>.sih)         ::  XX should crash
+          %|  (mo-give %mack `p.q.+>.sih)         ::  XX should crash
           %&  (mo-pass [%sys pax] %b %deal [him our] i.t.t.pax %poke p.q.+>.sih)
         ==
-      ?:  ?=([%a %woot *] sih)
-        ?~  q.+>.sih  +>.$
-        ~&  [%behn-woot-lost pax +>.sih]
-        +>.$
       ?>  ?=([%b %unto *] sih)
       =+  cuf=`cuft`+>.sih
       ?-    -.cuf
-        %coup  (mo-give %unto %coup p.cuf)
+        %coup  (mo-give %mack p.cuf)
         %diff  %+  mo-pass  [%sys pax]
                [%a %wont [our him] [%q %bh dap ~] [num %d p.p.cuf q.q.p.cuf]]
         %quit  %+  mo-pass  [%sys pax]
                [%a %wont [our him] [%q %bh dap ~] [num %x ~]]
-        %reap  (mo-give %unto %reap p.cuf)
+        %reap  (mo-give %mack p.cuf)
       ==
     ::
         %way                                            ::  outbound request
@@ -504,7 +503,7 @@
         [%sys %rep (scot %p him) dap (scot %ud num) ~]
       [%f %exec our ~ %vale p.ron our q.ron]
     ::
-        %x  (mo-give %unto %quit ~)
+        %x  (mo-give(hen (mo-ball him num)) %unto %quit ~)
     ==
   ::
   ++  ap                                                ::  agent engine
@@ -607,19 +606,24 @@
       =.  q.cag  (spec q.cag)
       =+  cug=(ap-find [%diff p.cag pax])
       ?~  cug
-        (ap-lame %diff (ap-suck "pour: no diff"))
+        (ap-pump:(ap-lame %diff (ap-suck "pour: no diff")) | her pax)
       =+  ^=  arg  ^-  vase
           %-  slop
           ?:  =(0 p.u.cug)
-            [!>([`@ud`ost `@p`q.q.pry `path`pax]) !>(cag)]
-          [!>([`@ud`ost `@p`q.q.pry `path`(slag (dec p.u.cug) pax)]) q.cag]
+            [!>([`@ud`ost `@p`q.q.pry `path`+.pax]) !>(cag)]
+          [!>([`@ud`ost `@p`q.q.pry (slag (dec p.u.cug) `path`+.pax)]) q.cag]
       =^  cam  +>.$  (ap-call q.u.cug arg)
-      ?^  cam  (ap-lame q.u.cug u.cam)
-      +>.$
+      ?^  cam   
+        (ap-pump:(ap-lame q.u.cug u.cam) | her pax)
+      (ap-pump & her pax)
     ::
-    ++  ap-kill                                         ::  break subscription
-      ^+  .
-      ap-pull:(ap-give %quit ~)
+    ++  ap-pump                                         ::  break subscription
+      |=  [oak=? her=ship pax=path]
+      =+  way=[(scot %p her) %out pax]
+      ::  ~&  [%ap-pump-path oak pax]
+      ?:  oak
+        (ap-pass way %send her -.pax %pump ~)
+      (ap-pass:(ap-give %quit ~) way %send her -.pax %pull ~)
     ::
     ++  ap-fall                                         ::  drop from queue
       ^+  .
@@ -891,7 +895,7 @@
       ^+  +>
       ?-  -.cuf
         %coup  (ap-punk q.q.pry %coup +.pax `!>(p.cuf))
-        %diff  (ap-diff q.q.pry +.pax p.cuf)
+        %diff  (ap-diff q.q.pry pax p.cuf)
         %quit  (ap-punk q.q.pry %quit +.pax ~)
         %reap  (ap-punk q.q.pry %reap +.pax `!>(p.cuf))
       ==
@@ -921,7 +925,7 @@
           ?~(vux !>(~) (slop !>(~) (slot 13 u.vux)))
       ?~(tur `+>.$ :_(+>.$ `u.tur))
     ::
-    ++  ap-pull                                         ::  pull subscription
+    ++  ap-pull                                         ::  pull inbound
       =+  wim=(~(get by sup.ged) ost)
       ?~  wim  ~&(%ap-pull-none +)
       =:  sup.ged  (~(del by sup.ged) ost)
@@ -935,6 +939,10 @@
         !>([`@ud`ost `@p`q.q.pry (slag p.u.cug q.u.wim)])
       ?^  cam  (ap-lame q.u.cug u.cam)
       +>+
+    ::
+    ++  ap-kill                                         ::  queue kill
+      ~&  [%ap-kill dap ost]
+      (ap-give:ap-pull %quit ~)
     ::
     ++  ap-punk                                         ::  non-diff gall take
       |=  [her=ship cog=term pax=path vux=(unit vase)]
