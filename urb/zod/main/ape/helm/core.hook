@@ -100,9 +100,8 @@
       =+  way=[(scot %p our.hid) %arvo (scot %da lat.hid) nam %hoon ~]
       =+  fil=(,@ .^(%cx way))
       :*  ost
-          %pass
-          /reload
           %flog
+          /reload
           [%veer ?:(=('z' tip) %$ tip) way (,@ .^(%cx way))]
       ==
     ==

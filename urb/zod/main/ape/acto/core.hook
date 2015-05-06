@@ -1,8 +1,8 @@
 ::                                                      ::  ::
 ::::  /hook/core/acto/ape                               ::  ::
   ::                                                    ::  ::
-/-  *sole                                               ::  console structures
-/+  sole                                                ::  console library
+/-  *sole                                               ::  structures
+/+  sole                                                ::  libraries
 ::                                                      ::
 ::::                                                    ::
   !:                                                    ::
@@ -24,6 +24,7 @@
                    (wit 2^0 2^1 2^2)
                    (wit 0^1 1^1 2^1)
                    (wit 0^2 1^2 2^2)
+                   (wit 0^2 1^1 2^0)
                == 
       --
     --
@@ -130,6 +131,6 @@
   abet:(~(work yo [ost ~] (~(got by hoc) ost)) act)
 ::
 ++  pull                                                ::  stop subscription
-  |=  from
+  |=  then
   [~ +>(hoc (~(del by hoc) ost))]
 --
