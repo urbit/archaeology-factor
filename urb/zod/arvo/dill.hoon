@@ -136,7 +136,7 @@
   $%  [%peer p=path]                                    ::  subscribe
       [%poke p=cage]                                    ::  apply
       [%pull ~]                                         ::  unsubscribe
-      [%pump p=(unit tang)]                             ::  pump yes/no
+      [%pump ~]                                         ::  pump yes/no
   ==                                                    ::
 ++  cuft                                                ::  internal gift
   $%  [%coup p=(unit tang)]                             ::  poke result

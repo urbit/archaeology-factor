@@ -68,7 +68,7 @@
   $%  [%peer p=path]                                    ::  subscribe
       [%poke p=cage]                                    ::  apply
       [%pull ~]                                         ::  unsubscribe
-      [%pump p=(unit tang)]                             ::  subscription ack
+      [%pump ~]                                         ::  subscription ack
   ==                                                    ::
 ++  culm                                                ::  config action
   $%  [%load p=scup]                                    ::  load/reload
@@ -540,6 +540,7 @@
     ::
     ++  ap-abet                                         ::  resolve
       ^+  +>
+      ::  =>  ap-abut
       %_  +>  
         bum  (~(put by bum) dap +<+)
         moz  :(weld (turn zip ap-aver) (turn dub ap-avid) moz)
