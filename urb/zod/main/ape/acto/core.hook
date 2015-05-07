@@ -22,7 +22,7 @@
     ++  game  ,[tun=? box=board boo=board]              ::  game state
     ++  go                                              ::  game core
       |_  game                                          ::
-      ++  pro  ": {?:(tun "X" "O")} to move (x/y): "    ::  prompt
+      ++  pro  ": {?:(tun "X" "O")} to move (row/col): "::  prompt
       ++  say  |=  point                                ::  point value
         ?:  (~(get bo box) +<)  'X'
         ?:  (~(get bo boo) +<)  'O'  '.'
@@ -48,7 +48,9 @@
             ' '  (say y 1)
             ' '  (say y 2)
         ==
-      ++  red  ~["+ 1 2 3" (ray 0) (ray 1) (ray 2)]     ::  render board
+      ++  red                                           ::  render board
+        ^-  (list tape)
+        ~["+ 1 2 3" (ray 0) (ray 1) (ray 2)]
       --
     --
 =>  |%                                                  ::  arvo tools
@@ -117,6 +119,6 @@
   abet:(~(work yo [ost ~] (~(got by hoc) ost)) act)
 ::
 ++  pull                                                ::  stop subscription
-  |=  then
+  |=  [from pax=path]
   [~ +>(hoc (~(del by hoc) ost))]
 --
