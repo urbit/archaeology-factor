@@ -1,0 +1,11 @@
+::
+::::  /hook/gate/start/helm/cat
+  ::
+/?  314
+::
+::::
+  !:
+|=  $:  *
+        [[arg=term ~] ~]
+    ==
+[%helm-start arg]
