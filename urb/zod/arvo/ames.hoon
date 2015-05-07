@@ -1868,6 +1868,7 @@
       =+  ^=  fuy
           =<  zork  =<  zank
           %^  ~(rack am [now fox])  soq  pax
+          ::  ~&  [%knap-ack ?-(+<.sih %mean `p.+.sih, %nice ~)]
           ?-(+<.sih %mean `p.+.sih, %nice ~)
       =>  %_(. fox q.fuy)
       =|  out=(list move)

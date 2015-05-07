@@ -304,9 +304,14 @@
     ^+  +>
     ::  ~&  [%mo-away him caz]
     ?:  ?=(%pump -.q.caz)
-      ~&  [%mo-away-pump him caz]
+      ::
+      ::  you'd think this would send an ack for the diff
+      ::  that caused this pump.  it would, but we already
+      ::  sent it when we got the diff in ++mo-cyst.  then
+      ::  we'd have to save the network duct and connect it
+      ::  to this returning pump.
+      ::
       +>
-    ::  ?<  ?=(%pump -.q.caz)
     =^  num  +>.$  (mo-bale him)
     =+  ^=  roc  ^-  rook
         ?-  -.q.caz
@@ -332,6 +337,7 @@
   ++  mo-awed                                           ::  foreign response
     |=  [him=ship why=?(%peer %poke %pull) art=(unit ares)]
     ^+  +>
+    ::  ~&  [%mo-awed him why art]
     =+  tug=(mo-baba (mo-baal art))
     ?-  why
       %peer  (mo-give %unto %reap tug)
@@ -397,6 +403,20 @@
       ?>  ?=([@ @ @ ~] t.pax)
       (mo-boon i.t.pax [(slav %p i.t.t.pax) i.t.t.t.pax] +>.sih)
     ::
+        %red                                            ::  diff ack
+      ?>  ?=([@ @ @ ~] t.pax)
+      ?>  ?=([%a %woot *] sih)
+      =+  :*  him=(slav %p i.t.pax)
+              dap=i.t.t.pax
+              num=(slav %ud i.t.t.t.pax)
+          ==
+      =>  .(pax `path`[%req t.pax])
+      ?~  q.+>.sih 
+        (mo-pass [%sys pax] %b %deal [him our] dap %pump ~)
+      ~&  [%diff-bad-ack q.+>.sih]                      ::  should not happen
+      =.  +>.$  (mo-pass [%sys pax] %b %deal [him our] dap %pull ~)
+      (mo-pass [%sys pax] %a %wont [our him] [%q %bh dap ~] [num %x ~])
+    ::
         %rep                                            ::  reverse request
       ?>  ?=([@ @ @ ~] t.pax)
       ?>  ?=([%f %made *] sih)
@@ -406,7 +426,7 @@
           ==
       ?-  -.q.+>.sih
         %|  (mo-give %mack `p.q.+>.sih)                  ::  XX should crash
-        %&  ::  =.  +>.$  (mo-give %mack ~)             ::  XX pump should ack
+        %&  =.  +>.$  (mo-give %mack ~)             ::  XX pump should ack
             (mo-give(hen (mo-ball him num)) %unto %diff `cage`p.q.+>.sih)
       ==
     ::
@@ -421,11 +441,12 @@
           %|  (mo-give %mack `p.q.+>.sih)         ::  XX should crash
           %&  (mo-pass [%sys pax] %b %deal [him our] i.t.t.pax %poke p.q.+>.sih)
         ==
+      ?:  ?=([%a %woot *] sih)  +>.$                    ::  quit ack, boring
       ?>  ?=([%b %unto *] sih)
       =+  cuf=`cuft`+>.sih
       ?-    -.cuf
         %coup  (mo-give %mack p.cuf)
-        %diff  %+  mo-pass  [%sys pax]
+        %diff  %+  mo-pass  [%sys %red t.pax]
                [%a %wont [our him] [%q %bh dap ~] [num %d p.p.cuf q.q.p.cuf]]
         %quit  %+  mo-pass  [%sys pax]
                [%a %wont [our him] [%q %bh dap ~] [num %x ~]]
@@ -629,7 +650,7 @@
       ^+  .
       =+  soy=(~(get by qel.ged) ost)
       ?:  |(?=(~ soy) =(0 u.soy))  
-        ~&  [%ap-fall-duh [our dap] q.q.pry ost]
+        ~&  [%ap-fill-under [our dap] q.q.pry ost]
         +
       =.  u.soy  (dec u.soy)
       ::  ~&  [%ap-fill-sub [[our dap] q.q.pry ost] u.soy]
@@ -652,8 +673,9 @@
     ++  ap-fill                                         ::  add to queue
       ^-  [? _.]
       =+  suy=(fall (~(get by qel.ged) ost) 0)
-      ::  ?:  =(10 suy)  [%| +]
-      ~?  =(10 suy)  [%ap-fill-full ost]
+      ?:  =(10 suy)  
+        ~&  [%ap-fill-full [our dap] q.q.pry ost]
+        [%| +]
       ::  ~?  !=(10 suy)  [%ap-fill-add [[our dap] q.q.pry ost] +(suy)]
       [%& +(qel.ged (~(put by qel.ged) ost +(suy)))]
     ::
@@ -941,7 +963,7 @@
       ?~  cug  +>
       =^  cam  +> 
         %+  ap-call  q.u.cug
-        !>([`@ud`ost `@p`q.q.pry (slag p.u.cug q.u.wim)])
+        !>([[`@ud`ost `@p`q.q.pry] (slag p.u.cug q.u.wim)])
       ?^  cam  (ap-lame q.u.cug u.cam)
       +>+
     ::
