@@ -427,6 +427,7 @@
       ?-  -.q.+>.sih
         %|  (mo-give %mack `p.q.+>.sih)                  ::  XX should crash
         %&  =.  +>.$  (mo-give %mack ~)             ::  XX pump should ack
+            ~&  [%mo-ball-diff him num]
             (mo-give(hen (mo-ball him num)) %unto %diff `cage`p.q.+>.sih)
       ==
     ::
@@ -577,16 +578,12 @@
         $(ded t.ded, +>.^$ ap-kill(ost i.ded))
       ?.  ?=([%give %diff *] q.i.pyz)
         $(pyz t.pyz)
-      =^  vad  +>  ap-fill
+      =^  vad  +>  ap-fill(ost p.i.pyz)
       $(pyz t.pyz, ful ?:(vad ful (~(put in ful) p.i.pyz)))
     ::
     ++  ap-aver                                         ::  cute to move
       |=  cov=cute
       ^-  move 
-      =+  fuk=(~(get by r.zam) p.cov)
-      ?~  fuk 
-        ~&  [%ap-aver-fuk p.cov]
-        !!
       :-  (~(got by r.zam) p.cov)
       ?-    -.q.cov
           ?(%slip %sick)  !!
@@ -673,10 +670,10 @@
     ++  ap-fill                                         ::  add to queue
       ^-  [? _.]
       =+  suy=(fall (~(get by qel.ged) ost) 0)
-      ?:  =(10 suy)  
+      ?:  =(8 suy)
         ~&  [%ap-fill-full [our dap] q.q.pry ost]
         [%| +]
-      ::  ~?  !=(10 suy)  [%ap-fill-add [[our dap] q.q.pry ost] +(suy)]
+      ::  ~?  !=(8 suy)  [%ap-fill-add [[our dap] q.q.pry ost] +(suy)]
       [%& +(qel.ged (~(put by qel.ged) ost +(suy)))]
     ::
     ++  ap-find                                         ::  general arm
