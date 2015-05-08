@@ -131,9 +131,7 @@
             ?:(?=(%det -.act) (delt +.act) make)        ::
   --                                                    ::
 ++  abet  [(flop moz) .(moz ~)]                         ::  resolve core
-++  dump  |=  mov=move
-          ?<  &(=(0 p.mov) ?=(%diff -.q.mov))
-          %_(+> moz [mov moz])             ::  send move
+++  dump  %_(+> moz [mov moz])                          ::  send move
 ++  dish  |=(cad=card (dump 0 cad))                     ::  forward move
 ++  flet  |=(from ~(. et +< (~(got by q.eye) ost)))     ::  in old client
 ++  fret  |=(from ~(. et +< *sole-share))               ::  in new client
