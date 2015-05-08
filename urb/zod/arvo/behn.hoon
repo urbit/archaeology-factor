@@ -268,8 +268,8 @@
         pup  pup
         hav  hav
         p.zam  1
-        q.zam  [[~ 0] ~ ~]
-        r.zam  [[0 ~] ~ ~]
+        q.zam  [[[~ ~] 0] ~ ~]
+        r.zam  [[0 [~ ~]] ~ ~]
       ==
     ==
   ::
@@ -427,7 +427,6 @@
       ?-  -.q.+>.sih
         %|  (mo-give %mack `p.q.+>.sih)                  ::  XX should crash
         %&  =.  +>.$  (mo-give %mack ~)             ::  XX pump should ack
-            ~&  [%mo-ball-diff him num]
             (mo-give(hen (mo-ball him num)) %unto %diff `cage`p.q.+>.sih)
       ==
     ::
@@ -587,7 +586,7 @@
       :-  (~(got by r.zam) p.cov)
       ?-    -.q.cov
           ?(%slip %sick)  !!
-          %give  [%give %unto p.q.cov]
+          %give  ?<(=(0 p.cov) [%give %unto p.q.cov])
           %pass
         :+  %pass  `path`[%use dap p.q.cov]
         ?-  -.q.q.cov
