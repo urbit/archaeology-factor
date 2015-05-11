@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee":[function(require,module,exports){
 var MessageDispatcher;
 
 MessageDispatcher = require('../dispatcher/Dispatcher.coffee');
@@ -88,7 +88,7 @@ module.exports = {
 
 
 
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee":[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee":[function(require,module,exports){
 var StationDispatcher;
 
 StationDispatcher = require('../dispatcher/Dispatcher.coffee');
@@ -176,7 +176,7 @@ module.exports = {
 
 
 
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee":[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee":[function(require,module,exports){
 var div, input, recl, ref, textarea;
 
 recl = React.createClass;
@@ -205,7 +205,7 @@ module.exports = recl({
 
 
 
-},{}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee":[function(require,module,exports){
+},{}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee":[function(require,module,exports){
 var Member, Message, MessageActions, MessageStore, StationActions, StationStore, a, br, div, input, moment, recl, ref, textarea;
 
 moment = require('moment-timezone');
@@ -333,15 +333,10 @@ module.exports = recl({
   _focus: function() {
     this.focussed = true;
     this.lastSeen = null;
-<<<<<<< HEAD
     return setTimeout(function() {
       $('.message.new').removeClass('new');
       return document.title = document.title.replace(/\ \([0-9]*\)/, "");
     }, 1000);
-=======
-    $('.message.new').removeClass('new');
-    return document.title = document.title.replace(/\ \([0-9]*\)/, "");
->>>>>>> test
   },
   checkMore: function() {
     var end;
@@ -390,11 +385,7 @@ module.exports = recl({
       $window.scrollTop(st);
       this.lastLength = null;
     } else {
-<<<<<<< HEAD
-      if ($('#writing-container').length > 0) {
-=======
       if (!window.util.isScrolling()) {
->>>>>>> test
         window.util.setScroll();
       }
     }
@@ -463,7 +454,7 @@ module.exports = recl({
 
 
 
-},{"../actions/MessageActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee","../actions/StationActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/MessageStore.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/stores/MessageStore.coffee","../stores/StationStore.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee","moment-timezone":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/index.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee":[function(require,module,exports){
+},{"../actions/MessageActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee","../actions/StationActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/MessageStore.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/stores/MessageStore.coffee","../stores/StationStore.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee","moment-timezone":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/index.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee":[function(require,module,exports){
 var Member, StationActions, StationStore, a, div, h1, input, recl, ref, textarea;
 
 recl = React.createClass;
@@ -623,7 +614,7 @@ module.exports = recl({
 
 
 
-},{"../actions/StationActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/StationStore.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee":[function(require,module,exports){
+},{"../actions/StationActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/StationStore.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee":[function(require,module,exports){
 var Member, MessageActions, MessageStore, StationActions, StationStore, br, div, input, recl, ref, textarea;
 
 recl = React.createClass;
@@ -866,7 +857,7 @@ module.exports = recl({
 
 
 
-},{"../actions/MessageActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee","../actions/StationActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/MessageStore.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/stores/MessageStore.coffee","../stores/StationStore.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee":[function(require,module,exports){
+},{"../actions/MessageActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee","../actions/StationActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","../stores/MessageStore.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/stores/MessageStore.coffee","../stores/StationStore.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee","./MemberComponent.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/MemberComponent.coffee"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee":[function(require,module,exports){
 var Dispatcher;
 
 Dispatcher = require('flux').Dispatcher;
@@ -888,7 +879,7 @@ module.exports = _.merge(new Dispatcher(), {
 
 
 
-},{"flux":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/main.coffee":[function(require,module,exports){
+},{"flux":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/main.coffee":[function(require,module,exports){
 $(function() {
   var $c, MessagesComponent, StationActions, StationComponent, WritingComponent, clean, rend;
   StationActions = require('./actions/StationActions.coffee');
@@ -919,11 +910,7 @@ $(function() {
 
 
 
-<<<<<<< HEAD
-},{"./actions/StationActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","./components/MessagesComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee","./components/StationComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee","./components/WritingComponent.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee","./move.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/move.coffee","./persistence/MessagePersistence.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee","./persistence/StationPersistence.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee","./util.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/util.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/move.coffee":[function(require,module,exports){
-=======
-},{"./actions/StationActions.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","./components/MessagesComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee","./components/StationComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee","./components/WritingComponent.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee","./move.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/move.coffee","./persistence/MessagePersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee","./persistence/StationPersistence.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee","./util.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/util.coffee"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/move.coffee":[function(require,module,exports){
->>>>>>> test
+},{"./actions/StationActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee","./components/MessagesComponent.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/MessagesComponent.coffee","./components/StationComponent.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/StationComponent.coffee","./components/WritingComponent.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/components/WritingComponent.coffee","./move.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/move.coffee","./persistence/MessagePersistence.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee","./persistence/StationPersistence.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee","./util.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/util.coffee"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/move.coffee":[function(require,module,exports){
 var ldy, setSo, so;
 
 so = {};
@@ -1024,11 +1011,7 @@ $(window).on('scroll', window.util.checkScroll);
 
 
 
-<<<<<<< HEAD
-},{}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js":[function(require,module,exports){
-=======
-},{}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js":[function(require,module,exports){
->>>>>>> test
+},{}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/flux/index.js":[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1040,7 +1023,7 @@ $(window).on('scroll', window.util.checkScroll);
 
 module.exports.Dispatcher = require('./lib/Dispatcher')
 
-},{"./lib/Dispatcher":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/Dispatcher.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/Dispatcher.js":[function(require,module,exports){
+},{"./lib/Dispatcher":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/Dispatcher.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/Dispatcher.js":[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -1292,7 +1275,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-},{"./invariant":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/invariant.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/invariant.js":[function(require,module,exports){
+},{"./invariant":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/invariant.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/flux/lib/invariant.js":[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -1347,8 +1330,8 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/data/packed/latest.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/data/packed/latest.json":[function(require,module,exports){
+module.exports={
 	"version": "2014j",
 	"zones": [
 		"Africa/Abidjan|LMT GMT|g.8 0|01|-2ldXH.Q",
@@ -1937,11 +1920,11 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 		"Pacific/Pohnpei|Pacific/Ponape"
 	]
 }
-},{}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/index.js":[function(require,module,exports){
+},{}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/index.js":[function(require,module,exports){
 var moment = module.exports = require("./moment-timezone");
 moment.tz.load(require('./data/packed/latest.json'));
 
-},{"./data/packed/latest.json":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/data/packed/latest.json","./moment-timezone":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/moment-timezone.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/moment-timezone.js":[function(require,module,exports){
+},{"./data/packed/latest.json":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/data/packed/latest.json","./moment-timezone":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/moment-timezone.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/moment-timezone.js":[function(require,module,exports){
 //! moment-timezone.js
 //! version : 0.2.5
 //! author : Tim Wood
@@ -2344,9 +2327,9 @@ moment.tz.load(require('./data/packed/latest.json'));
 	return moment;
 }));
 
-},{"moment":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/node_modules/moment/moment.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/node_modules/moment/moment.js":[function(require,module,exports){
+},{"moment":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/node_modules/moment/moment.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/node_modules/moment/moment.js":[function(require,module,exports){
 //! moment.js
-//! version : 2.10.0
+//! version : 2.10.2
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -2359,7 +2342,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
     var hookCallback;
 
-    function hooks__hooks () {
+    function utils_hooks__hooks () {
         return hookCallback.apply(null, arguments);
     }
 
@@ -2423,7 +2406,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         return a;
     }
 
-    function utc__createUTC (input, format, locale, strict) {
+    function create_utc__createUTC (input, format, locale, strict) {
         return createLocalOrUTC(input, format, locale, strict, true).utc();
     }
 
@@ -2448,7 +2431,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     }
 
     function valid__createInvalid (flags) {
-        var m = utc__createUTC(NaN);
+        var m = create_utc__createUTC(NaN);
         if (flags != null) {
             extend(m._pf, flags);
         }
@@ -2459,7 +2442,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         return m;
     }
 
-    var momentProperties = hooks__hooks.momentProperties = [];
+    var momentProperties = utils_hooks__hooks.momentProperties = [];
 
     function copyConfig(to, from) {
         var i, prop, val;
@@ -2518,7 +2501,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         // objects.
         if (updateInProgress === false) {
             updateInProgress = true;
-            hooks__hooks.updateOffset(this);
+            utils_hooks__hooks.updateOffset(this);
             updateInProgress = false;
         }
     }
@@ -2603,7 +2586,7 @@ moment.tz.load(require('./data/packed/latest.json'));
                 require('./locale/' + name);
                 // because defineLocale currently also sets the global locale, we
                 // want to undo that for lazy loaded locales
-                locales__getSetGlobalLocale(oldLocale);
+                locale_locales__getSetGlobalLocale(oldLocale);
             } catch (e) { }
         }
         return locales[name];
@@ -2612,11 +2595,11 @@ moment.tz.load(require('./data/packed/latest.json'));
     // This function will load locale and then set the global locale.  If
     // no arguments are passed in, it will simply return the current global
     // locale key.
-    function locales__getSetGlobalLocale (key, values) {
+    function locale_locales__getSetGlobalLocale (key, values) {
         var data;
         if (key) {
             if (typeof values === 'undefined') {
-                data = locales__getLocale(key);
+                data = locale_locales__getLocale(key);
             }
             else {
                 data = defineLocale(key, values);
@@ -2640,7 +2623,7 @@ moment.tz.load(require('./data/packed/latest.json'));
             locales[name].set(values);
 
             // backwards compat for now: also set the locale
-            locales__getSetGlobalLocale(name);
+            locale_locales__getSetGlobalLocale(name);
 
             return locales[name];
         } else {
@@ -2651,7 +2634,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     }
 
     // returns locale data
-    function locales__getLocale (key) {
+    function locale_locales__getLocale (key) {
         var locale;
 
         if (key && key._locale && key._locale._abbr) {
@@ -2706,7 +2689,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         return function (value) {
             if (value != null) {
                 get_set__set(this, unit, value);
-                hooks__hooks.updateOffset(this, keepTime);
+                utils_hooks__hooks.updateOffset(this, keepTime);
                 return this;
             } else {
                 return get_set__get(this, unit);
@@ -2989,7 +2972,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
         for (i = 0; i < 12; i++) {
             // make the regex if we don't have it already
-            mom = utc__createUTC([2000, i]);
+            mom = create_utc__createUTC([2000, i]);
             if (strict && !this._longMonthsParse[i]) {
                 this._longMonthsParse[i] = new RegExp('^' + this.months(mom, '').replace('.', '') + '$', 'i');
                 this._shortMonthsParse[i] = new RegExp('^' + this.monthsShort(mom, '').replace('.', '') + '$', 'i');
@@ -3031,7 +3014,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     function getSetMonth (value) {
         if (value != null) {
             setMonth(this, value);
-            hooks__hooks.updateOffset(this, true);
+            utils_hooks__hooks.updateOffset(this, true);
             return this;
         } else {
             return get_set__get(this, 'Month');
@@ -3067,7 +3050,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     }
 
     function warn(msg) {
-        if (hooks__hooks.suppressDeprecationWarnings === false && typeof console !== 'undefined' && console.warn) {
+        if (utils_hooks__hooks.suppressDeprecationWarnings === false && typeof console !== 'undefined' && console.warn) {
             console.warn('Deprecation warning: ' + msg);
         }
     }
@@ -3092,7 +3075,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         }
     }
 
-    hooks__hooks.suppressDeprecationWarnings = false;
+    utils_hooks__hooks.suppressDeprecationWarnings = false;
 
     var from_string__isoRegex = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
 
@@ -3156,11 +3139,11 @@ moment.tz.load(require('./data/packed/latest.json'));
         configFromISO(config);
         if (config._isValid === false) {
             delete config._isValid;
-            hooks__hooks.createFromInputFallback(config);
+            utils_hooks__hooks.createFromInputFallback(config);
         }
     }
 
-    hooks__hooks.createFromInputFallback = deprecate(
+    utils_hooks__hooks.createFromInputFallback = deprecate(
         'moment construction falls back to js Date. This is ' +
         'discouraged and will be removed in upcoming major ' +
         'release. Please refer to ' +
@@ -3212,7 +3195,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
     addParseToken(['YYYY', 'YYYYY', 'YYYYYY'], YEAR);
     addParseToken('YY', function (input, array) {
-        array[YEAR] = hooks__hooks.parseTwoDigitYear(input);
+        array[YEAR] = utils_hooks__hooks.parseTwoDigitYear(input);
     });
 
     // HELPERS
@@ -3227,7 +3210,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
     // HOOKS
 
-    hooks__hooks.parseTwoDigitYear = function (input) {
+    utils_hooks__hooks.parseTwoDigitYear = function (input) {
         return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
     };
 
@@ -3486,12 +3469,12 @@ moment.tz.load(require('./data/packed/latest.json'));
         config._dayOfYear = temp.dayOfYear;
     }
 
-    hooks__hooks.ISO_8601 = function () {};
+    utils_hooks__hooks.ISO_8601 = function () {};
 
     // date from string and format string
     function configFromStringAndFormat(config) {
         // TODO: Move this to another part of the creation flow to prevent circular deps
-        if (config._f === hooks__hooks.ISO_8601) {
+        if (config._f === utils_hooks__hooks.ISO_8601) {
             configFromISO(config);
             return;
         }
@@ -3637,7 +3620,7 @@ moment.tz.load(require('./data/packed/latest.json'));
             format = config._f,
             res;
 
-        config._locale = config._locale || locales__getLocale(config._l);
+        config._locale = config._locale || locale_locales__getLocale(config._l);
 
         if (input === null || (format === undefined && input === '')) {
             return valid__createInvalid({nullInput: true});
@@ -3686,7 +3669,7 @@ moment.tz.load(require('./data/packed/latest.json'));
             // from milliseconds
             config._d = new Date(input);
         } else {
-            hooks__hooks.createFromInputFallback(config);
+            utils_hooks__hooks.createFromInputFallback(config);
         }
     }
 
@@ -3795,7 +3778,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
         this._data = {};
 
-        this._locale = locales__getLocale();
+        this._locale = locale_locales__getLocale();
 
         this._bubble();
     }
@@ -3852,7 +3835,7 @@ moment.tz.load(require('./data/packed/latest.json'));
             diff = (isMoment(input) || isDate(input) ? +input : +local__createLocal(input)) - (+res);
             // Use low-level api, because this fn is low-level api.
             res._d.setTime(+res._d + diff);
-            hooks__hooks.updateOffset(res, false);
+            utils_hooks__hooks.updateOffset(res, false);
             return res;
         } else {
             return local__createLocal(input).local();
@@ -3870,7 +3853,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
     // This function will be called whenever a moment is mutated.
     // It is intended to keep the offset in sync with the timezone.
-    hooks__hooks.updateOffset = function () {};
+    utils_hooks__hooks.updateOffset = function () {};
 
     // MOMENTS
 
@@ -3907,7 +3890,7 @@ moment.tz.load(require('./data/packed/latest.json'));
                     add_subtract__addSubtract(this, create__createDuration(input - offset, 'm'), 1, false);
                 } else if (!this._changeInProgress) {
                     this._changeInProgress = true;
-                    hooks__hooks.updateOffset(this, true);
+                    utils_hooks__hooks.updateOffset(this, true);
                     this._changeInProgress = null;
                 }
             }
@@ -3976,7 +3959,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
     function isDaylightSavingTimeShifted () {
         if (this._a) {
-            var other = this._isUTC ? utc__createUTC(this._a) : local__createLocal(this._a);
+            var other = this._isUTC ? create_utc__createUTC(this._a) : local__createLocal(this._a);
             return this.isValid() && compareArrays(this._a, other.toArray()) > 0;
         }
 
@@ -4062,6 +4045,8 @@ moment.tz.load(require('./data/packed/latest.json'));
         return ret;
     }
 
+    create__createDuration.fn = Duration.prototype;
+
     function parseIso (inp, sign) {
         // We'd normally use ~~inp for this, but unfortunately it also
         // converts floats to ints.
@@ -4131,14 +4116,14 @@ moment.tz.load(require('./data/packed/latest.json'));
             setMonth(mom, get_set__get(mom, 'Month') + months * isAdding);
         }
         if (updateOffset) {
-            hooks__hooks.updateOffset(mom, days || months);
+            utils_hooks__hooks.updateOffset(mom, days || months);
         }
     }
 
     var add_subtract__add      = createAdder(1, 'add');
     var add_subtract__subtract = createAdder(-1, 'subtract');
 
-    function calendar__calendar (time) {
+    function moment_calendar__calendar (time) {
         // We want to compare the start of today, vs this.
         // Getting start-of-today depends on whether we're local/utc/offset or not.
         var now = time || local__createLocal(),
@@ -4251,7 +4236,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         return -(wholeMonthDiff + adjust);
     }
 
-    hooks__hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+    utils_hooks__hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
 
     function toString () {
         return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
@@ -4272,7 +4257,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     }
 
     function format (inputString) {
-        var output = formatMoment(this, inputString || hooks__hooks.defaultFormat);
+        var output = formatMoment(this, inputString || utils_hooks__hooks.defaultFormat);
         return this.localeData().postformat(output);
     }
 
@@ -4290,7 +4275,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         if (key === undefined) {
             return this._locale._abbr;
         } else {
-            newLocaleData = locales__getLocale(key);
+            newLocaleData = locale_locales__getLocale(key);
             if (newLocaleData != null) {
                 this._locale = newLocaleData;
             }
@@ -4338,7 +4323,6 @@ moment.tz.load(require('./data/packed/latest.json'));
             /* falls through */
         case 'second':
             this.milliseconds(0);
-            /* falls through */
         }
 
         // weeks are a special case
@@ -4432,7 +4416,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     });
 
     addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
-        week[token] = hooks__hooks.parseTwoDigitYear(input);
+        week[token] = utils_hooks__hooks.parseTwoDigitYear(input);
     });
 
     // HELPERS
@@ -4777,7 +4761,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     var momentPrototype__proto = Moment.prototype;
 
     momentPrototype__proto.add          = add_subtract__add;
-    momentPrototype__proto.calendar     = calendar__calendar;
+    momentPrototype__proto.calendar     = moment_calendar__calendar;
     momentPrototype__proto.clone        = clone;
     momentPrototype__proto.diff         = diff;
     momentPrototype__proto.endOf        = endOf;
@@ -4960,7 +4944,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         return typeof format === 'function' ? format(output) : format.replace(/%s/i, output);
     }
 
-    function set__set (config) {
+    function locale_set__set (config) {
         var prop, i;
         for (i in config) {
             prop = config[i];
@@ -4991,7 +4975,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     prototype__proto._relativeTime   = defaultRelativeTime;
     prototype__proto.relativeTime    = relative__relativeTime;
     prototype__proto.pastFuture      = pastFuture;
-    prototype__proto.set             = set__set;
+    prototype__proto.set             = locale_set__set;
 
     // Month
     prototype__proto.months       =        localeMonths;
@@ -5021,8 +5005,8 @@ moment.tz.load(require('./data/packed/latest.json'));
     prototype__proto.meridiem = localeMeridiem;
 
     function lists__get (format, index, field, setter) {
-        var locale = locales__getLocale();
-        var utc = utc__createUTC().set(setter, index);
+        var locale = locale_locales__getLocale();
+        var utc = create_utc__createUTC().set(setter, index);
         return locale[field](utc, format);
     }
 
@@ -5066,7 +5050,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         return list(format, index, 'weekdaysMin', 7, 'day');
     }
 
-    locales__getSetGlobalLocale('en', {
+    locale_locales__getSetGlobalLocale('en', {
         ordinalParse: /\d{1,2}(th|st|nd|rd)/,
         ordinal : function (number) {
             var b = number % 10,
@@ -5079,12 +5063,12 @@ moment.tz.load(require('./data/packed/latest.json'));
     });
 
     // Side effect imports
-    hooks__hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', locales__getSetGlobalLocale);
-    hooks__hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', locales__getLocale);
+    utils_hooks__hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', locale_locales__getSetGlobalLocale);
+    utils_hooks__hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', locale_locales__getLocale);
 
     var mathAbs = Math.abs;
 
-    function abs__abs () {
+    function duration_abs__abs () {
         var data           = this._data;
 
         this._milliseconds = mathAbs(this._milliseconds);
@@ -5202,7 +5186,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     }
 
     // TODO: Use this.as('ms')?
-    function as__valueOf () {
+    function duration_as__valueOf () {
         return (
             this._milliseconds +
             this._days * 864e5 +
@@ -5226,7 +5210,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     var asMonths       = makeAs('M');
     var asYears        = makeAs('y');
 
-    function get__get (units) {
+    function duration_get__get (units) {
         units = normalizeUnits(units);
         return this[units + 's']();
     }
@@ -5237,7 +5221,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         };
     }
 
-    var get__milliseconds = makeGetter('milliseconds');
+    var duration_get__milliseconds = makeGetter('milliseconds');
     var seconds      = makeGetter('seconds');
     var minutes      = makeGetter('minutes');
     var hours        = makeGetter('hours');
@@ -5263,7 +5247,7 @@ moment.tz.load(require('./data/packed/latest.json'));
         return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
     }
 
-    function humanize__relativeTime (posNegDuration, withoutSuffix, locale) {
+    function duration_humanize__relativeTime (posNegDuration, withoutSuffix, locale) {
         var duration = create__createDuration(posNegDuration).abs();
         var seconds  = round(duration.as('s'));
         var minutes  = round(duration.as('m'));
@@ -5290,7 +5274,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     }
 
     // This function allows you to set a threshold for relative time strings
-    function humanize__getSetRelativeTimeThreshold (threshold, limit) {
+    function duration_humanize__getSetRelativeTimeThreshold (threshold, limit) {
         if (thresholds[threshold] === undefined) {
             return false;
         }
@@ -5303,7 +5287,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
     function humanize (withSuffix) {
         var locale = this.localeData();
-        var output = humanize__relativeTime(this, !withSuffix, locale);
+        var output = duration_humanize__relativeTime(this, !withSuffix, locale);
 
         if (withSuffix) {
             output = locale.pastFuture(+this, output);
@@ -5343,7 +5327,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 
     var duration_prototype__proto = Duration.prototype;
 
-    duration_prototype__proto.abs            = abs__abs;
+    duration_prototype__proto.abs            = duration_abs__abs;
     duration_prototype__proto.add            = duration_add_subtract__add;
     duration_prototype__proto.subtract       = duration_add_subtract__subtract;
     duration_prototype__proto.as             = as;
@@ -5355,10 +5339,10 @@ moment.tz.load(require('./data/packed/latest.json'));
     duration_prototype__proto.asWeeks        = asWeeks;
     duration_prototype__proto.asMonths       = asMonths;
     duration_prototype__proto.asYears        = asYears;
-    duration_prototype__proto.valueOf        = as__valueOf;
+    duration_prototype__proto.valueOf        = duration_as__valueOf;
     duration_prototype__proto._bubble        = bubble;
-    duration_prototype__proto.get            = get__get;
-    duration_prototype__proto.milliseconds   = get__milliseconds;
+    duration_prototype__proto.get            = duration_get__get;
+    duration_prototype__proto.milliseconds   = duration_get__milliseconds;
     duration_prototype__proto.seconds        = seconds;
     duration_prototype__proto.minutes        = minutes;
     duration_prototype__proto.hours          = hours;
@@ -5396,38 +5380,38 @@ moment.tz.load(require('./data/packed/latest.json'));
     // Side effect imports
 
 
-    hooks__hooks.version = '2.10.0';
+    utils_hooks__hooks.version = '2.10.2';
 
     setHookCallback(local__createLocal);
 
-    hooks__hooks.fn                    = momentPrototype;
-    hooks__hooks.min                   = min;
-    hooks__hooks.max                   = max;
-    hooks__hooks.utc                   = utc__createUTC;
-    hooks__hooks.unix                  = moment__createUnix;
-    hooks__hooks.months                = lists__listMonths;
-    hooks__hooks.isDate                = isDate;
-    hooks__hooks.locale                = locales__getSetGlobalLocale;
-    hooks__hooks.invalid               = valid__createInvalid;
-    hooks__hooks.duration              = create__createDuration;
-    hooks__hooks.isMoment              = isMoment;
-    hooks__hooks.weekdays              = lists__listWeekdays;
-    hooks__hooks.parseZone             = moment__createInZone;
-    hooks__hooks.localeData            = locales__getLocale;
-    hooks__hooks.isDuration            = isDuration;
-    hooks__hooks.monthsShort           = lists__listMonthsShort;
-    hooks__hooks.weekdaysMin           = lists__listWeekdaysMin;
-    hooks__hooks.defineLocale          = defineLocale;
-    hooks__hooks.weekdaysShort         = lists__listWeekdaysShort;
-    hooks__hooks.normalizeUnits        = normalizeUnits;
-    hooks__hooks.relativeTimeThreshold = humanize__getSetRelativeTimeThreshold;
+    utils_hooks__hooks.fn                    = momentPrototype;
+    utils_hooks__hooks.min                   = min;
+    utils_hooks__hooks.max                   = max;
+    utils_hooks__hooks.utc                   = create_utc__createUTC;
+    utils_hooks__hooks.unix                  = moment__createUnix;
+    utils_hooks__hooks.months                = lists__listMonths;
+    utils_hooks__hooks.isDate                = isDate;
+    utils_hooks__hooks.locale                = locale_locales__getSetGlobalLocale;
+    utils_hooks__hooks.invalid               = valid__createInvalid;
+    utils_hooks__hooks.duration              = create__createDuration;
+    utils_hooks__hooks.isMoment              = isMoment;
+    utils_hooks__hooks.weekdays              = lists__listWeekdays;
+    utils_hooks__hooks.parseZone             = moment__createInZone;
+    utils_hooks__hooks.localeData            = locale_locales__getLocale;
+    utils_hooks__hooks.isDuration            = isDuration;
+    utils_hooks__hooks.monthsShort           = lists__listMonthsShort;
+    utils_hooks__hooks.weekdaysMin           = lists__listWeekdaysMin;
+    utils_hooks__hooks.defineLocale          = defineLocale;
+    utils_hooks__hooks.weekdaysShort         = lists__listWeekdaysShort;
+    utils_hooks__hooks.normalizeUnits        = normalizeUnits;
+    utils_hooks__hooks.relativeTimeThreshold = duration_humanize__getSetRelativeTimeThreshold;
 
-    var _moment = hooks__hooks;
+    var _moment = utils_hooks__hooks;
 
     return _moment;
 
 }));
-},{}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee":[function(require,module,exports){
+},{}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/persistence/MessagePersistence.coffee":[function(require,module,exports){
 var MessageActions;
 
 MessageActions = require('../actions/MessageActions.coffee');
@@ -5506,7 +5490,7 @@ module.exports = {
 
 
 
-},{"../actions/MessageActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee":[function(require,module,exports){
+},{"../actions/MessageActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/MessageActions.coffee"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/persistence/StationPersistence.coffee":[function(require,module,exports){
 var StationActions;
 
 StationActions = require('../actions/StationActions.coffee');
@@ -5631,7 +5615,7 @@ module.exports = {
 
 
 
-},{"../actions/StationActions.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/stores/MessageStore.coffee":[function(require,module,exports){
+},{"../actions/StationActions.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/actions/StationActions.coffee"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/stores/MessageStore.coffee":[function(require,module,exports){
 var EventEmitter, MessageDispatcher, MessageStore, _fetching, _last, _listening, _messages, _station, _typing, moment;
 
 moment = require('moment-timezone');
@@ -5777,7 +5761,7 @@ module.exports = MessageStore;
 
 
 
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","moment-timezone":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/index.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee":[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","moment-timezone":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/node_modules/moment-timezone/index.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/stores/StationStore.coffee":[function(require,module,exports){
 var EventEmitter, StationDispatcher, StationStore, _audience, _config, _listening, _members, _station, _stations, _typing, _validAudience;
 
 EventEmitter = require('events').EventEmitter;
@@ -5977,11 +5961,7 @@ module.exports = StationStore;
 
 
 
-<<<<<<< HEAD
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js"}],"/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/util.coffee":[function(require,module,exports){
-=======
-},{"../dispatcher/Dispatcher.coffee":"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js"}],"/Users/galen/Documents/src/urbit-test/urb/zod/main/pub/talk/src/js/util.coffee":[function(require,module,exports){
->>>>>>> test
+},{"../dispatcher/Dispatcher.coffee":"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/dispatcher/Dispatcher.coffee","events":"/usr/local/lib/node_modules/watchify/node_modules/browserify/node_modules/events/events.js"}],"/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/util.coffee":[function(require,module,exports){
 if (!window.util) {
   window.util = {};
 }
@@ -6076,13 +6056,6 @@ _.merge(window.util, {
     window.util.getScroll();
     return $(window).scrollTop($("#c").height());
   },
-<<<<<<< HEAD
-  checkScroll: function() {
-    if (!window.util.writingPosition) {
-      window.util.getScroll();
-    }
-    if ($(window).scrollTop() < window.util.writingPosition) {
-=======
   isScrolling: function() {
     if (!window.util.writingPosition) {
       window.util.getScroll();
@@ -6091,7 +6064,6 @@ _.merge(window.util, {
   },
   checkScroll: function() {
     if (this.isScrolling()) {
->>>>>>> test
       return $('body').addClass('scrolling');
     } else {
       return $('body').removeClass('scrolling');
@@ -6406,4 +6378,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},["/Users/galen/src/urbit/urb/zod/main/pub/talk/src/js/main.coffee"]);
+},{}]},{},["/Users/galen/src/urbit-dev/urb/zod/main/pub/talk/src/js/main.coffee"]);

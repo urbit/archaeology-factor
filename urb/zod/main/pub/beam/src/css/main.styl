@@ -1,22 +1,3 @@
-//
-// fonts first
-//
-
-@import 'fonts'
-
-html
-body
-  font-family "bau"
-  font-size 18px
-
-#c
-  position absolute
-  top 0rem
-  left 50%
-  width 58rem
-  margin-left -29rem
-  margin-bottom 12rem
-
 .beam #c
   top 2rem
 
@@ -34,8 +15,11 @@ body
   z-index 100
 
 #beam .mods .links
-  height 1rem
+  max-height 1rem
   overflow hidden
+
+#beam:hover .mods .links
+  max-height 30rem
 
 #beam .mods .links
 #beam .mods .caret
@@ -45,6 +29,7 @@ body
 #beam .mods .caret
   border-left-color #ff0000
   margin-top 1px
+  display none
 
 #beam .mods
   float left
