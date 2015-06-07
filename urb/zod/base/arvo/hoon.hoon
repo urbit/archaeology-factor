@@ -155,6 +155,7 @@
 ++  rule  |=(tub=nail `edge`[p.tub ~ ~ tub])            ::  parsing rule
 ++  span  ,@ta                                          ::  text-atom (ASCII)
 ++  spot  ,[p=path q=pint]                              ::  range in file
+++  tane  (unit tang)                                   ::  general error unit
 ++  tang  (list tank)                                   ::  general error
 ++  tank  $%  [%leaf p=tape]                            ::  printing formats
               $:  %palm                                 ::  backstep list

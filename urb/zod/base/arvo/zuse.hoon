@@ -1816,7 +1816,8 @@
               r=(map ,@ta ankh)                         ::  folders
           ==                                            ::
 ++  apex  ,[p=@uvI q=(map ,@ta ,@uvI) r=(map ,@ta ,~)]  ::  node report (old)
-++  ares  (unit ,[p=term q=(list tank)])                ::  possible error
+++  area  (pair term tang)                              ::  modern error
+++  ares  (unit area)                                   ::
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
 ++  bath                                                ::  convo per client
@@ -1872,6 +1873,7 @@
           $?  %good                                     ::  delivered
               %dead                                     ::  rejected
           ==                                            ::
+++  carb  (pair flap flap)                              ::  packet id, msg id
 ++  cart  ,[p=cash q=cash]                              ::  hash change
 ++  care  ?(%u %v %w %x %y %z)                          ::  clay submode
 ++  case                                                ::  ship desk case spur
@@ -1911,9 +1913,9 @@
 ++  coop  (unit ares)                                   ::  e2e ack
 ++  corn                                                ::  flow by server
           $:  hen=duct                                  ::  admin channel
-              nys=(map flap bait)                       ::  packets incoming
-              olz=(map flap cape)                       ::  packets completed
-              wab=(map ship bath)                       ::  relationship
+              nys=(map flap bait)                       ::  messages assembling
+              olz=(map flap (unit (unit tang)))         ::  messages completed
+              wab=(map ship bath)                       ::  relationships
           ==                                            ::
 ++  cred                                                ::  credential
           $:  hut=hart                                  ::  client host
@@ -2088,10 +2090,8 @@
 ++  mace  (list ,[p=life q=ring])                       ::  private secrets
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
-          $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
-              [%buck p=coop q=flap r=@dr]               ::  e2e ack
-              [%bond p=life q=path r=@ud s=*]           ::  message
-              [%bund p=life q=path r=@ud s=*]           ::  e2e message
+          $%  [%beck p=flap q=@dr r=tane]               ::  unified acknowledge
+              [%band p=path q=@ud r=*]                  ::  unified message
               [%carp p=@ q=@ud r=@ud s=flap t=@]        ::  skin/inx/cnt/hash
               [%fore p=ship q=(unit lane) r=@]          ::  forwarded packet
           ==                                            ::
@@ -2176,10 +2176,10 @@
           ==                                            ::
 ++  race                                                ::  inbound stream
           $:  did=@ud                                   ::  filled sequence
-              dod=?                                     ::  not processing
-              bum=(map ,@ud ares)                       ::  nacks
-              mis=(map ,@ud ,[p=cape q=lane r=flap s=(unit)]) ::  misordered
+              liv=(unit ,@ud)                           ::  out for ack
+              mis=(map ,@ud raga)                       ::  unprocessed
           ==                                            ::
+++  raga  (trel lane carb (each noun tang))             ::  
 ++  rank  ?(%czar %king %duke %earl %pawn)              ::  ship width class
 ++  rang  $:  hut=(map tako yaki)                       ::
               lat=(map lobe blob)                       ::
