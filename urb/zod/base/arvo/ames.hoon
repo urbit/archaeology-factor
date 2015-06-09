@@ -1118,9 +1118,10 @@
             ?.  (gte num did.rum)
               ~&  %ha-dear 
               +>(..ha (cock p.rab (~(got by olz) q.rab)))
-            (
             work(mis (~(put by mis) num ryn rab dub))
+          ::
           ++  work
+            
           ::
           ++  done
             ?:  ?=(| -.dub)
