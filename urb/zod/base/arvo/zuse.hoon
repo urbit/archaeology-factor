@@ -1822,7 +1822,7 @@
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
 ++  bath                                                ::  convo per client
           $:  sop=shed                                  ::  not stalled
-              raz=(map path race)                       ::  statements inbound
+              raz=(map path race)                       ::  old msgs inbound
               ryl=(map path rill)                       ::  statements outbound
           ==                                            ::
 ++  beam  ,[[p=ship q=desk r=case] s=path]              ::  global name
@@ -1912,10 +1912,11 @@
 ++  coop  (unit ares)                                   ::  e2e ack
 ++  corn                                                ::  flow by server
           $:  hen=duct                                  ::  admin channel
-              nys=(map flap bait)                       ::  packets incoming
-              olz=(map flap cape)                       ::  packets completed
+              nys=(map flap bait)                       ::  messages incoming
+              olz=(map flap corp)                       ::  messages completed
               wab=(map ship bath)                       ::  relationship
           ==                                            ::
+++  corp  (unit (each cape coop))                       ::  ack record
 ++  cred                                                ::  credential
           $:  hut=hart                                  ::  client host
               aut=(jug ,@tas ,@t)                       ::  client identities
@@ -2175,11 +2176,12 @@
           $%  [& p=purl]                                ::  absolute
               [| p=pork q=quay]                         ::  relative
           ==                                            ::
+++  rabe  ,[kay=cape ryn=lane dam=flap]                 ::  inbound label
 ++  race                                                ::  inbound stream
           $:  did=@ud                                   ::  filled sequence
-              dod=?                                     ::  not processing
+              dod=?                                     ::  not waiting for app
               bum=(map ,@ud ares)                       ::  nacks
-              mis=(map ,@ud ,[p=cape q=lane r=flap s=(unit)]) ::  misordered
+              mis=(map ,@ud (pair rabe (unit noun)))    ::  waiting messages
           ==                                            ::
 ++  rank  ?(%czar %king %duke %earl %pawn)              ::  ship width class
 ++  rang  $:  hut=(map tako yaki)                       ::
