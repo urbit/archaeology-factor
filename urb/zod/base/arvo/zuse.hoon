@@ -1820,20 +1820,8 @@
 ++  ares  (unit ,[p=term q=(list tank)])                ::  possible error
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
-++  bath                                                ::  convo per client
-          $:  sop=shed                                  ::  not stalled
-              raz=(map path race)                       ::  old msgs inbound
-              ryl=(map path rill)                       ::  statements outbound
-          ==                                            ::
 ++  beam  ,[[p=ship q=desk r=case] s=path]              ::  global name
 ++  beak  ,[p=ship q=desk r=case]                       ::  garnish with beak
-++  bird                                                ::  packet in travel
-          $:  gom=soap                                  ::  message identity
-              mup=@ud                                   ::  pktno in msg
-              nux=@ud                                   ::  xmission count
-              lys=@da                                   ::  last sent
-              pac=rock                                  ::  packet data
-          ==                                            ::
 ++  bitt  (map bone (pair ship path))                   ::  incoming subs
 ++  blob                                                ::  fs blob
           $%  [%delta p=lobe q=[p=mark q=lobe] r=page]  ::  delta on q
@@ -1841,16 +1829,6 @@
               [%indirect p=lobe q=page r=lobe s=page]   ::  both
           ==                                            ::
 ++  boat  (map (pair bone wire) (trel bean ship path))  ::  outgoing subs
-++  boon                                                ::  fort output
-          $%  [%beer p=ship q=@uvG]                     ::  gained ownership
-              [%cake p=sock q=soap r=coop s=duct]       ::  e2e message result
-              [%coke p=sock q=soap r=cape s=duct]       ::  message result
-              [%mead p=lane q=rock]                     ::  accept packet
-              [%milk p=sock q=soap r=*]                 ::  accept message
-              [%mulk p=sock q=soap r=*]                 ::  e2e pass message
-              [%ouzo p=lane q=rock]                     ::  transmit packet
-              [%wine p=sock q=tape]                     ::  notify user
-          ==                                            ::
 ++  bowl                                                ::  standard app state
         $:  $:  our=ship                                ::  host
                 src=ship                                ::  guest
@@ -1910,12 +1888,6 @@
               [| p=(list ,@tas)]                        ::  alter
           ==                                            ::
 ++  coop  (unit ares)                                   ::  e2e ack
-++  corn                                                ::  flow by server
-          $:  hen=duct                                  ::  admin channel
-              nys=(map flap bait)                       ::  messages incoming
-              olz=(map flap corp)                       ::  messages completed
-              wab=(map ship bath)                       ::  relationship
-          ==                                            ::
 ++  corp  (unit (each cape coop))                       ::  ack record
 ++  cred                                                ::  credential
           $:  hut=hart                                  ::  client host
@@ -1932,12 +1904,7 @@
               hit=(map ,@ud tako)                       ::  changes by id
               lab=(map ,@tas ,@ud)                      ::  labels
           ==                                            ::
-++  dore                                                ::  foreign contact
-          $:  wod=road                                  ::  connection to
-              wyl=will                                  ::  inferred mirror
-              caq=clot                                  ::  symmetric key state
-          ==                                            ::
-++  dove  ,[p=@ud q=(map ,@ud ,@)]                      ::  count hash 13-blocks
+++  dove  ,[p=@ud q=(map ,@ud ,@)]                      ::  count 13-blocks
 ++  epic                                                ::  FCGI parameters
           $:  qix=(map ,@t ,@t)                         ::  query
               ced=cred                                  ::  client credentials
@@ -1948,13 +1915,6 @@
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  decaying avg rtt
               wid=@ud                                   ::  logical wdow msgs
-          ==                                            ::
-++  fort                                                ::  formal state
-          $:  %0                                        ::  version
-              gad=duct                                  ::  client interface
-              hop=@da                                   ::  network boot date
-              ton=town                                  ::  security
-              zac=(map ship corn)                       ::  flows by server
           ==                                            ::
 ++  gank  (each vase (list tank))                       ::  abstract result
 ++  gift                                                ::  one-way effect
@@ -2089,14 +2049,6 @@
 ++  maki  ,[p=@ta q=@ta r=@ta s=path]                   ::
 ++  mace  (list ,[p=life q=ring])                       ::  private secrets
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
-++  meal                                                ::  payload
-          $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
-              [%buck p=coop q=flap r=@dr]               ::  e2e ack
-              [%bond p=life q=path r=@ud s=*]           ::  message
-              [%bund p=life q=path r=@ud s=*]           ::  e2e message
-              [%carp p=@ q=@ud r=@ud s=flap t=@]        ::  skin/inx/cnt/hash
-              [%fore p=ship q=(unit lane) r=@]          ::  forwarded packet
-          ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers
 ++  meta                                                ::  path metadata
           $%  [& q=@uvI]                                ::  hash
@@ -2162,10 +2114,6 @@
 ++  prom  ?(%text %pass %none)                          ::  format type
 ++  purf  (pair purl (unit ,@t))                        ::  url with fragment
 ++  purl  ,[p=hart q=pork r=quay]                       ::  parsed url
-++  putt                                                ::  outgoing message
-          $:  ski=snow                                  ::  sequence acked/sent
-              wyv=(list rock)                           ::  packet list XX gear
-          ==                                            ::
 ++  pyre                                                ::  cascade stash
           $:  p=(map ,[p=path q=path r=coal] coal)      ::  by path
               q=(map ,[p=path q=@uvI r=coal] coal)      ::  by source hash
@@ -2175,13 +2123,6 @@
 ++  quri                                                ::  request-uri
           $%  [& p=purl]                                ::  absolute
               [| p=pork q=quay]                         ::  relative
-          ==                                            ::
-++  rabe  ,[kay=cape ryn=lane dam=flap]                 ::  inbound label
-++  race                                                ::  inbound stream
-          $:  did=@ud                                   ::  filled sequence
-              dod=?                                     ::  not waiting for app
-              bum=(map ,@ud ares)                       ::  nacks
-              mis=(map ,@ud (pair rabe (unit noun)))    ::  waiting messages
           ==                                            ::
 ++  rank  ?(%czar %king %duke %earl %pawn)              ::  ship width class
 ++  rang  $:  hut=(map tako yaki)                       ::
@@ -2217,13 +2158,11 @@
 ++  rump  ,[p=care q=case r=@tas s=path]                ::  relative path
 ++  saba  ,[p=ship q=@tas r=moar s=dome]                ::  patch/merge
 ++  sack  ,[p=ship q=ship]                              ::  incoming [our his]
-++  sufi                                                ::  domestic host
-          $:  hoy=(list ship)                           ::  hierarchy
-              val=wund                                  ::  private keys
-              law=will                                  ::  server will
-              seh=(map hand ,[p=ship q=@da])            ::  key cache
-              hoc=(map ship dore)                       ::  neighborhood
-          ==                                            ::
+++  scar                                                ::  opaque duct
+  $:  p=@ud                                             ::  bone sequence
+      q=(map duct bone)                                 ::  by duct
+      r=(map bone duct)                                 ::  by bone
+  ==                                                    ::
 ++  salt  ,@uv                                          ::  entropy
 ++  seal                                                ::  auth conversation
           $:  whu=(unit ship)                           ::  client identity
@@ -2233,50 +2172,16 @@
               pus=(unit ,@ta)                           ::  password
           ==                                            ::
 ++  sect  ?(%black %blue %red %orange %white)           ::  banner
-++  shed                                                ::  packet flow
-          $:  $:  rtt=@dr                               ::  smoothed rtt
-                  rto=@dr                               ::  retransmit timeout
-                  rtn=(unit ,@da)                       ::  next timeout
-                  rue=(unit ,@da)                       ::  last heard from
-              ==                                        ::
-              $:  nus=@ud                               ::  number sent
-                  nif=@ud                               ::  number live
-                  nep=@ud                               ::  next expected
-                  caw=@ud                               ::  logical window
-                  cag=@ud                               ::  congest thresh
-              ==                                        ::
-              $:  diq=(map flap ,@ud)                   ::  packets sent
-                  pyz=(map soup ,@ud)                   ::  message/unacked
-                  puq=(qeu ,[p=@ud q=soul])             ::  packet queue
-              ==                                        ::
-          ==                                            ::
 ++  skit  ,[p=(unit ,@ta) q=(list ,@ta) r=(list ,@ta)]  ::  tracking path
-++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  slip  ,[p=path q=goal]                              ::  traceable request
-++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
-++  soap  ,[p=[p=life q=life] q=path r=@ud]             ::  statement id
-++  soup  ,[p=path q=@ud]                               ::  new statement id
-++  soul                                                ::  packet in travel
-          $:  gom=soup                                  ::  message identity
-              nux=@ud                                   ::  xmission count
-              liv=?                                     ::  deemed live
-              lys=@da                                   ::  last sent
-              pac=rock                                  ::  packet data
-          ==                                            ::
+++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  soba  ,[p=cart q=(list ,[p=path q=miso])]           ::  delta
 ++  sock  ,[p=ship q=ship]                              ::  outgoing [from to]
 ++  spur  path                                          ::  ship desk case spur
 ++  step  ,[p=bray q=gens r=pass]                       ::  identity stage
 ++  suba  ,[p=cart q=(list ,[p=path q=misu])]           ::  delta
 ++  tako  ,@                                            ::  yaki ref
-++  tick  ,@ud                                          ::  process id
 ++  toro  ,[p=@ta q=nori]                               ::  general change
-++  town                                                ::  all security state
-          $:  lit=@ud                                   ::  imperial modulus
-              any=@                                     ::  entropy
-              urb=(map ship sufi)                       ::  all keys and routes
-              fak=?                                     ::
-          ==                                            ::
 ++  tube  ,[p=@ta q=@ta r=@ta s=path]                   ::  canonical path
 ++  tutu  ,*                                            ::  presumed type
 ++  yaki  ,[p=(list tako) q=(map path lobe) r=tako t=@da] ::  commit
@@ -2298,13 +2203,13 @@
 ::::        ::::  this will become `%york`, vane structures.
   ::          ::
 ++  gift-ames                                           ::  out result <-$
-          $%  [%hear p=lane q=@]                        ::  receive packet
+          $%  [%drop ~]                                 ::  drop packet
+              [%hear p=lane q=@]                        ::  receive packet
               [%init p=@p]                              ::  report install
               [%mass p=mass]                            ::  memory usage
               [%send p=lane q=@]                        ::  transmit packet
               [%waft p=sock q=*]                        ::  response message
               [%wart p=sock q=@tas r=path s=*]          ::  network request
-              [%went p=ship q=cape]                     ::  reaction message
               [%woot p=ship q=coop]                     ::  e2e reaction message
           ==                                            ::
 ++  kiss-ames                                           ::  in request ->$
@@ -2318,8 +2223,8 @@
               [%make p=(unit ,@t) q=@ud r=@ s=?]        ::  wild license
               [%sith p=@p q=@uw r=?]                    ::  imperial generator
               [%wake ~]                                 ::  timer activate
-              [%want p=sock q=path r=*]                 ::  send message
               [%wegh ~]                                 ::  report memory
+              [%west p=sack q=path r=*]                 ::  network request
               [%wont p=sock q=path r=*]                 ::  e2e send message
           ==                                            ::
 ::
@@ -2334,6 +2239,7 @@
 ::::                                                    ::
 ++  gift-clay                                           ::  out result <-$
           $%  [%ergo p=@p q=@tas r=@ud s=mick]          ::  version update
+              [%mack p=(unit tang)]                     ::  ack
               [%mass p=mass]                            ::  memory usage
               [%mere p=(each (set path) (pair term tang))]  ::  merge result
               [%note p=@tD q=tank]                      ::  debug message
@@ -2345,9 +2251,9 @@
               [%into p=@p q=@tas r=khan]                ::  external edit
               [%lynx p=@p q=@tas r=(unit ,?)]           ::  sync to unix
               [%merg p=@p q=@tas r=@p s=@tas t=germ]    ::  merge desks
-              [%wart p=sock q=@tas r=path s=*]          ::  network request
               [%warp p=sock q=riff]                     ::  file request
               [%wegh ~]                                 ::  report memory
+              [%west p=sack q=path r=*]                 ::  network request
           ==                                            ::
 ::
 ::::
@@ -2438,6 +2344,7 @@
 ::::    %eyre
   ::
 ++  gram                                                ::  inter-ship message
+  =+  fuz=,[path *]                                     ::  ames format
   $?  [[%lon ~] p=hole]                                 ::  login request
       [[%aut ~] p=hole]                                 ::  login reply
       [[%hat ~] p=hole q=hart]                          ::  login redirect
@@ -2454,11 +2361,12 @@
               [%they p=@ud q=httr]                      ::  inbound response
               [%this p=? q=clip r=httq]                 ::  inbound request
               [%thud ~]                                 ::  inbound cancel
-              [%wart p=sack q=@tas r=_`[path *]`*gram]  ::  urbit message
               [%wegh ~]                                 ::  report memory
+              [%west p=sack q=fuz:gram]                 ::  network request
           ==                                            ::
 ++  gift-eyre                                           ::  out result <-$
           $%  [%mass p=mass]                            ::  memory usage
+              [%mack p=(unit tang)]                     ::  message ack
               [%sigh p=cage]                            ::  marked http response
               [%thou p=httr]                            ::  raw http response
               [%thus p=@ud q=(unit hiss)]               ::  http request/cancel
@@ -2575,8 +2483,7 @@
   $%  [%conf p=dock q=culm]                             ::  configure app
       [%init p=ship]                                    ::  set owner
       [%deal p=sock q=cush]                             ::  full transmission
-      [%rote p=sack q=path r=*]                         ::  remote request
-      [%roth p=sack q=path r=*]                         ::  remote response
+      [%west p=sack q=path r=*]                         ::  network request
       [%wegh ~]                                         ::  report memory
   ==                                                    ::
 ++  gift-gall                                           ::  outgoing result
