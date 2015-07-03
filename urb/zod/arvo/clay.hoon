@@ -35,9 +35,12 @@
           ==                                            ::
 ++  moot  ,[p=case q=case r=path s=(map path lobe)]     ::  stored change range
 ++  move  ,[p=duct q=(mold note gift)]                  ::  local move
+++  noko  $:  tar=(set tako)                            ::  new commits
+              bar=(set lobe)                            ::  new content
+          ==                                            ::
 ++  nako  $:  gar=(map aeon tako)                       ::  new ids
               let=aeon                                  ::  next id
-              lar=(set yaki)                            ::  new commits
+              tar=(set yaki)                            ::  new commits
               bar=(set plop)                            ::  new content
           ==                                            ::
 ++  note                                                ::  out request $->
@@ -81,6 +84,7 @@
           $:  fat=(map ship room)                       ::  domestic
               hoy=(map ship rung)                       ::  foreign
               ran=rang                                  ::  hashes
+              nak=[p=@ud q=(map ,@ud riot)]             ::  pending nakos
               mon=(map term beam)                       ::  mount points
               hez=(unit duct)                           ::  sync duct
           ==                                            ::
@@ -836,13 +840,13 @@
     |=  $:  lem=(unit ,@da)                             ::  complete up to
             gar=(map aeon tako)                         ::  new ids
             let=aeon                                    ::  next id
-            lar=(set yaki)                              ::  new commits
+            tar=(set yaki)                              ::  new commits
             bar=(set blob)                              ::  new content
         ==
     ^+  +>
     =+  ^-  nut=(map tako yaki)
         %-  mo  ^-  (list (pair tako yaki))
-        %+  turn  (~(tap in lar))
+        %+  turn  (~(tap in tar))
         |=  yak=yaki
         [r.yak yak]
     =+  ^-  nat=(map lobe blob)
@@ -957,6 +961,7 @@
         ==
       ?.  ?=(%nako p.r.u.rut)  +>+.$
       =+  rav=`rave`q.u.ruv
+      ~&  >  [%taking-foreign-nako rav]
       ?>  ?=(%many -.rav)
       |-  ^+  +>+.^$
       =+  nez=[%w [%ud let.dom] ~]
@@ -1083,7 +1088,7 @@
         lem
       gar.u.nak.u.ref
     :+  let.u.nak.u.ref
-      lar.u.nak.u.ref
+      tar.u.nak.u.ref
     (sa lat)
   ::
   ++  mabe                                            ::  maybe fire function
@@ -1260,7 +1265,7 @@
       [p q has t]
     ::
     ++  apply-changes                                   ::   apply-changes:ze
-      |=  lar=(list ,[p=path q=misu])                   ::  store changes
+      |=  tar=(list ,[p=path q=misu])                   ::  store changes
       ^-  (map path blob)
       =+  ^=  hat                                       ::  current state
           ?:  =(let.dom 0)                              ::  initial commit
@@ -1268,7 +1273,7 @@
           =<  q
           %-  aeon-to-yaki
           let.dom
-      =-  =+  sar=(sa (turn lar |=([p=path *] p)))      ::  changed paths
+      =-  =+  sar=(sa (turn tar |=([p=path *] p)))      ::  changed paths
           %+  roll  (~(tap by hat) ~)                   ::  find unchanged
           =<  .(bat bar)
           |=  [[pax=path gar=lobe] bat=(map path blob)]
@@ -1278,7 +1283,7 @@
           ~|  [pax gar (lent (~(tap by lat.ran)))]
           (lobe-to-blob gar)                            ::  use original
       ^=  bar  ^-  (map path blob)
-      %+  roll  lar
+      %+  roll  tar
       |=  [[pax=path mys=misu] bar=(map path blob)]
       ^+  bar
       ?-    -.mys
@@ -2564,7 +2569,38 @@
             %c
           [%warp [p.p.q.hic p.p.q.hic] ryf]
       ==
-    ?>  ?=([%answer @ @ ~] q.q.hic)
+    ?:  ?=([%catalog *] q.q.hic)
+      =+  nok=((hard noko) r.q.hic)
+      =+  ^-  nuk=noko
+          :-  (~(dif in tar.nok) (sa (turn (~(tap by hut.ran.ruf)) head)))
+          (~(dif in bar.nok) (sa (turn (~(tap by lat.ran.ruf)) head)))
+      :_  ..^$
+      :~  [hen %give %mack ~]
+          :*  hen  %pass  ~  %a
+              %wont  p.q.hic
+              [%c %wish t.q.q.hic]
+              nuk
+      ==  ==
+    ?:  ?=([%wish @ *] q.q.hic)
+      =+  nok=((hard noko) r.q.hic)
+      =+  num=(slav %ud i.t.q.q.hic)
+      =+  nak=(~(got by q.nak.ruf) num)
+      ?>  ?=([~ * * %nako *] nak)
+      :_  ..^$(q.nak.ruf (~(del by q.nak.ruf) num))
+      :~  [hen %give %mack ~]
+          :*  hen  %pass  ~  %a
+              %wont  p.q.hic
+              [%c %answer t.t.q.q.hic]
+              ^-  (unit rand)
+              %=    nak
+                  r.u
+                :*  %nako
+                    -.r.u.nak  +<.r.u.nak
+                    (sa (turn (~(tap in tar.nok)) ~(got by hut.ran.ruf)))
+                    (sa (turn (~(tap in bar.nok)) ~(got by lat.ran.ruf)))
+                ==
+      ==  ==  ==
+    ?>  ?=([?(%answer %answre) @ @ ~] q.q.hic)
     =+  syd=(slav %tas i.t.q.q.hic)
     =+  inx=(slav %ud i.t.t.q.q.hic)
     =+  ^=  zat
@@ -2805,12 +2841,24 @@
     ~|  it=i.t.tea
     =+  our=(slav %p i.tea)
     =+  him=(slav %p i.t.tea)
+    ?:  ?=([~ * * %nako *] p.+.q.hin)
+      =+  nak=((hard nako) q.q.r.u.p.+.q.hin)
+      :_  %_  ..^$
+             p.nak.ruf  +(p.nak.ruf)
+             q.nak.ruf  (~(put by q.nak.ruf) p.nak.ruf p.+.q.hin)
+          ==
+      :~  :*  hen  %pass  ~  %a
+              %wont  [our him]
+              [%c %catalog (scot %ud p.nak.ruf) t.t.tea]
+              (sa (turn (~(tap in tar.nak)) |=(yaki r)))
+              (sa (turn (~(tap in bar.nak)) |=(blob p)))
+      ==  ==
     :_  ..^$
     :~  :*  hen  %pass  ~  %a
-            %wont  [our him]  [%c %answer t.t.tea]
+            %wont  [our him]
+            :-  [%c %answre t.t.tea]
             (bind p.+.q.hin rant-to-rand)
-        ==
-    ==
+    ==  ==
   ::
       %woot
     ?~  q.q.hin  [~ ..^$]
