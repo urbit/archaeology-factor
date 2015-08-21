@@ -1,0 +1,32 @@
+A noun is an atom or a cell.
+An atom is a natural number.
+A cell is an ordered pair of nouns.
+
+nock(a)          *a
+[a b c]          [a [b c]]
+
+?[a b]           0
+?a               1
++[a b]           +[a b]
++a               1 + a
+=[a a]           0
+=[a b]           1
+=a               =a
+
+/[1 a]           a
+/[2 a b]         a
+/[3 a b]         b
+/[(a + a) b]     /[2 /[a b]]
+/[(a + a + 1) b] /[3 /[a b]]
+/a               /a
+
+*[a [b c] d]     [*[a b c] *[a d]]
+
+*[a 0 b]         /[b a]
+*[a 1 b]         b
+*[a 2 b c]       *[*[a b] *[a c]]
+*[a 3 b]         ?*[a b]
+*[a 4 b]         +*[a b]
+*[a 5 b]         =*[a b]
+
+*a               *a

@@ -1539,10 +1539,10 @@ _raft_lame(u3_noun ovo, u3_noun why, u3_noun tan)
 
 /* _raft_drop(): test if event must be dropped.
 */
-static u3_bean
+static c3_o
 _raft_drop(u3_noun vir)
 {
-  u3_bean kil = c3n;
+  c3_o    kil = c3n;
   u3_noun riv = vir;
 
   while ( u3_nul != riv ) {
@@ -1555,7 +1555,7 @@ _raft_drop(u3_noun vir)
   }
   u3z(vir);
   return kil;
-    
+} 
 
 /* _raft_punk(): insert and apply an input ovum (unprotected).
 */
@@ -1637,9 +1637,9 @@ _raft_punk(u3_noun ovo)
 
       u3z(nug);
       if ( c3y == _raft_drop(u3k(vir)) ) {
-        c3_c* str_c =  u3_cr_string(u3h(u3t(ovo)));
+        c3_c* str_c =  u3r_string(u3h(u3t(ovo)));
 
-        uL(fprintf(uH, "drop ovum %%%s, mug %x\n", str_c, u3_cr_mug(ovo)));
+        uL(fprintf(uH, "drop ovum %%%s, mug %x\n", str_c, u3r_mug(ovo)));
         u3z(vir);
         u3z(cor);
         free(str_c);

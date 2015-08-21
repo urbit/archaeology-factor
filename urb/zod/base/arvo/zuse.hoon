@@ -1846,7 +1846,6 @@
 ++  bray  ,[p=life q=(unit life) r=ship s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
-++  cake  ,[p=sock q=skin r=@]                          ::  top level packet
 ++  cape                                                ::  end-to-end result
           $?  %good                                     ::  delivered
               %dead                                     ::  rejected
@@ -2223,8 +2222,7 @@
               [%make p=(unit ,@t) q=@ud r=@ s=?]        ::  wild license
               [%sith p=@p q=@uw r=?]                    ::  imperial generator
               [%wake ~]                                 ::  timer activate
-              [%wegh ~]                                 ::  report memory
-              [%west p=sack q=path r=*]                 ::  network request
+              ::  [%wegh ~]                                 ::  report memory
               [%wont p=sock q=path r=*]                 ::  e2e send message
           ==                                            ::
 ::
