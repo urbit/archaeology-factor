@@ -2360,7 +2360,7 @@
               [%this p=? q=clip r=httq]                 ::  inbound request
               [%thud ~]                                 ::  inbound cancel
               [%wegh ~]                                 ::  report memory
-              [%west p=sack q=fuz:gram]                 ::  network request
+              [%west p=sack q=path r=*]                 ::  network request
           ==                                            ::
 ++  gift-eyre                                           ::  out result <-$
           $%  [%mass p=mass]                            ::  memory usage

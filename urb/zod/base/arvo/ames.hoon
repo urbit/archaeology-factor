@@ -20,7 +20,7 @@
               [%beer p=ship q=@uvG]                     ::  gained ownership
               [%coke p=duct q=sock r=coop]              ::  report ack
               [%mead p=lane q=rock]                     ::  forward to self
-              [%milk p=sock q=path r=*]                 ::  pass message
+              [%milk p=sock q=bole r=path s=*]          ::  pass message
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
@@ -125,36 +125,7 @@
 ::::                                                    ::::::  arvo structures
   ::                                                    ::  ::
 |%                                                      ::
-++  move  ,[p=duct q=(mold note gift-ames)]             ::  local move
-++  note                                                ::  out request $->
-          $?  $:  %d                                    ::  to %dill
-          $%  [%flog p=flog]                            ::
-          ==  ==                                        ::
-              $:  %a                                    ::  to %ames
-          $%  [%kick p=@da]                             ::
-          ==  ==                                        ::
-              $:  %g                                    ::  to %gall
-          $%  [%deal p=sock q=cush]                     ::
-          ==  ==                                        ::
-              $:  @tas                                  ::  to any
-          $%  [%init p=@p]                              ::
-              [%want p=sock q=path r=*]                 ::
-              [%wart p=sock q=@tas r=path s=*]          ::
-              [%west p=sack q=path r=*]                 ::
-          ==  ==  ==                                    ::
-++  sign                                                ::  in result $<-
-          $?  $:  %a                                    ::  from %ames
-          $%  [%went p=ship q=cape]                     ::
-          ==  ==                                        ::
-              $:  %g                                    ::  from %gall
-          $%  [%unto p=cuft]                            ::
-              [%mean p=ares]                            ::  XX old, clean up
-              [%nice ~]                                 ::
-          ==  ==                                        ::
-              $:  @tas                                  ::
-          $%  [%crud p=@tas q=(list tank)]              ::  by any
-              [%mack p=(unit tang)]                     ::  message ack
-          ==  ==  ==                                    ::
+++  move  ,[p=duct q=(mold note-arvo gift-ames)]        ::  local move
 --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   ::              section 4aA, identity logic           ::
@@ -1190,15 +1161,10 @@
       =^  biz  fox  $(aks t.aks)
       [(weld p.buz p.biz) fox]
     ::
-    ++  rack                                            ::    rack:am
+    ++  rack                                            ::    ruck:am
       |=  [soq=sock los=bole cop=coop]                  ::  new e2e ack
       ^-  [p=(list boon) q=fort]
       zork:abet:(hike:(ho:(um p.soq) q.soq) los cop)
-    ::
-    ++  ruck                                            ::    ruck:am
-      |=  [soq=sock hen=duct cop=coop]                  ::  new e2e ack
-      ^-  [p=(list boon) q=fort]
-      zork:abet:(heck:(ho:(um p.soq) q.soq) hen cop)
     ::
     ++  wake                                            ::    wake:am
       |=  hen=duct                                      ::  harvest packets
@@ -1252,9 +1218,9 @@
           ==
         ::
         ++  chew                                        ::    chew:ho:um:am
-          |=  [syn=skin dam=flap ryn=lane msg=@]        ::  handle anything
+          |=  [sin=skin dam=flap ryn=lane msg=@]        ::  handle anything
           ^+  +>
-          =+  sin=(kins syn)
+          ~&  [%chew sin dam ryn (met 3 msg)]
           =^  fud  diz  (grok sin msg)
           ?-  -.fud
             %back  =.  +>.$  ?.  =(%full sin)  +>.$
@@ -1329,13 +1295,10 @@
             [(maw (need (sure:as:r.wug *code r.mex))) diz]
           ==
         ::
-        ++  heck                                        ::    heck:ho:um:am
-          |=  [hen=duct cop=coop]                       ::  acknowledgment
-          (hike (~(got by q.zam.bah) hen) cop)
-        ::
         ++  hike                                        ::    hike:ho:um:am
           |=  [los=bole cop=coop]                       ::  acknowledgment
           ^+  +>
+          ~&  [%hike [our her] los cop]
           =+  loc=(~(got by fon.bah) los)
           ?.  &(?=(^ laz.loc) =(los p.p.u.laz.loc))
             ~&  [%hike-no-message los laz.loc]
@@ -1365,16 +1328,20 @@
             ^+  +>
             ?:  (lth liq laq)  
               ::  we already acked this msg; ack it again
-              ~&  [%hi-bond-low liq laq]
+              ~&  [%hi-bond-low [los liq] laq]
               hi-cong
             ?:  (gth liq laq)  
               ::  later than the next msg; ignore
-              ~&  [%hi-bond-high liq laq]
+              ~&  [%hi-bond-high [los liq] laq]
               +>
-            ?^  laz  +>
+            ?^  laz  
+              ::  this msg is already being processed; ignore
+              ~&  [%hi-bond-wait [los liq] laq]
+              +>
             %=    +>
+              bin  :_(bin [%milk [our her] los cha val])
               laz  `[[los liq] fap ryn]
-              nys   (~(del by nys) liq)
+              nys  (~(del by nys) liq)
             == 
           ::
           ++  hi-back                                   ::  app acknowledge
@@ -1614,7 +1581,7 @@
     ::
     ++  stay  fox
     ++  take                                            ::  accept response
-      |=  [tea=wire hen=duct hin=(hypo sign)]
+      |=  [tea=wire hen=duct hin=(hypo sign-arvo)]
       ^-  [p=(list move) q=_..^$]
       =^  duy  ..knap
         (knap tea hen q.hin)
@@ -1645,11 +1612,17 @@
     ::
         %mead  :_(fox [[hen [%give %hear p.bon q.bon]] ~])
         %milk
-      ::  ~&  [%milk p.bon q.bon]
-      ?>  ?=([@ @ *] q.bon)
-      ?>  ?=(?(%a %c %e %g) i.q.bon)
-      =+  pax=[(scot %p p.p.bon) (scot %p q.p.bon) q.bon]
-      :_  fox  [hen %pass pax i.q.bon %west p.bon t.q.bon r.bon]~
+      ~&  [%milk p.bon q.bon r.bon]
+      ?>  ?=([@ @ *] r.bon)
+      =+  pax=[(scot %p p.p.bon) (scot %p q.p.bon) (scot %ud q.bon) ~]
+      =+  cad=[%west p.bon t.r.bon s.bon]
+      =+  ^=  did
+          ?+  i.r.bon  ~|([%bad-vane i.r.bon] !!)
+            %c  [%pass pax %c cad]
+            %e  [%pass pax %e cad]
+            %g  [%pass pax %g cad]
+          ==
+      [[hen did]~ fox]
     ::
         %ouzo
       ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))] 
@@ -1673,32 +1646,21 @@
     ==
   ::
   ++  knap
-    |=  [tea=wire hen=duct sih=sign]
+    |=  [tea=wire hen=duct sih=sign-arvo]
     ^-  [(list move) _+>]
-    ?-  +<.sih
-        %crud  [[[hen [%slip %d %flog +.sih]] ~] +>]
-        %went  [~ +>]
-        %mack  ?~  +>.sih  $(sih [%g %nice ~])          ::  XX using old code
-               $(sih [%g %mean `[%mack +>+.sih]])
-        %unto  [~ +>]
-        ?(%mean %nice)                                  ::  XX obsolete
-      ?:  ?=([%ye ~] tea)
-        [~ +>.$]
-      ?>  ?=([@ @ @ *] tea)
-      =+  soq=[(slav %p i.tea) (slav %p i.t.tea)]
-      =+  pex=t.t.tea
-      =+  ^=  fuy
-          %^  ~(ruck am [now fox])  soq  hen
-          ::  ~&  [%knap-ack ?-(+<.sih %mean `p.+.sih, %nice ~)]
-          ?-(+<.sih %mean `p.+.sih, %nice ~)
-      =>  %_(. fox q.fuy)
-      =|  out=(list move)
-      |-  ^-  [p=(list move) q=_+>.^$]
-      ?~  p.fuy
-        [(flop out) +>.^$]
-      =^  toe  fox  (clop now hen i.p.fuy)
-      $(p.fuy t.p.fuy, out (weld (flop toe) out))
-    ==
+    ?.  ?=([%g %mack *] sih)
+      ~&  [%ames-sign -.sih (,@tas +<.sih)]
+      !!
+    ?>  ?=([@ @ @ ~] tea)
+    =+  [soq los]=[[(slav %p i.tea) (slav %p i.t.tea)] (slav %ud i.t.t.tea)]
+    =+  fuy=(~(rack am [now fox]) soq los ?~(+>.sih ~ `[~ %lose u.p.+>.sih]))
+    =>  %_(. fox q.fuy)
+    =|  out=(list move)
+    |-  ^-  [p=(list move) q=_+>.^$]
+    ?~  p.fuy
+      [(flop out) +>.^$]
+    =^  toe  fox  (clop now hen i.p.fuy)
+    $(p.fuy t.p.fuy, out (weld (flop toe) out))
   ::
   ++  knob
     |=  [hen=duct kyz=kiss-ames]

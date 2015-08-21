@@ -244,7 +244,7 @@
   ++  mo-bale                                           ::  assign outbone
     |=  him=ship 
     ^-  [@ud _+>]
-    =+  sad=(fall (~(get by sap) him) `scad`[1 ~ ~])
+    =+  sad=(fall (~(get by sap) him) `scar`[1 ~ ~])
     =+  nom=(~(get by q.sad) hen)
     ?^  nom  [u.nom +>.$]
     :-  p.sad
