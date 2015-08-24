@@ -62,7 +62,7 @@
           ==  ==  ==                                    ::
 ++  sign                                                ::  in result $<-
           $?  $:  %a                                    ::  by %ames
-          $%  [%woot p=ship q=coop]                     ::
+          $%  [%woot p=ship q=path r=coop]              ::
           ==  ==                                        ::
               $:  %c                                    ::  by %clay
           $%  [%note p=@tD q=tank]                      ::
@@ -2717,8 +2717,8 @@
     ==
   ::
       %woot
-    ?~  q.q.hin  [~ ..^$]
-    ~&  [%clay-lost p.q.hin q.q.hin tea]
+    ?~  r.q.hin  [~ ..^$]
+    ~&  [%clay-lost p.q.hin r.q.hin tea]
     [~ ..^$]
   ==
 ::

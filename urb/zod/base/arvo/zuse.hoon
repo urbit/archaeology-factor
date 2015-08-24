@@ -2209,7 +2209,7 @@
               [%send p=lane q=@]                        ::  transmit packet
               [%waft p=sock q=*]                        ::  response message
               [%wart p=sock q=@tas r=path s=*]          ::  network request
-              [%woot p=ship q=coop]                     ::  e2e reaction message
+              [%woot p=ship q=path r=coop]              ::  e2e reaction message
           ==                                            ::
 ++  kiss-ames                                           ::  in request ->$
           $%  [%barn ~]                                 ::  new unix process

@@ -215,9 +215,15 @@
           %punk  !!
           %peer  [%s p.q.caz]
         ==
+    =+  ^=  dak
+        ?+  -.q.caz  !!
+          %poke  %gk
+          %pull  %gl
+          %peer  %gr
+        ==
     %+  mo-pass  
-      [%sys %way -.q.caz ~]
-    `note-arvo`[%a %wont [our him] [%g %ge p.caz ~] [num roc]]
+      [%sys %way ~]
+    `note-arvo`[%a %wont [our him] [%g dak p.caz ~] [num roc]]
   ::
   ++  mo-baal                                           ::  error convert a
     |=  art=(unit ares)
@@ -330,7 +336,7 @@
               num=(slav %ud i.t.t.t.pax)
           ==
       =>  .(pax `path`[%req t.pax])
-      ?~  q.+>.sih 
+      ?~  r.+>.sih 
         (mo-pass [%sys pax] %g %deal [him our] dap %pump ~)
       ~&  [%diff-bad-ack q.+>.sih]                      ::  should not happen
       =.  +>.$  (mo-pass [%sys pax] %g %deal [him our] dap %pull ~)
@@ -387,11 +393,15 @@
     ::
         %way                                            ::  outbound request
       ?>  ?=([%a %woot *] sih)
-      ?>  ?=([@ ~] t.pax)
+      ?>  ?=([%g @ @ ~] q.+>.sih)
       %-  mo-awed
       :*  p.+>.sih
-          (?(%peer %poke %pull) i.t.pax)
-          +>+.sih
+          ?+  i.t.q.+>.sih  !!
+            %gk  %poke
+            %gr  %peer
+            %gl  %pull
+          ==
+          r.+>.sih
       ==
     ==
   ::
@@ -1126,11 +1136,11 @@
     ?.  (~(has by pol.all) p.p.q.hic)
       ~&  [%gall-not-ours p.q.hic]
       [~ ..^$]
-    ?>  ?=([?(%ge %gh) @ ~] q.q.hic)
+    ?>  ?=([?(%gk %gr %gl %gh) @ ~] q.q.hic)
     =+  dap=i.t.q.q.hic
     =+  our=p.p.q.hic
     =+  him=q.p.q.hic
-    ?:  ?=(%ge i.q.q.hic)
+    ?.  ?=(%gh i.q.q.hic)
       =+  mes=((hard ,[@ud rook]) r.q.hic)
       =<  mo-abet
       (mo-gawk:(mo-abed:mo our hen) him dap mes)

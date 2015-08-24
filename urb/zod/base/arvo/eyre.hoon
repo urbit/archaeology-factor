@@ -31,7 +31,7 @@
           ==  ==  ==                                    ::
 ++  sign                                                ::  in result $<-
           $?  $:  %a                                    ::  by %ames
-          $%  [%woot p=ship q=coop]                     ::
+          $%  [%woot p=ship q=path r=coop]              ::
           ==  ==                                        ::
               $:  %g                                    ::  by %gall
           $%  [%unto p=cuft]                            ::  within agent
