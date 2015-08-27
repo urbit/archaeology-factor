@@ -1207,7 +1207,7 @@
         ::
         ++  back                                        ::    back:ho:um:am
           |=  [ost=bone dam=flap cop=coop coh=@dr]      ::  receive ack
-          (~(we-tock we ost (~(got by sal.bah) ost)) dam cop coh)
+          (~(we-tock we (mul 2 ost) (~(got by sal.bah) ost)) dam cop coh)
         ::
         ++  busk                                        ::    busk:ho:um:am
           |=  [waz=(list ship) pex=(list rock)]         ::  send packets
