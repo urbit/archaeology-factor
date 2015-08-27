@@ -217,9 +217,9 @@
         ==
     =+  ^=  dak
         ?+  -.q.caz  !!
-          %poke  %gk
-          %pull  %gl
-          %peer  %gr
+          %poke  %k
+          %pull  %l
+          %peer  %r
         ==
     %+  mo-pass  
       [%sys %way ~]
@@ -340,7 +340,7 @@
         (mo-pass [%sys pax] %g %deal [him our] dap %pump ~)
       ~&  [%diff-bad-ack q.+>.sih]                      ::  should not happen
       =.  +>.$  (mo-pass [%sys pax] %g %deal [him our] dap %pull ~)
-      (mo-pass [%sys pax] %a %wont [our him] [%g %gh dap ~] [num %x ~])
+      (mo-pass [%sys pax] %a %wont [our him] [%g %h dap ~] [num %x ~])
     ::
         %rep                                            ::  reverse request
       ?>  ?=([@ @ @ ~] t.pax)
@@ -374,10 +374,10 @@
       ?-    -.cuf
         %coup  (mo-give %mack p.cuf)
         %diff  %+  mo-pass  [%sys %red t.pax]
-               [%a %wont [our him] [%g %gh dap ~] [num %d p.p.cuf q.q.p.cuf]]
+               [%a %wont [our him] [%g %h dap ~] [num %d p.p.cuf q.q.p.cuf]]
         %doff  !!
         %quit  %+  mo-pass  [%sys pax]
-               [%a %wont [our him] [%g %gh dap ~] [num %x ~]]
+               [%a %wont [our him] [%g %h dap ~] [num %x ~]]
         %reap  (mo-give %mack p.cuf)
       ==
     ::
@@ -397,9 +397,9 @@
       %-  mo-awed
       :*  p.+>.sih
           ?+  i.t.q.+>.sih  !!
-            %gk  %poke
-            %gr  %peer
-            %gl  %pull
+            %k  %poke
+            %r  %peer
+            %l  %pull
           ==
           r.+>.sih
       ==
@@ -1136,11 +1136,11 @@
     ?.  (~(has by pol.all) p.p.q.hic)
       ~&  [%gall-not-ours p.q.hic]
       [~ ..^$]
-    ?>  ?=([?(%gk %gr %gl %gh) @ ~] q.q.hic)
+    ?>  ?=([?(%h %k %l %r) @ ~] q.q.hic)
     =+  dap=i.t.q.q.hic
     =+  our=p.p.q.hic
     =+  him=q.p.q.hic
-    ?.  ?=(%gh i.q.q.hic)
+    ?.  ?=(%h i.q.q.hic)
       =+  mes=((hard ,[@ud rook]) r.q.hic)
       =<  mo-abet
       (mo-gawk:(mo-abed:mo our hen) him dap mes)

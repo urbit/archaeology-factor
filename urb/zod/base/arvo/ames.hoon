@@ -11,10 +11,11 @@
 ++  bath                                                ::  per friend
           $:  fon=(map bole lock)                       ::  inbound locks
               zam=scar                                  ::  outbound bones
-              sal=(map bone colt)                       ::  outbound flows
+              sal=(map boke colt)                       ::  outbound flows
               sop=shed                                  ::  packet pump XX
           ==                                            ::
-++  bole  bone                                          ::  inbound opaque
+++  boke  ,@ud                                          ::  even bone, odd bole
+++  bole  ,@ud                                          ::  inbound opaque
 ++  boon                                                ::  internal effect
           $%  [%acid ~]                                 ::  drop input
               [%beer p=ship q=@uvG]                     ::  gained ownership
@@ -1296,23 +1297,31 @@
           ==
         ::
         ++  hike                                        ::    hike:ho:um:am
-          |=  [los=bole cop=coop]                       ::  acknowledgment
+          |=  [kos=boke cop=coop]                       ::  acknowledgment
           ^+  +>
           ::  ~&  [%hike [our her] los cop]
-          =+  loc=(~(got by fon.bah) los)
-          ?.  &(?=(^ laz.loc) =(los p.p.u.laz.loc))
-            ~&  [%hike-no-message los laz.loc]
+          =+  loc=(~(got by fon.bah) kos)
+          ?.  &(?=(^ laz.loc) =(kos p.p.u.laz.loc))
+            ~&  [%hike-no-message kos laz.loc]
             !!
-          ~&  [?~(cop %ro %re) her los q.p.u.laz.loc]
-          hi-abet:(~(hi-back hi [los q.p.u.laz.loc] [& +.u.laz.loc] loc) cop)
+          ~&  [?~(cop %ro %re) her kos q.p.u.laz.loc]
+          hi-abet:(~(hi-back hi [kos q.p.u.laz.loc] [& +.u.laz.loc] loc) cop)
         ::
-        ++  high                                        ::  high:ho:um:am
-          |=  [fel=flea dam=flap ryn=lane]              ::  external message
+        ++  hire                                        ::    hire:ho:um:am
+          |=  [[kos=boke seq=@ud] dam=flap ryn=lane]      ::  receiver
           ^+  hi
-          ~(. hi fel [& dam ryn] (fall (~(get by fon.bah) p.fel) *lock))
+          ~(. hi [kos seq] [& dam ryn] (fall (~(get by fon.bah) kos) *lock))
+        ::
+        ++  high                                        ::    high:ho:um:am
+          |=  [[los=bole seq=@ud] dam=flap ryn=lane]      ::  receive forward
+          (hire [+((mul 2 los)) seq] dam ryn)
+        ::
+        ++  hilt                                        ::    hilt:ho:um:am
+          |=  [[ost=bone seq=@ud] dam=flap ryn=lane]      ::  receive forward
+          (hire [(mul 2 ost) seq] dam ryn)
         ::
         ++  hi                                          ::  receiving core
-          |_  $:  $:  los=bole                          ::  sender 
+          |_  $:  $:  kos=boke                          ::  sender 
                       liq=tick                          ::  index
                   ==
                   $:  tru=?                             ::  authenticated
@@ -1322,27 +1331,30 @@
                   lock
               ==
           ++  hi-abet                                   ::  resolve
-            +>(fon.bah (~(put by fon.bah) los +<+>))
+            +>(fon.bah (~(put by fon.bah) kos +<+>))
           ::                                            ::  receive message
           ++  hi-bond
             |=   [cha=path val=*]
             ^+  +>
             ?:  (lth liq laq)  
               ::  we already acked this msg; ack it again
-              ~&  [%hi-bond-low [los liq] laq]
+              ~&  [%hi-bond-low [kos liq] laq]
               hi-cong
             ?:  (gth liq laq)  
               ::  later than the next msg; ignore
-              ~&  [%hi-bond-high [los liq] laq]
+              ~&  [%hi-bond-high [kos liq] laq]
               +>
             ?^  laz  
               ::  this msg is already being processed; ignore
-              ~&  [%hi-bond-wait [los liq] laq]
+              ~&  [%hi-bond-wait [kos liq] laq]
               +>
-            ::  ~&  [%rx her los liq cha `@p`(mug val)]
-            %=    +>
-              bin  :_(bin [%milk [our her] los cha val])
-              laz  `[[los liq] fap ryn]
+            =+  osk=(rsh 0 1 kos)
+            ~&  ?:  =(1 (end 0 1 kos))
+                  [%rx her osk liq cha `@p`(mug val)]
+                [%dx her osk liq cha `@p`(mug val)]
+            %=    +>.$
+              bin  :_(bin [%milk [our her] osk cha val])
+              laz  `[[kos liq] fap ryn]
               nys  (~(del by nys) liq)
             == 
           ::
@@ -1373,18 +1385,19 @@
             =^  fud  diz  (grok sin (hi-golf r.neb))
             =+  sec=?=(?(%open %fast %full) sin)
             =.  tru  |(tru sec)
-            ?.  &(tru ?=(%bond -.fud) =([los liq] p.fud))
-              ~&  [%ames-bad-bond tru -.fud [[los liq] p.fud]]
+            =+  osk=(rsh 0 1 kos)
+            ?.  &(tru ?=(%bond -.fud) =([osk liq] p.fud))
+              ~&  [%ames-bad-bond tru -.fud [[osk liq] p.fud]]
               !!
             (hi-bond q.fud r.fud)
           ::
           ++  hi-cong  (hi-conk (~(get by exc) liq))    ::  accepted ack
           ++  hi-conk                                   ::  stated ack
-            |=(cop=coop +>(+> (conk los fap cop ryn)))
+            |=(cop=coop +>(+> (conk (rsh 0 1 kos) fap cop ryn)))
           ::
           ++  hi-cone                                   ::  record ack
             |=  cop=coop
-            =.  +>+>  (conk los fap cop ryn)
+            =.  +>+>  (conk (rsh 0 1 kos) fap cop ryn)
             ?~(cop +> +>(exc (~(put by exc) liq u.cop)))
           ::
           ++  hi-golf                                   ::    golf:hi:ho:um:am
@@ -1421,23 +1434,26 @@
           (busk xong:diz yem)
         ::
         ++  we                                          ::    we:ho:um:am
-          |_  [ost=bone colt]                           ::  outgoing core
+          |_  [kos=boke colt]                           ::  outgoing core
           ++  we-abet                                   ::    abet:we:ho:um:am
             %=    +>                                    ::  resolve
                 sal.bah
-              (~(put by sal.bah) ost +<+)
+              (~(put by sal.bah) kos +<+)
             ==
           ::
           ++  we-tire                                   ::    tire:we:ho:um:am
             |-  ^+  +                                   ::  report results
             =+  zup=(~(get by mis) lac)
             ?~  zup  +>
-            ::  ~&  [?~(q.u.zup %to %te) her ost lac]
+            =+  osk=(rsh 0 1 kos)
+            ~&  ?:  =(1 (end 0 1 kos))
+                  [?~(q.u.zup %to %te) her osk lac]
+                [?~(q.u.zup %bo %be) her osk lac]
             %=    $
                 lac  +(lac)
                 mis  (~(del by mis) lac)
                 bin  :_  bin
-              [%coke (~(got by r.zam.bah) ost) [our her] u.zup]
+              [%coke (~(got by r.zam.bah) osk) [our her] u.zup]
             ==
           ::
           ++  we-toad                                   ::    toad:we:ho:um:am
@@ -1453,7 +1469,7 @@
             ^+  +>
             =^  yoh  puz  (bick:puz now fap)
             ?~  p.yoh  +>.$
-            ?>  =(ost p.p.u.p.yoh)
+            ?>  =(kos p.p.u.p.yoh)
             (we-toad(+> (busk xong:diz q.yoh)) q.p.u.p.yoh q.u.p.yoh cop)
           ::
           ++  we-wind                                   ::    wind:we:ho:um:am
@@ -1466,24 +1482,33 @@
           ::
           ++  we-wool                                   ::    wool:we:ho:um:am
             |=  [cha=path val=*]                        ::  send message
-            ::  ~&  [%tx her ost seq cha `@p`(mug val)]
-            =+  fel=[ost seq]
-            (we-wind(seq +(seq)) fel cha %bond fel cha val)
+            ?>  =(0 (end 0 1 kos))
+            =+  ost=(rsh 0 1 kos)
+            ~&  [%tx her ost seq cha `@p`(mug val)]
+            (we-wind(seq +(seq)) [kos seq] cha %bond [ost seq] cha val)
           --
         ::
+        ++  wand                                        ::    wand:ho:um:am
+          |=  kos=boke                                  ::  make sender
+          ~(. we kos (fall (~(get by sal.bah) kos) *colt))
+        ::
         ++  wend                                        ::    wend:ho:um:am
-          |=  hen=duct                                  ::  outbound core
+          |=  hen=duct                                  ::  request sender
           ^+  we
-          =+  ust=(~(get by q.zam.bah) hen)
-          ?~  ust
-            %~  .
-              %_  we
-                p.zam.bah  +(p.zam.bah)
-                q.zam.bah  (~(put by q.zam.bah) hen p.zam.bah)
-                r.zam.bah  (~(put by r.zam.bah) p.zam.bah hen)
+          =^  ost  zam.bah
+              =+  ust=(~(get by q.zam.bah) hen)
+              ?^  ust  [u.ust zam.bah]
+              :-  p.zam.bah
+              %_  zam.bah
+                p  +(p.zam.bah)
+                q  (~(put by q.zam.bah) hen p.zam.bah)
+                r  (~(put by r.zam.bah) p.zam.bah hen)
               ==
-            [p.zam.bah *colt]
-          ~(. we u.ust (~(got by sal.bah) u.ust))
+          (wand (mul 2 ost))
+        ::
+        ++  wind                                        ::    wind:ho:um:am
+          |=  los=bole                                  ::  response sender
+          (wand +((mul 2 los)))
         --                                              ::  --ho:um:am
       ::
       ++  kick                                          ::    kick:um:am

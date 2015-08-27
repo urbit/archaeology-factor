@@ -2203,6 +2203,7 @@
   ::          ::
 ++  gift-ames                                           ::  out result <-$
           $%  [%drop ~]                                 ::  drop packet
+              [%east p=sock q=*]                        ::  response message
               [%hear p=lane q=@]                        ::  receive packet
               [%init p=@p]                              ::  report install
               [%mass p=mass]                            ::  memory usage
@@ -2222,8 +2223,8 @@
               [%make p=(unit ,@t) q=@ud r=@ s=?]        ::  wild license
               [%sith p=@p q=@uw r=?]                    ::  imperial generator
               [%wake ~]                                 ::  timer activate
-              ::  [%wegh ~]                                 ::  report memory
-              [%wont p=sock q=path r=*]                 ::  e2e send message
+              ::  [%wegh ~]                             ::  report memory
+              [%wont p=sock q=path r=*]                 ::  request message
           ==                                            ::
 ::
 ::::    %clay
