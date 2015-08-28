@@ -9,7 +9,7 @@
 |%                                                      ::
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
 ++  bath                                                ::  per friend
-          $:  fon=(map bole lock)                       ::  inbound locks
+          $:  fon=(map boke lock)                       ::  inbound locks
               zam=scar                                  ::  outbound bones
               sal=(map boke colt)                       ::  outbound flows
               sop=shed                                  ::  packet pump XX
@@ -1206,8 +1206,8 @@
           ==
         ::
         ++  back                                        ::    back:ho:um:am
-          |=  [ost=bone dam=flap cop=coop coh=@dr]      ::  receive ack
-          (~(we-tock we (mul 2 ost) (~(got by sal.bah) ost)) dam cop coh)
+          |=  [kos=boke dam=flap cop=coop coh=@dr]      ::  receive ack
+          (~(we-tock we kos (~(got by sal.bah) kos)) dam cop coh)
         ::
         ++  busk                                        ::    busk:ho:um:am
           |=  [waz=(list ship) pex=(list rock)]         ::  send packets
@@ -1239,9 +1239,9 @@
           ==
         ::
         ++  conk                                        ::    conk:ho:um:am
-          |=  [los=bole dam=flap cop=coop ryn=lane]     ::  send acknowledge
+          |=  [kos=boke dam=flap cop=coop ryn=lane]     ::  send acknowledge
           ^+  +>
-          =^  pex  diz  (zuul:diz now [%back los dam cop ~s0])
+          =^  pex  diz  (zuul:diz now [%back (mix 1 kos) dam cop ~s0])
           (busk(diz (wast:diz ryn)) xong:diz pex)
         ::
         ++  fore                                        ::  
@@ -1308,17 +1308,13 @@
           hi-abet:(~(hi-back hi [kos q.p.u.laz.loc] [& +.u.laz.loc] loc) cop)
         ::
         ++  hire                                        ::    hire:ho:um:am
-          |=  [[kos=boke seq=@ud] dam=flap ryn=lane]      ::  receiver
+          |=  [[kos=boke seq=@ud] dam=flap ryn=lane]    ::  receiver
           ^+  hi
           ~(. hi [kos seq] [& dam ryn] (fall (~(get by fon.bah) kos) *lock))
         ::
         ++  high                                        ::    high:ho:um:am
-          |=  [[los=bole seq=@ud] dam=flap ryn=lane]      ::  receive forward
-          (hire [+((mul 2 los)) seq] dam ryn)
-        ::
-        ++  hilt                                        ::    hilt:ho:um:am
-          |=  [[ost=bone seq=@ud] dam=flap ryn=lane]      ::  receive forward
-          (hire [(mul 2 ost) seq] dam ryn)
+          |=  [[kos=boke seq=@ud] dam=flap ryn=lane]    ::  receive forward
+          (hire [kos seq] dam ryn)
         ::
         ++  hi                                          ::  receiving core
           |_  $:  $:  kos=boke                          ::  sender 
@@ -1393,11 +1389,11 @@
           ::
           ++  hi-cong  (hi-conk (~(get by exc) liq))    ::  accepted ack
           ++  hi-conk                                   ::  stated ack
-            |=(cop=coop +>(+> (conk (rsh 0 1 kos) fap cop ryn)))
+            |=(cop=coop +>(+> (conk kos fap cop ryn)))
           ::
           ++  hi-cone                                   ::  record ack
             |=  cop=coop
-            =.  +>+>  (conk (rsh 0 1 kos) fap cop ryn)
+            =.  +>+>  (conk kos fap cop ryn)
             ?~(cop +> +>(exc (~(put by exc) liq u.cop)))
           ::
           ++  hi-golf                                   ::    golf:hi:ho:um:am
@@ -1483,9 +1479,9 @@
           ++  we-wool                                   ::    wool:we:ho:um:am
             |=  [cha=path val=*]                        ::  send message
             ?>  =(0 (end 0 1 kos))
-            =+  ost=(rsh 0 1 kos)
-            ~&  [%tx her ost seq cha `@p`(mug val)]
-            (we-wind(seq +(seq)) [kos seq] cha %bond [ost seq] cha val)
+            =+  fel=[(mix 1 kos) seq]
+            ~&  [%tx her kos seq cha `@p`(mug val)]
+            (we-wind(seq +(seq)) fel cha %bond fel cha val)
           --
         ::
         ++  wand                                        ::    wand:ho:um:am
