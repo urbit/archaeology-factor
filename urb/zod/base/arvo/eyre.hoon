@@ -615,6 +615,10 @@
       ::  ford-kill  ::  XX discriminate
       +>.$(ded (~(put in ded) hen))
     ::
+        %went
+      ::  this won't happen until we send responses.
+      !!
+    ::
         %west                                           ::  remote request
       =.  mow  :_(mow [hen %give %mack ~])
       =+  mez=((soft gram) q.kyz)

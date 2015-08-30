@@ -2226,6 +2226,15 @@
               ::  [%wegh ~]                             ::  report memory
               [%wont p=sock q=path r=*]                 ::  request message
           ==                                            ::
+++   card-ames                                          ::  out cards
+          $%  [%went p=sack q=path r=@ud s=coop]        ::  response confirm 
+              [%west p=sack q=path r=@ud s=*]           ::  network request
+          ==                                            ::
+++   note-ames                                          ::  out request $->
+          $%  [%c card-ames]                            ::  to %clay
+              [%e card-ames]                            ::  to %eyre
+              [%g card-ames]                            ::  to %gall
+          ==                                            ::
 ::
 ::::    %clay
   ::
@@ -2252,7 +2261,8 @@
               [%merg p=@p q=@tas r=@p s=@tas t=germ]    ::  merge desks
               [%warp p=sock q=riff]                     ::  file request
               [%wegh ~]                                 ::  report memory
-              [%west p=sack q=path r=*]                 ::  network request
+              [%went p=sack q=path r=@ud s=coop]        ::  response confirm 
+              [%west p=sack q=path r=@ud s=*]           ::  network request
           ==                                            ::
 ::
 ::::
@@ -2361,7 +2371,8 @@
               [%this p=? q=clip r=httq]                 ::  inbound request
               [%thud ~]                                 ::  inbound cancel
               [%wegh ~]                                 ::  report memory
-              [%west p=sack q=path r=*]                 ::  network request
+              [%went p=sack q=path r=@ud s=coop]        ::  response confirm 
+              [%west p=sack q=path r=@ud s=*]           ::  network request
           ==                                            ::
 ++  gift-eyre                                           ::  out result <-$
           $%  [%mass p=mass]                            ::  memory usage
@@ -2482,12 +2493,14 @@
   $%  [%conf p=dock q=culm]                             ::  configure app
       [%init p=ship]                                    ::  set owner
       [%deal p=sock q=cush]                             ::  full transmission
-      [%west p=sack q=path r=*]                         ::  network request
+      [%went p=sack q=path r=@ud s=coop]                ::  response confirm 
+      [%west p=sack q=path r=@ud s=*]                   ::  network request
       [%wegh ~]                                         ::  report memory
   ==                                                    ::
 ++  gift-gall                                           ::  outgoing result
   $%  [%mass p=mass]                                    ::  memory usage
       [%onto p=(each suss tang)]                        ::  about agent
+      [%rend p=path q=*]                                ::  network request
       [%unto p=cuft]                                    ::  within agent
       [%mack p=(unit tang)]                             ::  message ack
   ==                                                    ::

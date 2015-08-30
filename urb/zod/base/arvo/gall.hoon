@@ -1132,6 +1132,7 @@
     ::  ~&  [%gall-init p.q.hic]
     [~ ..^$(pol.all (~(put by pol.all) p.q.hic [hen ~ ~ ~]))]
   ::
+      %went  !!
       %west
     ?.  (~(has by pol.all) p.p.q.hic)
       ~&  [%gall-not-ours p.q.hic]
@@ -1141,10 +1142,10 @@
     =+  our=p.p.q.hic
     =+  him=q.p.q.hic
     ?.  ?=(%h i.q.q.hic)
-      =+  mes=((hard ,[@ud rook]) r.q.hic)
+      =+  mes=((hard ,[@ud rook]) s.q.hic)
       =<  mo-abet
       (mo-gawk:(mo-abed:mo our hen) him dap mes)
-    =+  mes=((hard ,[@ud roon]) r.q.hic)
+    =+  mes=((hard ,[@ud roon]) s.q.hic)
     =<  mo-abet
     (mo-gawd:(mo-abed:mo our hen) him dap mes)
   ::

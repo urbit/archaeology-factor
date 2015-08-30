@@ -2458,9 +2458,13 @@
       [-.woo (posh q.p.q.hic p.q.q.hic +.woo ruf)]
     [mos ..^$]
   ::
+      %went
+    ::  this won't happen until we send responses.
+    !!
+  ::
       %west
     ?:  ?=([%question *] q.q.hic)
-      =+  ryf=((hard riff) r.q.hic)
+      =+  ryf=((hard riff) s.q.hic)
       :_  ..^$
       :~  [hen %give %mack ~]
           :-  hen
@@ -2474,7 +2478,7 @@
     =+  ^=  zat
         =<  wake
         %-  take-foreign-update:(do now hen p.q.hic syd ruf)
-        [inx ((hard (unit rand)) r.q.hic)]
+        [inx ((hard (unit rand)) s.q.hic)]
     =^  mos  ruf
       =+  zot=abet.zat
       [-.zot (posh q.p.q.hic syd +.zot ruf)]
