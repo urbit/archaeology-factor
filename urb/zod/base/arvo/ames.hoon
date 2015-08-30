@@ -21,7 +21,8 @@
               [%coke p=sock q=duct r=path s=coop]       ::  forward ack
               [%cola p=sock q=bole r=path s=coop]       ::  reverse ack
               [%mead p=lane q=rock]                     ::  forward to self
-              [%milk p=sock q=bole r=path s=*]          ::  pass forward
+              [%malt p=sock q=duct r=path s=*]          ::  response
+              [%milk p=sock q=bole r=path s=*]          ::  request
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
@@ -1347,7 +1348,10 @@
               +>
             ::  ~&  [%rx her kos liq cha `@p`(mug val)]
             %=    +>
-              bin  :_(bin [%milk [our her] kos cha val])
+              bin  :_  bin 
+                   ?:  =(0 (end 0 1 kos))
+                     [%malt [our her] (~(got by r.zam.bah) kos) cha val]
+                   [%milk [our her] kos cha val]
               laz  `[[kos liq] fap ryn]
               nys  (~(del by nys) liq)
             == 
@@ -1647,6 +1651,7 @@
     ::
         %cola  (clod p.bon q.bon r.bon hen [%went p.bon +.r.bon q.bon s.bon])
         %coke  :_(fox [[q.bon [%give %woot q.p.bon r.bon s.bon]] ~])
+        %malt  :_(fox [[q.bon [%give %waft q.p.bon r.bon s.bon]] ~])  
         %mead  :_(fox [[hen [%give %hear p.bon q.bon]] ~])
         %milk  (clod p.bon q.bon r.bon hen [%west p.bon +.r.bon q.bon s.bon])
         %ouzo

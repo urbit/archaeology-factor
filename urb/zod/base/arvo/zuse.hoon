@@ -2208,7 +2208,7 @@
               [%init p=@p]                              ::  report install
               [%mass p=mass]                            ::  memory usage
               [%send p=lane q=@]                        ::  transmit packet
-              [%waft p=sock q=*]                        ::  response message
+              [%waft p=ship q=path r=*]                 ::  response message
               [%wart p=sock q=@tas r=path s=*]          ::  network request
               [%woot p=ship q=path r=coop]              ::  e2e reaction message
           ==                                            ::
