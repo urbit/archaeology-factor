@@ -1342,18 +1342,21 @@
               ::  later than the next msg; ignore
               ~&  [%hi-bond-high [kos liq] laq]
               +>
-            ?^  laz  
+            ?:  !=(~ laz)
               ::  this msg is already being processed; ignore
               ~&  [%hi-bond-wait [kos liq] laq]
               +>
-            ::  ~&  [%rx her kos liq cha `@p`(mug val)]
-            %=    +>
-              bin  :_  bin 
-                   ?:  =(0 (end 0 1 kos))
-                     [%malt [our her] (~(got by r.zam.bah) kos) cha val]
-                   [%milk [our her] kos cha val]
+            =.  nys  (~(del by nys) liq)
+            ?:  =(0 (end 0 1 kos))
+              ~&  [%br her kos cha liq]
+              =.  +>.$  (hi-back ~)
+              %=  +>.$
+                bin  :_(bin [%malt [our her] (~(got by r.zam.bah) kos) cha val])
+              ==
+            ~&  [%tr her kos cha liq]
+            %=  +>.$
+              bin  :_(bin [%milk [our her] kos cha val])
               laz  `[[kos liq] fap ryn]
-              nys  (~(del by nys) liq)
             == 
           ::
           ++  hi-back                                   ::  app acknowledge
@@ -1442,7 +1445,7 @@
             |-  ^+  +                                   ::  report results
             =+  zup=(~(get by mis) lac)
             ?~  zup  +>
-            ::  ~&  [?~(q.u.zup %to %te) her kos lac]
+            ~&  [?:(=(0 (end 0 1 kos)) %ta %ba) her kos lac]
             %=    $
                 lac  +(lac)
                 mis  (~(del by mis) lac)
@@ -1478,7 +1481,7 @@
           ::
           ++  we-wool                                   ::    wool:we:ho:um:am
             |=  [cha=path val=*]                        ::  send message
-            ~&  [%tx her kos seq cha]
+            ~&  [?:(=(0 (end 0 1 kos)) %tx %bx) her kos seq cha]
             %^    we-wind(seq +(seq))  
                 [kos seq] 
               cha 
