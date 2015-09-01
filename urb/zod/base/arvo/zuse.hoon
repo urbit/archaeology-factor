@@ -2205,6 +2205,7 @@
           $%  [%drop ~]                                 ::  drop packet
               [%east p=sock q=*]                        ::  response message
               [%hear p=lane q=@]                        ::  receive packet
+              [%mack p=(unit tang)]                     ::  ack
               [%init p=@p]                              ::  report install
               [%mass p=mass]                            ::  memory usage
               [%send p=lane q=@]                        ::  transmit packet
@@ -2223,6 +2224,8 @@
               [%make p=(unit ,@t) q=@ud r=@ s=?]        ::  wild license
               [%sith p=@p q=@uw r=?]                    ::  imperial generator
               [%wake ~]                                 ::  timer activate
+              [%went p=sack q=path r=@ud s=coop]        ::  response confirm 
+              [%west p=sack q=path r=@ud s=*]           ::  network request
               ::  [%wegh ~]                             ::  report memory
               [%wont p=sock q=path r=*]                 ::  request message
           ==                                            ::
@@ -2231,7 +2234,8 @@
               [%west p=sack q=path r=@ud s=*]           ::  network request
           ==                                            ::
 ++   note-ames                                          ::  out request $->
-          $%  [%c card-ames]                            ::  to %clay
+          $%  [%a card-ames]                            ::  to %ames
+              [%c card-ames]                            ::  to %clay
               [%e card-ames]                            ::  to %eyre
               [%g card-ames]                            ::  to %gall
           ==                                            ::

@@ -24,6 +24,7 @@
               [%malt p=sock q=duct r=path s=*]          ::  response
               [%milk p=sock q=bole r=path s=*]          ::  request
               [%ouzo p=lane q=rock]                     ::  transmit packet
+              [%raki p=(unit tang)]                     ::  return 
               [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
 ++  cake  ,[p=sock q=skin r=@]                          ::  top level packet
@@ -655,6 +656,7 @@
           ?.  ?&  !=(our i.waz)
                   ?=(^ lun.wod.dyr)
               ==
+            ~&  [%wist-skip i.waz lun.wod.dyr]
             $(waz t.waz)
           :_  ?:  ?=(%ix -.u.lun.wod.dyr)
                 $(waz t.waz)
@@ -1213,6 +1215,7 @@
         ::
         ++  back                                        ::    back:ho:um:am
           |=  [ost=bone dam=flap cop=coop coh=@dr]      ::  receive ack
+          ?:  =(0 dam)  +>  ::  dummy ack
           (~(we-tock we ost (~(got by sal.bah) ost)) dam cop coh)
         ::
         ++  busk                                        ::    busk:ho:um:am
@@ -1227,15 +1230,16 @@
         ++  chew                                        ::    chew:ho:um:am
           |=  [sin=skin dam=flap ryn=lane msg=@]        ::  handle anything
           ^+  +>
-          ::  ~&  [%chew sin dam ryn (met 3 msg)]
-          =^  fud  diz  (grok sin msg)
+          =.  puz  (bilk:puz now)
+          =^  fud  diz  (grok sin ryn msg)
+          ::  ~&  [%chew sin -.fud `@p`(mug dam) ryn (met 3 msg)]
           ?-  -.fud
             %back  =.  +>.$  ?.  =(%full sin)  +>.$
-                       ::  here we send an unnecessary packet
+                       ::  here we send a dummy ack
                        ::  to complete the key exchange and stop
                        ::  the sender from using %full
-                       ::  (conk ~ dam ryn) XX what bone?
-                       +>.$
+                       ::  (conk ~ dam ryn)
+                       (conk 0 `@`0 ~ ryn)
                    (back +.fud) 
             %bond  hi-abet:(hi-bond:(high p.fud dam ryn) q.fud r.fud)
             %carp  =<  hi-abet
@@ -1264,12 +1268,12 @@
           +>.$(bin (weld (flop (wist:zid now xong:zid [~ lyn] msg)) bin))
         ::
         ++  grok                                        ::    grok:ho:um:am
-          |=  [sin=skin msg=@]                          ::  decode message
+          |=  [sin=skin ryn=lane msg=@]                 ::  decode message
           ^+  [*meal diz]
           =+  maw=|=(@ ((hard meal) (cue +<)))
           ?-  sin
               %none  
-            ~&  %chew-none
+            ::  ~&  %chew-none
             [(maw msg) diz]
           ::
               %fast
@@ -1279,6 +1283,7 @@
             ?~  dey
               ~&  [%bad-key her mag]
               !!
+            =.  diz  (wast:diz ryn)
             =^  key  diz  u.dey
             [(maw (dy:q:sen:gus key bod)) diz]
           ::
@@ -1290,7 +1295,7 @@
             ?>  =(q.p.mex p.wug)
             =+  gey=(sev:gus p.p.mex)
             =+  mes=(need (tear:as:q.gey pub:ex:r.wug r.mex))
-            =.  diz  (wasc:diz p.mes)
+            =.  diz  (wast:(wasc:diz p.mes) ryn)
             [(maw q.mes) diz]
           ::
               %open
@@ -1299,6 +1304,7 @@
             =.  diz  (deng:diz q.mex)
             =+  wug=cluy:diz
             ?>  =(q.p.mex p.wug)
+            =.  diz  (wast:diz ryn)
             [(maw (need (sure:as:r.wug *code r.mex))) diz]
           ==
         ::
@@ -1367,24 +1373,25 @@
           ++  hi-carp                                   ::  receive fragment
             |=  [syn=skin cnt=@ud far=(pair ,@ud ,@)]
             ^+  +>
+            ~&  [%carp fap/`@p`(mug fap) syn/syn cnt/cnt far/p.far]
             ?:  (lth liq laq)
               ~&  [%hi-card-low liq laq]
               hi-cong
             ?:  (gth liq laq)  
               ~&  [%hi-card-high liq laq]
               +>
-            =+  sin=(kins syn)
-            =+  neb=`bait`(fall (~(get by nys) liq) [sin 0 [cnt ~]])
-            ?>  &(=(p.neb sin) (gth p.r.neb p.far) =(p.r.neb cnt))
+            =+  neb=`bait`(fall (~(get by nys) liq) [syn 0 [cnt ~]])
+            ?>  &(=(p.neb syn) (gth p.r.neb p.far) =(p.r.neb cnt))
             =+  doy=(~(get by q.r.neb) p.far)
             ?^  doy  (hi-conk ~)
             =:  q.r.neb  (~(put by q.r.neb) p.far q.far)
                 q.neb    +(q.neb)
               ==
+            ~&  [%hope q.neb p.r.neb]
             ?.  =(q.neb p.r.neb)
-              +>.$(nys (~(put by nys) liq neb))
-            =^  fud  diz  (grok sin (hi-golf r.neb))
-            =+  sec=?=(?(%open %fast %full) sin)
+              (hi-conk(nys (~(put by nys) liq neb)) ~)
+            =^  fud  diz  (grok syn ryn (hi-golf r.neb))
+            =+  sec=?=(?(%open %fast %full) syn)
             =.  tru  |(tru sec)
             ?.  &(tru ?=(%bond -.fud) =([kos liq] p.fud))
               ~&  [%ames-bad-bond tru -.fud [[kos liq] p.fud]]
@@ -1420,7 +1427,9 @@
                   ==
               ==
             +>.$
-          (we-wool:(wend hen) /a/pi ~)
+          ::  ~&  [%pong hen]
+          ::  (we-wool:(wend hen) /a/pi ~)
+          +>.$
         ::
         ++  thaw                                        ::    thaw:ho:um:am
           ^+  .                                         ::  wakeup
@@ -1467,9 +1476,10 @@
             =<  we-abet
             ^+  +>
             =^  yoh  puz  (bick:puz now fap)
+            =.  +>+>.$  (busk xong:diz q.yoh)
             ?~  p.yoh  +>.$
             ?>  =(kos p.p.u.p.yoh)
-            (we-toad(+> (busk xong:diz q.yoh)) q.p.u.p.yoh q.u.p.yoh cop)
+            (we-toad q.p.u.p.yoh q.u.p.yoh cop)
           ::
           ++  we-wind                                   ::    wind:we:ho:um:am
             |=  [fel=flea cha=path ham=meal]            ::  queue outgoing
@@ -1630,6 +1640,7 @@
     =+  ^=  did
         ^-  move
         ?+  i.cha  ~|([%bad-vane i.cha] !!)
+          %a  [hen %pass pax `note-arvo`[%a cad]] 
           %c  [hen %pass pax `note-arvo`[%c cad]]
           %e  [hen %pass pax `note-arvo`[%e cad]]
           %g  [hen %pass pax `note-arvo`[%g cad]]
@@ -1662,6 +1673,7 @@
       :_  fox
       [[gad.fox [%give %send p.bon q.bon]] ~]
     ::
+        %raki  :_(fox [[hen [%give %mack p.bon]] ~])
         %wine
       :_  fox
       =+  nym=(temp p.p.bon q.p.bon /name)
@@ -1686,14 +1698,17 @@
     ?+    sih  
       ~|([%ames-sign -.sih (,@tas +<.sih)] !!)
     ::
-        [%g %rend *]
+        [?(%a %e %c %g) %rend *]
       =^  bin  fox  (~(wish am [now fox]) soq kos p.+>.sih q.+>.sih)
       (knit hen bin)
     ::
-        [%g %mack *]
+        [?(%a %e %c %g) %mack *]
       =^  bin  fox
           (~(rack am [now fox]) soq kos ?~(+>.sih ~ `[~ %lose u.p.+>.sih]))
       (knit hen bin)
+    ::
+        [%a %woot *]
+      [~ +>.$]
     ==
   ::
   ++  knit
@@ -1741,6 +1756,16 @@
         ::
             %wake
           (~(wake am [now fox]) hen)
+        ::
+            %went
+          ::  we don't send any responses as yet
+          !!
+        ::
+            %west
+          ?.  ?=([%pi ~] q.kyz)
+            ~&  [%ames-west-lost q.kyz]
+            !!
+          :_(fox [[%raki ~] ~])
         ::
             %wont
           (~(wise am [now fox]) p.kyz hen q.kyz r.kyz)
