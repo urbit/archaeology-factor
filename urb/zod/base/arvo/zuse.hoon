@@ -2225,7 +2225,6 @@
               [%sith p=@p q=@uw r=?]                    ::  imperial generator
               [%wake ~]                                 ::  timer activate
               [%went p=sack q=path r=@ud s=coop]        ::  response confirm 
-              [%west p=sack q=path r=@ud s=*]           ::  network request
               ::  [%wegh ~]                             ::  report memory
               [%wont p=sock q=path r=*]                 ::  request message
           ==                                            ::
