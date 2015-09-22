@@ -1910,7 +1910,6 @@
               bem=beam                                  ::  original path
               but=path                                  ::  ending
           ==                                            ::
-++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  decaying avg rtt
               wid=@ud                                   ::  logical wdow msgs

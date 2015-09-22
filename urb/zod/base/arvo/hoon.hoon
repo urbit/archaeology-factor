@@ -2266,7 +2266,7 @@
 ::
 ++  to                                                  ::  queue engine
   |/  a=(qeu)
-  +-  bal
+  +-  bal                                               ::  rebalance at node
     |-  ^+  a
     ?~  a  ~
     ?.  |(?=(~ l.a) (vor n.a n.l.a))
@@ -2297,11 +2297,19 @@
       [n.a l.a q.b]
     [n.q.b [n.a l.a l.q.b] r.q.b]
   ::
-  +-  nap                                               ::  removes head
+  +-  nap                                               ::  remove head
     ?>  ?=(^ a)
     ?:  =(~ l.a)  r.a
     =+  b=get(+< l.a)
     bal(+< ^+(a [p.b q.b r.a]))
+  ::
+  +-  nip                                               ::  remove root
+    |-  ^+  a
+    ?~  l.a  r.a
+    ?~  r.a  l.a
+    ?:  (vor n.l.a n.r.a)
+      [n.l.a l.l.a $(l.a r.l.a)]
+    [n.r.a $(r.a l.r.a) r.r.a]
   ::
   +-  put                                               ::  insert new tail
     |*  b=*
