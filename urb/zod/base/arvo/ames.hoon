@@ -89,11 +89,11 @@
 ++  plan                                                ::  session state
           $:  unc=(map flap tick)                       ::  packet to message
               nem=(map tick (pair ,@ud path))           ::  number unacked /msg
-              cue=(qeu pony)                            ::  queued packets
+              chu=(qeu pony)                            ::  queued packets
           ==                                            ::
 ++  plod                                                ::  burst statistics
           $:  byt=@ud                                   ::  bytes moved
-              bys=@ud                                   ::  bandwidth/second
+              ::  bys=@ud                               ::  bandwidth/second
               rtm=@dr                                   ::  minimum rtt
               rtg=@dr                                   ::  average rtt
               rts=@dr                                   ::  smoothed rtt
@@ -103,9 +103,10 @@
               lax=@da                                   ::  last ack
               pad=plod                                  ::  statistics
           ==                                            ::
+++  poet  (tree (pair ,@da pipe))                       ::  scheduler
 ++  pole  (pair flap rock)                              ::  hashed packet
 ++  pond  (tree (pair ,@da (pair ship bole)))           ::  network sequencer
-++  pony  (qual (unit ,@da) ? tick pole)                ::  sent/virgin/seq/pack
+++  pony  (qual (unit ,@da) ,? tick pole)               ::  sent/virgin/seq/pack
 ++  pomp                                                ::  traverse update
           $:  byr=@ud                                   ::  bytes received (now)
               boz=@ud                                   ::  bytes lost (now)
@@ -114,9 +115,10 @@
           ==                                            ::
 ++  pump                                                ::  new packet pump
           $:  nex=(unit ,@da)                           ::  next wake; derived
+              win=@ud                                   ::  logical window bytes
               old=plod                                  ::  long-running state
               sac=plow                                  ::  current flow
-              kit=plan                                  ::  data 
+              plan                                      ::  data 
           ==                                            ::
 ++  shed                                                ::  packet sender
           $:  $:  rtt=@dr                               ::  smoothed rtt
@@ -166,10 +168,10 @@
 |%                                                      ::
 ++  move  ,[p=duct q=(mold note-arvo gift-ames)]        ::  local move
 ++  se                                                  ::  simple scheduler
-  |_  a=(tree ,@da pipe)                                ::  l.n.a < n.a < r.n.a
+  |_  a=poet                                            ::  l.n.a < n.a < r.n.a
   ++  cor                                               ::  schedule order
-    |=  [t=,@da v=pipe]
-    |=  [t=,@da v=pipe]
+    |=  [t=@da v=pipe]
+    |=  [t=@da v=pipe]
     |((lth ^t t) &(=(^t t) (gor ^v v)))
   ::
   ++  dal                                               ::  delete match
@@ -208,22 +210,24 @@
     |-  ^-  (unit ,@da)
     ?~(a ~ ?~(l.a `p.n.a $(a l.a)))
   ::
-  ++  tip                                               ::  raw head
+  ++  tip                                               ::  raw behead
     |=  t=@da
-    ^-  (pair (list pipe) _a)
-    ?~  a  [~ a]
+    ^-  (pair (list pipe) poet)
+    ?~  a  [~ ~]
     =+  l=$(a l.a)
-    ?.  (lte p.n.a t)  l
+    ?.  (lte p.n.a t)
+      [p.l [n.a q.l r.a]]
+    ?>  =(~ q.l)
     =+  r=$(a r.a)
-    [(weld l `(list pipe)`q.n.a^r)
+    :_(q.r (weld p.l `(list pipe)`[q.n.a p.r]))
   ::
-  ++  top  |=(t=@da =^(b a tip (flop b)^a))             ::  ordered head
+  ++  top  |=(t=@da =^(b a (tip t) [(flop p.b) a]))     ::  ordered behead
+  --
 --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   ::              section 4aA, identity logic           ::
   ::
   |%
-  ::
   ++  grip                                              ::  extend will
     |=  [wet=will law=will]
     ^-  will
@@ -1293,7 +1297,7 @@
         =+  diz=(myx:gus her)
         =+  bah=(~(get by wab.weg) her)
         =+  puz=?~(bah ahoy:pu %*(. pu +< sop.u.bah))
-        =>  .(bah `bath`?~(bah [~ [2 ~ ~] ~ *shed] u.bah))
+        =>  .(bah `bath`?~(bah [~ [2 ~ ~] ~ ~ *shed] u.bah))
         |%
         ++  abet                                        ::    abet:ho:um:am
           %=  +>.$                                      ::  resolve
@@ -1330,12 +1334,12 @@
             %_    +>.$
                 nip.bah  (~(put by nip.bah) kos bip(nex nyx))
                 pod.weg
-              =+  pod=?~(nex pod.weg (~(dal se pod.weg) u.nex her kos)))
+              =+  pod=?~(nex pod.weg (~(dal se pod.weg) u.nex her kos))
               ?~(nyx pod (~(put se pod) u.nyx her kos))
             ==
           ::
           ++  aimd                                      ::  TCP formula
-            |=  num=@ud
+            |=  num=@ud                                 ::  number lost, 0=ack
             %_    +>
                 win
               ?:  =(0 num) 
@@ -1343,27 +1347,29 @@
                 ::  we don't grow the window if we sense buffer bloat
                 ::
                 ~&  :_  [her kos win]
-                    ?:  (gth (mul 2 rts.sac) (mul 3 rtm.sac))
+                    ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac))
                       %aimd-stay
                     %aimd-more
-                ?:((gth (mul 2 rts.sac) (mul 3 rtm.sac)) win (add 1.536 win))
+                ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac)) 
+                  win 
+                (add 1.536 win)
               ~&  [%aimd-less her kos win]
               (min 1.536 (rsh 0 num win))
             ==
           ::
           ++  babe                                      ::  message ack
             |=  [liq=tick cop=coop]
-            =+  lef=(~(got by nem.kit) liq)
+            =+  lef=(~(got by nem) liq)
             ?.  =(~ cop)
               (done:cull:fine cop)
             ?.  =(1 p.lef)
-              +>.$(nem.kit (~(put by nem.kit liq (dec p.lef) q.lef)))
+              +>.$(nem (~(put by nem liq (dec p.lef) q.lef)))
             (done:fine u.luq cop)
           ::
           ++  back                                      ::  receive ack
             |=  [dam=flap cop=coop lag=@dr]
             ^+  +>
-            =+  luq=(~(get by unc.kit) dam)
+            =+  luq=(~(get by unc) dam)
             ?~  luq  
               ::  not waiting for this packet - eg, duplicate ack
               +>.$
@@ -1375,34 +1381,32 @@
             ~&  [%cave-burp lag aft]
             ?:  =(0 lag)  +>.$
             %_    +>
-                cue
-              |-  ^+  cue
-              ?~  cue  ~  
-              ?:  &(=(~ p.n.cue) q.n.cue)
-                [n.cue l.cue $(cue r.cue)]
-              :_  [$(cue l.cue) $(cue r.cue)]
-              ?.  &(?^(p.n.cue) (gth u.p.n.cue aft))  n.cue
-              n.cue(p `(add lag u.p.n.cue))
+                chu
+              |-  ^+  chu
+              ?~  chu  ~  
+              ?:  &(=(~ p.n.chu) q.n.chu)
+                [n.chu l.chu $(chu r.chu)]
+              :_  [$(chu l.chu) $(chu r.chu)]
+              ?.  &(?=(^ p.n.chu) (gth u.p.n.chu aft))  n.chu
+              n.chu(p `(add lag u.p.n.chu))
             ==
           ::
           ++  cull                                      ::  clear message
             |=  liq=tick
             ~&  [%cave-cull her kos liq]
             %_    +>
-                cue  
-              |-  ^+  cue
-              ?~  cue  ~
-              =+  ^=  ecu  ^+  cue
-                  :+  n.cue
-                    ?:((lte liq q.n.cue) $(cue l.cue) l.cue)
-                  ?:((gte liq q.n.cue) $(cue r.cue) r.cue)
-              ?.(=(liq q.n.cue) ecu ~(nip to ecu))
+                chu  
+              |-  ^+  chu
+              ?~  chu  ~
+              =+  ^=  ecu  ^+  chu
+                  :+  n.chu
+                    ?:((lte liq q.n.chu) $(chu l.chu) l.chu)
+                  ?:((gte liq q.n.chu) $(chu r.chu) r.chu)
+              ?.(=(liq q.n.chu) ecu ~(nip to ecu))
             == 
           ::
           ++  cold  =(0 fax.sac)                        ::  nothing happening
           ++  dead  &(!cold (gth (sub now lax.sac) ~s8))::  stuck
-            ^+  .
-            !!
           ::
           ++  done                                      ::  deliver ack
             |=  [liq=tick cop=coop]
@@ -1411,38 +1415,37 @@
           ::
           ++  fine                                      ::  forget message
             |=  liq=tick 
-            +>(nem.kit (~(del by nem.kit) liq))
+            +>(nem (~(del by nem) liq))
           ::
           ++  home                                      ::  receive ack 
             |=  [dam=flap byt=lag=@dr]
             ^+  +>
             ~&  [%cave-home her kos `@p`(mug dam)]
-            =^  rey  cue
-              |-  ^+  
+            =^  rey  chu
               ::
               ::  p.rey: packet bytes
               ::  q.rey: number skipped
               ::  r.rey: send-time for rtt
               ::
               |-  ^+  (pair (trel ,? ,@ud (unit ,@dr)) (qeu pony))
-              ?~  cue  [[| 0 ~] ~]
-              ?.  =(dam p.s.n.cue)
-                =+  r=$(cue r.cue)
-                ?:  !=(0 p.p.r)  [p.r [n.cue l.cue q.r]]
-                =+  l=$(cue l.cue)
-                [p.l [n.cue q.l r.cue]]
-              =^  lop  r.cue
+              ?~  chu  [[| 0 ~] ~]
+              ?.  =(dam p.s.n.chu)
+                =+  r=$(chu r.chu)
+                ?:  !=(0 p.p.r)  [p.r [n.chu l.chu q.r]]
+                =+  l=$(chu l.chu)
+                [p.l [n.chu q.l r.chu]]
+              =^  lop  r.chu
                 ::
                 ::  virgin packets skipped lose their virginity
                 ::
-                |-  ^-  (pair ,@ud _r.cue)
-                ?~  r.cue  [0 ~]
-                =^  lop  r.r.cue  $(r.cue r.r.cue)
-                =.  p.n.r.cue  ~
-                ?.  q.n.r.cue
-                  [lop n.r.cue(p ~) l.r.cue r.r.cue]
-                [+(lop) n.r.cue(p ~, q |) l.r.cue r.r.cue]
-              [[(met 3 q.s.n.cue) lop p.n.cue] ~(nip to cue)]
+                |-  ^-  (pair ,@ud ,_r.chu)
+                ?~  r.chu  [0 ~]
+                =^  lop  r.r.chu  $(r.chu r.r.chu)
+                =.  p.n.r.chu  ~
+                ?.  q.n.r.chu
+                  [lop n.r.chu(p ~) l.r.chu r.r.chu]
+                [+(lop) n.r.chu(p ~, q |) l.r.chu r.r.chu]
+              [[(met 3 q.s.n.chu) lop p.n.chu] ~(nip to chu)]
             [rey +>.$]
           ::
           ++  hump                                      ::  combine pomp
@@ -1455,14 +1458,14 @@
             ==
           ::
           ++  honk                                      ::  lose all packets
-            |-  ^-  [pomp (qeu pony)]
-            ?~  cue  [*pomp ~]
-            =+  [lef=$(cue l.cue) ryt=$(cue r.cue)]
+            |-  ^-  (pair pomp (qeu pony))
+            ?~  chu  [*pomp ~]
+            =+  [lef=$(chu l.chu) ryt=$(chu r.chu)]
             =+  hup=(hump p.lef p.ryt)
-            =+  neu=[hup n.cue q.lef q.ryt]
-            ?~  p.n.cue  neu
+            =+  neu=[hup n.chu q.lef q.ryt]
+            ?~  p.n.chu  neu
             :_  neu(p.n ~, q.n |)
-            hup(boz (add boz.hup (met 3 q.s.n.cue)))
+            hup(boz (add boz.hup (met 3 q.s.n.chu)))
           ::
           ++  hoop                                      ::  
             ::  |-  ^-  [(pair 
@@ -1470,64 +1473,68 @@
           ::
           ++  hope                                      ::  analysis traverse
             |=  [dum=(unit flap) lag=@dr]
-            ^-  [pomp (qeu pony)]
-            ?~  cue  [*pomp ~]
-            =+  ack=&(?=(^ dum) =(u.dum p.s.n.cue))
+            ^-  (pair pomp (qeu pony))
+            ?~  chu  [*pomp ~]
+            =+  ack=&(?=(^ dum) =(u.dum p.s.n.chu))
             =+  :*  ::
                     ::  we have lost all packets ahead of an ack.
                     ::
-                    ryt=?.(ack $(cue r.cue) honk(cue r.cue))
+                    ryt=?.(ack $(chu r.chu) honk(chu r.chu))
                     ::
                     ::  there are no sent packets behind an unsent virgin.
                     ::
-                    lef=?:(&(=(~ p.n.cue) q.n.cue) [*pomp l.cue] $(cue l.cue))
+                    ^=  lef
+                    ?:(&(=(~ p.n.chu) q.n.chu) [p=*pomp q=l.chu] $(chu l.chu))
                 ==
-            =+  :*  neu=[n.cue q.lef q.ryt]
+            =+  :*  neu=[n.chu q.lef q.ryt]
                     hup=(hump p.lef p.ryt)
-                    len=(met 3 q.s.n.cue)
+                    len=(met 3 q.s.n.chu)
                 ==
             ?.  ack
-              ?~  p.n.cue
+              ?~  p.n.chu
                 ::
-                ::  n.cue is not live.
+                ::  n.chu is not live.
                 ::
                 [hup neu]
-              ?.  (lth now (add (mul 2 rtg.sac) u.p.n.cue))
+              ?.  (lth now (add (mul 2 rtg.sac) u.p.n.chu))
                 ::
-                ::  n.cue remains live.
+                ::  n.chu remains live.
                 ::
                 [hup(liv (add len liv.hup)) neu]
               ::
-              ::  n.cue declared lost, no longer virgin.
+              ::  n.chu declared lost, no longer virgin.
               ::
               [hup(boz (add len boz.hup)) neu(p.n ~, q.n |)]
             ::
-            ::  n.cue acknowledged.
+            ::  n.chu acknowledged.
             ::
             :_  ~(nip to `(qeu pony)`neu)
             %_  hup
               byr  (add len byr.hup)
-              rut  ?:(|(?=(~ p.n.cue) !q.n.cue) ~ p.n.cue)
+              rut  ?:(|(?=(~ p.n.chu) !q.n.chu) ~ `(sub now u.p.n.chu))
             ==
           ::
-          ++  hoot                                      ::  update stats
+          ++  hoot                                      ::  bump stats for ack
             |=  [byt=@ud lag=@dr unt=(unit ,@da)]
             ^+  +>
-            =+  oyb=byt.sac
-            =.  byt.sac  (add oyb byt)
-            ?~  |(?=(~ unt) (gte u.unt now))  +>.$
+            =+  oyb=byt.pad.sac
+            =.  byt.pad.sac  (add oyb byt)
+            ?:  |(?=(~ unt) (gte u.unt now))  
+              +>.$
             =+  rut=(sub now u.unt)
-            =:  rtm.sac  (min rtm.sac rut)
-                rtg.sac  (div (add (mul rtg.sac oyb) (mul rut byt)) byt.sac)
-                rts.sac  (div (add (mul rts.sac 3) (rut)) 4)
+            =:  rtm.pad.sac  (min rtm.pad.sac rut)
+                rtg.pad.sac  %+  div 
+                               (add (mul rtg.pad.sac oyb) (mul rut byt))
+                             byt.pad.sac
+                rts.pad.sac  (div (add (mul rts.pad.sac 3) rut) 4)
               ==
-            ?.  (gth rts.sac (mul 2 rtm.sac))
+            ?.  (gth rts.pad.sac (mul 2 rtm.pad.sac))
               (burp lag u.unt)
             ::
             ::  extreme buffer bloat, roundtrip double the minimum;
             ::  scale back window; delay later-sent packets
             ::
-            (burp:(aimd 1) (add lag rtm.sac) u.unt)
+            (burp:(aimd 1) (add lag rtm.pad.sac) u.unt)
           ::
           ++  lost                                      ::  packet now lost
             |=  wen=@da
@@ -1536,14 +1543,14 @@
           ++  send                                      ::  add to queue
             |=  [liq=tick cha=path val=*]
             =^  pex  diz  (zuul:diz now [%bond (mix kos 1) liq cha val])
-            =.  nem.kit  (~(put by nem.kit) [(lent pex) cha])
+            =.  nem  (~(put by nem) [(lent pex) cha])
             |-  ^+  +>.^$
             ?~  pex  +>.^$
             =+  dam=(shaf %flap i.pex)
             %=  $
-              pex      t.pex
-              unc.kit  (~(put by unc.kit) dam liq)
-              cue      (~(put to cue) `pony`[~ & liq dam i.pex])
+              pex  t.pex
+              unc  (~(put by unc) dam liq)
+              chu  (~(put to chu) `pony`[~ & liq dam i.pex])
             ==
           ::
           ++  wack                                      ::  merge statistics
@@ -1559,41 +1566,40 @@
           ::
           ++  wade                                      ::  update statistics
             ^+  .
-            =>  ?:  =(~ cue)
+            =>  ?:  =(~ chu)
                   ?:  cold  .
                   ::
                   ::  end flow, integrate statistics
                   ::
                   %_(. sac *plow, old (wack old pad.sac))
                 =.  liv  wail
-                ?.  =(0 fax.sac))  .
+                ?.  =(0 fax.sac)  .
                 ::
                 ::  start flow, default statistics
                 ::
-                =:  fax.sac   now
-                    lax.sac   now
-                    pad.sac   old(byt (max (byt.old 16.384)), rtm rtg.old)
-                  ==
-            =.  
-            =>  .(liv wail)
-            .(nex wait)
+                %_  .
+                  win.sac   4.096
+                  fax.sac   now
+                  lax.sac   now
+                  pad.sac   old(byt (max (byt.old 16.384)), rtm rtg.old)
+                ==
+            %_(. liv wail, nex wait)
           ::
           ++  wake                                      ::  arbitrary activate
-            ^-  [(list rock) 
-            =.  .  wade
-            ?>  
-            
-            ?:  =(0 win.sac)  ~
+            ::  ^-  [(list rock) 
+            ::  =.  .  wade
+            ::  ?:  =(0 win.sac)  ~
+            !!
           ::
           ++  wail                                      ::  live count
-            |-  ^-  ,@ud
-            ?~  cue  0
-            ?:  &(q.n.cue =(~ p.n.cue))  0
-            =+  [l r]=[$(cue l.cue) $(cue r.cue)]
-            :(add l r ?:(&(?=(^ p.n.cue) !(lost u.p.n.cue)) 1 0))
+            |-  ^-  @ud
+            ?~  chu  0
+            ?:  &(q.n.chu =(~ p.n.chu))  0
+            =+  [l r]=[$(chu l.chu) $(chu r.chu)]
+            :(add l r ?:(&(?=(^ p.n.chu) !(lost u.p.n.chu)) 1 0))
           ::
           ++  wait
-            ^-  ,@da
+            ^-  @da
             !!
           --         
         ::
@@ -1647,7 +1653,7 @@
           ::  ++grok decodes a message blob to a ++meal.  Decoding
           ::  affects the orb connection state, diz.
           ::
-          =+  maw=|=(@ ((hard meal) (cue +<)))
+          =+  maw=|=(@ ((hard meal) (chu +<)))
           =.  diz  ?:(=(%none sin) diz (wast:diz ryn))
           ?-  sin
               %none  
