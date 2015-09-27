@@ -86,6 +86,11 @@
               lew=will                                  ::  will of friend
           ==                                            ::
 ++  pipe  (pair ship bole)                              ::  session identity
+++  pith                                                ::  ack effect
+          $:  byt=@ud                                   ::  packet bytes
+              lop=@ud                                   ::  num out-of-order
+              rut=(unit ,@dr)                           ::  roundtrip update
+          ==                                            ::
 ++  plan                                                ::  session state
           $:  unc=(map flap tick)                       ::  packet to message
               nem=(map tick (pair ,@ud path))           ::  number unacked /msg
@@ -109,8 +114,8 @@
 ++  pony  (qual (unit ,@da) ,? tick pole)               ::  sent/virgin/seq/pack
 ++  pomp                                                ::  traverse update
           $:  byr=@ud                                   ::  bytes received (now)
-              boz=@ud                                   ::  bytes lost (now)
-              liv=@ud                                   ::  bytes live
+              boz=@ud                                   ::  packets lost (now)
+              lie=@ud                                   ::  bytes live
               rut=(unit ,@dr)                           ::  round-trip update
           ==                                            ::
 ++  pump                                                ::  new packet pump
@@ -784,7 +789,7 @@
         ::
         ++  zuul                                        ::    zuul:lax:as:go
           |=  [now=@da ham=meal]                        ::  encode message
-          ^-  [p=(list rock) q=_+>]
+          ^-  [(list rock) _+>]
           =<  weft
           |%
           ++  wain                                      ::  message identity
@@ -1326,13 +1331,13 @@
           |%  
           ++  abed                                      ::  instantiate
             =+  [rtt=(bex 60) bip=(~(get by nip.bah) kos)]
-            %_(+ +< ?^(bip u.bip `pump`+<(old [1.024 rtt rtt rtt])))
+            %_(+ +< ?^(bip u.bip +>-(old [1.024 rtt rtt rtt])))
           ::
           ++  abet                                      ::  resolve
             =.  .  wade
             =+  nyx=wait
             %_    +>.$
-                nip.bah  (~(put by nip.bah) kos bip(nex nyx))
+                nip.bah  (~(put by nip.bah) kos +>-(nex nyx))
                 pod.weg
               =+  pod=?~(nex pod.weg (~(dal se pod.weg) u.nex her kos))
               ?~(nyx pod (~(put se pod) u.nyx her kos))
@@ -1359,12 +1364,13 @@
           ::
           ++  babe                                      ::  message ack
             |=  [liq=tick cop=coop]
+            ^+  +>
             =+  lef=(~(got by nem) liq)
             ?.  =(~ cop)
-              (done:cull:fine cop)
+              (done:cull:fine liq cop)
             ?.  =(1 p.lef)
-              +>.$(nem (~(put by nem liq (dec p.lef) q.lef)))
-            (done:fine u.luq cop)
+              +>.$(nem (~(put by nem) liq (dec p.lef) q.lef))
+            (done:fine liq cop)
           ::
           ++  back                                      ::  receive ack
             |=  [dam=flap cop=coop lag=@dr]
@@ -1398,7 +1404,7 @@
                 chu  
               |-  ^+  chu
               ?~  chu  ~
-              =+  ^=  ecu  ^+  chu
+              =+  ^=  ecu  ^-  (qeu pony)
                   :+  n.chu
                     ?:((lte liq q.n.chu) $(chu l.chu) l.chu)
                   ?:((gte liq q.n.chu) $(chu r.chu) r.chu)
@@ -1417,43 +1423,17 @@
             |=  liq=tick 
             +>(nem (~(del by nem) liq))
           ::
-          ++  home                                      ::  receive ack 
-            |=  [dam=flap byt=lag=@dr]
+          ++  harp                                      ::  adjust to pith 
+            |=  rey=pith
             ^+  +>
-            ~&  [%cave-home her kos `@p`(mug dam)]
-            =^  rey  chu
-              ::
-              ::  p.rey: packet bytes
-              ::  q.rey: number skipped
-              ::  r.rey: send-time for rtt
-              ::
-              |-  ^+  (pair (trel ,? ,@ud (unit ,@dr)) (qeu pony))
-              ?~  chu  [[| 0 ~] ~]
-              ?.  =(dam p.s.n.chu)
-                =+  r=$(chu r.chu)
-                ?:  !=(0 p.p.r)  [p.r [n.chu l.chu q.r]]
-                =+  l=$(chu l.chu)
-                [p.l [n.chu q.l r.chu]]
-              =^  lop  r.chu
-                ::
-                ::  virgin packets skipped lose their virginity
-                ::
-                |-  ^-  (pair ,@ud ,_r.chu)
-                ?~  r.chu  [0 ~]
-                =^  lop  r.r.chu  $(r.chu r.r.chu)
-                =.  p.n.r.chu  ~
-                ?.  q.n.r.chu
-                  [lop n.r.chu(p ~) l.r.chu r.r.chu]
-                [+(lop) n.r.chu(p ~, q |) l.r.chu r.r.chu]
-              [[(met 3 q.s.n.chu) lop p.n.chu] ~(nip to chu)]
-            [rey +>.$]
+            !!    ::  XX hoot
           ::
           ++  hump                                      ::  combine pomp
             |=  [one=pomp two=pomp]
             ^-  pomp
             :*  (add byr.one byr.two)
                 (add boz.one boz.two)
-                (add liv.one liv.two)
+                (add lie.one lie.two)
                 ?^(rut.one rut.one rut.two)
             ==
           ::
@@ -1462,14 +1442,21 @@
             ?~  chu  [*pomp ~]
             =+  [lef=$(chu l.chu) ryt=$(chu r.chu)]
             =+  hup=(hump p.lef p.ryt)
-            =+  neu=[hup n.chu q.lef q.ryt]
-            ?~  p.n.chu  neu
+            =+  neu=[n=n.chu l=q.lef r=q.ryt]
+            ?~  p.n.chu  [hup neu]
             :_  neu(p.n ~, q.n |)
-            hup(boz (add boz.hup (met 3 q.s.n.chu)))
+            hup(boz +(boz.hup))
           ::
           ++  hoop                                      ::  
             ::  |-  ^-  [(pair 
-            !!
+             !!
+          ::
+          ++  home
+            |=  [dam=flap lag=@dr]
+            ^+  +>
+            =^  pom  chu  (hope `dam lag)
+            ::  XX apply
+            +>.$
           ::
           ++  hope                                      ::  analysis traverse
             |=  [dum=(unit flap) lag=@dr]
@@ -1486,7 +1473,7 @@
                     ^=  lef
                     ?:(&(=(~ p.n.chu) q.n.chu) [p=*pomp q=l.chu] $(chu l.chu))
                 ==
-            =+  :*  neu=[n.chu q.lef q.ryt]
+            =+  :*  neu=[n=n.chu l=q.lef r=q.ryt]
                     hup=(hump p.lef p.ryt)
                     len=(met 3 q.s.n.chu)
                 ==
@@ -1496,15 +1483,15 @@
                 ::  n.chu is not live.
                 ::
                 [hup neu]
-              ?.  (lth now (add (mul 2 rtg.sac) u.p.n.chu))
+              ?.  (lth now (add (mul 2 rtg.pad.sac) u.p.n.chu))
                 ::
                 ::  n.chu remains live.
                 ::
-                [hup(liv (add len liv.hup)) neu]
+                [hup(lie (add len lie.hup)) neu]
               ::
               ::  n.chu declared lost, no longer virgin.
               ::
-              [hup(boz (add len boz.hup)) neu(p.n ~, q.n |)]
+              [hup(boz +(boz.hup)) neu(p.n ~, q.n |)]
             ::
             ::  n.chu acknowledged.
             ::
@@ -1542,8 +1529,8 @@
           :: 
           ++  send                                      ::  add to queue
             |=  [liq=tick cha=path val=*]
-            =^  pex  diz  (zuul:diz now [%bond (mix kos 1) liq cha val])
-            =.  nem  (~(put by nem) [(lent pex) cha])
+            =^  pex  diz  (zuul:diz now [%bond [(mix kos 1) liq] cha val])
+            =.  nem  (~(put by nem) liq [(lent pex) cha])
             |-  ^+  +>.^$
             ?~  pex  +>.^$
             =+  dam=(shaf %flap i.pex)
@@ -1553,7 +1540,7 @@
               chu  (~(put to chu) `pony`[~ & liq dam i.pex])
             ==
           ::
-          ++  wack                                      ::  merge statistics
+          ++  waac                                      ::  merge statistics
             |=  new=plod
             ^-  plod
             =+  ols=(max (bex 20) byt.old)
@@ -1571,19 +1558,21 @@
                   ::
                   ::  end flow, integrate statistics
                   ::
-                  %_(. sac *plow, old (wack old pad.sac))
-                =.  liv  wail
+                  %_(. sac *plow, old (waac pad.sac))
                 ?.  =(0 fax.sac)  .
                 ::
                 ::  start flow, default statistics
                 ::
-                %_  .
-                  win.sac   4.096
-                  fax.sac   now
-                  lax.sac   now
-                  pad.sac   old(byt (max (byt.old 16.384)), rtm rtg.old)
+                %_    .
+                    win  4.096
+                    sac
+                  ^-  plow
+                  :*  fax=now
+                      lax=now
+                      pad=old(byt (max byt.old 16.384), rtm rtg.old)
+                  ==
                 ==
-            %_(. liv wail, nex wait)
+            %_(. nex wait)
           ::
           ++  wake                                      ::  arbitrary activate
             ::  ^-  [(list rock) 
@@ -1591,15 +1580,8 @@
             ::  ?:  =(0 win.sac)  ~
             !!
           ::
-          ++  wail                                      ::  live count
-            |-  ^-  @ud
-            ?~  chu  0
-            ?:  &(q.n.chu =(~ p.n.chu))  0
-            =+  [l r]=[$(chu l.chu) $(chu r.chu)]
-            :(add l r ?:(&(?=(^ p.n.chu) !(lost u.p.n.chu)) 1 0))
-          ::
           ++  wait
-            ^-  @da
+            ^-  (unit ,@da)
             !!
           --         
         ::
@@ -1653,7 +1635,7 @@
           ::  ++grok decodes a message blob to a ++meal.  Decoding
           ::  affects the orb connection state, diz.
           ::
-          =+  maw=|=(@ ((hard meal) (chu +<)))
+          =+  maw=|=(@ ((hard meal) (cue +<)))
           =.  diz  ?:(=(%none sin) diz (wast:diz ryn))
           ?-  sin
               %none  
@@ -2033,7 +2015,7 @@
     ?-    -.bon
         %acid  :_(fox [[hen [%give %drop ~]] ~])
         %beer
-      :_  fox(zac (~(put by zac.fox) p.bon `corn`[hen ~]))
+      :_  fox(zac (~(put by zac.fox) p.bon `corn`[hen ~ ~]))
       :*  [hen [%slip %c %init p.bon]]
           [hen [%give %init p.bon]]
           [hen [%slip %a %kick now]]

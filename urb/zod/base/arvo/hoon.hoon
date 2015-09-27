@@ -2305,6 +2305,7 @@
   ::
   +-  nip                                               ::  remove root
     |-  ^+  a
+    ?~  a  ~
     ?~  l.a  r.a
     ?~  r.a  l.a
     ?:  (vor n.l.a n.r.a)
