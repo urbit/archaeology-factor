@@ -1228,7 +1228,7 @@
         [~ fox]
       =<  zork
       =<  abet
-      ::  ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
+      ~&  [%pi p.p.kec ryn `@p`(mug (shaf %flap pac))]
       %-  chew:(ho:(um q.p.kec) p.p.kec)
       [q.kec (shaf %flap pac) ryn r.kec]
     ::
@@ -1330,8 +1330,8 @@
           |=  [ost=bone dam=flap cop=coop lag=@dr]      ::  receive ack
           ^+  +>
           ?:  =(0 dam)  +>                              ::  dummy ack
-          (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag)
-          ::  abet:(back:(cave ost) dam cop lag)
+          ::  (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag) oldpump
+          abet:(back:(cave ost) dam cop lag)
         ::
         ++  balk                                        ::    balk:ho:um:am
           |=  kos=bole                                  ::  wakeup
@@ -1518,7 +1518,7 @@
           ++  hone                                      ::  adjust for ack
             |=  [lag=@dr rey=pomp]
             ^+  +>
-            =.  +>  (aimd boz.rey)
+            =.  +>  ?:(&(=(0 byr.rey) =(0 boz.rey)) +> (aimd boz.rey))
             =+  oyb=byt.pad.sac
             =.  byt.pad.sac  (add oyb byr.rey)
             ?~  rut.rey  +>.$
@@ -1705,7 +1705,10 @@
         ++  doze                                        ::    doze:ho:um:am
           ^-  (unit ,@da)                               ::  wait until
           ::  rtn.sop.bah                               ::  XX oldpump
-          ~(til se pod.weg)
+          =+  doe=~(til se pod.weg)
+          ::  ~&  [%doze doe]
+          ::  doe
+          `(add ~s1 now)
         ::
         ++  fore                                        ::    fore:ho:um:am
           |=  [ryn=lane who=ship via=(unit lane) msg=@] ::  forward packet
@@ -2117,7 +2120,7 @@
         %mead  :_(fox [[hen [%give %hear p.bon q.bon]] ~])
         %milk  (clod p.bon q.bon r.bon hen [%west p.bon +.r.bon q.bon s.bon])
         %ouzo
-      ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))] 
+      ~&  [%po now p.bon `@p`(mug (shaf %flap q.bon))] 
       :_  fox
       [[gad.fox [%give %send p.bon q.bon]] ~]
     ::
