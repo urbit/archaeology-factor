@@ -1265,18 +1265,23 @@
       ?~  caz  [~ fox]
       =^  lef  fox  $(caz l.caz)
       =^  ryt  fox  $(caz r.caz)
-      =^  bun  fox  zork:(wake:(um p.n.caz) hen)
+      ::  =^  bun  fox  zork:(wake:(um p.n.caz) hen)        ::  XX oldpump
+      =^  bun  fox  zork:(walk:(um p.n.caz) hen)
       :_(fox :(weld p.lef p.ryt p.bun))
     ::
     ++  wise                                            ::    wise:am
       |=  [soq=sock hen=duct cha=path val=*]            ::  send request
       ^-  [p=(list boon) q=fort]
-      zork:abet:(we-wool:(wend:(ho:(um p.soq) q.soq) hen) cha val)
+      ::  zork:abet:(we-wool:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
+      ::  XX oldpump
+      zork:abet:(we-woof:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
     ::
     ++  wish                                            ::    wise:am
       |=  [soq=sock kos=bole cha=path val=*]            ::  return response
       ^-  [p=(list boon) q=fort]
-      zork:abet:(we-wool:(wand:(ho:(um p.soq) q.soq) kos) cha val)
+      ::  zork:abet:(we-wool:(wand:(ho:(um p.soq) q.soq) kos) cha val)
+      ::  XX oldpump
+      zork:abet:(we-woof:(wand:(ho:(um p.soq) q.soq) kos) cha val)
     ::
     ++  um                                              ::  per server
       |=  our=ship
@@ -1699,7 +1704,8 @@
         ::
         ++  doze                                        ::    doze:ho:um:am
           ^-  (unit ,@da)                               ::  wait until
-          rtn.sop.bah
+          ::  rtn.sop.bah                               ::  XX oldpump
+          ~(til se pod.weg)
         ::
         ++  fore                                        ::    fore:ho:um:am
           |=  [ryn=lane who=ship via=(unit lane) msg=@] ::  forward packet
