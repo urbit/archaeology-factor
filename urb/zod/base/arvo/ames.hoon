@@ -10,9 +10,9 @@
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
 ++  bath                                                ::  per friend
           $:  fon=(map bole lock)                       ::  inbound locks
-              zam=scar                                  ::  outbound bones
+              zam=scar                                  ::  outbound boles
               sal=(map bole colt)                       ::  outbound flows
-              nup=(map bole pump)                       ::  new pumps
+              nup=(map bole pump)                       ::  outbound pumps
               sop=shed                                  ::  packet pump XX
           ==                                            ::
 ++  bole  bone                                          ::  inbound opaque
@@ -38,8 +38,8 @@
               neg=(set tick)                            ::  dedup negatives, XX
           ==                                            ::
 ++  colt                                                ::  outbound state
-          $:  seq=@ud                                   ::  next to send
-              lac=@ud                                   ::  acknowledged until
+          $:  seq=@ud                                   ::  next tick to send
+              lac=@ud                                   ::  acked tick until
               mis=(map tick (pair path coop))           ::  nonsequential acks
           ==                                            ::
 ++  corn                                                ::  flow by server
@@ -1366,10 +1366,10 @@
             ^+  +>
             =+  lef=(~(got by nem) liq)
             ?.  =(~ cop)
-              (done:cull:fine liq cop)
+              (done:cull:fine liq q.lef cop)
             ?.  =(1 p.lef)
               +>.$(nem (~(put by nem) liq (dec p.lef) q.lef))
-            (done:fine liq cop)
+            (done:fine liq q.lef cop)
           ::
           ++  back                                      ::  receive ack
             |=  [dam=flap cop=coop lag=@dr]
@@ -1413,9 +1413,9 @@
           ++  cold  =(0 fax.sac)                        ::  nothing happening
           ++  dead  &(!cold (gth (sub now lax.sac) ~s8))::  stuck
           ++  done                                      ::  deliver ack
-            |=  [liq=tick cop=coop]
+            |=  [liq=tick cha=path cop=coop]
             ^+  +>
-            !!
+            +>(..cave we-abet:(we-toad:(wand kos) liq cha cop))
           ::
           ++  fine                                      ::  forget message
             |=  liq=tick 
@@ -1533,10 +1533,8 @@
             ::
             (burp:(aimd 1) (add lag rtm.pad.sac) u.unt)
           ::
-          ++  lost                                      ::  packet now lost
-            |=  wen=@da
-            (gte now (add wen (mul 3 rtg.pad.sac)))
-          :: 
+          ++  lost  |=(a=@da (gte now (add a loss)))    ::  sent deemed lost
+          ++  loss  (mul 3 rtg.pad.sac)                 ::  loss timer
           ++  send                                      ::  add to queue
             |=  [liq=tick cha=path val=*]
             ^+  +>
@@ -1608,7 +1606,7 @@
             ?~  chu  ~
             ;:  hunt
               $(chu r.chu)
-              ?~(p.n.chu ~ `(add u.p.n.chu (mul 3 rtg.pad.sac)))
+              ?~(p.n.chu ~ `(add u.p.n.chu loss))
               $(chu l.chu)
             ==
           ::
