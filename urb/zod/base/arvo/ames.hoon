@@ -1213,6 +1213,12 @@
         ==
       [[[%beer our pac:ex:loy] ~] fox]
     ::
+    ++  doze
+      %+  hunt  `(add now ~s32)
+      |-  ^-  (unit ,@da)
+      ?~  zac.fox  ~
+      :(hunt $(zac.fox l.zac.fox) $(zac.fox r.zac.fox) doze:(um p.n.zac.fox))
+    ::
     ++  gnaw                                            ::    gnaw:am
       |=  [ryn=lane pac=rock]                           ::  process packet
       ^-  [p=(list boon) q=fort]
@@ -1296,6 +1302,11 @@
           ?^(weg u.weg *corn)
       =|  bin=(list boon)
       |%
+      ++  doze                                          ::    doze:um:am
+        |-  ^-  (unit ,@da)
+        ?~  wab.weg  ~
+        :(hunt $(wab.weg l.wab.weg) $(wab.weg r.wab.weg) doze:(ho p.n.wab.weg))
+      ::
       ++  ho                                            ::    ho:um:am
         |=  her=ship                                    ::  per friend
         =+  diz=(myx:gus her)
@@ -1311,8 +1322,10 @@
         ::
         ++  back                                        ::    back:ho:um:am
           |=  [ost=bone dam=flap cop=coop lag=@dr]      ::  receive ack
-          ?:  =(0 dam)  +>  ::  dummy ack
+          ^+  +>
+          ?:  =(0 dam)  +>                              ::  dummy ack
           (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag)
+          ::  abet:(back:(cave ost) dam cop lag)
         ::
         ++  busk                                        ::    busk:ho:um:am
           |=  [waz=(list ship) pex=(list rock)]         ::  send packets
@@ -1675,8 +1688,12 @@
           =^  pex  diz  (zuul:diz now [%back (mix 1 kos) dam cop ~s0])
           (busk xong:diz pex)
         ::
-        ++  fore                                        ::  
-          |=  [ryn=lane who=ship via=(unit lane) msg=@]
+        ++  doze                                        ::    doze:ho:um:am
+          ^-  (unit ,@da)                               ::  wait until
+          rtn.sop.bah
+        ::
+        ++  fore                                        ::    fore:ho:um:am
+          |=  [ryn=lane who=ship via=(unit lane) msg=@] ::  forward packet
           ^+  +>
           =+  ^=  lyn  ^-  lane
               ?~  via  ryn
@@ -2002,18 +2019,8 @@
     ::
     ++  doze
       |=  [now=@da hen=duct]
-      =+  doz=`(unit ,@da)`[~ (add now ~s32)]
-      |-  ^+  doz
-      ?~  zac.fox  doz
-      =.  doz  $(zac.fox l.zac.fox)
-      =.  doz  $(zac.fox r.zac.fox)
-      =+  yem=q.n.zac.fox
-      |-  ^+  doz
-      ?~  wab.yem  doz
-      =.  doz  $(wab.yem l.wab.yem)
-      =.  doz  $(wab.yem r.wab.yem)
-      =+  bah=q.n.wab.yem
-      (hunt doz rtn.sop.bah)
+      ^-  (unit ,@da)
+      ^doze
     ::
     ++  load
       |=  old=fort
@@ -2109,6 +2116,10 @@
           ==
       ==
     ==
+  ::
+  ++  doze
+    ^-  (unit ,@da)
+    ~(doze am now fox)
   ::
   ++  knap
     |=  [tea=wire hen=duct sih=sign-arvo]
