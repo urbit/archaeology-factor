@@ -108,9 +108,8 @@
               lax=@da                                   ::  last ack
               pad=plod                                  ::  statistics
           ==                                            ::
-++  poet  (tree (pair ,@da pipe))                       ::  scheduler
+++  pond  (tree (pair ,@da pipe))                       ::  scheduler
 ++  pole  (pair flap rock)                              ::  hashed packet
-++  pond  (tree (pair ,@da (pair ship bole)))           ::  network sequencer
 ++  pony  (qual (unit ,@da) ,? tick pole)               ::  sent/virgin/seq/pack
 ++  pomp                                                ::  traverse update
           $:  byr=@ud                                   ::  bytes received
@@ -172,7 +171,7 @@
 |%                                                      ::
 ++  move  ,[p=duct q=(mold note-arvo gift-ames)]        ::  local move
 ++  se                                                  ::  simple scheduler
-  |_  a=poet                                            ::  l.n.a < n.a < r.n.a
+  |_  a=pond                                            ::  l.n.a < n.a < r.n.a
   ++  cor                                               ::  schedule order
     |=  [t=@da v=pipe]
     |=  [t=@da v=pipe]
@@ -216,7 +215,7 @@
   ::
   ++  tip                                               ::  raw behead
     |=  t=@da
-    ^-  (pair (list pipe) poet)
+    ^-  (pair (list pipe) pond)
     ?~  a  [~ ~]
     =+  l=$(a l.a)
     ?.  (lte p.n.a t)
@@ -1288,12 +1287,12 @@
       =|  bin=(list boon)
       |%
       ++  doze                                          ::    doze:um:am
-        |-  ^-  (unit ,@da)
+        |-  ^-  (unit ,@da)                             ::  wakeup time
         ?~  wab.weg  ~
         :(hunt $(wab.weg l.wab.weg) $(wab.weg r.wab.weg) doze:(ho p.n.wab.weg))
       ::
-      ++  wake
-        |=  hen=duct
+      ++  wake                                          ::    wake:um:am
+        |=  hen=duct                                    ::  activate
         =.  +>  (kick hen)
         =+  baw=wab.weg
         |-  ^+  +>.^$
@@ -1301,6 +1300,13 @@
         =.  +>.^$  $(baw l.baw)
         =.  +>.^$  $(baw r.baw)
         abet:thaw:(ho p.n.baw)
+      ::
+      ++  walk                                          ::    walk:um:am
+        |=  hen=duct                                    ::  activate
+        =^  gup  pod.weg  (~(top se pod.weg) now)
+        |-  ^+  +>.^$
+        ?~  gup  +>.^$
+        $(gup t.gup, +>.^$ abet:(balk:(ho p.i.gup) q.i.gup))
       ::
       ++  ho                                            ::    ho:um:am
         |=  her=ship                                    ::  per friend
@@ -1321,6 +1327,14 @@
           ?:  =(0 dam)  +>                              ::  dummy ack
           (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag)
           ::  abet:(back:(cave ost) dam cop lag)
+        ::
+        ++  balk                                        ::    balk:ho:um:am
+          |=  kos=bole                                  ::  wakeup
+          ^+  +>
+          =+  vac=(cave kos)
+          =^  pex  vac  wake:vac
+          =.  +>.$  abet:vac
+          (busk xong:diz pex)
         ::
         ++  busk                                        ::    busk:ho:um:am
           |=  [waz=(list ship) pex=(list rock)]         ::  send packets
