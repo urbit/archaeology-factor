@@ -1237,19 +1237,6 @@
       |=  him=ship
       |
     ::
-    ++  hall                                            ::    hall:am
-      ^-  (list sock)                                   ::  all sockets
-      =|  sox=(list sock)                               ::  XX hideous
-      |-  ^+  sox
-      ?~  zac.fox  sox
-      =.  sox  $(zac.fox l.zac.fox)
-      =.  sox  $(zac.fox r.zac.fox)
-      |-  ^+  sox
-      ?~  wab.q.n.zac.fox  sox
-      =.  sox  $(wab.q.n.zac.fox l.wab.q.n.zac.fox)
-      =.  sox  $(wab.q.n.zac.fox r.wab.q.n.zac.fox)
-      [[p.n.zac.fox p.n.wab.q.n.zac.fox] sox]
-    ::
     ++  have                                            ::    have:am
       |=  [our=ship buq=buck]                           ::  acquire license
       ^-  [p=(list boon) q=fort]
@@ -1274,15 +1261,13 @@
     ::
     ++  wake                                            ::    wake:am
       |=  hen=duct                                      ::  harvest packets
-      ^-  [p=(list boon) q=fort]
-      =+  sox=hall
-      =|  bin=(list boon)
+      =+  caz=zac.fox
       |-  ^-  [p=(list boon) q=fort]
-      ?~  sox
-        =^  ban  fox  (kick hen)
-        [(weld bin p.ban) fox]
-      =^  bun  fox  zork:abet:thaw:(ho:(um p.i.sox) q.i.sox)
-      $(sox t.sox, bin (weld p.bun bin))
+      ?~  caz  [~ fox]
+      =^  lef  fox  $(caz l.caz)
+      =^  ryt  fox  $(caz r.caz)
+      =^  bun  fox  zork:(wake:(um p.n.caz) hen)
+      :_(fox :(weld p.lef p.ryt p.bun))
     ::
     ++  wise                                            ::    wise:am
       |=  [soq=sock hen=duct cha=path val=*]            ::  send request
@@ -1306,6 +1291,16 @@
         |-  ^-  (unit ,@da)
         ?~  wab.weg  ~
         :(hunt $(wab.weg l.wab.weg) $(wab.weg r.wab.weg) doze:(ho p.n.wab.weg))
+      ::
+      ++  wake
+        |=  hen=duct
+        =.  +>  (kick hen)
+        =+  baw=wab.weg
+        |-  ^+  +>.^$
+        ?~  baw  +>.^$
+        =.  +>.^$  $(baw l.baw)
+        =.  +>.^$  $(baw r.baw)
+        abet:thaw:(ho p.n.baw)
       ::
       ++  ho                                            ::    ho:um:am
         |=  her=ship                                    ::  per friend
