@@ -1937,6 +1937,11 @@
             =^  pex  puz  (whap:puz now fel cha wyv)
             +>.$(+> (busk xong:diz pex))
           ::
+          ++  we-woof                                   ::    woof:we:ho:um:am
+            |=  [cha=path val=*]                        ::  send message
+            ^+  +>
+            +>(seq +(seq), +> abet:(send:(cave kos) seq cha val))
+          ::
           ++  we-wool                                   ::    wool:we:ho:um:am
             |=  [cha=path val=*]                        ::  send message
             ~&  [?:(=(0 (end 0 1 kos)) %tx %bx) her kos seq cha]
