@@ -169,6 +169,8 @@
 ::::                                                    ::::::  arvo structures
   ::                                                    ::  ::
 |%                                                      ::
+++  flam  |=(a=flap `@p`(mug a))                        ::  debug flap
+++  msec  |=(a=@dr `@ud`(div a (div ~s1 1.000)))        ::  debug @dr
 ++  move  ,[p=duct q=(mold note-arvo gift-ames)]        ::  local move
 ++  se                                                  ::  simple scheduler
   |_  a=pond                                            ::  l.n.a < n.a < r.n.a
@@ -1213,6 +1215,7 @@
       [[[%beer our pac:ex:loy] ~] fox]
     ::
     ++  doze
+      ~&  %ames-doze
       %+  hunt  `(add now ~s32)
       |-  ^-  (unit ,@da)
       ?~  zac.fox  ~
@@ -1362,6 +1365,14 @@
           ++  abet                                      ::  resolve
             =.  .  wade
             =+  nyx=wait
+            ~&  :*  %cave-abet  
+                    [her/her kos/kos]
+                    [liv/wail win/win] 
+                    :-  %wait
+                    ?~  nyx  %no
+                    ?:  =(`now nyx)  %now 
+                    (scot %ud (msec (sub u.nyx now)))
+                ==
             %_    +>.$
                 nup.bah  (~(put by nup.bah) kos +>-(nex nyx))
                 pod.weg
@@ -1377,14 +1388,21 @@
                 ::
                 ::  we don't grow the window if we sense buffer bloat
                 ::
-                ~&  :_  [her kos win]
-                    ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac))
-                      %aimd-stay
-                    %aimd-more
+                ~&  :*  %cave-grow
+                        [her/her kos/kos]
+                        [win/win rts/(msec rts.pad.sac) rtm/(msec rtm.pad.sac)]
+                        ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac))
+                          %aimd-stay
+                        %aimd-more
+                    ==
                 ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac)) 
                   win 
                 (add 1.536 win)
-              ~&  [%aimd-less her kos win]
+              ~&  :*  %cave-lose
+                      [her/her kos/kos]
+                      [win/win boz/boz]
+                      (max 1.536 (rsh 0 boz win))
+                  ==
               (max 1.536 (rsh 0 boz win))
             ==
           ::
@@ -1411,7 +1429,10 @@
             |=  [lag=@dr aft=@da]
             ^+  +>
             ?:  =(0 lag)  +>.$
-            ~&  [%cave-burp lag aft]
+            ~&  :*  %cave-burp 
+                    [her/her kos/kos] 
+                    [lag/(msec lag) ago/(msec (sub now aft))]
+                ==
             %_    +>
                 chu
               |-  ^+  chu
@@ -1710,9 +1731,10 @@
           ^-  (unit ,@da)                               ::  wait until
           ::  rtn.sop.bah                               ::  XX oldpump
           =+  doe=~(til se pod.weg)
-          ::  ~&  [%doze doe]
-          ::  doe
-          `(add ~s1 now)
+          ~&  [%cave-doze 
+          ?:  ?=(~ doe)  ~
+          ~&  [%doze (msec (sub u.doe now))]
+          doe
         ::
         ++  fore                                        ::    fore:ho:um:am
           |=  [ryn=lane who=ship via=(unit lane) msg=@] ::  forward packet
