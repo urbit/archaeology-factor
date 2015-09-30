@@ -71,6 +71,7 @@
 ++  from-helm  (from-lib %helm [..$ ,_abet]:(helm-work))
 ++  from-kiln  (from-lib %kiln [..$ ,_abet]:(kiln-work))
 ::
+++  poke-atom               (wrap poke-ping):from-helm
 ++  poke-dill-belt          (wrap poke-dill-belt):from-drum
 ++  poke-helm-init          (wrap poke-init):from-helm
 ++  poke-helm-verb          (wrap poke-verb):from-helm

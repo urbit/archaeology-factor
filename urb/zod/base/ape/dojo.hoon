@@ -108,10 +108,10 @@
       ;~  pose
         ;~  pfix  bar
           %+  cook
-            |=  [a=path b=dojo-config]
+            |=  [a=(unit ship) b=path c=dojo-config]
             ^-  dojo-command
-            [%poke [our.hid %hood] [0 %ge [0 [%cat %hood a]] b]]
-          ;~(plug (most fas sym) dp-config)
+            [%poke [?~(a our.hid u.a) %hood] [0 %ge [0 [%cat %hood b]] c]]
+          ;~(plug (punt (ifix [sig fas] fed:ag)) (most fas sym) dp-config)
         ==
       ::
         ;~  pfix  col

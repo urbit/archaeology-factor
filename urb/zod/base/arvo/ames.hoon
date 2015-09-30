@@ -1385,7 +1385,7 @@
                   win 
                 (add 1.536 win)
               ~&  [%aimd-less her kos win]
-              (min 1.536 (rsh 0 boz win))
+              (max 1.536 (rsh 0 boz win))
             ==
           ::
           ++  babe                                      ::  message ack
@@ -1463,6 +1463,7 @@
             =+  hup=(hump p.lef p.ryt)
             =+  neu=[n=n.chu l=q.lef r=q.ryt]
             ?~  p.n.chu  [hup neu]
+            ~&  [%honk-lost `@p`(mug p.s.n.chu)]
             :_  neu(p.n ~, q.n |)
             hup(boz +(boz.hup))
           ::
@@ -1505,10 +1506,12 @@
               ::
               ::  n.chu declared lost, no longer virgin.
               ::
+              ~&  [%hack-lost `@p`(mug p.s.n.chu) rtg.pad.sac]
               [hup(boz +(boz.hup)) neu(p.n ~, q.n |)]
             ::
             ::  n.chu acknowledged.
             ::
+            ~&  [%hack-good `@p`(mug p.s.n.chu)]
             :_  ~(nip to `(qeu pony)`neu)
             %_  hup
               byr  (add len byr.hup)
@@ -1655,6 +1658,7 @@
                         ?.  =(~ p.n.huc)  left
                         =+  len=(met 3 q.s.n.huc)
                         ?:  (lth rum len)  ..work
+                        ~&  [%wash-send `@p`(mug p.s.n.huc)]
                         %=    left
                             rum      (sub rum len)
                             raw      [q.s.n.huc raw]
