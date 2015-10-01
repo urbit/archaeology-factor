@@ -1298,16 +1298,16 @@
       ?~  caz  [~ fox]
       =^  lef  fox  $(caz l.caz)
       =^  ryt  fox  $(caz r.caz)
-      ::  =^  bun  fox  zork:(wake:(um p.n.caz) hen)        ::  XX oldpump
-      =^  bun  fox  zork:(walk:(um p.n.caz) hen)
+      =^  bun  fox  zork:(wake:(um p.n.caz) hen)        ::  XX oldpump
+      ::  =^  bun  fox  zork:(walk:(um p.n.caz) hen)
       :_(fox :(weld p.lef p.ryt p.bun))
     ::
     ++  wise                                            ::    wise:am
       |=  [soq=sock hen=duct cha=path val=*]            ::  send request
       ^-  [p=(list boon) q=fort]
-      ::  zork:abet:(we-wool:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
+      zork:abet:(we-wool:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
       ::  XX oldpump
-      zork:abet:(we-woof:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
+      ::  zork:abet:(we-woof:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
     ::
     ++  wish                                            ::    wise:am
       |=  [soq=sock kos=bole cha=path val=*]            ::  return response
@@ -1363,8 +1363,8 @@
           |=  [ost=bone dam=flap cop=coop lag=@dr]      ::  receive ack
           ^+  +>
           ?:  =(0 dam)  +>                              ::  dummy ack
-          ::  (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag) oldpump
-          abet:(back:(cave ost) dam cop lag)
+          (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag) :: oldpump
+          ::  abet:(back:(cave ost) dam cop lag)
         ::
         ++  balk                                        ::    balk:ho:um:am
           |=  kos=bole                                  ::  wakeup
@@ -1774,7 +1774,8 @@
                        ::  to complete the key exchange and stop
                        ::  the sender from using %full
                        ::  (conk ~ dam)
-                       (conk 0 `@`0 ~)
+                       ::  (conk 0 `@`0 ~)
+                       +>.$
                    (back +.fud) 
             %bond  hi-abet:(hi-bond:(high p.fud dam ryn) q.fud r.fud)
             %carp  =<  hi-abet
@@ -1791,12 +1792,12 @@
         ::
         ++  doze                                        ::    doze:ho:um:am
           ^-  (unit ,@da)                               ::  wait until
-          ::  rtn.sop.bah                               ::  XX oldpump
-          =+  doe=~(til se pod.weg)
-          ?:  ?=(~ doe)
-            ~
-          ~&  [%cave-doze (anun doe)]
-          doe
+          rtn.sop.bah                               ::  XX oldpump
+          ::  =+  doe=~(til se pod.weg)
+          ::  ?:  ?=(~ doe)
+          ::  ~
+          ::~&  [%cave-doze (anun doe)]
+          :: doe
         ::
         ++  fore                                        ::    fore:ho:um:am
           |=  [ryn=lane who=ship via=(unit lane) msg=@] ::  forward packet
