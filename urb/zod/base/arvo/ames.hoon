@@ -112,7 +112,7 @@
 ++  pole  (pair flap rock)                              ::  hashed packet
 ++  pony  (qual (unit ,@da) ,? tick pole)               ::  sent/virgin/seq/pack
 ++  pomp                                                ::  traverse update
-          $:  byr=@ud                                   ::  bytes received
+          $:  byt=@ud                                   ::  bytes received
               boz=@ud                                   ::  packets lost
               rut=(unit ,@dr)                           ::  round-trip update
           ==                                            ::
@@ -806,13 +806,20 @@
             ^-  [p=(list rock) q=_+>.$]
             =^  gim  ..weft  wisp
             :_  +>.$
+            =-  ~&  :~  %zuul-wisp
+                        (met 3 q.gim) 
+                        (lent pex) 
+                        (turn pex |=(a=@ (flam (shaf %flap a))))
+                    ==
+                pex
+            ^=  pex
             ^-  (list rock)
-            =+  wit=(met ?:(fak.ton 16 13) q.gim)
+            =+  wit=(met ?:(fak.ton 13 13) q.gim)
             ?<  =(0 wit)
             ?:  =(1 wit)
               =+  yup=(spit [our her] p.gim q.gim)
               [yup ~]
-            =+  ruv=(rip ?:(fak.ton 16 13) q.gim)
+            =+  ruv=(rip ?:(fak.ton 13 13) q.gim)
             =+  inx=0
             |-  ^-  (list rock)
             ?~  ruv  ~
@@ -1166,6 +1173,30 @@
   |%
   ++  am                                                ::    am
     |_  [now=@da fox=fort]                              ::  protocol engine
+    ++  anon
+      |=  wen=@da
+      ^-  @tas
+      ?:  =(wen now)  %now
+      ?:  (gth wen now)
+        (cat 3 (scot %ud (msec (sub wen now))) %ms)
+      (cat 3 '-' $(now wen, wen now))
+    ::
+    ++  anun
+      |=  wun=(unit ,@da)
+      ^-  @tas
+      ?~(wun %no (anon u.wun))
+    ::
+    ++  anos
+      |=  one=@dr
+      ^-  @tas
+      ?:  =(0 one)  %now
+      (cat 3 (scot %ud (msec one)) %ms)
+    ::
+    ++  anus
+      |=  une=(unit ,@dr)
+      ^-  @tas
+      ?~(une %no (anos u.une))
+    ::
     ++  boot                                            ::    boot:am
       ^-  fort                                          ::  restore from noun
       %=    fox
@@ -1215,7 +1246,6 @@
       [[[%beer our pac:ex:loy] ~] fox]
     ::
     ++  doze
-      ~&  %ames-doze
       %+  hunt  `(add now ~s32)
       |-  ^-  (unit ,@da)
       ?~  zac.fox  ~
@@ -1359,19 +1389,16 @@
           =<  abed
           |%  
           ++  abed                                      ::  instantiate
-            =+  [rtt=(bex 60) bip=(~(get by nup.bah) kos)]
-            %_(+ +< ?^(bip u.bip +>-(old [1.024 rtt rtt rtt])))
+            =+  bip=(~(get by nup.bah) kos)
+            %_(+ +< ?^(bip u.bip *pump))
           ::
           ++  abet                                      ::  resolve
             =.  .  wade
             =+  nyx=wait
-            ~&  :*  %cave-abet  
+            ~&  :~  %cave-abet  
                     [her/her kos/kos]
                     [liv/wail win/win] 
-                    :-  %wait
-                    ?~  nyx  %no
-                    ?:  =(`now nyx)  %now 
-                    (scot %ud (msec (sub u.nyx now)))
+                    wait/(anun nyx)
                 ==
             %_    +>.$
                 nup.bah  (~(put by nup.bah) kos +>-(nex nyx))
@@ -1388,9 +1415,11 @@
                 ::
                 ::  we don't grow the window if we sense buffer bloat
                 ::
-                ~&  :*  %cave-grow
+                ~&  :~  %cave-grow
                         [her/her kos/kos]
-                        [win/win rts/(msec rts.pad.sac) rtm/(msec rtm.pad.sac)]
+                        win/(add 1.536 win)
+                        rts/(anos rts.pad.sac) 
+                        rtm/(anos rtm.pad.sac)
                         ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac))
                           %aimd-stay
                         %aimd-more
@@ -1398,10 +1427,10 @@
                 ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac)) 
                   win 
                 (add 1.536 win)
-              ~&  :*  %cave-lose
+              ~&  :~  %cave-lose
                       [her/her kos/kos]
-                      [win/win boz/boz]
-                      (max 1.536 (rsh 0 boz win))
+                      boz/boz
+                      [win/(max 1.536 (rsh 0 boz win))]
                   ==
               (max 1.536 (rsh 0 boz win))
             ==
@@ -1425,13 +1454,13 @@
               +>.$
             (babe:(home dam lag) u.luq cop)
           ::
-          ++  burp                                      ::  delay packets
+          ++  burp                                      ::  delay packets after
             |=  [lag=@dr aft=@da]
             ^+  +>
             ?:  =(0 lag)  +>.$
             ~&  :*  %cave-burp 
                     [her/her kos/kos] 
-                    [lag/(msec lag) ago/(msec (sub now aft))]
+                    [lag/(anos lag) aft/(anon aft)]
                 ==
             %_    +>
                 chu
@@ -1472,7 +1501,7 @@
           ++  hump                                      ::  combine pomp
             |=  [one=pomp two=pomp]
             ^-  pomp
-            :*  (add byr.one byr.two)
+            :*  (add byt.one byt.two)
                 (add boz.one boz.two)
                 ?^(rut.one rut.one rut.two)
             ==
@@ -1518,11 +1547,13 @@
                 ::
                 ::  n.chu is not live.
                 ::
+                ~&  [%hack-cold (flam p.s.n.chu)]
                 [hup neu]
               ?.  (lth now (add (mul 2 rtg.pad.sac) u.p.n.chu))
                 ::
                 ::  n.chu remains live.
                 ::
+                ~&  [%hack-live (flam p.s.n.chu)]
                 [hup neu]
               ::
               ::  n.chu declared lost, no longer virgin.
@@ -1532,65 +1563,54 @@
             ::
             ::  n.chu acknowledged.
             ::
-            ~&  [%hack-good `@p`(mug p.s.n.chu)]
             :_  ~(nip to `(qeu pony)`neu)
             %_  hup
-              byr  (add len byr.hup)
-              rut  ?:(|(?=(~ p.n.chu) !q.n.chu) ~ `(sub now u.p.n.chu))
+              byt  (add len byt.hup)
+              rut  =-  ~&  [%hack-good `@p`(mug p.s.n.chu) (anus -)]
+                       -
+                   ?:  |(?=(~ p.n.chu) !q.n.chu)  ~
+                   `(min ~s1 (sub now u.p.n.chu))
             ==
           ::
           ++  hone                                      ::  adjust for ack
             |=  [lag=@dr rey=pomp]
             ^+  +>
-            =.  +>  ?:(&(=(0 byr.rey) =(0 boz.rey)) +> (aimd boz.rey))
+            =.  +>  ?:(&(=(0 byt.rey) =(0 boz.rey)) +> (aimd boz.rey))
             =+  oyb=byt.pad.sac
-            =.  byt.pad.sac  (add oyb byr.rey)
+            =.  byt.pad.sac  (add oyb byt.rey)
             ?~  rut.rey  +>.$
             =+  old=`@da`(sub now u.rut.rey)
-            =:  rtm.pad.sac  (min rtm.pad.sac u.rut.rey)
-                rtg.pad.sac  %+  div 
+            =+  dub=(mul 2 rtm.pad.sac)
+            =:  rtm.pad.sac  ?:  =(0 rtm.pad.sac)  u.rut.rey
+                             (min rtm.pad.sac u.rut.rey)
+                rtg.pad.sac  ?:  =(0 rtg.pad.sac)  u.rut.rey
+                             %+  div 
                                %+  add  (mul rtg.pad.sac oyb) 
-                               (mul u.rut.rey byr.rey)
+                               (mul u.rut.rey byt.rey)
                              byt.pad.sac
-                rts.pad.sac  (div (add (mul rts.pad.sac 3) u.rut.rey) 4)
+                rts.pad.sac  ?:  =(0 rts.pad.sac)  u.rut.rey
+                             (div (add (mul rts.pad.sac 3) u.rut.rey) 4)
               ==
-            ?.  (gth rts.pad.sac (mul 2 rtm.pad.sac))
+            ?.  (gth rts.pad.sac dub)
               (burp lag old)
             ::
             ::  extreme buffer bloat, roundtrip double the minimum;
             ::  scale back window; delay later-sent packets
             ::
-            (burp:(aimd 1) (add lag rtm.pad.sac) old)
-          ::
-          ++  hoot                                      ::  bump stats for ack
-            |=  [byt=@ud lag=@dr unt=(unit ,@da)]
-            ^+  +>
-            =+  oyb=byt.pad.sac
-            =.  byt.pad.sac  (add oyb byt)
-            ?:  |(?=(~ unt) (gte u.unt now))  
-              +>.$
-            =+  rut=(sub now u.unt)
-            =:  rtm.pad.sac  (min rtm.pad.sac rut)
-                rtg.pad.sac  %+  div 
-                               (add (mul rtg.pad.sac oyb) (mul rut byt))
-                             byt.pad.sac
-                rts.pad.sac  (div (add (mul rts.pad.sac 3) rut) 4)
-              ==
-            ?.  (gth rts.pad.sac (mul 2 rtm.pad.sac))
-              (burp lag u.unt)
-            ::
-            ::  extreme buffer bloat, roundtrip double the minimum;
-            ::  scale back window; delay later-sent packets
-            ::
-            (burp:(aimd 1) (add lag rtm.pad.sac) u.unt)
+            ~&  %hone-slow
+            (burp:(aimd 1) (add lag dub) old)
           ::
           ++  lost  |=(a=@da (gte now (add a loss)))    ::  sent deemed lost
-          ++  loss  (mul 3 rtg.pad.sac)                 ::  loss timer
+          ++  loss                                      ::  loss timer
+            ?:  =(0 rtg.pad.sac)  ~s1
+            (mul 3 rtg.pad.sac)
+          ::
           ++  send                                      ::  add to queue
             |=  [liq=tick cha=path val=*]
             ^+  +>
             =.  +>  wade
             =^  pex  diz  (zuul:diz now [%bond [(mix kos 1) liq] cha val])
+            ~&  [%send (turn pex |=(a=@ (flam (shaf %flap a))))]
             =.  nem  (~(put by nem) liq [(lent pex) cha])
             |-  ^+  +>.^$
             ?~  pex  +>.^$
@@ -1630,7 +1650,7 @@
               ^-  plow
               :*  fax=now
                   lax=now
-                  pad=old(byt (max byt.old 16.384), rtm rtg.old)
+                  pad=old(byt (min byt.old 16.384))
               ==
             ==
           ::
@@ -1638,18 +1658,22 @@
             ^-  [(list rock) _.]
             =.  .  wade
             =^  rey  chu  (hack ~)
-            wash:(hone ~s0 rey)
+            =+  foo=wash:(hone ~s0 rey)
+            ~&  [%ship (turn -.foo |=(a=@ (flam (shaf %flap a))))]
+            foo
           ::
           ++  wail                                      ::  live count
             |-  ^-  @ud
             ?~  chu  0
             ?:  &(q.n.chu =(~ p.n.chu))  0
             =+  [l r]=[$(chu l.chu) $(chu r.chu)]
-            :(add l r ?:(&(?=(^ p.n.chu) !(lost u.p.n.chu)) 1 0))
+            ;:  add  l  r
+                ?:(&(?=(^ p.n.chu) !(lost u.p.n.chu)) (met 3 q.s.n.chu) 0)
+            ==
           ::
           ++  wait                                      ::  wait until
             ^-  (unit ,@da)
-            ?.  =(~ -:wash)  `now                       ::  XX performance!
+            ?.  =(~ -:wosh)  `now                       ::  XX performance!
             walk  
           ::
           ++  walk                                      ::  first timeout
@@ -1661,7 +1685,7 @@
               $(chu l.chu)
             ==
           ::
-          ++  wash                                      ::  flush packets
+          ++  wosh                                      ::  flush packets, hack
             ^-  [(list rock) _.]
             =+  liv=wail
             ?:  (gth liv win)  [~ +]
@@ -1679,7 +1703,45 @@
                         ?.  =(~ p.n.huc)  left
                         =+  len=(met 3 q.s.n.huc)
                         ?:  (lth rum len)  ..work
-                        ~&  [%wash-send `@p`(mug p.s.n.huc)]
+                        %=    left
+                            rum      (sub rum len)
+                            raw      [q.s.n.huc raw]
+                            p.n.huc  `now
+                        ==
+                      ++  left
+                        ^+  ..work
+                        =.  ..work  work(chu l.huc)
+                        ..work(chu huc(l chu))
+                      ++  rite
+                        ^+  ..work
+                        =.  ..work  work(chu r.huc)
+                        ..work(chu huc(r chu))
+                  -- 
+            --
+          ::
+          ++  wash                                      ::  flush packets
+            ^-  [(list rock) _.]
+            =+  liv=wail
+            ?:  (gth liv win)  [~ +]
+            =+  [rum=(sub win liv) raw=*(list rock)]
+            =<  $:work
+            |%  ++  $  [(flop raw) ..wash]
+                ++  work
+                  ^+  .
+                  =+  huc=chu
+                  ?~  huc  +
+                  =<  $
+                  |%  ++  $
+                        ^+  ..work
+                        =.  ..work  rite
+                        ?.  =(~ p.n.huc)  
+                          ~&  [%wash-live (flam p.s.n.huc)]
+                          left
+                        =+  len=(met 3 q.s.n.huc)
+                        ?:  (lth rum len)  
+                          ~&  [%wash-stop (flam p.s.n.huc) [rum len]]
+                          ..work
+                        ~&  [%wash-fire (flam p.s.n.huc)]
                         %=    left
                             rum      (sub rum len)
                             raw      [q.s.n.huc raw]
@@ -1731,9 +1793,9 @@
           ^-  (unit ,@da)                               ::  wait until
           ::  rtn.sop.bah                               ::  XX oldpump
           =+  doe=~(til se pod.weg)
-          ~&  [%cave-doze 
-          ?:  ?=(~ doe)  ~
-          ~&  [%doze (msec (sub u.doe now))]
+          ?:  ?=(~ doe)
+            ~
+          ~&  [%cave-doze (anun doe)]
           doe
         ::
         ++  fore                                        ::    fore:ho:um:am
@@ -1897,7 +1959,7 @@
             =+  [nix=0 rax=*(list ,@)]
             |-  ^-  @
             ?:  =(p.duv nix)
-              (can ?:(fak.ton.fox 16 13) (turn (flop rax) |=(a=@ [1 a])))
+              (can ?:(fak.ton.fox 13 13) (turn (flop rax) |=(a=@ [1 a])))
             $(nix +(nix), rax [(need (~(get by q.duv) nix)) rax])
           --
         ::
@@ -1975,6 +2037,7 @@
           ++  we-woof                                   ::    woof:we:ho:um:am
             |=  [cha=path val=*]                        ::  send message
             ^+  +>
+            ~&  [%we-woof seq cha (mug val)]
             +>(seq +(seq), +> abet:(send:(cave kos) seq cha val))
           ::
           ++  we-wool                                   ::    wool:we:ho:um:am
