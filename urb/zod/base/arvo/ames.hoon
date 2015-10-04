@@ -1262,7 +1262,7 @@
       =<  zork
       =<  abet
       ::  ~&  [%in p.p.kec ryn `@p`(mug (shaf %flap pac))]
-      ::  ~&  [%in p.p.kec (flam (shaf %flap pac))]
+      ~&  [%in p.p.kec (flam (shaf %flap pac))]
       %-  chew:(ho:(um q.p.kec) p.p.kec)
       [q.kec (shaf %flap pac) ryn r.kec]
     ::
@@ -1400,11 +1400,11 @@
           ++  abet                                      ::  resolve
             =.  .  wade
             =+  nyx=wait
-            ::  ~&  :~  %cave-abet  
-            ::          [her/her kos/kos]
-            ::          [liv/wail win/win] 
-            ::          wait/(anun nyx)
-            ::      ==
+            ~&  :~  %cave-abet  
+                    [her/her kos/kos]
+                    [liv/wail win/win] 
+                    wait/(anun nyx)
+                ==
             %_    +>.$
                 nup.bah  (~(put by nup.bah) kos +>-(nex nyx))
                 pod.weg
@@ -1451,10 +1451,10 @@
             |=  [lag=@dr aft=@da]
             ^+  +>
             ?:  =(0 lag)  +>.$
-            ::  ~&  :*  %burp 
-            ::          [her/her kos/kos] 
-            ::          [lag/(anos lag) aft/(anon aft)]
-            ::      ==
+            ~&  :*  %burp 
+                    [her/her kos/kos] 
+                    [lag/(anos lag) aft/(anon aft)]
+                ==
             %_    +>
                 chu
               |-  ^+  chu
@@ -1551,7 +1551,7 @@
               ::
               ::  n.chu declared lost, no longer virgin.
               ::
-              ::  ~&  [%lost (anon (add loss u.p.n.chu)) (flam p.s.n.chu)]
+              ~&  [%lost (anon (add loss u.p.n.chu)) (flam p.s.n.chu)]
               [hup(boz +(boz.hup)) neu(p.n ~, q.n |)]
             ::
             ::  n.chu acknowledged.
@@ -1578,11 +1578,11 @@
             |=  [lag=@dr rey=pomp]
             ^+  +>
             =<  
-                ::  ~&  :~  %hone  [her kos win wail]
-                ::          rtm/(anos rtm.pad.sac)
-                ::          rtg/(anos rtg.pad.sac)
-                ::          rts/(anos rts.pad.sac)
-                ::      ==
+                ~&  :~  %hone  [her kos win wail]
+                        rtm/(anos rtm.pad.sac)
+                        rtg/(anos rtg.pad.sac)
+                        rts/(anos rts.pad.sac)
+                    ==
                 .
             =.  +>  ?:(&(=(0 byt.rey) =(0 boz.rey)) +> (aimd boz.rey))
             =+  oyb=byt.pad.sac
@@ -1746,7 +1746,7 @@
             ?:  (lth rum len)  
               ::  ~&  [%wash-stop (flam p.s.n.chu) [rum len]]
               [rum raw chu]
-            ::  ~&  [?:(q.n.chu %fire %warm) len (flam p.s.n.chu)]
+            ~&  [?:(q.n.chu %fire %warm) len (flam p.s.n.chu)]
             =+  lef=$(chu l.chu, rum (sub rum len), raw [q.s.n.chu raw])
             [p.lef q.lef [n.chu(p `now) r.lef r.chu]]
           --
@@ -2212,7 +2212,7 @@
         %milk  (clod p.bon q.bon r.bon hen [%west p.bon +.r.bon q.bon s.bon])
         %ouzo
       ::  ~&  [%to now p.bon `@p`(mug (shaf %flap q.bon))] 
-      ::  ~&  [%to (flam (shaf %flap q.bon))]
+      ~&  [%to (flam (shaf %flap q.bon))]
       :_  fox
       [[gad.fox [%give %send p.bon q.bon]] ~]
     ::
