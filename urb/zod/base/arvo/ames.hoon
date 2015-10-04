@@ -816,7 +816,7 @@
             ^-  (list rock)
             =+  wit=(met ?:(fak.ton 13 13) q.gim)
             ?<  =(0 wit)
-            ?:  =(1 wit)
+            ?:  |(?=(%back -.ham) =(1 wit))
               =+  yup=(spit [our her] p.gim q.gim)
               [yup ~]
             =+  ruv=(rip ?:(fak.ton 13 13) q.gim)
@@ -1189,7 +1189,7 @@
     ++  anos
       |=  one=@dr
       ^-  @tas
-      ?:  =(0 one)  %now
+      ?:  =(0 one)  '0ms'
       (cat 3 (scot %ud (msec one)) %ms)
     ::
     ++  anus
@@ -1298,16 +1298,16 @@
       ?~  caz  [~ fox]
       =^  lef  fox  $(caz l.caz)
       =^  ryt  fox  $(caz r.caz)
-      =^  bun  fox  zork:(wake:(um p.n.caz) hen)        ::  XX oldpump
-      ::  =^  bun  fox  zork:(walk:(um p.n.caz) hen)
+      ::  =^  bun  fox  zork:(wake:(um p.n.caz) hen)        ::  XX oldpump
+      =^  bun  fox  zork:(walk:(um p.n.caz) hen)
       :_(fox :(weld p.lef p.ryt p.bun))
     ::
     ++  wise                                            ::    wise:am
       |=  [soq=sock hen=duct cha=path val=*]            ::  send request
       ^-  [p=(list boon) q=fort]
-      zork:abet:(we-wool:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
+      ::  zork:abet:(we-wool:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
       ::  XX oldpump
-      ::  zork:abet:(we-woof:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
+      zork:abet:(we-woof:(wend:(ho:(um p.soq) q.soq) hen) cha val) 
     ::
     ++  wish                                            ::    wise:am
       |=  [soq=sock kos=bole cha=path val=*]            ::  return response
@@ -1363,8 +1363,12 @@
           |=  [ost=bone dam=flap cop=coop lag=@dr]      ::  receive ack
           ^+  +>
           ?:  =(0 dam)  +>                              ::  dummy ack
-          (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag) :: oldpump
-          ::  abet:(back:(cave ost) dam cop lag)
+          ?.  (~(has by sal.bah) ost)
+            ~&  [%back-lost ost (flam dam)]
+            +>
+          ~&  [%back-took ost (flam dam)]
+          ::  (~(we-tock we ost (~(got by sal.bah) ost)) dam cop lag) :: oldpump
+          abet:(back:(cave ost) dam cop lag)
         ::
         ++  balk                                        ::    balk:ho:um:am
           |=  kos=bole                                  ::  wakeup
@@ -1424,7 +1428,9 @@
                           %aimd-stay
                         %aimd-more
                     ==
-                ?:  (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac)) 
+                ?:  ?&  !=(0 rtm.pad.sac) 
+                        (gth (mul 2 rts.pad.sac) (mul 3 rtm.pad.sac)) 
+                    ==
                   win 
                 (add 1.536 win)
               ~&  :~  %cave-lose
@@ -1549,16 +1555,16 @@
                 ::
                 ~&  [%hack-cold (flam p.s.n.chu)]
                 [hup neu]
-              ?.  (lth now (add (mul 2 rtg.pad.sac) u.p.n.chu))
+              ?:  (lth now (add loss u.p.n.chu))
                 ::
                 ::  n.chu remains live.
                 ::
-                ~&  [%hack-live (flam p.s.n.chu)]
+                ~&  [%hack-live (anos loss) (anon u.p.n.chu) (flam p.s.n.chu)]
                 [hup neu]
               ::
               ::  n.chu declared lost, no longer virgin.
               ::
-              ~&  [%hack-lost `@p`(mug p.s.n.chu) rtg.pad.sac]
+              ~&  [%hack-lost (anos loss) (anon u.p.n.chu) (flam p.s.n.chu)]
               [hup(boz +(boz.hup)) neu(p.n ~, q.n |)]
             ::
             ::  n.chu acknowledged.
@@ -1576,6 +1582,7 @@
             |=  [lag=@dr rey=pomp]
             ^+  +>
             =.  +>  ?:(&(=(0 byt.rey) =(0 boz.rey)) +> (aimd boz.rey))
+            ~&  [%hone-pomp boz.rey byt.rey (anus rut.rey)]
             =+  oyb=byt.pad.sac
             =.  byt.pad.sac  (add oyb byt.rey)
             ?~  rut.rey  +>.$
@@ -1584,6 +1591,8 @@
             =:  rtm.pad.sac  ?:  =(0 rtm.pad.sac)  u.rut.rey
                              (min rtm.pad.sac u.rut.rey)
                 rtg.pad.sac  ?:  =(0 rtg.pad.sac)  u.rut.rey
+                             ~&  [%avg oyb byt.rey byt.pad.sac (add oyb byt.rey)]
+                             ~&  [%avx (anos u.rut.rey) (anos rtg.pad.sac)]
                              %+  div 
                                %+  add  (mul rtg.pad.sac oyb) 
                                (mul u.rut.rey byt.rey)
@@ -1591,7 +1600,12 @@
                 rts.pad.sac  ?:  =(0 rts.pad.sac)  u.rut.rey
                              (div (add (mul rts.pad.sac 3) u.rut.rey) 4)
               ==
-            ?.  (gth rts.pad.sac dub)
+            ~&  :*  %hone-stat 
+                    (anos rtm.pad.sac)
+                    (anos rtg.pad.sac)
+                    (anos rts.pad.sac)
+                ==
+            ?.  &(!=(0 dub) (gth rts.pad.sac dub))
               (burp lag old)
             ::
             ::  extreme buffer bloat, roundtrip double the minimum;
@@ -1624,9 +1638,10 @@
           ++  waac                                      ::  merge statistics
             |=  new=plod
             ^-  plod
-            =+  ols=(max (bex 20) byt.old)
+            =+  ols=(min (bex 20) byt.old)
             =+  sum=(add ols byt.new)
-            :*  (add byt.old byt.new)
+            ~&  [%waac new/byt.new old/byt.old sum/sum]
+            :*  sum
                 (div (add (mul ols rtm.old) (mul byt.new rtm.new)) sum)
                 (div (add (mul ols rtg.old) (mul byt.new rtg.new)) sum)
                 rts.new
@@ -1637,9 +1652,9 @@
             ?:  =(~ chu)
               ?:  cold  .
               ::
-              ::  end burst, integrate statistics
+              ::  end burst, save statistics
               ::
-              %_(. sac *plow, old (waac pad.sac))
+              %_(. sac *plow, old pad.sac)
             ?.  =(0 fax.sac)  .
             ::
             ::  start flow, default statistics
@@ -1650,7 +1665,7 @@
               ^-  plow
               :*  fax=now
                   lax=now
-                  pad=old(byt (min byt.old 16.384))
+                  pad=old(rtm ~s0, byt (min byt.old 16.384))
               ==
             ==
           ::
@@ -1724,39 +1739,22 @@
             =+  liv=wail
             ?:  (gth liv win)  [~ +]
             =+  [rum=(sub win liv) raw=*(list rock)]
-            =<  $:work
-            |%  ++  $  [(flop raw) ..wash]
-                ++  work
-                  ^+  .
-                  =+  huc=chu
-                  ?~  huc  +
-                  =<  $
-                  |%  ++  $
-                        ^+  ..work
-                        =.  ..work  rite
-                        ?.  =(~ p.n.huc)  
-                          ~&  [%wash-live (flam p.s.n.huc)]
-                          left
-                        =+  len=(met 3 q.s.n.huc)
-                        ?:  (lth rum len)  
-                          ~&  [%wash-stop (flam p.s.n.huc) [rum len]]
-                          ..work
-                        ~&  [%wash-fire (flam p.s.n.huc)]
-                        %=    left
-                            rum      (sub rum len)
-                            raw      [q.s.n.huc raw]
-                            p.n.huc  `now
-                        ==
-                      ++  left
-                        ^+  ..work
-                        =.  ..work  work(chu l.huc)
-                        ..work(chu huc(l chu))
-                      ++  rite
-                        ^+  ..work
-                        =.  ..work  work(chu r.huc)
-                        ..work(chu huc(r chu))
-                  -- 
-            --
+            =-  [(flop q.-) ..wash(chu r.-)]
+            |-  ^-  (trel ,@ud (list rock) (qeu pony))
+            ?~  chu  [rum raw ~]
+            =+  ryt=$(chu r.chu)
+            =>  .(rum p.ryt, raw q.ryt, r.chu r.ryt)
+            ?.  =(~ p.n.chu)
+              ~&  [%wash-live (flam p.s.n.chu)]
+              =+  lef=$(chu l.chu)
+              [p.lef q.lef [n.chu r.lef r.chu]]
+            =+  len=(met 3 q.s.n.chu)
+            ?:  (lth rum len)  
+              ~&  [%wash-stop (flam p.s.n.chu) [rum len]]
+              [rum raw chu]
+            ~&  [%wash-fire (flam p.s.n.chu)]
+            =+  lef=$(chu l.chu, rum (sub rum len), raw [q.s.n.chu raw])
+            [p.lef q.lef [n.chu(p `now) r.lef r.chu]]
           --
         ::
         ++  chew                                        ::    chew:ho:um:am
@@ -1776,6 +1774,7 @@
                        ::  (conk ~ dam)
                        ::  (conk 0 `@`0 ~)
                        +>.$
+                    ::  ~&  [%chew-back p.fud (flam dam) (flam q.fud)]
                    (back +.fud) 
             %bond  hi-abet:(hi-bond:(high p.fud dam ryn) q.fud r.fud)
             %carp  =<  hi-abet
@@ -1787,17 +1786,21 @@
         ++  conk                                        ::    conk:ho:um:am
           |=  [kos=bole dam=flap cop=coop]              ::  send acknowledge
           ^+  +>
+          ?:  =(0 kos) 
+            ::  don't ack an ack
+            ~&  [%conk-acak (flam dam)]
+            +>
           =^  pex  diz  (zuul:diz now [%back (mix 1 kos) dam cop ~s0])
           (busk xong:diz pex)
         ::
         ++  doze                                        ::    doze:ho:um:am
           ^-  (unit ,@da)                               ::  wait until
-          rtn.sop.bah                               ::  XX oldpump
-          ::  =+  doe=~(til se pod.weg)
-          ::  ?:  ?=(~ doe)
-          ::  ~
-          ::~&  [%cave-doze (anun doe)]
-          :: doe
+          ::  rtn.sop.bah                               ::  XX oldpump
+          =+  doe=~(til se pod.weg)
+          ?:  ?=(~ doe)
+            ~
+          ~&  [%cave-doze (anun doe)]
+          doe
         ::
         ++  fore                                        ::    fore:ho:um:am
           |=  [ryn=lane who=ship via=(unit lane) msg=@] ::  forward packet
@@ -1941,6 +1944,9 @@
             =^  fud  diz  (grok syn ryn (hi-golf r.neb))
             =+  sec=?=(?(%open %fast %full) syn)
             =.  tru  |(tru sec)
+            ?:  ?=(%back -.fud)
+              ~&  [%back-phat [kos p.fud] (flam q.fud) r.fud s.fud]
+              +>.$(+> (back +.fud))
             ?.  &(tru ?=(%bond -.fud) =([kos liq] p.fud))
               ~&  [%ames-bad-bond tru -.fud [[kos liq] p.fud]]
               !!
@@ -2037,6 +2043,7 @@
           ::
           ++  we-woof                                   ::    woof:we:ho:um:am
             |=  [cha=path val=*]                        ::  send message
+            =<  we-abet
             ^+  +>
             ~&  [%we-woof seq cha (mug val)]
             +>(seq +(seq), +> abet:(send:(cave kos) seq cha val))

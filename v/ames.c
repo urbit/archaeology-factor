@@ -245,9 +245,14 @@ _ames_time_cb(uv_timer_t* tim_uo)
 
   sam_u->law_w = time(0);
   {
-    u3v_plan
-      (u3nt(u3_blip, c3__ames, u3_nul),
-       u3nc(c3__wake, u3_nul));
+    if ( u3_nul == u3A->roe ) {
+      //  This is a hack of sorts, and should be done very differently,
+      //  with a "send wake event if the queue is empty" model.
+      //
+      u3v_plan
+        (u3nt(u3_blip, c3__ames, u3_nul),
+         u3nc(c3__wake, u3_nul));
+    }
   }
   u3_lo_shut(c3n);
 }
