@@ -378,7 +378,7 @@
           %poke       
         %-  he-card(poy ~)
         :*  %deal
-            /poke
+            /poke/(scot %da now.hid)
             [our.hid p.p.mad]
             q.p.mad
             %poke
@@ -595,13 +595,13 @@
     ==
   ::
   ++  he-unto                                           ::  result from behn
-    |=  cit=cuft
+    |=  [old=@da cit=cuft]
     ^+  +>
     ?.  ?=(%coup -.cit)
       ~&  [%strange-unto cit]
       +>
     ?~  p.cit  
-      (he-diff %txt ">=")
+      (he-diff %txt ">= {<`@ud`(div (sub now.hid old) (div ~s1 1.000))>}ms")
     (he-diff %tan u.p.cit)
   ::
   ++  he-like                                           ::  accept line
@@ -699,7 +699,9 @@
 ::
 ++  unto
   |=  [way=wire cit=cuft] 
-  he-abet:(~(he-unto he [[ost.hid ~] (~(got by hoc) ost.hid)]) cit)
+  ?>  ?=([%poke @ ~] way)
+  =<  he-abet
+  (~(he-unto he [[ost.hid ~] (~(got by hoc) ost.hid)]) (slav %da i.t.way) cit)
 ::
 ++  pull
   |=  [pax=path]
