@@ -1451,10 +1451,10 @@
             |=  [lag=@dr aft=@da]
             ^+  +>
             ?:  =(0 lag)  +>.$
-            ~&  :*  %burp 
-                    [her/her kos/kos] 
-                    [lag/(anos lag) aft/(anon aft)]
-                ==
+            ::  ~&  :*  %burp 
+            ::          [her/her kos/kos] 
+            ::          [lag/(anos lag) aft/(anon aft)]
+            ::      ==
             %_    +>
                 chu
               |-  ^+  chu
@@ -1551,7 +1551,7 @@
               ::
               ::  n.chu declared lost, no longer virgin.
               ::
-              ~&  [%lost (anon (add loss u.p.n.chu)) (flam p.s.n.chu)]
+              ::  ~&  [%lost (anon (add loss u.p.n.chu)) (flam p.s.n.chu)]
               [hup(boz +(boz.hup)) neu(p.n ~, q.n |)]
             ::
             ::  n.chu acknowledged.
@@ -1560,7 +1560,7 @@
             %_  hup
               byt  (add len byt.hup)
               rut  ?:  |(?=(~ p.n.chu) !q.n.chu)  
-                     ~&  [%deaf (flam p.s.n.chu)]
+                     ::  ~&  [%deaf (flam p.s.n.chu)]  
                      ~
                    ?:  (lth now u.p.n.chu)
                      ~&  :*  %hack-flub 
@@ -1570,18 +1570,19 @@
                          ==
                      !!
                    =+  `(min ~s1 (sub now u.p.n.chu))
-                   ~&  [%clap `@p`(mug p.s.n.chu) (anus -)]
+                   ::  ~&  [%clap `@p`(mug p.s.n.chu) (anus -)]
                    -
             ==
           ::
           ++  hone                                      ::  adjust for ack
             |=  [lag=@dr rey=pomp]
             ^+  +>
-            =<  ~&  :~  %hone  [her kos win wail]
-                        rtm/(anos rtm.pad.sac)
-                        rtg/(anos rtg.pad.sac)
-                        rts/(anos rts.pad.sac)
-                    ==
+            =<  
+                ::  ~&  :~  %hone  [her kos win wail]
+                ::          rtm/(anos rtm.pad.sac)
+                ::          rtg/(anos rtg.pad.sac)
+                ::          rts/(anos rts.pad.sac)
+                ::      ==
                 .
             =.  +>  ?:(&(=(0 byt.rey) =(0 boz.rey)) +> (aimd boz.rey))
             =+  oyb=byt.pad.sac
@@ -1745,7 +1746,7 @@
             ?:  (lth rum len)  
               ::  ~&  [%wash-stop (flam p.s.n.chu) [rum len]]
               [rum raw chu]
-            ~&  [?:(q.n.chu %fire %warm) len (flam p.s.n.chu)]
+            ::  ~&  [?:(q.n.chu %fire %warm) len (flam p.s.n.chu)]
             =+  lef=$(chu l.chu, rum (sub rum len), raw [q.s.n.chu raw])
             [p.lef q.lef [n.chu(p `now) r.lef r.chu]]
           --
