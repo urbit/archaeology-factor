@@ -1262,7 +1262,7 @@
       =<  zork
       =<  abet
       ::  ~&  [%in p.p.kec ryn `@p`(mug (shaf %flap pac))]
-      ~&  [%in p.p.kec (flam (shaf %flap pac))]
+      ::  ~&  [%in p.p.kec (flam (shaf %flap pac))]
       %-  chew:(ho:(um q.p.kec) p.p.kec)
       [q.kec (shaf %flap pac) ryn r.kec]
     ::
@@ -1570,7 +1570,7 @@
                          ==
                      !!
                    =+  `(min ~s1 (sub now u.p.n.chu))
-                   ::  ~&  [%clap `@p`(mug p.s.n.chu) (anus -)]
+                   ~&  [%clap `@p`(mug p.s.n.chu) (anus -)]
                    -
             ==
           ::
@@ -2212,7 +2212,7 @@
         %milk  (clod p.bon q.bon r.bon hen [%west p.bon +.r.bon q.bon s.bon])
         %ouzo
       ::  ~&  [%to now p.bon `@p`(mug (shaf %flap q.bon))] 
-      ~&  [%to (flam (shaf %flap q.bon))]
+      ::  ~&  [%to (flam (shaf %flap q.bon))]
       :_  fox
       [[gad.fox [%give %send p.bon q.bon]] ~]
     ::
