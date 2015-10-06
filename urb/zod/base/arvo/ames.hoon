@@ -812,7 +812,10 @@
             ::              (turn pex |=(a=@ (flam (shaf %flap a))))
             ::          ==
             ::      pex
-            ::  ^=  pex
+            =-  ~?  (gth (lent pex) 1)
+                    [%wisp (lent pex)]
+                pex
+            ^=  pex
             ^-  (list rock)
             =+  wit=(met ?:(fak.ton 13 13) q.gim)
             ?<  =(0 wit)
@@ -1400,11 +1403,11 @@
           ++  abet                                      ::  resolve
             =.  .  wade
             =+  nyx=wait
-            ~&  :~  %cave-abet  
-                    [her/her kos/kos]
-                    [liv/wail win/win] 
-                    wait/(anun nyx)
-                ==
+            ::  ~&  :~  %cave-abet  
+            ::          [her/her kos/kos]
+            ::          [liv/wail win/win] 
+            ::          wait/(anun nyx)
+            ::      ==
             %_    +>.$
                 nup.bah  (~(put by nup.bah) kos +>-(nex nyx))
                 pod.weg
@@ -1413,6 +1416,10 @@
             ==
           ::
           ++  aimd                                      ::  TCP formula
+            |=  boz=@ud                                 ::  number lost, 0=ack
+            +>
+          ::
+          ++  aime                                      ::  TCP formula
             |=  boz=@ud                                 ::  number lost, 0=ack
             %_    +>
                 win
@@ -1445,12 +1452,13 @@
             ?~  luq  
               ::  not waiting for this packet - eg, duplicate ack
               +>.$
-            (babe:(home dam lag) u.luq cop)
+            (babe:(home(unc (~(del by unc) dam)) dam lag) u.luq cop)
           ::
           ++  burp                                      ::  delay packets after
             |=  [lag=@dr aft=@da]
             ^+  +>
             ?:  =(0 lag)  +>.$
+            ?:  &  +>.$
             ~&  :*  %burp 
                     [her/her kos/kos] 
                     [lag/(anos lag) aft/(anon aft)]
@@ -1506,7 +1514,7 @@
             =+  hup=(hump p.lef p.ryt)
             =+  neu=[n=n.chu l=q.lef r=q.ryt]
             ?~  p.n.chu  [hup neu]
-            ~&  [%honk `@p`(mug p.s.n.chu)]
+            ~&  [%skip `@p`(mug p.s.n.chu)]
             :_  neu(p.n ~, q.n |)
             hup(boz +(boz.hup))
           ::
@@ -1514,7 +1522,8 @@
             |=  [dam=flap lag=@dr]
             ^+  +>
             =^  rey  chu  (hack `dam)
-            (hone lag rey)
+            =^  pex  +>.$  wash:(hone lag rey)
+            +>.$(..busk (busk xong:diz pex))
           ::
           ++  hack                                      ::  accept 
             |=  dum=(unit flap)
@@ -1560,7 +1569,7 @@
             %_  hup
               byt  (add len byt.hup)
               rut  ?:  |(?=(~ p.n.chu) !q.n.chu)  
-                     ::  ~&  [%deaf (flam p.s.n.chu)]  
+                     ~&  [%deaf (flam p.s.n.chu)]  
                      ~
                    ?:  (lth now u.p.n.chu)
                      ~&  :*  %hack-flub 
@@ -1570,7 +1579,7 @@
                          ==
                      !!
                    =+  `(min ~s1 (sub now u.p.n.chu))
-                   ~&  [%clap `@p`(mug p.s.n.chu) (anus -)]
+                   ::  ~&  [%clap `@p`(mug p.s.n.chu) (anon u.p.n.chu)]
                    -
             ==
           ::
@@ -1578,11 +1587,11 @@
             |=  [lag=@dr rey=pomp]
             ^+  +>
             =<  
-                ~&  :~  %hone  [her kos win wail]
-                        rtm/(anos rtm.pad.sac)
-                        rtg/(anos rtg.pad.sac)
-                        rts/(anos rts.pad.sac)
-                    ==
+                ::   ~&  :~  %hone  [her kos win wail]
+                ::           rtm/(anos rtm.pad.sac)
+                ::           rtg/(anos rtg.pad.sac)
+                ::           rts/(anos rts.pad.sac)
+                ::       ==
                 .
             =.  +>  ?:(&(=(0 byt.rey) =(0 boz.rey)) +> (aimd boz.rey))
             =+  oyb=byt.pad.sac
@@ -1610,15 +1619,16 @@
           ::
           ++  lost  |=(a=@da (gte now (add a loss)))    ::  sent deemed lost
           ++  loss                                      ::  loss timer
-            ?:  =(0 rtg.pad.sac)  ~s1
-            (mul 3 rtg.pad.sac)
+            ::  ?:  =(0 rtg.pad.sac)  ~s1
+            ::  (mul 3 rtg.pad.sac)
+            ~s5
           ::
           ++  send                                      ::  add to queue
             |=  [liq=tick cha=path val=*]
             ^+  +>
             =.  +>  wade
             =^  pex  diz  (zuul:diz now [%bond [(mix kos 1) liq] cha val])
-            ~&  [%send (turn pex |=(a=@ (flam (shaf %flap a))))]
+            ::  ~&  [%send (turn pex |=(a=@ (flam (shaf %flap a))))]
             =.  nem  (~(put by nem) liq [(lent pex) cha])
             |-  ^+  +>.^$
             ?~  pex  +>.^$
@@ -1654,7 +1664,7 @@
             ::  start flow, default statistics
             ::
             %_    .
-                win  4.096
+                win  65.536
                 sac
               ^-  plow
               :*  fax=now
@@ -1667,8 +1677,7 @@
             ^-  [(list rock) _.]
             =.  .  wade
             =^  rey  chu  (hack ~)
-            =+  foo=wash:(hone ~s0 rey)
-            foo
+            wash:(hone ~s0 rey)
           ::
           ++  wail                                      ::  live count
             |-  ^-  @ud
@@ -1746,7 +1755,7 @@
             ?:  (lth rum len)  
               ::  ~&  [%wash-stop (flam p.s.n.chu) [rum len]]
               [rum raw chu]
-            ~&  [?:(q.n.chu %fire %warm) len (flam p.s.n.chu)]
+            ::  ~&  [?:(q.n.chu %fire %warm) len (flam p.s.n.chu)]
             =+  lef=$(chu l.chu, rum (sub rum len), raw [q.s.n.chu raw])
             [p.lef q.lef [n.chu(p `now) r.lef r.chu]]
           --
@@ -1793,7 +1802,6 @@
           =+  doe=~(til se pod.weg)
           ?:  ?=(~ doe)
             ~
-          ::  ~&  [%cave-doze (anun doe)]
           doe
         ::
         ++  fore                                        ::    fore:ho:um:am

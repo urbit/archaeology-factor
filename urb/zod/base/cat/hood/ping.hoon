@@ -11,7 +11,7 @@
 :-  %atom
 ?~  arg
   0
-?>  (lte log.arg 24)
+?>  (lte log.arg 32)
 %+  add
   (bex (bex log.arg))
 ?~  +.arg
