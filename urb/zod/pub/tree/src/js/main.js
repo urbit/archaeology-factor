@@ -35,7 +35,8 @@ module.exports = {
 };
 
 
-},{"../dispatcher/Dispatcher.coffee":14,"../persistence/TreePersistence.coffee":20}],2:[function(require,module,exports){
+
+},{"../dispatcher/Dispatcher.coffee":15,"../persistence/TreePersistence.coffee":21}],2:[function(require,module,exports){
 var BodyComponent, CLICK, Links, TreeActions, TreeStore, a, clas, div, query, reactify, recl, ref;
 
 clas = require('classnames');
@@ -92,9 +93,6 @@ Links = React.createFactory(query({
         var className, data, head, href;
         href = window.tree.basepath(_this.props.path + "/" + key);
         data = _this.props.kids[key];
-        if (data.meta.hide) {
-          return null;
-        }
         if (data.meta) {
           head = data.meta.title;
         }
@@ -228,22 +226,16 @@ module.exports = query({
     this.interval = setInterval(this.checkURL, 100);
     _this = this;
     return $('body').on('click', CLICK, function(e) {
-      var base, href, id;
+      var href, id;
       href = $(this).attr('href');
       id = $(this).attr('id');
-      if (href) {
-        if (!/^https?:\/\//i.test(href)) {
-          if ((href != null ? href[0] : void 0) === "/") {
-            e.preventDefault();
-            e.stopPropagation();
-            _this.goTo(window.tree.fragpath(href));
-          } else {
-            e.preventDefault();
-            e.stopPropagation();
-            base = window.tree.fragpath(document.location.pathname);
-            _this.goTo(base + ("/" + href));
-          }
+      if (href && !/^https?:\/\//i.test(href)) {
+        e.preventDefault();
+        e.stopPropagation();
+        if ((href != null ? href[0] : void 0) !== "/") {
+          href = (document.location.pathname.replace(/[^\/]*\/?$/, '')) + href;
         }
+        _this.goTo(window.tree.fragpath(href));
       }
       if (id) {
         return window.location.hash = id;
@@ -276,7 +268,6 @@ module.exports = query({
     $("html,body").animate({
       scrollTop: 0
     });
-    $("#cont").attr('class', '');
     $('#nav').attr('style', '');
     $('#nav').removeClass('scrolling m-up');
     return $('#nav').addClass('m-down m-fixed');
@@ -318,10 +309,11 @@ module.exports = query({
       sein: this.props.sein
     }));
   }
-}));
+}), div);
 
 
-},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":21,"./Async.coffee":3,"./BodyComponent.coffee":4,"./Reactify.coffee":11,"classnames":16}],3:[function(require,module,exports){
+
+},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":22,"./Async.coffee":3,"./BodyComponent.coffee":4,"./Reactify.coffee":12,"classnames":17}],3:[function(require,module,exports){
 var TreeActions, TreeStore, _load, code, div, recl, ref, span;
 
 _load = require('./LoadComponent.coffee');
@@ -431,8 +423,13 @@ module.exports = function(queries, Child, load) {
 };
 
 
-},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":21,"./LoadComponent.coffee":10}],4:[function(require,module,exports){
-var Next, a, div, img, p, query, reactify, recl, ref;
+
+},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":22,"./LoadComponent.coffee":10}],4:[function(require,module,exports){
+var Logo, Next, a, clas, div, img, logo, p, query, reactify, recl, ref;
+
+clas = require('classnames');
+
+logo = require('./Logo.coffee');
 
 query = require('./Async.coffee');
 
@@ -441,6 +438,20 @@ reactify = require('./Reactify.coffee');
 recl = React.createClass;
 
 ref = React.DOM, div = ref.div, p = ref.p, img = ref.img, a = ref.a;
+
+Logo = React.createFactory(recl({
+  render: function() {
+    var color, src;
+    color = this.props.color;
+    if (color === "white" || color === "black") {
+      src = "//storage.googleapis.com/urbit-extra/logo/logo-" + color + "-100x100.png";
+    }
+    return img({
+      src: src,
+      className: "logo"
+    });
+  }
+}));
 
 Next = React.createFactory(query({
   path: 't',
@@ -485,16 +496,13 @@ module.exports = query({
 }, recl({
   displayName: "Body",
   render: function() {
-    var body;
-    $("#cont").attr('class', '');
-    if (this.props.meta.layout) {
-      $("#cont").attr('class', this.props.meta.layout.replace(/,/g, " "));
-    }
+    var body, className, ref1;
+    className = ((ref1 = this.props.meta.layout) != null ? ref1.replace(/,/g, " ") : void 0) || "";
     body = [reactify(this.props.body)];
     if (this.props.meta.logo != null) {
-      body.unshift(img({
-        className: "logo " + this.props.meta.logo
-      }, ""));
+      body.unshift(Logo({
+        color: this.props.meta.logo
+      }));
     }
     if (this.props.meta.next != null) {
       body.push(Next({
@@ -509,13 +517,15 @@ module.exports = query({
     }
     return div({
       id: 'body',
-      key: "body" + this.props.path
+      key: "body" + this.props.path,
+      className: className
     }, body);
   }
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":11}],5:[function(require,module,exports){
+
+},{"./Async.coffee":3,"./Logo.coffee":11,"./Reactify.coffee":12,"classnames":17}],5:[function(require,module,exports){
 var div, recl, ref, textarea;
 
 recl = React.createClass;
@@ -536,6 +546,7 @@ module.exports = recl({
     });
   }
 });
+
 
 
 },{}],6:[function(require,module,exports){
@@ -560,7 +571,8 @@ module.exports = {
 };
 
 
-},{"./CodeMirror.coffee":5,"./EmailComponent.coffee":7,"./KidsComponent.coffee":8,"./ListComponent.coffee":9,"./SearchComponent.coffee":12,"./TocComponent.coffee":13}],7:[function(require,module,exports){
+
+},{"./CodeMirror.coffee":5,"./EmailComponent.coffee":7,"./KidsComponent.coffee":8,"./ListComponent.coffee":9,"./SearchComponent.coffee":13,"./TocComponent.coffee":14}],7:[function(require,module,exports){
 var button, div, input, p, reactify, recl, ref;
 
 reactify = require('./Reactify.coffee');
@@ -640,7 +652,8 @@ module.exports = recl({
 });
 
 
-},{"./Reactify.coffee":11}],8:[function(require,module,exports){
+
+},{"./Reactify.coffee":12}],8:[function(require,module,exports){
 var a, div, hr, li, query, reactify, recl, ref, ul;
 
 reactify = require('./Reactify.coffee');
@@ -711,7 +724,8 @@ module.exports = query({
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":11}],9:[function(require,module,exports){
+
+},{"./Async.coffee":3,"./Reactify.coffee":12}],9:[function(require,module,exports){
 var a, clas, div, h1, li, query, reactify, recl, ref, ul;
 
 clas = require('classnames');
@@ -858,7 +872,8 @@ module.exports = query({
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":11,"classnames":16}],10:[function(require,module,exports){
+
+},{"./Async.coffee":3,"./Reactify.coffee":12,"classnames":17}],10:[function(require,module,exports){
 var div, input, recl, ref, textarea;
 
 recl = React.createClass;
@@ -898,7 +913,13 @@ module.exports = recl({
 });
 
 
+
 },{}],11:[function(require,module,exports){
+
+
+
+
+},{}],12:[function(require,module,exports){
 var Virtual, div, load, reactify, recl, ref, rele, span, walk;
 
 recl = React.createClass;
@@ -965,7 +986,8 @@ module.exports = _.extend(reactify, {
 });
 
 
-},{"./LoadComponent.coffee":10}],12:[function(require,module,exports){
+
+},{"./LoadComponent.coffee":10}],13:[function(require,module,exports){
 var a, div, input, query, reactify, recl, ref,
   slice = [].slice;
 
@@ -1103,7 +1125,8 @@ module.exports = query({
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":11}],13:[function(require,module,exports){
+
+},{"./Async.coffee":3,"./Reactify.coffee":12}],14:[function(require,module,exports){
 var div, query, reactify, recl,
   slice = [].slice;
 
@@ -1231,7 +1254,8 @@ module.exports = query({
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":11}],14:[function(require,module,exports){
+
+},{"./Async.coffee":3,"./Reactify.coffee":12}],15:[function(require,module,exports){
 var Dispatcher;
 
 Dispatcher = require('flux').Dispatcher;
@@ -1252,7 +1276,8 @@ module.exports = _.extend(new Dispatcher(), {
 });
 
 
-},{"flux":17}],15:[function(require,module,exports){
+
+},{"flux":18}],16:[function(require,module,exports){
 var rend;
 
 rend = React.render;
@@ -1282,7 +1307,7 @@ $(function() {
     return _path;
   };
   window.tree.fragpath = function(path) {
-    return path.replace(window.tree._basepath, "");
+    return path.replace(/\/$/, '').replace(window.tree._basepath, "");
   };
   TreeActions = require('./actions/TreeActions.coffee');
   TreePersistence = require('./persistence/TreePersistence.coffee');
@@ -1293,15 +1318,18 @@ $(function() {
   rend(body({}, ""), $('#cont')[0]);
   window.tree.util = {
     getKeys: function(kids) {
-      var k, keys, ref, ref1, sorted, v;
+      var k, keys, ref, ref1, ref2, sorted, v;
       sorted = true;
       keys = [];
       for (k in kids) {
         v = kids[k];
-        if (((ref = v.meta) != null ? ref.sort : void 0) == null) {
+        if ((ref = v.meta) != null ? ref.hide : void 0) {
+          continue;
+        }
+        if (((ref1 = v.meta) != null ? ref1.sort : void 0) == null) {
           sorted = false;
         }
-        keys[Number((ref1 = v.meta) != null ? ref1.sort : void 0)] = k;
+        keys[Number((ref2 = v.meta) != null ? ref2.sort : void 0)] = k;
       }
       if (sorted !== true) {
         return keys = _.keys(kids).sort();
@@ -1422,7 +1450,8 @@ $(function() {
 });
 
 
-},{"./actions/TreeActions.coffee":1,"./components/AnchorComponent.coffee":2,"./components/BodyComponent.coffee":4,"./components/Components.coffee":6,"./persistence/TreePersistence.coffee":20}],16:[function(require,module,exports){
+
+},{"./actions/TreeActions.coffee":1,"./components/AnchorComponent.coffee":2,"./components/BodyComponent.coffee":4,"./components/Components.coffee":6,"./persistence/TreePersistence.coffee":21}],17:[function(require,module,exports){
 /*!
   Copyright (c) 2015 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -1472,7 +1501,7 @@ $(function() {
 	}
 }());
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1484,7 +1513,7 @@ $(function() {
 
 module.exports.Dispatcher = require('./lib/Dispatcher')
 
-},{"./lib/Dispatcher":18}],18:[function(require,module,exports){
+},{"./lib/Dispatcher":19}],19:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -1736,7 +1765,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-},{"./invariant":19}],19:[function(require,module,exports){
+},{"./invariant":20}],20:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -1791,7 +1820,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var dedup;
 
 dedup = {};
@@ -1849,7 +1878,8 @@ module.exports = {
 };
 
 
-},{}],21:[function(require,module,exports){
+
+},{}],22:[function(require,module,exports){
 var EventEmitter, MessageDispatcher, QUERIES, TreeStore, _curr, _data, _tree, clog;
 
 EventEmitter = require('events').EventEmitter;
@@ -2074,7 +2104,8 @@ TreeStore.dispatchToken = MessageDispatcher.register(function(payload) {
 module.exports = TreeStore;
 
 
-},{"../dispatcher/Dispatcher.coffee":14,"events":22}],22:[function(require,module,exports){
+
+},{"../dispatcher/Dispatcher.coffee":15,"events":23}],23:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2377,4 +2408,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},[15]);
+},{}]},{},[16]);
