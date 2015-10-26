@@ -2026,6 +2026,7 @@
 ::
 ++  log-all-to-file
   ^-  (quip move .)
+  ?:  &  [~ .]  ::  XXX!!!!
   :_  %_  .
         log   %-  ~(urn by log)
               |=([man=span len=@ud] count:(~(got by stories) man))
