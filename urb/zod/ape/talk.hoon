@@ -8,7 +8,7 @@
 /=    talk-doc    
       /;  |=(a=wain (turn a |=(b=cord [%txt "? {(trip b)}"])))
       /:  /===/pub/doc/talk/help  /txt/
-!:
+::
 ::::
   ::
 [. talk sole]
@@ -2066,6 +2066,8 @@
 ::
 ++  poke-log
   |=  man=span
+  ~&  %poke-log
+
   ^-  (quip move +>)
   :-  [(log-to-file man) ~]
   +>.$(log (~(put by log) man count:(~(got by stories) man)))
