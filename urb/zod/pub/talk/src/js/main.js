@@ -554,7 +554,8 @@ module.exports = recl({
 
 
 },{"../actions/MessageActions.coffee":1,"../actions/StationActions.coffee":2,"../stores/MessageStore.coffee":21,"../stores/StationStore.coffee":22,"./MemberComponent.coffee":3,"classnames":10,"moment-timezone":16}],5:[function(require,module,exports){
-var Member, StationActions, StationStore, a, div, h1, input, recl, ref, style, textarea;
+var Member, MessageStore, StationActions, StationStore, a, div, h1, input, recl, ref, style, textarea,
+  indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 recl = React.createClass;
 
@@ -597,27 +598,16 @@ module.exports = recl({
     return this.setState(this.stateFromStore());
   },
   _toggleOpen: function(e) {
-    if ($(e.target).closest('.sour-ctrl').length > 0) {
-      return;
+    if ($(e.target).closest('.sour-ctrl').length === 0) {
+      return $("#station-container").toggleClass('open');
     }
-    return $("#station-container").toggleClass('open');
   },
   validateSource: function(s) {
-    if (this.state.configs[this.state.station].sources.indexOf(s) !== -1) {
-      return false;
-    }
-    if (s.length < 5) {
-      return false;
-    }
-    if (s[0] !== "~") {
-      return false;
-    }
-    if (s.indexOf("/") === -1) {
-      return false;
-    }
-    return true;
+    var sources;
+    sources = this.state.configs[this.state.station].sources;
+    return indexOf.call(sources, s) < 0 && indexOf.call(s, "/") >= 0 && s[0] === "~" && s.length >= 5;
   },
-  _keyUp: function(e) {
+  onKeyUp: function(e) {
     var _sources, v;
     $('.sour-ctrl .join').removeClass('valid-false');
     if (e.keyCode === 13) {
@@ -646,58 +636,57 @@ module.exports = recl({
     return StationActions.setSources(this.state.station, _sources);
   },
   render: function() {
-    var _remove, _sources, members, parts, sourceCtrl, sourceInput, sources;
+    var member, members, parts, presence, source, sources, station, stations;
     parts = [];
     members = [];
-    if (this.state.station && this.state.members) {
-      members = _.map(this.state.members, function(stations, member) {
-        var audi;
-        audi = _.map(stations, function(presence, station) {
-          return div({
-            className: "audi"
-          }, station.slice(1));
-        });
-        return div({}, [
-          React.createElement(Member, {
+    members = (function() {
+      var ref1, results;
+      if (!(this.state.station && this.state.members)) {
+        return "";
+      } else {
+        ref1 = this.state.members;
+        results = [];
+        for (member in ref1) {
+          stations = ref1[member];
+          results.push(div({}, React.createElement(Member, {
             ship: member
-          }), audi
-        ]);
-      });
-    } else {
-      members = "";
-    }
-    sourceInput = [
-      input({
-        className: "join",
-        onKeyUp: this._keyUp,
-        placeholder: "+"
-      })
-    ];
-    sourceCtrl = div({
-      className: "sour-ctrl"
-    }, sourceInput);
-    sources = [];
-    if (this.state.station && this.state.configs[this.state.station]) {
-      _remove = this._remove;
-      _sources = _.clone(this.state.configs[this.state.station].sources);
-      sources = _.map(_sources, (function(_this) {
-        return function(source) {
-          return div({
+          }), (function() {
+            var results1;
+            results1 = [];
+            for (station in stations) {
+              presence = stations[station];
+              results1.push(div({
+                className: "audi"
+              }, station.slice(1)));
+            }
+            return results1;
+          })()));
+        }
+        return results;
+      }
+    }).call(this);
+    sources = (function() {
+      var i, len, ref1, results;
+      if (!(this.state.station && this.state.configs[this.state.station])) {
+        return "";
+      } else {
+        ref1 = this.state.configs[this.state.station].sources;
+        results = [];
+        for (i = 0, len = ref1.length; i < len; i++) {
+          source = ref1[i];
+          results.push(div({
             className: "station"
-          }, [
-            div({
-              className: "path"
-            }, source.slice(1)), div({
-              className: "remove",
-              onClick: _remove,
-              "data-station": source
-            }, "×")
-          ]);
-        };
-      })(this));
-    } else {
-      sources = "";
-    }
+          }, div({
+            className: "path"
+          }, source.slice(1)), div({
+            className: "remove",
+            onClick: this._remove,
+            "data-station": source
+          }, "×")));
+        }
+        return results;
+      }
+    }).call(this);
     return div({
       id: "station",
       onClick: this._toggleOpen
@@ -721,7 +710,13 @@ module.exports = recl({
       id: "offline"
     }, "Warning: no connection to server.")), div({
       id: "stations"
-    }, h1({}, "Listening to"), div({}, sources), sourceCtrl), div({
+    }, h1({}, "Listening to"), div({}, sources), div({
+      className: "sour-ctrl"
+    }, input({
+      className: "join",
+      onKeyUp: this.onKeyUp,
+      placeholder: "+"
+    }))), div({
       id: "audience"
     }, div({}, h1({}, "Talking to"), div({
       id: "members"
