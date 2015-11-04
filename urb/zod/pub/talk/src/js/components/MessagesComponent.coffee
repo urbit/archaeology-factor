@@ -100,46 +100,45 @@ module.exports = recl
   getInitialState: -> @stateFromStore()
 
   _blur: ->
-    @focussed = false
+    @focused = false
     @lastSeen = @last
 
   _focus: ->
-    @focussed = true
+    @focused = true
     @lastSeen = null
     $('.message.new').removeClass 'new'
     document.title = document.title.replace /\ \([0-9]*\)/, ""
 
   checkMore: ->
     if $(window).scrollTop() < @paddingTop &&
-    @state.fetching is false &&
-    this.state.last &&
-    this.state.last > 0
+        @state.fetching is false &&
+        this.state.last &&
+        this.state.last > 0
       end = @state.last-@pageSize
       end = 0 if end < 0
       @lastLength = @length
       MessageActions.getMore @state.station,(@state.last+1),end
 
   setAudience: -> 
-    return if not @last
-    if _.keys(@last.thought.audience).length > 0 and @state.typing is false and
-    _.difference(_.keys(@last.thought.audience),@state.audi).length is 0
+    return if @state.typing or not @last
+    laudi = _.keys @last.thought.audience
+    return if (_.isEmpty laudi) or not
+              _(laudi).difference(@state.audi).isEmpty()
       StationActions.setAudience _.keys(@last.thought.audience)
 
   sortedMessages: (messages) ->
-    _.sortBy messages, (_message) -> 
-          _message.pending = _message.thought.audience[station]
-          _message.key
-          #_message.thought.statement.date
+    _.sortBy messages, (message) -> 
+          message.pending = message.thought.audience[station]
+          message.key
+          #message.thought.statement.date
 
   componentDidMount: ->
     MessageStore.addChangeListener @_onChangeStore
     StationStore.addChangeListener @_onChangeStore
-    if @state.station and
-    @state.listening.indexOf(@state.station) is -1
+    if @state.station and @state.listening.indexOf(@state.station) is -1
       MessageActions.listenStation @state.station
-    checkMore = @checkMore
-    $(window).on 'scroll', checkMore
-    @focussed = true
+    $(window).on 'scroll', @checkMore
+    @focused = true
     $(window).on 'blur', @_blur
     $(window).on 'focus', @_focus
     window.util.setScroll()
@@ -156,7 +155,7 @@ module.exports = recl
       else
         console.log 'scrolling'
 
-    if @focussed is false and @last isnt @lastSeen
+    if @focused is false and @last isnt @lastSeen
       _messages = @sortedMessages @state.messages
       d = _messages.length-_messages.indexOf(@lastSeen)-1
       t = document.title
@@ -180,34 +179,27 @@ module.exports = recl
 
   render: ->
     station = @state.station
-    _station = "~"+window.urb.ship+"/"+station
-    sources = _.clone @state.configs[@state.station]?.sources ? []
-    sources.push _station
-    _messages = @sortedMessages @state.messages
-
-    @last = _messages[_messages.length-1]
+    messages = @sortedMessages @state.messages
+    
+    @last = messages[messages.length-1]
     if @last?.ship && @last.ship is window.urb.user then @lastSeen = @last
-    @length = _messages.length
+    @length = messages.length
 
-    setTimeout => 
-        @checkMore() if length < @pageSize
-      , 1
+    setTimeout (=> @checkMore() if @length < @pageSize), 1
 
-    lastIndex = if @lastSeen then _messages.indexOf(@lastSeen)+1 else null
+    lastIndex = if @lastSeen then messages.indexOf(@lastSeen)+1 else null
     lastSaid = null
+    
+    
+    div {id: "messages"}, messages.map (message,index) =>
+        nowSaid = [message.ship,message.thought.audience]
+        sameAs = _.isEqual lastSaid, nowSaid
+        lastSaid = nowSaid
 
-    div {id: "messages"}, _messages.map (_message,k) =>
-      nowSaid = [_message.ship,_message.thought.audience]
-      {station} = @state
-      mess = {
-        station, @_handlePm, @_handleAudi,
-        glyph: @state.glyph[(_.keys _message.thought.audience).join " "]
-        unseen: lastIndex and lastIndex is k
-        sameAs: _.isEqual lastSaid, nowSaid
-      }
-      lastSaid = nowSaid
-              
-      if _message.thought.statement.speech?.app
-        mess.ship = "system"
-
-      React.createElement Message, (_.extend {}, _message, mess)
+        {speech} = message.thought.statement
+        React.createElement Message, (_.extend {}, message, {
+          station, sameAs, @_handlePm, @_handleAudi,
+          ship: if speech?.app then "system" else message.ship
+          glyph: @state.glyph[(_.keys message.thought.audience).join " "]
+          unseen: lastIndex and lastIndex is index
+        })
