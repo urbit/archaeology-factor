@@ -87,7 +87,8 @@ body {
   height: 100%;
   font-family: "bau";
 }
-.type {
+.type,
+.spin {
   font-family: "scp";
 }
 input {
@@ -688,4 +689,33 @@ body:not(.offline) #offline {
     -webkit-transform: rotate(90deg);
     -webkit-transition: -webkit-transform 0.2s;
   }
+}
+.loading {
+  display: inline-block;
+}
+.spin {
+  color: #fff;
+  padding: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  z-index: 3;
+}
+.loading > .spin {
+  background-color: #555;
+}
+#body .loading > .spin {
+  background-color: #000;
+}
+.spin.state-0:before {
+  content: "\2599";
+}
+.spin.state-1:before {
+  content: "\259B";
+}
+.spin.state-2:before {
+  content: "\259C";
+}
+.spin.state-3:before {
+  content: "\259F";
 }

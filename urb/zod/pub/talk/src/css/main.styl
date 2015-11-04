@@ -10,6 +10,7 @@ body
   font-family "bau"
 
 .type
+.spin
   font-family "scp"
 
 input
@@ -563,3 +564,34 @@ body:not(.offline) #offline
   color: red
   
 @import 'mobile'
+
+//
+//  import: Load
+//
+
+
+.loading
+  display inline-block
+
+.spin
+  color #fff
+  padding .6rem
+  font-size .7rem
+  font-weight 600
+  letter-spacing .1rem
+  z-index 3
+
+.loading > .spin
+  background-color #555
+
+#body .loading > .spin
+  background-color #000
+
+.spin.state-0:before
+  content "\2599"
+.spin.state-1:before
+  content "\259B"
+.spin.state-2:before
+  content "\259C"
+.spin.state-3:before
+  content "\259F"

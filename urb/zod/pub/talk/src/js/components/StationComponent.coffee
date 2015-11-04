@@ -1,9 +1,12 @@
 recl = React.createClass
+rele = React.createElement
 {div,style,input,textarea,h1,a} = React.DOM
 
+MessageStore    = require '../stores/MessageStore.coffee'
 StationStore    = require '../stores/StationStore.coffee'
 StationActions  = require '../actions/StationActions.coffee'
 Member          = require './MemberComponent.coffee'
+Load            = require './LoadComponent.coffee'
 
 module.exports = recl
   displayName: "Station"
@@ -13,6 +16,7 @@ module.exports = recl
     station:window.util.mainStation()
     stations:StationStore.getStations()
     configs:StationStore.getConfigs()
+    fetching:MessageStore.getFetching()
     typing:StationStore.getTyping()
     listening:StationStore.getListening()
   }
@@ -72,7 +76,7 @@ module.exports = recl
         ""
       else for member, stations of @state.members
         (div {},
-           (React.createElement Member, {ship:member})
+           (rele Member, {ship:member})
            for station, presence of stations
              (div {className:"audi"}, station.slice(1))
         )
@@ -91,6 +95,7 @@ module.exports = recl
           div {className:"sig"}
           div {className:"ship"},"#{window.urb.user}"
         )
+        (rele Load, {})  if @state.fetching
         (div {id:"where"},
           div {className:"slat"},"talk"
           div {className:"path"} #, window.util.mainStation(window.urb.user))

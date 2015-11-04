@@ -109,7 +109,7 @@ Persistence = _persistence({
 
 
 
-},{"../dispatcher/Dispatcher.coffee":7,"../persistence/MessagePersistence.coffee":19}],2:[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":8,"../persistence/MessagePersistence.coffee":20}],2:[function(require,module,exports){
 var Dispatcher, Persistence, _persistence, serverAction, viewAction;
 
 Dispatcher = require('../dispatcher/Dispatcher.coffee');
@@ -222,7 +222,48 @@ Persistence = _persistence({
 
 
 
-},{"../dispatcher/Dispatcher.coffee":7,"../persistence/StationPersistence.coffee":20}],3:[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":8,"../persistence/StationPersistence.coffee":21}],3:[function(require,module,exports){
+var div, input, recl, ref, textarea;
+
+recl = React.createClass;
+
+ref = React.DOM, div = ref.div, input = ref.input, textarea = ref.textarea;
+
+module.exports = recl({
+  displayName: "Load",
+  getInitialState: function() {
+    return {
+      anim: 0
+    };
+  },
+  componentDidMount: function() {
+    return this.interval = setInterval(this.setAnim, 100);
+  },
+  componentWillUnmount: function() {
+    return clearInterval(this.interval);
+  },
+  setAnim: function() {
+    var anim;
+    anim = this.state.anim + 1;
+    if (anim > 3) {
+      anim = 0;
+    }
+    return this.setState({
+      anim: anim
+    });
+  },
+  render: function() {
+    return div({
+      className: "loading"
+    }, div({
+      className: "spin state-" + this.state.anim
+    }, ""));
+  }
+});
+
+
+
+},{}],4:[function(require,module,exports){
 var div, input, recl, ref, textarea;
 
 recl = React.createClass;
@@ -251,7 +292,7 @@ module.exports = recl({
 
 
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var Member, Message, MessageActions, MessageStore, StationActions, StationStore, a, br, clas, div, input, moment, pre, recl, ref, span, textarea,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -553,19 +594,25 @@ module.exports = recl({
 
 
 
-},{"../actions/MessageActions.coffee":1,"../actions/StationActions.coffee":2,"../stores/MessageStore.coffee":21,"../stores/StationStore.coffee":22,"./MemberComponent.coffee":3,"classnames":10,"moment-timezone":16}],5:[function(require,module,exports){
-var Member, MessageStore, StationActions, StationStore, a, div, h1, input, recl, ref, style, textarea,
+},{"../actions/MessageActions.coffee":1,"../actions/StationActions.coffee":2,"../stores/MessageStore.coffee":22,"../stores/StationStore.coffee":23,"./MemberComponent.coffee":4,"classnames":11,"moment-timezone":17}],6:[function(require,module,exports){
+var Load, Member, MessageStore, StationActions, StationStore, a, div, h1, input, recl, ref, rele, style, textarea,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 recl = React.createClass;
 
+rele = React.createElement;
+
 ref = React.DOM, div = ref.div, style = ref.style, input = ref.input, textarea = ref.textarea, h1 = ref.h1, a = ref.a;
+
+MessageStore = require('../stores/MessageStore.coffee');
 
 StationStore = require('../stores/StationStore.coffee');
 
 StationActions = require('../actions/StationActions.coffee');
 
 Member = require('./MemberComponent.coffee');
+
+Load = require('./LoadComponent.coffee');
 
 module.exports = recl({
   displayName: "Station",
@@ -576,6 +623,7 @@ module.exports = recl({
       station: window.util.mainStation(),
       stations: StationStore.getStations(),
       configs: StationStore.getConfigs(),
+      fetching: MessageStore.getFetching(),
       typing: StationStore.getTyping(),
       listening: StationStore.getListening()
     };
@@ -648,7 +696,7 @@ module.exports = recl({
         results = [];
         for (member in ref1) {
           stations = ref1[member];
-          results.push(div({}, React.createElement(Member, {
+          results.push(div({}, rele(Member, {
             ship: member
           }), (function() {
             var results1;
@@ -698,7 +746,7 @@ module.exports = recl({
       className: "sig"
     }), div({
       className: "ship"
-    }, "" + window.urb.user)), div({
+    }, "" + window.urb.user)), this.state.fetching ? rele(Load, {}) : void 0, div({
       id: "where"
     }, div({
       className: "slat"
@@ -726,7 +774,7 @@ module.exports = recl({
 
 
 
-},{"../actions/StationActions.coffee":2,"../stores/StationStore.coffee":22,"./MemberComponent.coffee":3}],6:[function(require,module,exports){
+},{"../actions/StationActions.coffee":2,"../stores/MessageStore.coffee":22,"../stores/StationStore.coffee":23,"./LoadComponent.coffee":3,"./MemberComponent.coffee":4}],7:[function(require,module,exports){
 var Audience, Member, MessageActions, MessageStore, PO, SHIPSHAPE, StationActions, StationStore, br, div, husl, input, recl, ref, textarea;
 
 recl = React.createClass;
@@ -1024,7 +1072,7 @@ module.exports = recl({
 
 
 
-},{"../actions/MessageActions.coffee":1,"../actions/StationActions.coffee":2,"../stores/MessageStore.coffee":21,"../stores/StationStore.coffee":22,"./MemberComponent.coffee":3,"husl":14}],7:[function(require,module,exports){
+},{"../actions/MessageActions.coffee":1,"../actions/StationActions.coffee":2,"../stores/MessageStore.coffee":22,"../stores/StationStore.coffee":23,"./MemberComponent.coffee":4,"husl":15}],8:[function(require,module,exports){
 var Dispatcher;
 
 Dispatcher = require('flux').Dispatcher;
@@ -1046,7 +1094,7 @@ module.exports = _.merge(new Dispatcher(), {
 
 
 
-},{"flux":11}],8:[function(require,module,exports){
+},{"flux":12}],9:[function(require,module,exports){
 $(function() {
   var $c, MessagesComponent, StationActions, StationComponent, WritingComponent, rend;
   StationActions = require('./actions/StationActions.coffee');
@@ -1075,7 +1123,7 @@ $(function() {
 
 
 
-},{"./actions/StationActions.coffee":2,"./components/MessagesComponent.coffee":4,"./components/StationComponent.coffee":5,"./components/WritingComponent.coffee":6,"./move.coffee":9,"./util.coffee":23}],9:[function(require,module,exports){
+},{"./actions/StationActions.coffee":2,"./components/MessagesComponent.coffee":5,"./components/StationComponent.coffee":6,"./components/WritingComponent.coffee":7,"./move.coffee":10,"./util.coffee":24}],10:[function(require,module,exports){
 var ldy, setSo, so;
 
 so = {};
@@ -1176,7 +1224,7 @@ $(window).on('scroll', window.util.checkScroll);
 
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*!
   Copyright (c) 2015 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -1226,7 +1274,7 @@ $(window).on('scroll', window.util.checkScroll);
 	}
 }());
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1238,7 +1286,7 @@ $(window).on('scroll', window.util.checkScroll);
 
 module.exports.Dispatcher = require('./lib/Dispatcher')
 
-},{"./lib/Dispatcher":12}],12:[function(require,module,exports){
+},{"./lib/Dispatcher":13}],13:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -1490,7 +1538,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-},{"./invariant":13}],13:[function(require,module,exports){
+},{"./invariant":14}],14:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -1545,7 +1593,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // Generated by CoffeeScript 1.9.3
 (function() {
   var L_to_Y, Y_to_L, conv, distanceFromPole, dotProduct, epsilon, fromLinear, getBounds, intersectLineLine, kappa, lengthOfRayUntilIntersect, m, m_inv, maxChromaForLH, maxSafeChromaForL, refU, refV, root, toLinear;
@@ -1929,7 +1977,7 @@ module.exports = invariant;
 
 }).call(this);
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports={
 	"version": "2014j",
 	"zones": [
@@ -2519,11 +2567,11 @@ module.exports={
 		"Pacific/Pohnpei|Pacific/Ponape"
 	]
 }
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var moment = module.exports = require("./moment-timezone");
 moment.tz.load(require('./data/packed/latest.json'));
 
-},{"./data/packed/latest.json":15,"./moment-timezone":17}],17:[function(require,module,exports){
+},{"./data/packed/latest.json":16,"./moment-timezone":18}],18:[function(require,module,exports){
 //! moment-timezone.js
 //! version : 0.2.5
 //! author : Tim Wood
@@ -2926,7 +2974,7 @@ moment.tz.load(require('./data/packed/latest.json'));
 	return moment;
 }));
 
-},{"moment":18}],18:[function(require,module,exports){
+},{"moment":19}],19:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -6122,7 +6170,7 @@ moment.tz.load(require('./data/packed/latest.json'));
     return _moment;
 
 }));
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var send;
 
 window.urb.appl = "talk";
@@ -6200,7 +6248,7 @@ module.exports = function(arg) {
 
 
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var design, send;
 
 window.urb.appl = "talk";
@@ -6311,7 +6359,7 @@ module.exports = function(arg) {
 
 
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var EventEmitter, MessageDispatcher, MessageStore, _fetching, _last, _listening, _messages, _station, _typing, moment;
 
 moment = require('moment-timezone');
@@ -6458,7 +6506,7 @@ module.exports = MessageStore;
 
 
 
-},{"../dispatcher/Dispatcher.coffee":7,"events":24,"moment-timezone":16}],22:[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":8,"events":25,"moment-timezone":17}],23:[function(require,module,exports){
 var EventEmitter, StationDispatcher, StationStore, _audience, _config, _glyphs, _listening, _members, _shpylg, _station, _stations, _typing, _validAudience;
 
 EventEmitter = require('events').EventEmitter;
@@ -6698,7 +6746,7 @@ module.exports = StationStore;
 
 
 
-},{"../dispatcher/Dispatcher.coffee":7,"events":24}],23:[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":8,"events":25}],24:[function(require,module,exports){
 if (!window.util) {
   window.util = {};
 }
@@ -6810,7 +6858,7 @@ _.merge(window.util, {
 
 
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -7113,4 +7161,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},[8]);
+},{}]},{},[9]);
