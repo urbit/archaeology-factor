@@ -1,3 +1,4 @@
+Infinite = require 'react-infinite'
 moment = require 'moment-timezone'
 clas = require 'classnames'
 
@@ -9,6 +10,8 @@ MessageStore    = require '../stores/MessageStore.coffee'
 StationActions  = require '../actions/StationActions.coffee'
 StationStore    = require '../stores/StationStore.coffee'
 Member          = require './MemberComponent.coffee'
+
+MESSAGE_HEIGHT = 48 # XX measure
 
 Message = recl
   displayName: "Message"
@@ -191,15 +194,22 @@ module.exports = recl
     lastSaid = null
     
     
-    div {id: "messages"}, messages.map (message,index) =>
-        nowSaid = [message.ship,message.thought.audience]
-        sameAs = _.isEqual lastSaid, nowSaid
-        lastSaid = nowSaid
+    _messages = messages.map (message,index) =>
+      nowSaid = [message.ship,message.thought.audience]
+      sameAs = _.isEqual lastSaid, nowSaid
+      lastSaid = nowSaid
 
-        {speech} = message.thought.statement
-        React.createElement Message, (_.extend {}, message, {
-          station, sameAs, @_handlePm, @_handleAudi,
-          ship: if speech?.app then "system" else message.ship
-          glyph: @state.glyph[(_.keys message.thought.audience).join " "]
-          unseen: lastIndex and lastIndex is index
-        })
+      {speech} = message.thought.statement
+      React.createElement Message, (_.extend {}, message, {
+        station, sameAs, @_handlePm, @_handleAudi,
+        ship: if speech?.app then "system" else message.ship
+        glyph: @state.glyph[(_.keys message.thought.audience).join " "]
+        unseen: lastIndex and lastIndex is index
+      })
+        
+    (div {id: "messages"},
+      React.createElement Infinite, {
+          useWindowAsScrollContainer: yes
+          elementHeight: MESSAGE_HEIGHT
+        }, _messages
+    )

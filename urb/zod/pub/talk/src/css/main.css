@@ -350,8 +350,18 @@ body {
   color: transparent;
 }
 .message {
-  padding-top: 0.3rem;
-  margin-bottom: 0.6rem;
+  padding-top: 6px;
+  margin-bottom: 12px;
+  height: 30px;
+  overflow: hidden;
+}
+.message:hover {
+  overflow: visible;
+  position: relative;
+  z-index: 3;
+}
+.mess {
+  background: #fff;
 }
 #messages .message .time,
 #messages .message .audi {
