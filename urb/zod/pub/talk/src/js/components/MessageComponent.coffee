@@ -64,7 +64,7 @@ module.exports = recl
         when speech.app? then "say"
         when speech.exp? then "exp"
         
-    (div {className},
+    (div {className, 'data-index':@props.index},
         (div {className:"attr"},
           div {className:"type #{type}", "data-glyph": @props.glyph || "*"}
           (div {onClick:@_handlePm},

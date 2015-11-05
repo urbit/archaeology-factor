@@ -399,7 +399,8 @@ module.exports = recl({
       }
     })());
     return div({
-      className: className
+      className: className,
+      'data-index': this.props.index
     }, div({
       className: "attr"
     }, div({
@@ -513,22 +514,37 @@ module.exports = recl({
     this.focused = true;
     $(window).on('blur', this._blur);
     $(window).on('focus', this._focus);
-    return window.util.setScroll();
+    return window.util.scrollToBottom();
   },
-  componentDidUpdate: function() {
-    var $window, _messages, d, st, t;
+  componentWillUpdate: function() {
+    var $window, ref;
     $window = $(window);
-    if (this.lastLength) {
-      st = $window.height();
-      $window.scrollTop(st);
-      this.lastLength = null;
+    if ($('#writing').is(function() {
+      return $(this).offset().top < $window.scrollTop() + $window.height();
+    })) {
+      return this.anchorKey = Number.MAX_VALUE;
     } else {
-      if (!window.util.isScrolling()) {
-        window.util.setScroll();
-      } else {
-        console.log('scrolling');
+      return this.anchorKey = (ref = $('.message').first().attr('data-index')) != null ? ref : 0;
+    }
+  },
+  componentDidUpdate: function(_props, _state) {
+    var $window, _messages, d, i, j, key, len, len1, old, ref, ref1, scrollTop, t;
+    $window = $(window);
+    scrollTop = $window.scrollTop();
+    old = {};
+    ref = _state.messages;
+    for (i = 0, len = ref.length; i < len; i++) {
+      key = ref[i].key;
+      old[key] = true;
+    }
+    ref1 = this.state.messages;
+    for (j = 0, len1 = ref1.length; j < len1; j++) {
+      key = ref1[j].key;
+      if (!old[key] && key < this.anchorKey) {
+        scrollTop += MESSAGE_HEIGHT;
       }
     }
+    $window.scrollTop(scrollTop);
     if (this.focused === false && this.last !== this.lastSeen) {
       _messages = this.sortedMessages(this.state.messages);
       d = _messages.length - _messages.indexOf(this.lastSeen) - 1;
@@ -588,6 +604,7 @@ module.exports = recl({
           sameAs: sameAs,
           _handlePm: _this._handlePm,
           _handleAudi: _this._handleAudi,
+          index: message.key,
           ship: (speech != null ? speech.app : void 0) ? "system" : message.ship,
           glyph: _this.state.glyph[(_.keys(message.thought.audience)).join(" ")],
           unseen: lastIndex && lastIndex === index
@@ -26690,18 +26707,8 @@ _.merge(window.util, {
     };
     return send();
   },
-  getScroll: function() {
-    return this.writingPosition = $('#c').outerHeight(true) + $('#c').offset().top - $(window).height();
-  },
-  setScroll: function() {
-    window.util.getScroll();
+  scrollToBottom: function() {
     return $(window).scrollTop($("#c").height());
-  },
-  isScrolling: function() {
-    if (!window.util.writingPosition) {
-      window.util.getScroll();
-    }
-    return $(window).scrollTop() + $('#writing').outerHeight() < window.util.writingPosition;
   },
   checkScroll: function() {
     if (window.util.isScrolling()) {

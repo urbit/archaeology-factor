@@ -72,19 +72,24 @@ module.exports = recl
     @focused = true
     $(window).on 'blur', @_blur
     $(window).on 'focus', @_focus
-    window.util.setScroll()
+    window.util.scrollToBottom()
 
-  componentDidUpdate: ->
+  componentWillUpdate: ->
     $window = $(window)
-    if @lastLength
-      st = $window.height()
-      $window.scrollTop st
-      @lastLength = null
+    if ($('#writing').is -> 
+         $(@).offset().top < $window.scrollTop() + $window.height()
+        )
+      @anchorKey = Number.MAX_VALUE
     else
-      if not window.util.isScrolling()
-        window.util.setScroll()
-      else
-        console.log 'scrolling'
+      @anchorKey = $('.message').first().attr('data-index') ? 0
+    
+  componentDidUpdate: (_props, _state)->
+    $window = $ window
+    scrollTop = $window.scrollTop()
+    old = {}; old[key] = true for {key} in _state.messages
+    for {key} in @state.messages when not old[key] and key < @anchorKey
+      scrollTop += MESSAGE_HEIGHT
+    $window.scrollTop scrollTop
 
     if @focused is false and @last isnt @lastSeen
       _messages = @sortedMessages @state.messages
@@ -129,7 +134,8 @@ module.exports = recl
 
       {speech} = message.thought.statement
       React.createElement Message, (_.extend {}, message, {
-        station, sameAs, @_handlePm, @_handleAudi,
+        station, sameAs, @_handlePm, @_handleAudi, 
+        index: message.key
         ship: if speech?.app then "system" else message.ship
         glyph: @state.glyph[(_.keys message.thought.audience).join " "]
         unseen: lastIndex and lastIndex is index
