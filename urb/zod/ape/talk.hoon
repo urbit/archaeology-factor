@@ -2137,14 +2137,14 @@
   |=  [man=span len=@ud]
   ^-  (list toro)
   =+  [grams=grams count=count]:(~(got by stories) man)
-  ~&  log/[man len count]
+  :: ~&  log/[man len count]
   ?:  (gte len count)
     ~
   =+  old=p.r.q:(snag (sub count +(len)) grams)
   =.  old  (year %*(. (yore old) +.t +:*tarp))
   =.  grams
     -:(split-on grams |=(telegram (gth old p.r.q)))
-  ~&  (turn grams |=(telegram p.r.q))
+  :: ~&  (turn grams |=(telegram p.r.q))
   =+  new=(year %*(. (yore now.hid) +.t +:*tarp))
   |-  ^-  (list toro)
   ?:  =(~ grams)  ~
