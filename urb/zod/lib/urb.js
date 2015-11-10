@@ -106,7 +106,7 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
 
   // $send.seqn++
 
-  this.qreq('post',url,params,true,function(err,data) {
+  this.qreq('post',url,{wire:params.wire,xyro:params.xyro},true,function(err,data) {
     /* if(err) { $send.seqn--; }
     else */ if(data && data.data.fail && urb.wall !== false)
       document.write("<pre>"+JSON.stringify(params.xyro)+"\n"
@@ -209,7 +209,7 @@ window.urb.bind = function(path, params, cb, nicecb){ // or bind(path, cb)
   this.cabs[this.gsig(params)] = cb
 
   $this = this
-  this.qreq("put",url,params,true,function(err,res) {
+  this.qreq("put",url,{wire:params.wire},true,function(err,res) {
     if(nicecb) { nicecb.apply(this,[err,{status: res.status, data: res.data}])}
     //  XX give raw data
     //
@@ -234,7 +234,7 @@ window.urb.drop = function(path, params, cb){  // or drop(path,cb)
   
   url = "/~/is/"+this.gsig(params)+".json"
   method = "delete"
-  this.req("delete",url,params,true,function(err,res) {
+  this.req("delete",url,{wire:params.wire},true,function(err,res) {
     if(cb) cb(err,res)
   })
 }
