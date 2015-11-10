@@ -2117,27 +2117,52 @@
 ::
 ++  log-all-to-file
   ^-  (quip move .)
-  ?:  &  [~ .]  ::  XXX!!!!
+  :: ?:  &  [~ .]  ::  XXX!!!!
   :_  %_  .
         log   %-  ~(urn by log)
               |=([man=span len=@ud] count:(~(got by stories) man))
       ==
-  %+  murn  (~(tap by log))
-  |=  [man=span len=@ud]
-  ^-  (unit move)
-  ?:  (gte len count:(~(got by stories) man))
-    ~
-  `(log-to-file man)
+  =+  `liz=(list toro)`(zing (turn (~(tap by log)) log-to-toro))
+  ?~  liz  ~
+  [ost.hid %info /jamfile our.hid (roll t.liz %*(. furl two i.liz))]~
 ::
 ++  log-to-file
-  |=  man=span
-  ^-  move
-  =+  ^-  paf=path
-      =+  day=(year %*(. (yore now.hid) +.t +:*tarp))
-      %+  tope  [our.hid %home da/now.hid]
-      /talk-telegrams/(scot %da day)/[man]/talk
-  =+  grams:(~(got by stories) man)
-  [ost.hid %info /jamfile our.hid (foal paf [%talk-telegrams !>(-)])]
+  |=  [man=span len=@ud]
+  ^-  (list move)
+  =+  liz=(log-to-toro man len)
+  ?~  liz  ~
+  [ost.hid %info /jamfile our.hid (roll t.liz %*(. furl two i.liz))]~
+::
+++  log-to-toro  ::  XX inside story core
+  |=  [man=span len=@ud]
+  ^-  (list toro)
+  =+  [grams=grams count=count]:(~(got by stories) man)
+  ~&  log/[man len count]
+  ?:  (gte len count)
+    ~
+  =+  old=p.r.q:(snag (sub count +(len)) grams)
+  =.  old  (year %*(. (yore old) +.t +:*tarp))
+  =.  grams
+    -:(split-on grams |=(telegram (gth old p.r.q)))
+  ~&  (turn grams |=(telegram p.r.q))
+  =+  new=(year %*(. (yore now.hid) +.t +:*tarp))
+  |-  ^-  (list toro)
+  ?:  =(~ grams)  ~
+  =^  out  grams
+    (split-on grams |=(telegram (gth new p.r.q)))
+  ?:  =(~ out)
+    $(new (sub new ~d1))
+  :_  $(new (sub new ~d1))
+  %-  foal  :_  [%talk-telegrams !>(out)]
+  %+  tope  [our.hid %home da/now.hid] 
+  /talk-telegrams/(scot %da new)/[man]/talk
+::
+++  split-on
+  |*  [a=(list) b=_|=(p=* .?(p))]
+  |-  ^+  [a a]
+  ?~  a  [~ a]
+  ?:  (b i.a)  [~ a]
+  [[i -.t] +.t]:[i=i.a t=$(a t.a)]
 ::
 ++  poke-save
   |=  man=span
@@ -2159,9 +2184,8 @@
 ++  poke-log
   |=  man=span
   ~&  %poke-log
-
   ^-  (quip move +>)
-  :-  [(log-to-file man) ~]
+  :-  (log-to-file man (fall (~(get by log) man) 0))
   +>.$(log (~(put by log) man count:(~(got by stories) man)))
 ::
 ++  poke-unlog
