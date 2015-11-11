@@ -1,14 +1,15 @@
 if(!window.urb.appl) window.urb.appl = null
 
-window.urb.req = function(method,url,params,json,cb) {
+window.urb.req = function(method,url,params,type,cb) {
   var xhr = new XMLHttpRequest()
   method = method.toUpperCase()
   if(method == "PUT" || method == "DELETE")
     xhr.open("POST", url+"?"+method)
   else xhr.open(method, url)
   
-  if(json)
-    xhr.setRequestHeader("content-type", "text/json")
+  type = ({json:"text/json"})[type]
+  if(type)
+    xhr.setRequestHeader("content-type", type)
 
   if(!window.urb.oryx) throw "No CSRF token" // XX fetch auth.json
   _data = {oryx: window.urb.oryx}
@@ -106,7 +107,7 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
 
   // $send.seqn++
 
-  this.qreq('post',url,{wire:params.wire,xyro:params.xyro},true,function(err,data) {
+  this.qreq('post',url,{wire:params.wire,xyro:params.xyro},'json',function(err,data) {
     /* if(err) { $send.seqn--; }
     else */ if(data && data.data.fail && urb.wall !== false)
       document.write("<pre>"+JSON.stringify(params.xyro)+"\n"
@@ -142,7 +143,7 @@ window.urb.poll = function(params) {
   this.puls = true
 
   $this = this
-  this.req("get",url,params,true,function(err,res) {
+  this.req("get",url,{},null,function(err,res) {
     $this.poll.dely = params.dely || $this.poll.dely
     if(res){
       if(res.data.beat)
@@ -209,7 +210,7 @@ window.urb.bind = function(path, params, cb, nicecb){ // or bind(path, cb)
   this.cabs[this.gsig(params)] = cb
 
   $this = this
-  this.qreq("put",url,{wire:params.wire},true,function(err,res) {
+  this.qreq("put",url,{wire:params.wire},'json',function(err,res) {
     if(nicecb) { nicecb.apply(this,[err,{status: res.status, data: res.data}])}
     //  XX give raw data
     //
@@ -234,7 +235,7 @@ window.urb.drop = function(path, params, cb){  // or drop(path,cb)
   
   url = "/~/is/"+this.gsig(params)+".json"
   method = "delete"
-  this.req("delete",url,{wire:params.wire},true,function(err,res) {
+  this.req("delete",url,{wire:params.wire},'json',function(err,res) {
     if(cb) cb(err,res)
   })
 }
