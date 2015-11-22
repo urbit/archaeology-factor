@@ -1,0 +1,316 @@
+---
+title: Nock walkthrough
+sort: 1
+next: true
+---
+
+# Nock walkthrough
+
+We'll walk through each line of the [Nock spec](../spec) and try
+to explain it in plain English.  Of course, the spec itself is
+the definition of Nock; this document is just an illustration.
+
+We'll follow this with a brief discussion of Nock's design.
+
+## Lines 1-3: nouns
+
+Nouns are Nock's data model: atoms and cells.
+
+### 1: atoms
+```
+1  ::  An atom is a natural number.
+```
+By which is meant: an unsigned integer of any size.
+
+Not only does Nock not limit the size of an atom, it harbors no
+opinion at all on the atom's interpretation or presentation.
+
+The atom `97` might mean the number `97`.  Or the number `0x31`.
+Or the letter `a` (ASCII 97). A very large atom might be the
+number of grains of sand on the beach - or it might be a GIF of
+your children playing on the beach. 
+
+> Other simple data types - signed integers, floating point, etc —
+are easily mapped into atoms, although they are binary garbage
+without external metadata.  But so is a Unix bytestream file, 
+and this format has been 
+
+### 2-3: cells
+```
+2  ::  A noun is an atom or a cell.
+3  ::  A cell is an ordered pair of nouns.
+```
+In other words, a noun is a tree whose leaves are atoms.
+
+> A noun is a pure tree.  Although any noun implementation
+will be built with pointers, Nock can't create cyclical data 
+structures: there is no Nock computation that can make a child 
+that points back to its parent.  And while it's normal for noun 
+implementations to share pointers, creating dag structure, 
+there is no Nock computation that tests pointer equality.
+The noun abstraction does not leak.
+
+Although Nock specifies no syntax, we need a pseudocode to
+specify Nock.  In this pseudocode, we group cells with
+square brackets:
+```
+[1 1] 
+[34 45] 
+[[3 42] 12] 
+[[1 0] [0 [1 99]]]
+```
+Brackets associate right.  That last noun is the same value as:
+``` 
+[[1 0] 0 1 99]
+```
+but it's okay to use unnecessary brackets for emphasis.
+
+> A noun is a Lisp S-expression, except that (a) Nock defines no
+noun syntax, and (b) Nock has no atom metadata.
+
+> Nock is pair-oriented rather than list-oriented, and
+noun syntaxes generally don't insert list terminators.  The Lisp
+S-expression `(11 12 13)` is the Nock noun `[11 12 13 0]`.
+
+## Lines 5-6: pseudocode
+```
+5  ::  nock(a)          *a
+6  ::  [a b c]          [a [b c]]
+```
+Line 5 and 6 look like rules, but they're really pseudocode
+syntax definitions.  Line 5 defines the `*` prefix operator as
+Nock itself.  Line 6 tells us that brackets group right.
+
+All further lines are actual reduction rules.  Each rule has two
+pseudocode expressions: a "pattern", then a "production."
+
+To reduce any pseudocode expression `x`, step downward from line
+`8` to the first rule whose pattern matches `x`.  Every named
+variable must match a noun in `x`.  Bind those variables into the
+production, and reduce that expression.
+
+Note that lines `10`, `14`, `21` and `39` produce their own
+pattern.  This means Nock logically enters an infinite loop.  (A
+practical interpreter will throw an exception.)  Mathematicians
+call this "bottom."
+
+## Lines 8-21: axiomatic operators
+
+Besides `*`, the pseudocode defines four axiomatic operators on
+nouns: `?` ("deep"), `+` ("bump"), `=` "same", and `/` ("find").
+
+### 8-9: `?`, "deep"
+
+The `?` operator tests if a noun is an atom or a cell.  Cells
+produce `0`, atoms `1`.
+```
+8  ::  ?[a b]           0
+9  ::  ?a               1
+```
+`0` in Nock is "yes," `1` is "no."  This is called a "loobean."
+The motivation behind this decision is obscure.
+
+### 10-11: `+`, "bump"
+
+Bumping an atom produces that atom plus 1.  Bumping a cell
+crashes.
+```
+10 ::  +[a b]           +[a b]
+11 ::  +a               1 + a
+```
+
+### 12-14: `=`, "same"
+
+A cell of two equal nouns produces `0`.  Any other cell produces
+`1`.  An atom crashes.
+```
+12 ::  =[a a]           0
+13 ::  =[a b]           1
+14 ::  =a               =a
+```
+
+### 16-21: `/`, "seek"
+
+Since a noun is a binary tree, we can address its subtrees with
+atoms.  A tree address is called an "axis."
+
+Axis `1` is the root.  At axis `n`, `2n` is the left child,
+and `2n+1` is the right child.
+```
+16 ::  /[1 a]           a
+17 ::  /[2 a b]         a
+18 ::  /[3 a b]         b
+19 ::  /[(a + a) b]     /[2 /[a b]]
+20 ::  /[(a + a + 1) b] /[3 /[a b]]
+21 ::  /a               /a
+```
+An illustrated axis tree:
+```
+         1
+      2      3
+    4   5  6   7
+             14 15
+```
+A noun in which every leaf is its own axis:
+```
+[[4 5] [6 14 15]]
+```
+
+## Lines 23-39: Nock operator
+
+The Nock operator is `*`.  A valid operand is always a cell
+`[subject formula]`.  The "formula", always a cell, defines
+the function to compute.  The "subject" is the input data.
+The result of the computation is the "product."
+
+### 23: "both"
+
+If the head of a formula is a cell, the formula is a cell of two
+formulas, `[b c]` and `d`.  The product with subject `a` is `[e
+f]`, where `e` is `*[a [b c]]` and `f` is `*[a d]`.
+```
+23 ::  *[a [b c] d]     [*[a b c] *[a d]]
+```
+> The "both" pattern only works because all *other* formulas are
+cells whose head is an atom.  Otherwise, it would be ambiguous.
+"both" is sometimes called "autocons", after the Lisp operator
+*cons*, which also composes cells.
+
+### 25: instruction `0`, "seek"
+
+A formula whose head is `0` has a tail `b` which is an atom.
+Its product with subject `a` is `/[b a]`, the noun at axis `b` in
+`a`.
+```
+25 ::  *[a 0 b]         /[b a]
+```
+Intuitively, if the subject is an environment or scope, "seek"
+retrieves a variable in that scope.
+
+### 26: instruction `1`, "just"
+
+A formula whose head is `1` has a tail `b` which is any noun.
+Its product with subject `a` is `b`.
+```
+26 ::  *[a 1 b]         b
+```
+Intuitively, "just" produces a constant.
+
+### 27: instruction `2`, "eval"
+
+A formula whose head is `2` has a tail which is a cell `[b c]`.
+Its product with subject `a` is `*[d e]`, where `d` is `*[a b]`
+and `e` is `*[a c]`.
+```
+27 ::  *[a 2 b c]       *[*[a b] *[a c]]
+```
+Intuitively, evaluating a computed computation is the basis of
+Turing-complete semantics in any interpreter.
+
+### 28: instruction `3`, "deep"
+
+A formula whose head is `3` has a tail which is a formula `b`.
+Its product with subject `a` is `?[c]`, where `c` is `*[a b]`.
+```
+28 ::  *[a 3 b]         ?*[a b]
+```
+Intuitively, "deep" tests if a noun is an atom or a cell.
+
+### 29: instruction `4`, "bump"
+
+A formula whose head is `4` has a tail which is a formula `b`.
+Its product with subject `a` is `+[c]`, where `c` is `*[a b]`.
+```
+29 ::  *[a 4 b]         +*[a b]
+```
+Intuitively, "bump" increments an atom.
+
+### 30: instruction `5`, "same"
+
+A formula whose head is `5` has a tail which is a formula `b`.
+Its product with subject `a` is `=[c]`, where `c` is `*[a b]`.
+```
+30 ::  *[a 5 b]         =*[a b]
+```
+Intuitively, "same" tests whether a cell is a pair of equal nouns.
+
+### 32: instruction `6`, "pick"
+
+A formula whose head is `6` has a tail which is three formulas,
+`[b c d]`.  Its product with subject `a` is `*[a c]` if `e` is
+`0`, and `*[a d]` if `e` is `1`, where `e` is `*[a b]`.  If `e`
+is neither `0` nor `1`, Nock crashes.
+```
+32 ::  *[a 6 b c d]     *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
+```
+Intuitively, "pick" means "if `b`, then `c`, else `d`",
+remembering that `0` is "yes" and `1` is "no".
+
+> Lines 32-37 are "macros", defined only by formula expansions.
+A Nock without macros would be just as powerful, but the code
+would be less compact and efficient.  A good exercise is to trace
+through the macros and see how they work.
+
+### 33: instruction `7`, "link"
+
+A formula whose head is `7` has a tail which is a cell `[b c]`,
+where `b` and `c` are formulas.  Its product with subject `a` 
+is `*[d c]`, where `d` is `*[a b]`.
+```
+33 ::  *[a 7 b c]       *[a 2 b 1 c]
+```
+Intuitively, "link" is the functional composition of `b` and `c`.
+
+### 34: instruction `8`, "push"
+
+A formula whose head is `8` has a tail which is a cell `[b c]`,
+where `b` and `c` are formulas.  Its product with subject `a` 
+is `*[[d a] c]`, where `d` is `*[a b]`.
+```
+34 ::  *[a 8 b c]       *[a 7 [[7 [0 1] b] 0 1] c]
+```
+Intuitively, "push" adds an intermediate computation to the
+subject, rather like declaring a variable.
+
+### 35: instruction `9`, "kick"
+
+A formula whose head is `9` has a tail which is a cell `[b c]`,
+where `b` is an atom and `c` is a formula.  Its product with
+subject `a` is `*[d /[b d]]`, where `d` is `*[a c]`.
+```
+35 ::  *[a 9 b c]       *[a 7 c 2 [0 1] 0 b]
+```
+Intuitively, "kick" computes an internally defined function of a
+complex noun containing both code and data, rather like calling
+a method on an object.  `b` is the axis of a formula within `d`;
+that formula is designed to use `d` as its subject.
+
+### 36, 37: instruction `10`, "hint"
+
+A formula whose head is `10` has a tail which is a cell `[e d]`,
+where `d` is a formula, and `e` is either `[b c]` or `b`, where
+`b` is an atom and `c` is a formula.  Its product with subject
+`a` is always `*[a d]`, discarding `b`; but if there is a `c`,
+`*[a c]` is computed then discarded.
+```
+36 ::  *[a 10 [b c] d]  *[a 8 c 7 [0 3] d]
+37 ::  *[a 10 b c]      *[a c]
+```
+Intuitively, "hint" discards information.  A practical
+interpreter can use this information without violating
+the purity of the interpreter.  For example, one common hint is a
+debug printf.  Any interpreter can perform any side effect as a
+consequence of a hint; all still compute the same function.
+
+> The complex form of "hint" exist because, if the hint discards
+computed information, all interpreters must complete the
+computation whether they apply the hint or not.  An interpreter
+that skips the discarded computation, even if it has no way to
+use the result, will erroneously fail to crash if the hint crashed.
+
+### 39: default
+
+Any computation not matching a previous pattern crashes.
+```
+39 ::  *a               *a
+```

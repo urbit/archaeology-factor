@@ -6,47 +6,98 @@ sort: 1
 
 # Nock
 
-Nock is a homoiconic combinator algebra, not much fancier than SKI
-combinators.  We'll have some tutorials soon.  The spec:
+> "The machine is complete not when there is nothing left to 
+add, but when there is nothing left to take away." - St. Exupery
+
+Nock, a combinator tree interpreter, is Urbit's VM.  All Urbit's
+semantics are defined in terms of Nock.  In fact, Urbit just
+means running a trivial Nock formula on an event log.
+
+Nock is Lisp without the Lisp: without lists, functions, symbols,
+variables, or macros.  Nock doesn't even define its own syntax.
+Other than these minor differences, Nock is just Lisp.
+
+Unlike most VMs, Nock is defined on a T-shirt and designed to be
+permanently frozen.  Nock uses "Kelvin versioning": version
+numbers are integer degrees Kelvin.  At 0K, no further updates
+are possible.  The current spec is Nock 4K.
+
+## Reasons to learn Nock
+
+You don't need to learn Nock to code in Hoon, let alone to use
+Urbit.  But it's fun, it's not that hard, and it certainly helps
+the rest of the system make sense.
+
+## How to learn Nock
+
+The best way to learn Nock is to implement it, in your favorite
+Earth language, from just the [spec](spec).  While there's not much
+use in a naive Nock interpreter, each independent implementation
+actually helps reassure us that the axioms are unambiguous.
+
+Some existing implementations are [here](implementations).  If
+you write a new one, you don't have to use a new language.  But
+definitely send us a pull request whether you do or don't.
+
+In case you don't have time to write an interpreter, even a small
+one, your second-best option is to follow the spec
+[walkthrough](walkthrough).  After reading the walkthrough,
+you'll be ready for the traditional Nock problem: decrement.
+Write your own, or follow along with the [tutorial](tutorial).
+
+Once you've written decrement, you understand Nock by definition.
+You can write other formulas, but there's not much point.  Since
+Hoon is not much more than a macro assembler for Nock, there is
+no real reason to generate Nock by hand instead of by Hoon.
+
+But finally, don't forget to check out Bruce Schwartz's
+awesome [illustrated Nock]().
+
+Finally, in case 
+
+
+Nock 5K, 
+We'll have some tutorials soon.  The spec, with 
+convenient line numbers:
 
 ```
-A noun is an atom or a cell.
-An atom is a natural number.
-A cell is an ordered pair of nouns.
-
-nock(a)          *a
-[a b c]          [a [b c]]
-
-?[a b]           0
-?a               1
-+[a b]           +[a b]
-+a               1 + a
-=[a a]           0
-=[a b]           1
-=a               =a
-
-/[1 a]           a
-/[2 a b]         a
-/[3 a b]         b
-/[(a + a) b]     /[2 /[a b]]
-/[(a + a + 1) b] /[3 /[a b]]
-/a               /a
-
-*[a [b c] d]     [*[a b c] *[a d]]
-
-*[a 0 b]         /[b a]
-*[a 1 b]         b
-*[a 2 b c]       *[*[a b] *[a c]]
-*[a 3 b]         ?*[a b]
-*[a 4 b]         +*[a b]
-*[a 5 b]         =*[a b]
-
-*[a 6 b c d]     *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
-*[a 7 b c]       *[a 2 b 1 c]
-*[a 8 b c]       *[a 7 [[7 [0 1] b] 0 1] c]
-*[a 9 b c]       *[a 7 c 2 [0 1] 0 b]
-*[a 10 [b c] d]  *[a 8 c 7 [0 3] d]
-*[a 10 b c]      *[a c]
-
-*a               *a
+1  ::  An atom is a natural number.
+2  ::  A noun is an atom or a cell.
+3  ::  A cell is an ordered pair of nouns.
+4  ::  
+5  ::  nock(a)          *a
+6  ::  [a b c]          [a [b c]]
+7  ::  
+8  ::  ?[a b]           0
+9  ::  ?a               1
+10 ::  +[a b]           +[a b]
+11 ::  +a               1 + a
+12 ::  =[a a]           0
+13 ::  =[a b]           1
+14 ::  =a               =a
+15 ::  
+16 ::  /[1 a]           a
+17 ::  /[2 a b]         a
+18 ::  /[3 a b]         b
+19 ::  /[(a + a) b]     /[2 /[a b]]
+20 ::  /[(a + a + 1) b] /[3 /[a b]]
+21 ::  /a               /a
+22 ::  
+23 ::  *[a [b c] d]     [*[a b c] *[a d]]
+24 ::  
+25 ::  *[a 0 b]         /[b a]
+26 ::  *[a 1 b]         b
+27 ::  *[a 2 b c]       *[*[a b] *[a c]]
+28 ::  *[a 3 b]         ?*[a b]
+29 ::  *[a 4 b]         +*[a b]
+30 ::  *[a 5 b]         =*[a b]
+31 ::  
+32 ::  *[a 6 b c d]     *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
+33 ::  *[a 7 b c]       *[a 2 b 1 c]
+34 ::  *[a 8 b c]       *[a 7 [[7 [0 1] b] 0 1] c]
+35 ::  *[a 9 b c]       *[a 7 c 2 [0 1] 0 b]
+36 ::  *[a 10 [b c] d]  *[a 8 c 7 [0 3] d]
+37 ::  *[a 10 b c]      *[a c]
+38 ::  
+39 ::  *a               *a
 ```

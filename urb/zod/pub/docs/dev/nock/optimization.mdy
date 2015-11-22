@@ -1,0 +1,222 @@
+---
+title: Optimizing Nock
+sort: 2
+next: true
+---
+
+# Optimizing Nock
+
+> You don't need to read this essay if you just want to learn
+and/or use Nock, but it should be interesting for language geeks.
+
+Nock is frozen for all practical purposes.  The change from `5K`
+to `4K` was exchanging lines 1 and 2, and renaming `c` to `d` in 
+line 37 -- both cosmetic changes.
+
+So there's not much room left for interpreter design.  But 
+there's always room for a better implementation.  And obviously 
+every implementor prefers a frozen spec.
+
+Simplicity and optimization are symbiotic.  A complex system is
+one full of complex invariants, which optimizations must be
+careful to respect.  A simple system is one with the complexity
+headroom for a lot more speed hacks.
+
+## Virtualization
+
+Before we start optimizing, we have to ask: what function are we
+optimizing?  Nock, obviously?
+
+Maybe.  Actually, there are relatives of Nock which are more
+useful, as Nock implementations, than Nock proper.
+
+For example, consider an interpreter `mock` that takes the same
+`[subject formula]` pair as Nock, but produces a cell `[~ product]`
+if the computation completes, `~` if it crashes formally (of
+course, not all infinite loops are formal crash rules).
+
+This is obviously a more useful function than plain Nock.  Should
+we go back and replace the Nock spec with it?  No, because we can
+write `mock` in Nock.  (Or, more practically, in Hoon.)  The
+result has one more interpreter layer, but it's just as precisely
+defined in pure Nock.
+
+Obviously, our optimization scheme should support an arbitrary
+depth of virtualization tiers without performance degradation.
+Just another challenge in an already challenging situation.
+
+## Optimizations
+
+We've claimed that Nock is a practical interpreter.  But this
+claim is nowhere near obvious even with a complete understanding
+of the spec.  Indeed, it seems closer to being obviously false.
+
+There are five main ways of optimizing Nock: reference counting,
+tail-call optimization, mugging, memoization, and jet propulsion.
+
+### Reference counting
+
+A common design for a noun implementation: where the word size
+of the machine is `n`, all words less than `2^(n-1)` are short
+atoms whose value is the word value.  All other words are
+indirect pointers to a record in memory.  The pointer is also
+tagged as atom/cell.
+
+It seems obvious that this or any similar design would share
+pointers when nouns are "copied."  This choice forces us to
+manage memory; the simplest approach, though not necessarily the
+most efficient, is naive reference counting.  Since Nock cannot
+create cycles, there is no need for a true tracing GC.
+
+Just because naive refcounting works perfectly doesn't mean its
+performance is anywhere near optimal.  Reference counting and
+mark-and-sweep tracing are two ends of a great continuum of
+trickery.  However, one pleasant property of refcounting is its
+predictable performance, which would be a shame to lose.
+
+### Tail-call optimization
+
+TCO is a standard problem in interpreter implementation.  Head
+recursion always consumes O(n) memory in recursion depth.  TCO
+means tail recursion consumes O(k), not O(n), memory.
+
+Fortunately, Nock can be implemented on the C stack without any
+user-level stack structures at all.  Moreover, although the most
+naive Nock in C is not TCO, getting to TCO is a matter of
+replacing a few recursive calls with `continue`.  And TCO at the
+Nock level translates intuitively into TCO in Hoon.
+
+### Mugging
+
+While there is no pointer equality semantics in Nock, "same"
+starts by comparing pointers.  Different pointers may not be
+unequal nouns, but equal pointers are always equal nouns.
+
+One form of metadata very useful in comparison and association is
+a 32-bit lazily-computed Merkle hash (currently FNV, due to be
+Murmur3) indirect noun (cell or large atom).  Equal mugs don't
+always imply equal nouns, but unequal mugs imply unequal nouns.
+Of course, the worst-case scenario for comparison is a true copy
+without shared pointers; a programmers should not create the same
+noun twice, and if this happens shouldn't compare it to itself.
+
+A mug is a formally-invisible implementation detail, but if we
+compute the same function in userspace we can easily cross the
+beams.  (See jet propulsion, below).  So it's a good idea to
+reuse the mug hash for userspace associative arrays.  With a
+pseudo-random hash key, a lot of tree balancing problems become
+much easier.
+
+### Memoization
+
+Memoization (a fancy word for "caching") is a no-brainer in any
+purely functional environment.
+
+There are two ways to cache in a Nock VM: with normal programming
+techniques in userspace, and with an optimization hint.  The
+semantics of a memoization hint are, as with all hints,
+undetectable to the programmer (except by a stopwatch).
+
+Mugs are obviously a nice thing to have when memoizing, although
+a short hash is nowhere near unique in either theory or practice.
+
+### Jet propulsion
+
+But all these tricks aside, our major problem is straight-out
+performance.  The performance of a naive Nock interpreter is not
+good.  For instance, Nock's only arithmetic operator is
+increment, so a naive decrement operation is O(n).  This is not
+in any way practical.
+
+Decrement is a function most CPUs can perform quite efficiently.
+Another such function is AES, for which many CPUs have a hardware
+assist.  Decrement is mathematically simple and probably near the
+bottom of the kernel.  AES is a specialized library function that
+may live farther up in userspace.
+
+The problem of building a "sufficiently smart interpreter" which
+can match arbitrary concrete formulas to abstract functions is a
+difficult one.  However, successful optimization does not require
+our optimized interpreter to optimize all concrete formulas
+that implement a given abstract function.  We only have to match
+the ones that are actually called.  Often, this is not a large
+set, and the developer or administrator of an interpreter can
+match it effectively.
+
+Optimizing a Nock interpreter is all about the three R's:
+registering, recognizing, and replacing hotspot formulas.
+For both functions, we need to wrap our formula in a hint that
+tells the interpreter what abstract function (such as decrement
+or AES) the enclosed formula performs.  This is "registration." 
+The interpreter must verify the registration; if it is valid,
+we have gone to "recognition."  If the interpreter happens to
+have an efficient, perfectly compatible implementation of this
+abstract function, we are all the way to "replacement."
+
+Recognition happens every time the `10` instruction is invoked
+with the registration hint, so it has to be fast or at least
+well-cached.  Initial matching requires some sort of hash against
+the formula.  For all formulas known to the developer or
+administrator of the interpreter, we can configure a native or
+even hardware-specific "jet", or custom accelerator, which
+replaces the naive Nock interpreter -- and produces the same
+result, including crash semantics.  (Recognition usually also
+involves some constraint on the subject -- in other words, the
+implementation of the abstract function is a correct Nock
+interpreter, but only for *this* formula and *those* subjects.)
+
+What's nice about this optimization mechanism is that it breaks
+the usual coupling, common in high-level interpreters, between
+the set of well-optimized functions and the set of built-in
+functions.  For example, it's reasonable to have decrement as an
+interpreter intrinsic.  It's questionable to have an AES
+instruction, and many hotspots are even higher in the stack.
+Instead of having to build intrinsic functions into the language
+standard, any mechanism that allows the implementation to connect
+an expected formula with an installed driver will optimize.  The
+optimized formula can be anywhere in kernel or user space.
+
+In short, jet optimization separates mechanism from policy, a
+classic design goal of all system software.  It's the
+programmer's responsibility to define the algorithm as a formula,
+and declare that formula as a standard abstract function.
+
+Also, one common responsibility of efficient interpreters --
+detecting hotspots -- is eliminated.  It's not the interpreter's
+job to detect hotspots.  It's the programmer's job to declare
+them (with hints).  The programmer declares the policy, binding a
+concrete formula in Nock to an abstract function; if the
+interpreter is not armed with a replacement for this function, or
+cannot recognize the equivalence of the formula, the naive
+interpreter is executed, slowly but correctly.  A hotspot which
+is registered, but not replaced, is also a perfect target for a
+JIT code generator.
+
+A jet is often confused with a "native method" or other FFI.  An
+FFI function is different in two ways: one, it is not formally
+defined in pure code; two, it is called explicitly, making the
+program's semantics formally impure; three, it can perform system
+calls, rendering it hard to sandbox.
+
+In contrast, a jet function implements an exact executable
+specification; the program's semantics do not depend on whether
+or not the optimization is active; and since the pure code has no
+side effects, the jet should have none either.
+
+How do we actually verify that a hand-written jet in C is
+actually a perfect implementation of the Nock function, at least
+for a constrained subset of subject-formula pairs?  Could we
+prove their equivalence with a theorem prover?  Conceivably,
+but a better-trodden and practical path is simply exhaustive
+testing.  If we are unsure that we have a correct equivalence, we
+run both forms and test if they're the same.  Testing is not
+verification, but it's often adequate for the target market.
+
+Finally, when we virtualize, a jet for the super-Nock interpreter
+can simply keep track of the virtualization stack logically.  It
+knows not only when it's called, but when it calls itself.  The
+same codebase, configured to turn off superpowers, is probably
+also best reused as the baseline Nock interpreter.  Piling up a
+tower of meta-interpreters costs us nothing at all.  The power
+to virtualize without losing efficiency is of course the
+essential computational ingredient of an operating system.
