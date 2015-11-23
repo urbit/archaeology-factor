@@ -16,7 +16,7 @@ Except to learn Nock.
 Indeed, it is not necessary for the Hoon programmer to learn
 Nock.  We recommend it strongly, however, because Hoon has a very
 special relationship with Nock - not unlike the relationship
-between C and assembly language.  
+between C and assembly language.
 
 Just as C is a very shallow layer over the raw CPU, Hoon is a
 very shallow layer over raw Nock - often little more than a
@@ -230,9 +230,10 @@ And it's also just intuitively right.
 	15 ::    /[(a + a) b]      /[2 /[a b]]
 	16 ::    /[(a + a + 1) b]  /[3 /[a b]]
     
-Slightly more interesting is our tree numbering.  Every noun is of course a tree.  The `/` operator - pronounced
-"slot" - imposes an address space on that tree, mapping every
-nonzero atom to a tree position.
+Slightly more interesting is our tree numbering.  Every noun is
+of course a tree.  The `/` operator - pronounced "slot" - imposes
+an address space on that tree, mapping every nonzero atom to a
+tree position.
 
 1 is the root.  The head of every node `n` is `2n`; the tail is
 `2n+1`.  Thus a simple tree:

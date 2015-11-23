@@ -9,10 +9,6 @@ next: true
 > You don't need to read this essay if you just want to learn
 and/or use Nock, but it should be interesting for language geeks.
 
-Nock is frozen for all practical purposes.  The change from `5K`
-to `4K` was exchanging lines 1 and 2, and renaming `c` to `d` in 
-line 37 -- both cosmetic changes.
-
 So there's not much room left for interpreter design.  But 
 there's always room for a better implementation.  And obviously 
 every implementor prefers a frozen spec.

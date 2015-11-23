@@ -13,6 +13,15 @@ we wrote an actual algorithm.
 
 Now we'll go a step farther and actually define a *function*.
 
+## How to use this tutorial
+
+Ideally, you've installed an Urbit planet (if you have a ticket)
+or comet (if you don't).  See the [user doc](../../../user).
+
+We recommend opening up the dojo and just typing the examples;
+you don't know a language until you know it in your fingers.
+Also, make sure you've worked through the chapters in order.
+
 ## Goal: `(decrement arg)`
 
 Of course, Hoon is a functional language and every twig defines a
@@ -87,11 +96,31 @@ To run our algorithm, we put the core that `decrement` produces
 into a new leg, `gat`.  Mutating this core to set `sam` to our
 argument `arg`, we evaluate the `run` arm.
 
-> Why do we need this `gat` leg?  Why can't we just write `=<(run
-decrement(sam arg))`?  Remember our `moo:bar.foo` problem from
-the previous chapter.  `decrement(sam arg)` mutates not the
-*product* of the decrement arm, but the core that computes it.
-There's no `sam` in that subject, so the twig won't compile.
+## Mutation is part of evaluation
+
+Why do we need this `gat` leg?  Why can't we just write `=<(run
+decrement(sam arg))`?  In our extensive empirical experience, 
+this is the most confusing conundrum in Hoon.
+
+The answer: *mutation is part of evaluation*.
+
+When we write `foo(color %pink)`, or the regular form `%=(foo
+color %pink) 42)`, we're *not* telling Hoon to compute `foo`,
+*then* set its `color` to `%pink`.  We're telling it to compute
+`foo` *with* its `color` set to `%pink`.  If `foo` is a leg,
+this is the same thing; if `foo` is an arm, it isn't.
+
+The `foo` arm is on some core which is a leg of the subject.
+Suppose the core is a chicken and `foo` produces an egg.  When we
+say `foo(color %pink)`, we're not making a chicken lay an egg,
+then dying the egg pink.  We're dying a chicken pink, then making
+it lay an egg.
+
+The chicken in `decrement` is the outermost `|%` -- that is, the
+core on which `decrement` is an arm.  The egg, the product of
+`decrement`, is the innermost `|%`.  `decrement(sam arg)` doesn't
+work because it's `chicken(sam arg)`, not `egg(sam arg)`, and 
+the chicken doesn't even have a `sam`.
 
 ## Better is worse
 

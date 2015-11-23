@@ -1,0 +1,157 @@
+---
+title: Hoon 101.5: from mold to span
+sort: 5
+next: false
+---
+# Hoon 101.5: from mold to span
+
+In [chapter 0](0-nouns), we read about nouns.  In [chapter 1](1-twigs), 
+we discovered twigs and legs.  In [chapter 2](2-syntax), we learned 
+Hoon syntax and created our first source file.  In [chapter 3](3-algorithm) 
+we wrote an actual algorithm.  And in [chapter 4](4-function) we
+went so far as to define a function.
+
+Now we'll go crazy and build some actual *data structures*.
+
+## How to use this tutorial
+
+Ideally, you've installed an Urbit planet (if you have a ticket)
+or comet (if you don't).  See the [user doc](../../../user).
+
+We recommend opening up the dojo and just typing the examples;
+you don't know a language until you know it in your fingers.
+Also, make sure you've worked through the chapters in order.
+
+## Goal: practical data structures
+
+Having built functions, our next goal is *data structures*.  We
+know this involves molds and spans, somehow.  We'd like to
+actually put our data structures in structure files our build
+system can use, as though we were really writing a programs.
+
+## Form of the solution: books and reef
+
+Our solution comes in a new subspecies of core: the *book*.
+
+If a gate is a function, a book is a library.  (Saying "library"
+instead of "book" is even more inaccurate than calling a gate a
+"function", but people will do it.)  A book is just a core which 
+pushes no payload data and can have any arms it wants.
+
+> Cores earn these labels by their payload geometry and/or
+battery constraints.  A *gate* has payload geometry `[sample
+context]` and a one-arm battery, `$`.  A *book* has no payload
+geometry or battery constraints.  A core with a payload `[sample
+context]`, but no battery constraints, is a *door*.  A core with
+no payload geometry, but a one-arm battery `$`, is a *trap*.
+
+A conventional Hoon subject, which does the job carried out by an
+scope, environment or context, is a big stack of books called a
+*reef*.  Each book's payload is the book above it.  Outer code
+can use inner code, but not of course the reverse.
+
+There are many ways to assemble a reef, but written straight
+out in one file, with the simplest possible runes, an example:
+```
+=>  zero=0
+=>  |%
+    ++  one  zero
+    --
+=>  |%
+    ++  two  +(one)
+    --
+|%
+++  tri  +(two)
+--
+```
+This produces a core noun that looks like:
+```
+[tri-battery two-battery one-battery zero=0]
+```
+
+## Reef structures
+
+When we build user-level code in practice, we use the Arvo build
+system `%ford` (which also built our generator in the last
+chapter).
+
+The user-level reef you get in `%ford` contains, in order: the
+Hoon system (the basic books we need to build the compiler, then
+the compiler, then all the standard books we don't need to build
+the compiler but should be bundled in Arvo); then, a book of
+data structures; then, a book of libraries.
+
+System-level arms are naked -- you don't write `(dec:system 42)`
+to decrement `42`, you write `(dec 42)`.  But user-level books,
+for both libraries and structures, are actually books of books.
+Your structure book is shaped like:
+```
+|%  
+++  book-one
+  |%
+  ++  one  0
+  --
+++  book-two
+  |%
+  ++  two  +(one:book-one)
+  --
+++  book-tri
+  |%
+  ++  tri  +(two:book-two)
+  --
+--
+```
+Since this chapter is about molds, we'll be installing and
+loading a structure file, containing a single structure book.
+You can even think of this as an "include file" if you like.
+
+A structure book named `/test`, in the `%sandbox` desk, goes in
+`/=sandbox=/sur/test/hoon`.  In Unix, this will be
+`tasfyn-partyv/sur/test.hoon`, as soon as you mount `%sur`:
+```
+~tasfyn-partyv:dojo/sandbox> |mount /===/sur %sur
+```
+Let's do everything properly this time.  At the top of the file, 
+put the standard Hoon block-comment header:
+```
+::                                                      ::  ::
+::::  /hoon/test/sur                                    ::::::  test structures
+  ::                                                    ::  ::
+```
+> Nothing in this comment is parsed, of course.  But its presence
+and standard form shows the reader you care about writing tight,
+office-quality Hoon.  Its absence shows the opposite -- which may
+be perfectly fine.  Why is the path backward?  Because it is.
+The stylized N at column 0 means Nock; the H at 57 means Hoon.
+
+After this header, add boilerplate and our first structure:
+```
+|%
+++  welcome  ,[%hello %world]
+--
+```
+
+## Loading a structure file
+
+At the dojo prompt, just type
+```
+~tasfyn-partyv:dojo/sandbox> =+sur /test
+```
+This puts our `test` book into the structure book that the dojo
+uses when it builds your command.
+`
+Q`
+~tasfyn-partyv:dojo/sandbox> *welcome:test
+```
+Of course, 
+
+
+
+
+
+
+
+
+
+
+
