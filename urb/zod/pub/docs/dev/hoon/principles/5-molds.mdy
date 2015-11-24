@@ -161,7 +161,7 @@ than Haskell's.  Or Java's.  Or any normal language's.
 One concept in a normal language, the *type*, becomes two quite
 categorically different concepts in Hoon, the *mold* and *span*.
 
-> This blatant complification appears to violate Occam's razor.
+> This blatant complication appears to violate Occam's razor.
 But Einstein, who was based, said: everything must be as simple
 as possible, but no simpler.  Also, once you've seen the
 difference between a mold and a span, it's hard to unsee it.
@@ -201,7 +201,7 @@ nock]`, the product set and Nock formula.
 Not only are molds and spans categorically different, they never
 even touch each other.  Molds are a macro system; spans are an
 inference engine.
- 
+
 So a mold is a constructive definition of a noun geometry,
 because it constructs a twig which applies its geometry.  Does
 this make more sense now?
@@ -241,7 +241,7 @@ gate whose product is always `[%hello %world]`:
 [%hello %world]
 ```
 
-## The mold mold
+## The `mold` mold
 
 You don't know all this syntax yet, but:
 ```
