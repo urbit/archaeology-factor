@@ -50,8 +50,8 @@ scope, environment or context, is a big stack of books called a
 *reef*.  Each book's payload is the book above it.  Outer code
 can use inner code, but not of course the reverse.
 
-There are many ways to assemble a reef, but written straight
-out in one file, with the simplest possible runes, an example:
+There are many ways to assemble a reef of books, but written
+straight out in one file, with the simplest possible runes:
 ```
 =>  zero=0
 =>  |%
@@ -118,40 +118,196 @@ put the standard Hoon block-comment header:
 ::::  /hoon/test/sur                                    ::::::  test structures
   ::                                                    ::  ::
 ```
-> Nothing in this comment is parsed, of course.  But its presence
+> Nothing in these lines is parsed, of course.  But its presence
 and standard form shows the reader you care about writing tight,
-office-quality Hoon.  Its absence shows the opposite -- which may
-be perfectly fine.  Why is the path backward?  Because it is.
-The stylized N at column 0 means Nock; the H at 57 means Hoon.
+pro-quality Hoon.  Its absence shows the opposite -- which may
+be perfectly fine.  (Why is the path backward?  Because it is.
+The stylized N at column 0 is for Nock; the H at 57 is for Hoon.
+Apparently it's called "branding" and is still done to cows.)
 
-After this header, add boilerplate and our first structure:
+After this decorative header, our file is just the book itself.
+There is no more boilerplate.
 ```
 |%
 ++  welcome  ,[%hello %world]
 --
 ```
+> Hoon can become quite gnarly, but only if you're doing
+something wrong.  If your Hoon gets gnarly, you are either
+choosing the wrong solution or solving the wrong problem.
+Normal code should be quite pretty.
 
 ## Loading a structure file
 
-At the dojo prompt, just type
+We've created a tiny, tasteful little structure book.  Let's fire
+it up.  At the dojo prompt:
 ```
 ~tasfyn-partyv:dojo/sandbox> =+sur /test
 ```
 This puts our `test` book into the structure book that the dojo
-uses when it builds your command.
-`
-Q`
-~tasfyn-partyv:dojo/sandbox> *welcome:test
+uses when it builds each and every command line.
 ```
-Of course, 
+~tasfyn-partyv:dojo/sandbox> *welcome:test
+  [%hello %world]
+```
+You've just built and used your first mold.
 
+## Types in Hoon: span and mold revisited
 
+While Hoon is a higher-order typed functional language like
+Haskell, its type system works on very different principles
+than Haskell's.  Or Java's.  Or any normal language's.
 
+One concept in a normal language, the *type*, becomes two quite
+categorically different concepts in Hoon, the *mold* and *span*.
 
+> This blatant complification appears to violate Occam's razor.
+But Einstein, who was based, said: everything must be as simple
+as possible, but no simpler.  Also, once you've seen the
+difference between a mold and a span, it's hard to unsee it.
 
+Spans we've already done a lot of work with.  What is a span?  We
+know the answer now: a *semantically annotated set of nouns*.
 
+Whereas a mold is a *constructive definition of noun geometry*.
+It's easy to see how in most languages, these are synonyms.
 
+## Intuitive molds
 
+"A mold is a constructive definition of a noun geometry."  Let's
+make this sentence make sense.
 
+A mold, like a span, defines a noun geometry.  The mold expresses
+its semantics by expanding itself to a twig that, applied to an
+arbitrary subject, produces a noun within the geometry.
+
+The molded twig is a *normalizer*.  If its subject is within its
+range, it produces its own subject.  In math notation, `f(f(x))
+== f(x)`.
+
+For example, consider one simple shape: a pair of atoms.  A
+normalizer for this shape is:
+```
+?:(.?(+1) [0 0] [?:(.?(+2) 0 +2) ?:(.?(+3) 0 +3)])
+```
+If the subject is a pair of atoms, the product is the subject.
+Otherwise, we apply `0` as necessary to produce a pair of atoms.
+(A normalizer can also crash on bad input instead of fixing it.)
+
+So molds construct twigs.  Then twig compilation maps `[span
+twig]`, the subject set and the source expression, to `[span
+nock]`, the product set and Nock formula.
+
+Not only are molds and spans categorically different, they never
+even touch each other.  Molds are a macro system; spans are an
+inference engine.
+ 
+So a mold is a constructive definition of a noun geometry,
+because it constructs a twig which applies its geometry.  Does
+this make more sense now?
+
+## Deeper into molds
+
+Molds are a beautiful thing in principle.  But we have to admit
+that mold syntax and naming are the gnarliest corners of Hoon.
+(Of course, that's only because the rest is so chic.) 
+
+The previous section is a correct, but abstract, definition of a
+mold.  The truth about molds is that we use them to generate two
+more specific twigs: the `bunt` and the `clam`.
+
+> We apologize again for these atrocious names.  In particular,
+nothing smells worse than a rotten clam.
+
+The `bunt` of a mold is a twig that produces a default noun
+(hopefully, but not always, constant) in the mold geometry.
+
+The `clam` of a mold is a twig that produces a gate, whose sample
+is any noun, and whose product is in the mold geometry.
+
+In our example above, we bunted with the syntax `*welcome:test`.
+(Regular form: `$*($^(welcome:test))`.)  This twig produced the
+only noun, `[%hello %world]`, in the geometry.
+
+But `++welcome` itself is defined as `,[%hello %world]`.
+(Regular form: `$,($:(%hello %world))`.)  This twig produces a
+gate whose product is always `[%hello %world]`:
+```
+~tasfyn-partyv:dojo/sandbox> (welcome:test ~)
+[%hello %world]
+~tasfyn-partyv:dojo/sandbox> (welcome:test %hello %world)
+[%hello %world]
+~tasfyn-partyv:dojo/sandbox> (welcome:test %world %hello ~)
+[%hello %world]
+```
+
+## The mold mold
+
+You don't know all this syntax yet, but:
+```
+++  mold  $&  [p=mold q=mold]                     ::  ordered pair
+          $%  [%axil p=base]                      ::  base type
+              [%bark p=term q=mold]               ::  name
+              [%bush p=mold q=mold]               ::  pair/tag
+              [%fern p=[i=mold t=(list mold)]]    ::  plain selection
+              [%herb p=twig]                      ::  gate
+              [%kelp p=[i=line t=(list line)]]    ::  tag selection
+              [%leaf p=term q=@]                  ::  constant atom
+              [%reed p=mold q=mold]               ::  atom/cell
+              [%weed p=twig]                      ::  example
+          ==                                      ::
+```
+Although we use normal Hoon rune syntax to parse molds, we name
+the mold stems not by the rune names `%tsls` style, but rather
+with this strange herbaceous motif.
+
+> Some think the only reason molds have wordy stems is to
+prove what a bad idea it'd be to use this style for twigs.
+
+## Twigs and molds: a complicated relationship
+
+Alas, we've misled you a little in our definition of a twig.
+
+You may have thought twigs were a homogeneously recursive tree.
+Different stems may have different fanout in their bulbs, like
+the difference between `[%tsls p=twig q=twig]` and `[%cltr
+p=(list twig)]`, but at least everything repeated was a twig.
+
+Not so.  Some twigs contain molds, like `[%wtts p=mold q=twig]`.
+Some molds contain twigs, like `[%weed p=twig]`.  It's a regular
+rainforest out there.  In this jungle, Hoon's syntax has to be
+optimized for prettiness rather than clarity, a mistake we don't
+like to make.  Some confusion is the inevitable consequence.
+
+For example, look at `,[%hello %world]`.  This is a twig, whose
+simplest regular form is `$,([%hello %world])`.  `$,` is a twig
+`[%bccm p=mold]`; it produces the clam of `p`.
+
+So in this context, `[%hello %world]` is a mold.  It's an
+irregular form of the mold `$:(%hello %world)`, which parses to
+`[[%leaf %tas %hello] [%leaf %tas %world]]`.
+
+This same syntax, `[%hello %world]`, is perfectly good *twig*
+syntax.  So it's easy to write `[%hello %world]` instead of
+`,[%hello %world]`.  They're both twigs, but *different* twigs.
+
+When we write `*welcome:test`, or formally `$*(welcome:test)`, 
+again we write a twig: `[%bctr p=mold]`.  So `welcome:test` is a
+mold?  We thought it was a twig?  It's both, and this time it
+means the *same* thing.
+
+When you use a twig where a mold belongs, the parser assumes your
+twig is a normalizing gate.  It automatically inserts the `%herb`
+stem, `$^`.  Again, the full regular syntax: `$*($^(welcome:test))`.
+
+Of course, `welcome:test` *is* a normalizing gate.  Because the
+`welcome` arm produces a clam `$,`, which as we just saw makes
+the mold `[%hello %world]` into a normalizing gate.  So it's all
+good, really.  But it's pretty confusing for two lines of code!
+
+It's easy to focus too much on these conundrums and get even more
+confused.  But molds are the most confusing aspect of Hoon, and
+the twig-mold relationship is the most confusing aspect of molds.
+And honestly, it's really not that difficult.
 
 
