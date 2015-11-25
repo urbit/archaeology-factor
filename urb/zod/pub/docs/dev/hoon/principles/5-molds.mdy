@@ -31,14 +31,10 @@ system can use, as though we were really writing a programs.
 
 ## Form of the solution: books and reef
 
-Our solution comes in a new subspecies of core: the *book*.
+Our solution comes in a new subspecies of core: the *book*.  If a
+gate is a sort of function, a book is a sort of library.  In the 
 
-If a gate is a function, a book is a library.  (Saying "library"
-instead of "book" is even more inaccurate than calling a gate a
-"function", but people will do it.)  A book is just a core which 
-pushes no payload data and can have any arms it wants.
-
-> Cores earn these labels by their payload geometry and/or
+> Cores earn their labels by their payload geometry and/or
 battery constraints.  A *gate* has payload geometry `[sample
 context]` and a one-arm battery, `$`.  A *book* has no payload
 geometry or battery constraints.  A core with a payload `[sample
@@ -64,28 +60,33 @@ straight out in one file, with the simplest possible runes:
 ++  tri  +(two)
 --
 ```
-This produces a core noun that looks like:
+This produces a reef that looks like:
 ```
 [tri-battery two-battery one-battery zero=0]
 ```
+Obviously, from the third book you can use arms in all three
+books.  In the second book you can use the second and first.
+In the first you can only use the first.
 
-## Reef structures
+## Reef structure and meta-books
 
 When we build user-level code in practice, we use the Arvo build
 system `%ford` (which also built our generator in the last
 chapter).
 
 The user-level reef you get in `%ford` contains, in order: the
-Hoon system (the basic books we need to build the compiler, then
-the compiler, then all the standard books we don't need to build
-the compiler but should be bundled in Arvo); then, a book of
-data structures; then, a book of libraries.
+Hoon system (the books that we need to build the compiler; then
+the compiler; then the books that we don't need to build the
+compiler, but everyone should still have); then, a meta-book of
+user-level data structures; then, a meta-book of user-level
+algorithms.
 
-System-level arms are naked -- you don't write `(dec:system 42)`
-to decrement `42`, you write `(dec 42)`.  But user-level books,
-for both libraries and structures, are actually books of books.
-Your structure book is shaped like:
-```
+A meta-book is just a book whose arms produce books.  System arms
+are naked.  You don't write `(dec:system 42)` to decrement `42`,
+you write `(dec 42)`.  But user-level books, for both libraries
+and structures, are actually books of books.  Your user-level
+structure book is shaped like: 
+``` 
 |%  
 ++  book-one
   |%
@@ -118,12 +119,11 @@ put the standard Hoon block-comment header:
 ::::  /hoon/test/sur                                    ::::::  test structures
   ::                                                    ::  ::
 ```
-> Nothing in these lines is parsed, of course.  But its presence
+> Nothing in this header is parsed, of course.  But its presence
 and standard form shows the reader you care about writing tight,
 pro-quality Hoon.  Its absence shows the opposite -- which may
 be perfectly fine.  (Why is the path backward?  Because it is.
-The stylized N at column 0 is for Nock; the H at 57 is for Hoon.
-Apparently it's called "branding" and is still done to cows.)
+The stylized N at column 0 is for Nock; the H at 57 for Hoon.)
 
 After this decorative header, our file is just the book itself.
 There is no more boilerplate.
@@ -132,10 +132,6 @@ There is no more boilerplate.
 ++  welcome  ,[%hello %world]
 --
 ```
-> Hoon can become quite gnarly, but only if you're doing
-something wrong.  If your Hoon gets gnarly, you are either
-choosing the wrong solution or solving the wrong problem.
-Normal code should be quite pretty.
 
 ## Loading a structure file
 
@@ -150,7 +146,8 @@ uses when it builds each and every command line.
 ~tasfyn-partyv:dojo/sandbox> *welcome:test
   [%hello %world]
 ```
-You've just built and used your first mold.
+You've just built and used your first mold.  But wait, what are
+we doing here?
 
 ## Types in Hoon: span and mold revisited
 
@@ -159,18 +156,15 @@ Haskell, its type system works on very different principles
 than Haskell's.  Or Java's.  Or any normal language's.
 
 One concept in a normal language, the *type*, becomes two quite
-categorically different concepts in Hoon, the *mold* and *span*.
-
-> This blatant complication appears to violate Occam's razor.
-But Einstein, who was based, said: everything must be as simple
-as possible, but no simpler.  Also, once you've seen the
-difference between a mold and a span, it's hard to unsee it.
+different concepts in Hoon, the *mold* and *span*.
 
 Spans we've already done a lot of work with.  What is a span?  We
 know the answer now: a *semantically annotated set of nouns*.
 
 Whereas a mold is a *constructive definition of noun geometry*.
-It's easy to see how in most languages, these are synonyms.
+It's easy to see how in most languages, these are synonyms.  But
+in Hoon, a mold is a way to make a noun; a span is a way to
+describe the noun you've made.
 
 ## Intuitive molds
 
@@ -179,11 +173,11 @@ make this sentence make sense.
 
 A mold, like a span, defines a noun geometry.  The mold expresses
 its semantics by expanding itself to a twig that, applied to an
-arbitrary subject, produces a noun within the geometry.
+arbitrary subject, produces a correctly-shaped noun.
 
 The molded twig is a *normalizer*.  If its subject is within its
 range, it produces its own subject.  In math notation, `f(f(x))
-== f(x)`.
+== f(x)`.  If its subject is out of range, it makes a default.
 
 For example, consider one simple shape: a pair of atoms.  A
 normalizer for this shape is:
@@ -191,8 +185,7 @@ normalizer for this shape is:
 ?:(.?(+1) [0 0] [?:(.?(+2) 0 +2) ?:(.?(+3) 0 +3)])
 ```
 If the subject is a pair of atoms, the product is the subject.
-Otherwise, we apply `0` as necessary to produce a pair of atoms.
-(A normalizer can also crash on bad input instead of fixing it.)
+Otherwise, we default as necessary to produce a pair of atoms.
 
 So molds construct twigs.  Then twig compilation maps `[span
 twig]`, the subject set and the source expression, to `[span
@@ -206,11 +199,63 @@ So a mold is a constructive definition of a noun geometry,
 because it constructs a twig which applies its geometry.  Does
 this make more sense now?
 
-## Deeper into molds
+## Molds as twigs
+
+Is a mold a twig?  If not, how do we put it in a Hoon file?
+
+A mold is not a twig, though it uses twig-like syntax.  We wrap
+it in a twig in one of two ways: a `bunt` or a `clam`.
+
+The `bunt` of a mold is a twig that produces a default noun
+(hopefully, but not always, constant) in the mold geometry.
+The regular bunt form is `$*(mold)`; irregular form, `*mold`.
+
+The `clam` of a mold is a twig that produces a gate, whose sample
+is any noun, and whose product is in the mold geometry.  The
+regular clam form is `$,(mold)`; irregular form, `,mold`.
+
+It's easy to get from normalizer to bunt: just normalize nil,
+`~`.  It's easy to get from normalizer to clam: just make a gate
+whose sample is `*`, any noun, and normalize the sample.
+
+## The mold for molds
+
+Obviously, this uses mold syntax that we haven't explained yet,
+but here's 
+Now that you're thoroughly frightened, let's go through our molds
+one by one and 
+
+```
+++  base  ?([%atom p=odor] %noun %cell %bean %null)     ::  axils, @ * ^ ? ~
+++  line  ,[p=[%leaf p=@tas q=@] q=tile]          ::  %kelp case
+++  mold  $&  [p=mold q=mold]                     ::  ordered pair
+          $%  [%axil p=base]                      ::  base type
+              [%bark p=term q=mold]               ::  name
+              [%bush p=mold q=mold]               ::  pair/tag
+              [%fern p=[i=mold t=(list mold)]]    ::  plain selection
+              [%herb p=twig]                      ::  gate
+              [%kelp p=[i=line t=(list line)]]    ::  tag selection
+              [%leaf p=term q=@]                  ::  constant atom
+              [%reed p=mold q=mold]               ::  atom/cell
+              [%weed p=twig]                      ::  example
+          ==                                      ::
+```
+Although we use normal Hoon rune syntax to parse molds, we name
+the mold stems with this herbal theme, not condensed rune names.
+
+## Understanding our example
+
+Currently in `sur/test/hoon` we have:
+```
+|%
+++  welcome  ,[%hello %world]
+--
+```
+
 
 Molds are a beautiful thing in principle.  But we have to admit
 that mold syntax and naming are the gnarliest corners of Hoon.
-(Of course, that's only because the rest is so chic.) 
+(Of course, that's only because the rest is so elegant.) 
 
 The previous section is a correct, but abstract, definition of a
 mold.  The truth about molds is that we use them to generate two
@@ -218,12 +263,6 @@ more specific twigs: the `bunt` and the `clam`.
 
 > We apologize again for these atrocious names.  In particular,
 nothing smells worse than a rotten clam.
-
-The `bunt` of a mold is a twig that produces a default noun
-(hopefully, but not always, constant) in the mold geometry.
-
-The `clam` of a mold is a twig that produces a gate, whose sample
-is any noun, and whose product is in the mold geometry.
 
 In our example above, we bunted with the syntax `*welcome:test`.
 (Regular form: `$*($^(welcome:test))`.)  This twig produced the
@@ -240,29 +279,6 @@ gate whose product is always `[%hello %world]`:
 ~tasfyn-partyv:dojo/sandbox> (welcome:test %world %hello ~)
 [%hello %world]
 ```
-
-## The `mold` mold
-
-You don't know all this syntax yet, but:
-```
-++  mold  $&  [p=mold q=mold]                     ::  ordered pair
-          $%  [%axil p=base]                      ::  base type
-              [%bark p=term q=mold]               ::  name
-              [%bush p=mold q=mold]               ::  pair/tag
-              [%fern p=[i=mold t=(list mold)]]    ::  plain selection
-              [%herb p=twig]                      ::  gate
-              [%kelp p=[i=line t=(list line)]]    ::  tag selection
-              [%leaf p=term q=@]                  ::  constant atom
-              [%reed p=mold q=mold]               ::  atom/cell
-              [%weed p=twig]                      ::  example
-          ==                                      ::
-```
-Although we use normal Hoon rune syntax to parse molds, we name
-the mold stems not by the rune names `%tsls` style, but rather
-with this strange herbaceous motif.
-
-> Some think the only reason molds have wordy stems is to
-prove what a bad idea it'd be to use this style for twigs.
 
 ---------------------UNMERGED-----------------
 
@@ -326,6 +342,7 @@ In a mold pair, the pronoun *splits in half*.  The head mold
 rectifies the pronoun's head; the tail mold rectifies its tail.
 If the pronoun is an atom, it's defaulted to `[0 0]`.
 
+<<<<<<< HEAD
 The regular syntax for a mold tuple is `$:(a b c)`, but the
 irregular form is `[a b c]`, matching the twig syntax.  (The
 regular form of a twig tuple is `:*(a b c)`.)
