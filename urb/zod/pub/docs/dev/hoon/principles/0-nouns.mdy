@@ -224,6 +224,11 @@ Urbit (and German) way of writing the English number `7,303,014`,
 or the Urbit hex number `0x6f.6f66`, or the string "foo" as an
 unsigned integer with least-significant byte first.
 
+What's `%tas`, `%ux`, `%ud`, etc?  This symbol is an *aura* - a
+weakly-typed label for an atom's semantics, format, and/or
+presentation.  Again, `7.303.014` is the same atom as `%foo`,
+but presented as `%ud` (unsigned decimal), not `%tas` (symbol).
+
 A `%cube` span is a constant -- a set of one noun, the atom
 `7.303.014`.  But we still need to know how to print that noun.
 In this case, it's an `[%atom %tas]`, ie, a text symbol.

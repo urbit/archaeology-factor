@@ -264,50 +264,156 @@ with this strange herbaceous motif.
 > Some think the only reason molds have wordy stems is to
 prove what a bad idea it'd be to use this style for twigs.
 
-## Twigs and molds: a complicated relationship
-
-Alas, we've misled you a little in our definition of a twig.
-
-You may have thought twigs were a homogeneously recursive tree.
-Different stems may have different fanout in their bulbs, like
-the difference between `[%tsls p=twig q=twig]` and `[%cltr
-p=(list twig)]`, but at least everything repeated was a twig.
-
-Not so.  Some twigs contain molds, like `[%wtts p=mold q=twig]`.
-Some molds contain twigs, like `[%weed p=twig]`.  It's a regular
-rainforest out there.  In this jungle, Hoon's syntax has to be
-optimized for prettiness rather than clarity, a mistake we don't
-like to make.  Some confusion is the inevitable consequence.
-
-For example, look at `,[%hello %world]`.  This is a twig, whose
-simplest regular form is `$,([%hello %world])`.  `$,` is a twig
-`[%bccm p=mold]`; it produces the clam of `p`.
-
-So in this context, `[%hello %world]` is a mold.  It's an
-irregular form of the mold `$:(%hello %world)`, which parses to
-`[[%leaf %tas %hello] [%leaf %tas %world]]`.
-
-This same syntax, `[%hello %world]`, is perfectly good *twig*
-syntax.  So it's easy to write `[%hello %world]` instead of
-`,[%hello %world]`.  They're both twigs, but *different* twigs.
-
-When we write `*welcome:test`, or formally `$*(welcome:test)`, 
-again we write a twig: `[%bctr p=mold]`.  So `welcome:test` is a
-mold?  We thought it was a twig?  It's both, and this time it
-means the *same* thing.
-
-When you use a twig where a mold belongs, the parser assumes your
-twig is a normalizing gate.  It automatically inserts the `%herb`
-stem, `$^`.  Again, the full regular syntax: `$*($^(welcome:test))`.
-
-Of course, `welcome:test` *is* a normalizing gate.  Because the
-`welcome` arm produces a clam `$,`, which as we just saw makes
-the mold `[%hello %world]` into a normalizing gate.  So it's all
-good, really.  But it's pretty confusing for two lines of code!
-
-It's easy to focus too much on these conundrums and get even more
-confused.  But molds are the most confusing aspect of Hoon, and
-the twig-mold relationship is the most confusing aspect of molds.
-And honestly, it's really not that difficult.
+---------------------UNMERGED-----------------
 
 
+The mold's raw input is called its *pronoun*.  A twig computes
+its product from its subject.  A mold rectifies its pronoun
+(an arbitrary noun) into the *surnoun* (a well-shaped noun).
+
+Here is the mold of `mold`.  We don't know all this syntax yet.
+Let's try not to depend on features before we've defined them.
+```
+++  mold  $&  [p=mold q=mold]                     ::  ordered pair
+          $%  [%axil p=base]                      ::  base type
+              [%bark p=term q=mold]               ::  name
+              [%bush p=mold q=mold]               ::  pair/tag
+              [%cane p=mold q=mold]               ::
+              [%fern p=[i=mold t=(list mold)]]    ::  plain selection
+              [%herb p=twig]                      ::  gate
+              [%kelp p=[i=line t=(list line)]]    ::  tag selection
+              [%leaf p=@tas q=@]                  ::  constant atom
+              [%reed p=mold q=mold]               ::  atom/cell
+              [%weed p=twig]                      ::  example
+          ==                                      ::
+```
+
+
+
+### `[%leaf p=@tas q=@]`: an atomic constant
+
+A `%leaf` mold, like `%hello`, builds a constant atom.
+`q` is the atom; `p` is the aura.
+
+> Wait: isn't `%hello` also a twig?  Yes.  Since the parser knows
+when it's parsing a twig or a mold, twig and mold syntax freely
+overlaps.  When these syntaxes match, we try to make them mean
+the same *abstract* concept, but they're still different things.
+
+We already have a leaf in our test book, but let's add `%hello`
+to it:
+```
+|%
+++  hello    ,%hello
+++  welcome  ,[hello %world]
+--
+```
+Now we can use `hello` the way we used `welcome`:
+```
+~tasfyn-partyv:dojo/sandbox> *hello
+  %hello
+~tasfyn-partyv:dojo/sandbox> (hello 42)
+  %hello
+```
+### `[p=mold q=mold]`: a parallel pair
+
+Molds use the same geometric trick as twigs and Nock formulas:
+binding pair semantics to a stemless bulb.  But mold and twig
+pair semantics are very different.
+
+In a twig pair, of course, head and tail use the same subject.
+In a mold pair, the pronoun *splits in half*.  The head mold
+rectifies the pronoun's head; the tail mold rectifies its tail.
+If the pronoun is an atom, it's defaulted to `[0 0]`.
+
+The regular syntax for a mold tuple is `$:(a b c)`, but the
+irregular form is `[a b c]`, matching the twig syntax.  (The
+regular form of a twig tuple is `:*(a b c)`.)
+
+Let's modify our test book to use only regular forms:
+```
+|%
+++  hello    $,  %hello
+++  welcome  $,  $:(hello %world)
+--
+```
+### `[%herb p=twig]`: gate as mold
+
+Our test book is actually *almost* regular.  For complete
+regularity, we need to use a very rare rune, `$^`:
+```
+|%
+++  hello    $,  %hello
+++  welcome  $,  $:($^(hello) %world)
+--
+```
+The irregular form of `$^(hello)` is just `hello`.  When Hoon is
+trying to parse a mold and fails, it tries to parse a twig
+instead.  If that succeeds, it's wrapped in an invisible `$^` as
+an `%herb`.  We only need to type the `$^` if our twig's syntax
+actually parses as a mold, which is basically never.
+
+How does an `%herb` work?  The twig `p` is a gate (a function).  To
+produce the surnoun, we slam (call) `p` on the pronoun.
+
+> When we use a twig as a mold, in both `%herb` and `%weed`,
+what's the subject of the twig?  The same as the subject of the
+twig rune, eg `$*` or `$,`, that we use the mold in.  In other
+words, molds remain hygienic in the Lisp macro sense.
+
+As we see, the relationship between twigs and molds can get quite
+intricate, even when the code looks simple.  Let's expand our
+test file to put arms, twigs and molds on separate lines:
+```
+|%                            ::  twig
+++  hello                     ::  arm
+             $,               ::  twig
+               %hello         ::  mold
+++  welcome                   ::  arm
+             $,               ::  twig
+               $:             ::  mold
+                 $^           ::  mold
+                   hello      ::  twig
+                 %world       ::  mold
+               ==
+--
+```
+### `[%weed p=twig]`
+
+`%weed` also uses a twig `p` as a mold.  But `p` in an `%herb` is
+a rectifier; `p` in a twig is just an example.  To produce the
+surnoun, we just apply `p`, ignoring the pronoun.
+
+Just to be contrary, let's build `%world` as a weed.  The regular
+syntax is `$_(%world)`; the irregular form is `_%world`.  We'll
+add it to our regular test book:
+```
+|%                            ::  twig
+++  hello                     ::  arm
+             $,               ::  twig
+               %hello         ::  mold
+++  welcome                   ::  arm
+             $,               ::  twig
+               $:             ::  mold
+                 $^           ::  mold
+                   hello      ::  twig
+                 $_           ::  mold
+                   world      ::  twig
+               ==             :: 
+++  world                     ::  arm
+            %world            ::  twig
+--
+```
+Staring at this illustration for a few minutes might leave you
+with a little more grounding on the twig-mold relationship.  The
+same code, back in irregular form:
+```
+|%
+++  hello    ,%hello
+++  welcome  ,[hello _world]
+++  world    %world
+--
+```
+As the name implies, `%weed` is generally little disreputale.
+
+###
