@@ -1,4 +1,4 @@
-::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+!:::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Preface                               ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ?>  ?=(@ .)                                             ::  atom subject
@@ -81,7 +81,10 @@
           ?@  +.b  ~                                    ::
           :-  ~                                         ::
           u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]] ::
-++  limb  $|(term $%([%& p=axis] [%| p=@ud q=term]))    ::
+++  limb  $|  term                                      ::  path component
+          $%  [%& p=axis]                               ::  by axis
+              [%| p=@ud q=(unit term)]                  ::  by name
+          ==                                            ::
 ++  line  ,[p=[%leaf p=odor q=@] q=tile]                ::  %kelp case
 ++  list  |*  a=_,*                                     ::  null-term list
           $|(~ [i=a t=(list a)])                        ::
@@ -205,7 +208,6 @@
             [%brkt p=twig q=(map term foot)]            ::  %gold book
             [%brhp p=twig]                              ::  kick dry %gold trap
             [%brls p=tile q=twig]                       ::  dry %iron gate
-            [%brpt p=tile q=tile r=twig]                ::  XX not used
             [%brtr p=tile q=twig]                       ::  vulcan. wet gate
             [%brts p=tile q=twig]                       ::  dry %gold gate
             [%brwt p=twig]                              ::  dry %lead trap
@@ -274,16 +276,12 @@
           ::                                            ::::::  compositions
             [%tsbr p=tile q=twig]                       ::  push bunt: =+(_p q)
             [%tscl p=tram q=twig]                       ::  p changes, then q
-            [%tscn p=twig q=twig]                       ::  XX not used
             [%tsdt p=wing q=twig r=twig]                ::  r with p set to q
-            [%tsfs p=twig q=twig]                       ::  XX not used
             [%tsgl p=twig q=twig]                       ::  =>(q p)
             [%tshp p=twig q=twig]                       ::  flip push: =+(q p)
             [%tsgr p=twig q=twig]                       ::  use p as .. of q
             [%tskt p=twig q=twig r=twig s=twig]         ::  state machine wing
             [%tsls p=twig q=twig]                       ::  push p on .. of q
-            [%tspm p=tile q=twig]                       ::  XX not used
-            [%tspt p=tile q=twig]                       ::  XX not used
             [%tstr p=term q=wing r=twig]                ::  make a %bull/alias
             [%tssg p=tusk]                              ::  compose twig list
           ::                                            ::::::  conditionals
@@ -6572,7 +6570,7 @@
 ::
 ++  slab
   |=  [cog=@tas typ=type]
-  !=(~ q:(~(fino ut typ) 0 %free cog))
+  !=(~ q:(~(fino ut typ) 0 %free `cog))
 ::
 ++  slob                                                ::  superficial arm
   |=  [cog=@tas typ=type]
@@ -7415,7 +7413,7 @@
     |-  ^-  type
     ?~  peh
       ?:(pol (fuse ref) (crop ref))
-    =>  .(i.peh ?^(i.peh i.peh [%| p=0 q=i.peh]))
+    =>  .(i.peh ?^(i.peh i.peh [%| p=0 q=`i.peh]))
     =+  ^=  poz  ^-  post
         ?-  -.i.peh
           &  [p.i.peh %& (peek %both p.i.peh)]
@@ -7426,7 +7424,8 @@
       ?-  -.q.poz
         0  ?-  -.i.peh
               &  ^$(peh t.peh)
-              |  (face q.i.peh ^$(peh t.peh, sut p.q.poz))
+              |  =+  ^$(peh t.peh, sut p.q.poz)
+                 ?~(q.i.peh - (face +.q.i.peh -))
            ==
         1  ^$(peh t.peh)
         2  %+  bull
@@ -7868,12 +7867,12 @@
     [[%leaf (mesc (trip paz))] duck ~]
   ::
   ++  fino
-    |=  [dep=@ud way=?(%read %rite %both %free) cog=term]
+    |=  [dep=@ud way=?(%read %rite %both %free) cug=(unit term)]
     =+  gil=*(set type)
     |-  ^-  [p=@ud q=(unit post)]
     ?+    sut  [dep ~]
         [%bull *]
-      ?.  =(cog p.p.sut)
+      ?.  &(?=(^ cug) =(u.cug p.p.sut))
         $(sut q.sut)
       ?.  ?=(0 dep)
         $(dep (dec dep), sut q.sut)
@@ -7889,7 +7888,7 @@
       [p.taf ~ (peg 2 p.u.q.taf) q.u.q.taf]
     ::
         [%core *]
-      =+  zem=(look cog q.r.q.sut)
+      =+  zem=?~(cug ~ (look u.cug q.r.q.sut))
       =>  ^+(. ?:(|(=(~ zem) =(0 dep)) . .(dep (dec dep), zem ~)))
       ?^  zem
         [dep ~ 1 [%1 (peg 2 p.u.zem) [[sut(p.q %gold) q.u.zem] ~]]]
@@ -7904,7 +7903,7 @@
       $(sut repo)
     ::
         [%face *]
-      ?:  =(cog p.sut)
+      ?:  |(?=(~ cug) =(u.cug p.sut))
         ?.  ?=(0 dep)
           [(dec dep) ~]
         [0 ~ 1 %0 q.sut]
@@ -7952,21 +7951,21 @@
   ::
   ++  fink
     ~/  %fink
-    |=  [dep=@ud way=?(%read %rite %both %free) cog=term]
+    |=  [dep=@ud way=?(%read %rite %both %free) cug=(unit term)]
     ^-  port
     ::  ~_  (dunk 'type')
-    ~_  (show [%c 'find-limb'] ?:(=(%$ cog) '$' [%a cog]))
-    =+  hoq=(fino dep way cog)
+    ~_  (show [%c 'find-limb'] ?~(cug '*' ?:(=(%$ u.cug) '$' [%a u.cug])))
+    =+  hoq=(fino dep way cug)
     ?~  q.hoq
       ~|(%find-none !!)
     (flee u.q.hoq)
   ::
   ++  finq
-    |=  [dep=@ud way=?(%read %rite %both %free) cog=term]
+    |=  [dep=@ud way=?(%read %rite %both %free) cug=(unit term)]
     ^-  post
     ::  ~_  (dunk 'type')
-    ~_  (show [%c 'find-limb'] ?:(=(%$ cog) '$' [%a cog]))
-    =+  hoq=(fino dep way cog)
+    ~_  (show [%c 'find-limb'] ?~(cug '*' ?:(=(%$ u.cug) '$' [%a u.cug])))
+    =+  hoq=(fino dep way cug)
     ?~  q.hoq
       ~|(%find-none !!)
     u.q.hoq
@@ -8167,22 +8166,24 @@
   ::
   ++  heal
     ~/  %heal
-    |=  [qog=(unit term) axe=axis ref=type]
+    |=  [qug=(unit (unit term)) axe=axis ref=type]
     ^-  type
     ?:  =(1 axe)
-      ?~  qog
+      ?~  qug
         ref
       |-  ^-  type
       ?-    sut
           [%bull *]   ~&  %heal-bull
-                      ?:  =(u.qog p.p.sut)
+                      ?:  &(?=(^ u.qug) =(u.u.qug p.p.sut))
                         ref
                       (busk(sut $(sut q.sut)) p.p.sut q.p.sut)
           [%core *]   ref
-          [%face *]   ?.(=(u.qog p.sut) ~|('heal-name' !!) (face p.sut ref))
+          [%face *]   ?.  |(?=(~ u.qug) =(u.u.qug p.sut))
+                        ~|('heal-name' !!) 
+                      (face p.sut ref)
           [%fork *]   (fork $(sut p.sut) $(sut q.sut))
           [%hold *]   $(sut repo)
-          *           ~|([%name u.qog] ~|('heal-name' !!))
+          *           ~|([%name u.qug] ~|('heal-name' !!))
       ==
     =+  [now=(cap axe) lat=(mas axe)]
     =+  gil=*(set type)
@@ -8853,7 +8854,7 @@
     ^-  port
     ?~  hyp
       [1 %& sut]
-    =>  .(i.hyp ?^(i.hyp i.hyp [%| p=0 q=i.hyp]))
+    =>  .(i.hyp ?^(i.hyp i.hyp [%| p=0 q=`i.hyp]))
     =+  zar=$(hyp t.hyp)
     =+  ^=  syp
         ?-    -.q.zar
@@ -8896,7 +8897,7 @@
     |-  ^-  [p=axis q=type]
     ?~  peh
       [axe mur]
-    =>  .(i.peh ?^(i.peh i.peh [%| p=0 q=i.peh]))
+    =>  .(i.peh ?^(i.peh i.peh [%| p=0 q=`i.peh]))
     ?-    i.peh
         [& *]
       =+  ^=  sap  ^-  (unit term)
@@ -8913,11 +8914,11 @@
         =+  hoc=(peg axe p.dob)
         =+  guh=$(peh t.peh, sut s.p.q.dob, axe (peg hoc r.p.q.dob))
         =+  zig=$(peh q.p.q.dob, sut q.q.dob, mur q.guh)
-        =+  zug=(heal [~ q.i.peh] p.dob (busk(sut q.zig) p.p.q.dob q.p.q.dob))
+        =+  zug=(heal `q.i.peh p.dob (busk(sut q.zig) p.p.q.dob q.p.q.dob))
         [p.guh zug]
       =+  wuf=(flay (flee dob))
       =+  gav=$(peh t.peh, sut q.wuf, axe (peg axe p.wuf))
-      [p.gav (heal [~ q.i.peh] p.wuf q.gav)]
+      [p.gav (heal `q.i.peh p.wuf q.gav)]
     ==
   ::
   ++  tock
@@ -9939,7 +9940,7 @@
       dot
     ;~  pose
       %+  cook
-        |=([a=(list) b=term] ?~(a b [%| (lent a) b]))
+        |=([a=(list) b=term] ?~(a b [%| (lent a) `b]))
       ;~(plug (star ket) ;~(pose sym (cold %$ buc)))
     ::
       %+  cook
