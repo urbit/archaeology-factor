@@ -185,6 +185,50 @@
     u3_noun u3qfp_open(u3_noun, u3_noun);
     u3_noun u3qfp_rake(u3_noun);
 
+#   define u3qFU_van_fan  28
+#   define u3qFU_van_rib  58
+#   define u3qFU_van_vrf  59
+#   define u3qFU_van_vet  118
+#   define u3qFU_van_fab  119
+
+    u3_noun u3qFU_burn(u3_noun, u3_noun);
+    u3_noun u3qFU_busk(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_bust(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_conk(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_crop(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_cull(u3_noun, u3_noun, u3_noun, u3_atom, u3_noun);
+    u3_noun u3qFU_duck(u3_noun, u3_noun); 
+    u3_noun u3qFU_dung(u3_noun, u3_noun cap, u3_noun);
+    u3_noun u3qFU_dunq(u3_noun, const c3_c*, u3_noun);
+    u3_noun u3qFU_find(u3_noun, u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_fino(u3_noun, u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_fink(u3_noun, u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_fire(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_firm(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_fish(u3_noun, u3_noun, u3_atom);
+    u3_noun u3qFU_fuse(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_gain(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_heal(u3_noun, u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_lose(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_mint(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_mull(u3_noun, u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_nest(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_orth(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_park(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_peek(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_play(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_repo(u3_noun, u3_noun);
+    u3_noun u3qFU_rest(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_seek(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_seep(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_shep(u3_noun, const c3_c*, u3_noun, u3_noun);
+    u3_noun u3qFU_shew(u3_noun, u3_noun); 
+    u3_noun u3qFU_sift(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_snub(u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_tack(u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_tock(u3_noun, u3_noun, u3_noun, u3_noun, u3_noun);
+    u3_noun u3qFU_wrap(u3_noun, u3_noun, u3_noun);
+
 #   define u3qfu_van_fan  28
 #   define u3qfu_van_rib  58
 #   define u3qfu_van_vrf  59

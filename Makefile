@@ -319,6 +319,36 @@ J_F_OFILES_UT=\
        jets/f/ut_tock.o \
        jets/f/ut_wrap.o
 
+J_F_OFILES_UT_162=\
+		 	 jets/f/ut_burn_.o\
+       jets/f/ut_cull_.o\
+       jets/f/ut_fish_.o\
+       jets/f/ut_nest_.o\
+       jets/f/ut_rest_.o\
+		 	jets/f/ut_busk_.o\
+			jets/f/ut_find_.o\
+			jets/f/ut_fuse_.o\
+			jets/f/ut_gain_.o\
+			jets/f/ut_park_.o\
+			jets/f/ut_seek_.o\
+			jets/f/ut_bust_.o\
+			jets/f/ut_fink_.o\
+			jets/f/ut_lose_.o\
+			jets/f/ut_swab_.o\
+			jets/f/ut_heal_.o\
+			jets/f/ut_peek_.o\
+			jets/f/ut_tock_.o\
+			jets/f/ut_conk_.o\
+			jets/f/ut_fire_.o\
+			jets/f/ut_mint_.o\
+			jets/f/ut_play_.o\
+			jets/f/ut_wrap_.o\
+			jets/f/ut_crop_.o\
+			jets/f/ut_firm_.o\
+			jets/f/ut_mull_.o\
+			jets/f/ut_repo_.o\
+			jets/f/ut_tack_.o
+
 J_G_OFILES=\
        jets/g/down.o
 
@@ -331,6 +361,7 @@ J_OFILES=\
        $(J_E_OFILES_ED) \
        $(J_F_OFILES) \
        $(J_F_OFILES_UT) \
+       $(J_F_OFILES_UT_162) \
        $(J_G_OFILES) \
        jets/tree.o
 
