@@ -67,7 +67,7 @@
 ++  dime  ,[p=@ta q=@]                                  ::
 ++  each  |*([a=$+(* *) b=$+(* *)] $%([& p=a] [| p=b])) ::  either a or b
 ++  edge  ,[p=hair q=(unit ,[p=* q=nail])]              ::  parsing output
-++  foot  $%  [%ash p=bbtwig]                             ::  dry arm, geometric
+++  foot  $%  [%ash p=twig]                             ::  dry arm, geometric
               [%elm p=twig]                             ::  wet arm, generic
               [%oak ~]                                  ::  XX not used
               [%yew p=(map term foot)]                  ::  XX not used
