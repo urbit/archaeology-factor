@@ -126,7 +126,7 @@ be perfectly fine.  (Why is the path backward?  Because it is.
 The stylized N at column 0 is for Nock; the H at 57 for Hoon.)
 
 After this decorative header, our file is just the book itself.
-There is no more boilerplate.
+There is no further boilerplate.
 ```
 |%
 ++  welcome  ,[%hello %world]
@@ -193,7 +193,8 @@ nock]`, the product set and Nock formula.
 
 Not only are molds and spans categorically different, they never
 even touch each other.  Molds are a macro system; spans are an
-inference engine.
+inference engine.  The span engine (`ut`) has no idea whether or
+not molds were involved in the assembly of the 
 
 So a mold is a constructive definition of a noun geometry,
 because it constructs a twig which applies its geometry.  Does
@@ -226,7 +227,7 @@ Now that you're thoroughly frightened, let's go through our molds
 one by one and 
 
 ```
-++  base  ?([%atom p=odor] %noun %cell %bean %null)     ::  axils, @ * ^ ? ~
+++  base  ?([%atom p=%] %noun %cell %bean %null)     ::  axils, @ * ^ ? ~
 ++  line  ,[p=[%leaf p=@tas q=@] q=tile]          ::  %kelp case
 ++  mold  $&  [p=mold q=mold]                     ::  ordered pair
           $%  [%axil p=base]                      ::  base type
