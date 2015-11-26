@@ -142,7 +142,7 @@
       if ( c3y == u3du(i_hyp) ) {
         yip = u3k(i_hyp);
       } else {
-        yip = u3nt(c3n, 0, u3nc(u3_nul, u3k(i_hyp)));
+        yip = u3nt(c3__fish, 0, u3k(i_hyp));
       }
 
       zar = _cqFU_seek(van, sut, way, t_hyp);
@@ -176,7 +176,7 @@
         u3z(wip);
       }
 
-      if ( c3n == u3h(yip) ) {
+      if ( c3__fish == u3h(yip) ) {
         u3_noun p_yip, q_yip, hud;
 
         if ( c3n == u3r_cell(u3t(yip), &p_yip, &q_yip) ) {
@@ -194,6 +194,14 @@
         }
       }
       else {
+        if ( 0 != u3h(yip) ) {
+          fprintf(stderr, "bad yip %x (mug %x) %d %d %s\n", 
+              yip, u3r_mug(yip), u3h(yip), u3h(u3t(yip)),
+              u3r_string(u3t(u3t(yip))));
+          return u3m_bail(c3__exit);
+        }
+        c3_assert(0 == u3h(yip));
+
         u3_noun p_yip = u3t(yip);
 
         if ( c3n == u3ud(p_yip) ) {

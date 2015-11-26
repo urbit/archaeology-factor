@@ -261,6 +261,7 @@
     u3_loss loc_u;
     u3_noun lcs;
 
+    fprintf(stderr, "c loss\r\n");
     _lemp(&loc_u, hel, hev);
     _loss(&loc_u);
     lcs = _lexs(&loc_u);

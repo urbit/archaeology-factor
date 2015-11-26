@@ -364,7 +364,6 @@ static u3j_harm _mood__hoon__ut_conk_a[] = {{".2", u3wfu_conk}, {}};
 static u3j_harm _mood__hoon__ut_crop_a[] = {{".2", u3wfu_crop}, {}};
 static u3j_harm _mood__hoon__ut_cull_a[] = {{".2", u3wfu_cull}, {}};
 static u3j_harm _mood__hoon__ut_find_a[] = {{".2", u3wfu_find}, {}};
-static u3j_harm _mood__hoon__ut_fino_a[] = {{".2", u3wfu_fino}, {}};
 static u3j_harm _mood__hoon__ut_fink_a[] = {{".2", u3wfu_fink}, {}};
 static u3j_harm _mood__hoon__ut_fire_a[] = {{".2", u3wfu_fire}, {}};
 static u3j_harm _mood__hoon__ut_firm_a[] = {{".2", u3wfu_firm}, {}};
@@ -392,7 +391,6 @@ static u3j_core _mood__hoon__ut_d[] =
     { "crop", _mood__hoon__ut_crop_a },
     { "cull", _mood__hoon__ut_cull_a },
     { "find", _mood__hoon__ut_find_a },
-    { "fino", _mood__hoon__ut_fino_a },
     { "fink", _mood__hoon__ut_fink_a },
     { "fire", _mood__hoon__ut_fire_a },
     { "firm", _mood__hoon__ut_firm_a },
@@ -928,7 +926,6 @@ static u3j_harm _moad__hoon__ut_conk_a[] = {{".2", u3wFU_conk}, {}};
 static u3j_harm _moad__hoon__ut_crop_a[] = {{".2", u3wFU_crop}, {}};
 static u3j_harm _moad__hoon__ut_cull_a[] = {{".2", u3wFU_cull}, {}};
 static u3j_harm _moad__hoon__ut_find_a[] = {{".2", u3wFU_find}, {}};
-static u3j_harm _moad__hoon__ut_fino_a[] = {{".2", u3wFU_fino}, {}};
 static u3j_harm _moad__hoon__ut_fink_a[] = {{".2", u3wFU_fink}, {}};
 static u3j_harm _moad__hoon__ut_fire_a[] = {{".2", u3wFU_fire}, {}};
 static u3j_harm _moad__hoon__ut_firm_a[] = {{".2", u3wFU_firm}, {}};
@@ -956,7 +953,6 @@ static u3j_core _moad__hoon__ut_d[] =
     { "crop", _moad__hoon__ut_crop_a },
     { "cull", _moad__hoon__ut_cull_a },
     { "find", _moad__hoon__ut_find_a },
-    { "fino", _moad__hoon__ut_fino_a },
     { "fink", _moad__hoon__ut_fink_a },
     { "fire", _moad__hoon__ut_fire_a },
     { "firm", _moad__hoon__ut_firm_a },
@@ -986,8 +982,8 @@ static u3j_harm _moad__hoon__ut_a[] =
 static u3j_harm _moad__hoon__ap_a[] = 
   { // {"hack", u3wfp_open},
     // {"late", u3wfp_open},
-    {"open", u3wfp_open},
-    {"rake", u3wfp_rake},
+    // {"open", u3wfp_open},
+    // {"rake", u3wfp_rake},
     {}
   };
 
@@ -1140,7 +1136,7 @@ static u3j_core _moad_d[] =
   };
 
 static u3j_core _k162_d[] =
-  { { "moad", 0, _moad_d },
+  { { "mood", 0, _moad_d },
     {}
   };
 static u3j_core _k163_d[] =

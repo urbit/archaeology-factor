@@ -604,7 +604,7 @@ u3m_bail(u3_noun how)
   }
 
   switch ( how ) {
-#if 0
+#if 1
     case c3__fail:
     case c3__meme:
 #endif

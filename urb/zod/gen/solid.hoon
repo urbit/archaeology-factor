@@ -37,4 +37,5 @@
 ~&  [%solid-veer i.vay]
 =+  gat=.*(all .*(all [0 42]))
 =+  nex=+:.*([-.gat [sam +>.gat]] -.gat)
+~&  [%solid-done i.vay]
 $(vay t.vay, all nex)

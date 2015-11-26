@@ -1239,6 +1239,8 @@
       ^-  (bolt (pair type nock))
       %+  (clef %slim)  (fine cof sut gen)
       |=  [cof=cafe sut=type gen=twig]
+      =+  wad=(twig gen)
+      ~?  !=(wad gen)  [wad/wad gen/`*`gen]
       =+  puz=(mule |.((~(mint ut sut) [%noun gen])))
       ?-  -.puz
         |  (flaw cof p.puz)

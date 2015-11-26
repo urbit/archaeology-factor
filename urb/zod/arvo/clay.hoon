@@ -2726,7 +2726,8 @@
 ++  load
   |=  old=[%0 ruf=raft]
   ^+  ..^$
-  ..^$(ruf ruf.old)
+  ::  ..^$(ruf ruf.old)
+  ..^$
 ::
 ++  scry                                              ::  inspect
   |=  [fur=(unit (set monk)) ren=@tas his=ship syd=desk lot=coin tyl=path]
