@@ -243,10 +243,10 @@
             [%dtts p=twig q=twig]                       ::  nock 5 equality test
             [%dtwt p=twig]                              ::  nock 3 cell test
           ::                                            ::::::  temporary
-            [%hxcb p=twig]                              ::  $,
+            [%hxcb p=twig]                              ::  $_
             [%hxcl p=(unit stem) q=(list twig)]         ::  $: 
             [%hxcm p=base]                              ::  $,
-            [%hxcn p=[p=(unit stem) q=
+            [%hxcn p=twig q=song]                       ::  #%
           ::                                            ::::::  prettyprinting
             [%hxgl p=tusk]                              ::  prettyprint tape
             [%hxgr p=tusk]                              ::  prettyprint tank
@@ -321,7 +321,8 @@
             [%zpwt p=$|(p=@ [p=@ q=@]) q=twig]          ::  restrict hoon vers.
             [%zpzp ~]                                   ::  always crash
           ==                                            ::
-++  spar  (pair (unit term) twig)                       ::
+++  song  (pair (unit stem) (list spar))                ::  frond
+++  spar  (pair (unit term) twig)                       ::  frond element
 ++  stem  (pair term ,@)                                ::
 ++  tine  (list ,[p=tile q=twig])                       ::
 ++  tusk  (list twig)                                   ::
