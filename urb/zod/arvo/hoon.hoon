@@ -1,4 +1,4 @@
-::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+!:::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Preface                               ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ?>  ?=(@ .)                                             ::  atom subject
@@ -26,10 +26,11 @@
 |%                                                      ::
 ++  abel  typo                                          ::  original sin: type
 ++  ache  |*([a=$+(* *) b=$+(* *)] $%([| p=b] [& p=a])) ::  each, b default
-++  axis  ,@                                            ::  tree address
 ++  also  ,[p=term q=wing r=type]                       ::  alias
+++  axis  ,@                                            ::  tree address
+++  aura  ,@ta                                          ::  atom format
 ++  bank  (list ,@cF)                                   ::  UTF-32 string
-++  base  ?([%atom p=odor] %noun %cell %bean %null)     ::  axils, @ * ^ ? ~
+++  base  ?([%atom p=aura] %noun %cell %bean %null)     ::  axils, @ * ^ ? ~
 ++  bean  ,?                                            ::  0=&=yes, 1=|=no
 ++  beer  $|(@ [~ p=twig])                              ::  simple embed
 ++  beet  $|  @                                         ::  advanced embed
@@ -85,7 +86,7 @@
           $%  [%& p=axis]                               ::
               [%| p=@ud q=(unit term)]                  ::
           ==                                            ::
-++  line  ,[p=[%leaf p=odor q=@] q=tile]                ::  %kelp case
+++  line  ,[p=[%leaf p=aura q=@] q=tile]                ::  %kelp case
 ++  list  |*  a=_,*                                     ::  null-term list
           $|(~ [i=a t=(list a)])                        ::
 ++  lone  |*(a=$+(* *) ,p=a)                            ::  just one thing
@@ -98,7 +99,6 @@
 ++  metl  ?(%gold %iron %zinc %lead)                    ::  core variance
 ++  noun  ,*                                            ::  any noun
 ++  null  ,~                                            ::  null, nil, etc
-++  odor  ,@ta                                          ::  atom format
 ++  tarp  ,[d=@ud h=@ud m=@ud s=@ud f=(list ,@ux)]      ::  parsed time
 ++  time  ,@da                                          ::  galactic time
 ++  tree  |*  a=_,*                                     ::  binary tree
@@ -236,11 +236,17 @@
           ::                                            ::::::  nock
             [%dtkt p=twig]                              ::  nock 11 data skyhook
             [%dtls p=twig]                              ::  nock 4 increment
+            [%dtzx p=base]                              ::  base 
             [%dtzy p=term q=@]                          ::  atom constant
             [%dtzz p=term q=*]                          ::  cubical constant
             [%dttr p=twig q=twig]                       ::  nock p w/ formula q
             [%dtts p=twig q=twig]                       ::  nock 5 equality test
             [%dtwt p=twig]                              ::  nock 3 cell test
+          ::                                            ::::::  temporary
+            [%hxcb p=twig]                              ::  $,
+            [%hxcl p=(unit stem) q=(list twig)]         ::  $: 
+            [%hxcm p=base]                              ::  $,
+            [%hxcn p=[p=(unit stem) q=
           ::                                            ::::::  prettyprinting
             [%hxgl p=tusk]                              ::  prettyprint tape
             [%hxgr p=tusk]                              ::  prettyprint tank
@@ -315,6 +321,8 @@
             [%zpwt p=$|(p=@ [p=@ q=@]) q=twig]          ::  restrict hoon vers.
             [%zpzp ~]                                   ::  always crash
           ==                                            ::
+++  spar  (pair (unit term) twig)                       ::
+++  stem  (pair term ,@)                                ::
 ++  tine  (list ,[p=tile q=twig])                       ::
 ++  tusk  (list twig)                                   ::
 ++  tyre  (list ,[p=term q=twig])                       ::
@@ -3478,6 +3486,7 @@
   |=  a=@ta
   (flit (sane a))
 ::
+++  ruth                                                ::  biblical sane
 ++  sane                                                ::  atom sanity
   |=  a=@ta
   |=  b=@  ^-  ?
@@ -6344,7 +6353,7 @@
     [%1 p.vur p.sed]
   [vur sed]
 ::
-++  fitz                                                ::  odor compatibility
+++  fitz                                                ::  aura compatibility
   ~/  %fitz
   |=  [yaz=term wix=term]
   =+  ^=  fiz
@@ -6893,6 +6902,7 @@
       %rake  rake
     ==
   |_  gen=twig
+  ++  anal  ?:(?=([%zpcb *] gen) q.gen gen)
   ++  etch
     ~|  %etch
     |-  ^-  term
@@ -6992,6 +7002,73 @@
     ::
         [%cnzy *]  [%cnts [p.gen ~] ~]
         [%cnzz *]  [%cnts p.gen ~]
+    ::
+        [%dtzx *]
+      |-  ^-  twig
+      ?-  p.gen
+        [%atom *]  [%dtzy p.p.gen 0]
+        %noun      [%dttr [%dtzz %$ 0] [[%dtzz %$ 0] [%dtzz %$ 1]]]
+        %cell      =+(nec=$(p.gen %noun) [nec nec])
+        %bean      [%dtts [%dtzz %$ 0] [%dtzz %$ 0]]
+        %null      [%dtzz %n %$]
+      ==
+    ::
+        [%hxcl *]
+      :+  %tsls  [%dtzx %noun]
+      :-  %brdt
+      ^-  twig
+      =+  :*  axe=6
+              ^=  liz  ^-  (list spar)
+              =+  ^-  (list spar)
+                  %+  turn  q.gen
+                  |=  a=twig
+                  ^-  spar
+                  =+  b=~(anal ap a)
+                  ?.  &(?=([%ktts *] b) ?=(@ p.b))  [~ a]
+                  [`p.b q.b]
+              =.  -  ?~(p.gen - [[~ %hxcm %dtzz u.p.gen] -])
+              ?~(- [[~ %hxcm %dtzx %null] ~] -)
+          ==
+      =<  $
+      |%
+      ++  $
+        ?>  ?=(^ liz)
+        ?~  t.liz
+          (call i.liz)
+        ^-  twig
+        :+  %tsgr
+          =+  hyp=[[%& axe] ~]
+          :^  %wtkt  hyp  `twig`[%$ 1]
+          `twig`[%cnts `wing`~ `tram`[[hyp [%dtzx %cell]] ~]]
+        [(call i.liz) $(liz t.liz)]
+      ::
+      ++  call
+        |=  gan=spar
+        ^-  twig
+        =+  [%cnhp [%tsgr [%$ 7] q.gan] [%$ axe] ~]
+        ?~(p.gan - [%ktts u.p.gan -])
+      -- 
+    ::
+        [%hxcb *]  [%tsls [%dtzx %noun] %brdt [%tsgr [%$ 7] p.gen]]
+        [%hxcm *]
+      :+  %tsls  [%dtzx %noun]
+      :-  %brdt
+      ?-  -.p.gen
+        %atom  :^  %wtkt  [%$ 6]
+                 [%dtzx p.gen]
+               [%ktls [%dtzx p.gen] [%cnhp [%cnzy %ruth] neat ~]]
+        %bean  :^  %wtts  [%dtts [%dtzy %f |] [%$ 6]]
+                 [%dtzy %f |]
+               [%dtzy %f &]
+        %cell  :^  %wtpt  [%$ 6]
+                 [%dtzx %cell]
+               [[%$ 12] [%$ 13]]
+        %noun  [%$ 6]
+        %null  [%dtzx %null]
+      ==
+    ::
+        [%hxcn 
+    ::
         [%hxgl *]  [%cnhp [%cnzy %noah] [%zpgr [%cltr p.gen]] ~]
         [%hxgr *]  [%cnhp [%cnzy %cain] [%zpgr [%cltr p.gen]] ~]
     ::
@@ -9371,10 +9448,15 @@
         ==
       :-  '\''
         (stag %dtzy (stag %t qut))
+      :-  '@'
+        ;~(pfix pat (stag %dtzx (stag %atom mota)))
       :-  '('
         (stag %cnhp (ifix [pel per] (most ace wide)))
       :-  '*'
-        (stag %bctr ;~(pfix tar hill))
+        ;~  pose
+            (stag %bctr ;~(pfix tar hill))
+            (cold [%dtzx %noun] tar)
+        ==
       :-  '+'
         ;~  pose
           (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
@@ -9415,7 +9497,12 @@
       :-  '='
         (stag %dtts ;~(pfix tis (ifix [pel per] ;~(glam wide wide))))
       :-  '?'
-        (stag %bccm (stag %fern ;~(pfix wut (ifix [pel per] (most ace toil)))))
+        ;~  pose
+          %+  stag  %bccm
+          (stag %fern ;~(pfix wut (ifix [pel per] (most ace toil))))
+        ::
+          (cold [%dtzx %bean] wut)
+        ==
       :-  '['
         rupl
       :-  ','
@@ -9423,6 +9510,7 @@
       :-  '^'
         ;~  pose
           (stag %cnzz rope)
+          (cold [%dtzx %cell] ket)
         ==
       :-  '`'
         ;~  pfix  tec

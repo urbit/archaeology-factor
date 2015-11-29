@@ -46,12 +46,18 @@
              u3_noun cug)
   {
     // u3_noun dun = u3qfu_dunq(van, "type", sut);
-    u3_noun nuc = (u3_blip == cug)
+    u3_noun nuc = 
+        (c3n == u3du(cug)) 
+      ?  u3qfu_shew(van,
+                    u3nc(u3nc('c', 
+                             u3i_string("find-limb")),
+                         '*'))
+      :  (u3_blip == u3t(cug))
       ?  u3qfu_shew(van,
                     u3nc(u3nc('c', 
                              u3i_string("find-limb")),
                          '$'))
-      :  u3qfu_shep(van, "find-limb", 'a', u3k(cug));
+      :  u3qfu_shep(van, "find-limb", 'a', u3k(u3t(cug)));
     u3_noun pro;
 
     // u3t_push(u3nc(c3__mean, dun));
