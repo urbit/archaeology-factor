@@ -1,4 +1,4 @@
-# A simple makefile.
+# A simple makefile.  
 #
 
 # Pick one of:
