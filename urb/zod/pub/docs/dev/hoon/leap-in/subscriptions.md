@@ -72,6 +72,49 @@ And secondly, `:sink`:
 --
 ```
 
+Cheat sheet:
+
+```
+- `&` can either be the boolean true (along with `%.y`, `0`), or the irregular wide form
+  of the `$&` rune, which computes the logical 'and' operation on its two
+  children.
+
+- Similar to `&`,`|` is either the boolean false (along with `%.n` and `1`), or
+  the irregular short for of `?|`, which computes the logical 'or' operation on
+  its two children
+
+- `!` is the irregular wide form of `?!`, which computes the logical `not` on
+  its child. 
+
+- `?~` is basically an if-then-else statement that checks whether condition `p`
+  is `~` (null). `?~` is slightly different to `?:(~ %tru %fal) in that it
+  reduces to ?:($=(%type value) %tru %false). `$=` tests whether value `q`
+  falls within type `p`. One thing to watch out for in hoon: if you do `?~`, it
+  affects the type of the conditional value: XXexample
+
+- `:_` is just an inverted `:-`: all it does is accept children `p` and `q` and
+  produce an inverted tuple of the two, `[q p]`.
+
+-  `++bowl` is the type of our system state within our app. For example, it
+   includes things like `our`, the ship name of the host, and  `now`, the
+   current time. 
+
+-  `$%` is a type constructor that defines a type composed of `n`
+   types that it is passed. For example `$%  @  *  ^  ==` is the
+   type of either `@`, `*`, or a cell `^`.
+
+-  You may have noticed the separate `|%` above the application
+   core `|_`. We usually put our types in another core on top of the
+   application core. We can do this because hoon.hoon files, all
+   cores are =>'ed (called) against each other. Thus the `|%`
+   with the types is in the context of the `|_`, as it lies above
+   it.
+
+
+
+  
+```
+
 Here's some sample output of the two working together:
 
 ```
@@ -99,6 +142,8 @@ Here's some sample output of the two working together:
 >=
 ```
 
+###:source
+
 Hopefully you can get a sense for what's happening here.  When we
 poke `:sink` with `%on`, `:sink` subscribes to `:source`, and so
 whenever we poke `:source`, `:sink` gets the update and prints it
@@ -118,9 +163,9 @@ so far.  It's producing a result rather than calling other code
 (i.e. it's a return rather than a function call), so if you
 recall the discussion of ducts, a layer gets popped off the duct
 rather than added to it.  This is why no wire is needed for the
-move -- we can get no response to it.
+move -- we won't receive anything in response to it.
 
-Anyhow, there's two functions inside the `|_`.  We already know
+Anyways, there're two functions inside the `|_`.  We already know
 when `++poke-noun` is called.  `++peer` is called when someone
 tries to subscribe to our app.  Of course, you don't just
 subscribe to an app; you subscribe to a path on that app.  This
@@ -161,7 +206,9 @@ that means "tell bone `o` this subscription update:  `[%noun
 arg]`".  This is fairly dense code, but what it's doing is
 straightforward.
 
-`:source` should now makes sense.  `:sink` is a little longer,
+###:sink
+
+`:source` should now make sense.  `:sink` is a little longer,
 but not much more complicated.
 
 In `:sink`, our definition of of `++move` is different.  All
@@ -171,9 +218,9 @@ that sends a card along a bone.
 
 We have two kinds of cards here:  we `%peer` to start a
 subscription, and we `%pull` to stop it.  Both of these are
-"forward" moves that may receive a response, so they need a wire,
-which is what gets pushed onto the duct.  They also need a
-target, which is a pair of an urbit and an app name.  `%peer`
+"forward" moves that may receive a response, so they need a wire
+to tack onto the duct before they pass it on.  They also need a
+target, which is a pair of an urbit and an app name. Additionally, `%peer`
 needs a path on that app to subscribe too.  `%pull` doesn't need
 this, because its semantics are to cancel any subscriptions
 coming over this duct.  If your bone and wire are the same as
@@ -181,11 +228,11 @@ when you subscribed, then the cancellation will happen correctly.
 
 The only state we need for `:sink` is a loobean to tell whether
 we're already subscribed to `:source`.  We use `available=?`,
-where `?` is a boolean (which defaults to true).
+where `?` is the sign of type boolean (similar to `*`, `@`) (which defaults to true).
 
-In `++poke-noun` we check our input to see if it's `%on` and
-we're available, which means we should subscribe.  If so, we
-produce the move to subscribe to `:source`:
+In `++poke-noun` we check our input to see both if it's `%on` and
+we're available.  If so, we produce the move to subscribe to
+`:source`:
 
 ```
 [ost %peer /subscribe [our %source] /the-path]
@@ -194,7 +241,7 @@ produce the move to subscribe to `:source`:
 Also, we set available to false (`|`) with `+>.$(available |)`.
 
 Otherwise, if our input is `%off` and we're already subscribed
-(i.e. `available` is false), then we unsubscribe with from
+(i.e. `available` is false), then we unsubscribe from
 `:source`:
 
 ```
@@ -210,21 +257,22 @@ If neither of these cases are true, then we just print out our
 current subscription state and do nothing.
 
 `++diff-noun` is called when we get a `%diff` update along a
-subscription, and it's marked with `noun`.  `++diff-noun` is
-given the wire that we originally passed the `%peer`
-subscription request along and the data we got back.  In our case
-we just print out the data.
+subscription with a mark of `noun`.  `++diff-noun` is given the
+wire that we originally passed with the `%peer` subscription
+request along and the data we got back.  In our case we just
+print out the data.
 
 `++reap` is called when we receive an acknowledgment as to
-whether the subscription was handled successfully.  I think
-`reap` is supposed to bring to mind a backwards `peer` just like
-`coup` brings to mind a backwards `poke`, but if that mnemonic
-isn't helpful, just memorize it.
+whether the subscription was handled successfully. You can
+remember that `++reap` is the counterpart to `++peer` as it's
+almost spelled the same as 'peer' backwards. Similarly, `coup` is
+similar to 'poke' backwards.
 
-Anyhow, `++reap` is given the wire we attempted to subscribe over
-and a possible error message.  Of cours, there's only an error
-message if it fails.  `(unit type)` means "either `~` or `[~
-type]`, which means it's used like Haskell's "maybe" or C's
-nullability.  If `error` is `~`, then the subscription was
-successful, so we tell that to the user.  Otherwise, we print out
-the error message.
+Moving forward, `++reap` is given the wire we attempted to
+subscribe over, possibly along with an error message in cases of
+failure. `(unit type)` means "either `~` or `[~ type]`, which
+means it's used like Haskell's "maybe" or C's nullability.  If
+`error` is `~`, then the subscription was successful, so we tell
+that to the user.  Otherwise, we print out the error message.
+
+Excercises XX
