@@ -95,7 +95,7 @@ Here's some sample output of the two working together:
 %successfully-subscribed]
 >=
 ~fintud-macrep:dojo> :source 7
-[%recived-data 7]
+[%received-data 7]
 >=
 ```
 
@@ -110,7 +110,7 @@ There's a fair bit going on in this code,  Let's look at
 
 Our definition of `move` is fairly specific, since we're only
 going to sending one kind of move.  The `%diff` move is a
-subscription update, and its payload is marked data which gall
+subscription update, and its content is marked data which gall
 routes to our subscribers.
 
 This is a slightly different kind of move than we've dealt with
@@ -121,7 +121,7 @@ rather than added to it.  This is why no wire is needed for the
 move -- we can get no response to it.
 
 Anyhow, there's two functions inside the `|_`.  We already know
-when `++poke-noun` is calle.  `++peer` is called when someone
+when `++poke-noun` is called.  `++peer` is called when someone
 tries to subscribe to our app.  Of course, you don't just
 subscribe to an app; you subscribe to a path on that app.  This
 path comes in as the argument to `++peer`.
