@@ -5,9 +5,9 @@ title: State
 ---
 
 In the last section we built a few small apps that sent moves.
-These apps were entirely stateless, though.  Most useful apps
+These apps were entirely stateless, however.  Most useful apps
 require some amount of state.  Let's build a trivial stateful
-app.  It'll keep a running sum of all the atoms we poke it with.
+app.  It'll keep a running the sum of all the atoms we poke it with.
 Here's `ape/sum.hoon`:
 
 ```
@@ -22,7 +22,7 @@ Here's `ape/sum.hoon`:
 --
 ```
 
-We can start with `|start %sum`, then run:
+We can start it with `|start %sum`, and then run it:
 
 ```
 ~fintud-macrep:dojo> :sum &atom 5
@@ -41,7 +41,7 @@ how?
 
 The state is stored as the second thing in the `|_` line.  In our
 case, it's simply an atom named `state`.  We change it by
-producing as our state not `+>.$` but `+>.$(state (add state
+producing as our state not with (as before) `+>.$` but `+>.$(state (add state
 arg))`.  We've seen all these parts before, but you might not
 recognize them.
 
@@ -85,8 +85,9 @@ Everything you produce in the app state is persistent across
 calls to the app, restarts of the urbit, and even power failure.
 If you want to write to the filesystem, you can, but it's not
 needed for persistence.  Urbit has transactional events, which
-makes it an ACID operating system.  You don't have to worry about
-persistence when programming in urbit.
+makes it an [ACID operating system]().  Thus, you don't have to
+worry about persistence when programming in urbit or to ever go
+through the hassle of having to set up and write to a database.
 
 **Exercises**:
 
