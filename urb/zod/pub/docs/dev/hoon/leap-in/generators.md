@@ -8,7 +8,7 @@ Up until now we've poked apps directly.  This requires the user
 to specify the mark, and it requires the app to accept the
 arguments in a way that's convenient for users to input.  This is
 the "plumbing" way to interact with apps.  Generators are the
-"porcelain" layer.  When you run a command like `+ls` or
+"porcelain" layer.  This is why when you run a command like `+ls` or
 `|merge`, there are no marks in sight.
 
 We've used generators before, back in [Basic
@@ -52,12 +52,14 @@ abbreviated to `:my-app|my-generator <args>`.  Because most
 built-in commands are generators for the `:hood` app,
 `:hood|generator <args>` can be shortened to `|generator <args>`.
 
+XXThe paragraph above is too long and confusing
+
 Let's write a generator for a modified version of `:pong` from
 the chapter on [Network Messages](network).  Recall that `:pong`
 takes an urbit address, which is of mark `urbit`, and sends that
-urbit the message `'howdy'`.  Let's make `:ping` that does the
-same, except that it lets the user optionally specify the message
-as well.
+urbit the message `'howdy'`.  First--without a generator--let's
+make `:ping` that does the same, except that it lets the user
+optionally specify the message as well.
 
 We'll need a new mark for our arguments.  Let's call it
 `ping-message`.

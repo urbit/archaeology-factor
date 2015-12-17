@@ -75,9 +75,9 @@ And secondly, `:sink`:
 Cheat sheet:
 
 ```
-- `&` can either be the boolean true (along with `%.y`, `0`), or the irregular wide form
-  of the `$&` rune, which computes the logical 'and' operation on its two
-  children.
+- `&` can either be the boolean true (along with `%.y`, `0`), or
+  the irregular wide form of the `$&` rune, which computes the
+  logical 'and' operation on its two children.
 
 - Similar to `&`,`|` is either the boolean false (along with `%.n` and `1`), or
   the irregular short for of `?|`, which computes the logical 'or' operation on
@@ -101,14 +101,15 @@ Cheat sheet:
 
 -  `$%` is a type constructor that defines a type composed of `n`
    types that it is passed. For example `$%  @  *  ^  ==` is the
-   type of either `@`, `*`, or a cell `^`.
+   type of either `@`, `*`, or a cell `^`. XX this a union, right?
 
 -  You may have noticed the separate `|%` above the application
    core `|_`. We usually put our types in another core on top of the
-   application core. We can do this because hoon.hoon files, all
-   cores are =>'ed (called) against each other. Thus the `|%`
-   with the types is in the context of the `|_`, as it lies above
-   it.
+   application core. We can access these type from our `|_`
+   because in hoon.hoon files, all cores are =>'ed (called) against
+   each other. Thus the `|%` with the types is in the context of
+   the `|_`, as it lies above it:  hoon.hoon  `=> |% w types =>
+   |_`
 
 
 
