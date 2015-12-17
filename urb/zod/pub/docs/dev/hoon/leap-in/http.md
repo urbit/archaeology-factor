@@ -5,7 +5,7 @@ title: HTTP Requests and Timers
 ---
 
 There's a variety of arvo services we haven't touched on yet.
-Let's figure out how to do HTTP requests and set timers.
+Let's figure out how to make HTTP requests and set timers.
 
 Let's build an uptime-monitoring system.  It'll ping a web
 service periodically and print out an error when the response
@@ -57,39 +57,41 @@ code isn't 2xx.  Here's `ape/up.hoon`:
 --
 ```
 
-There's some fancy stuff going on here.  We'll go through line by
+There's some fancy stuff going on here.  We'll go through it line by
 line, though.
 
 Firstly, there's two kinds of cards we're sending to arvo.  A
 `%them` card makes an HTTP requrest out of a unit `hiss`.
 
 > Recall that `++unit` means "maybe".  Formally, "`(unit a)` is
-> either null or a pair of null and a value in `a`".
+> either null or a pair of null and a value in `a`". Also recall
+> that to pull a value out of a unit `(u.unit)`, you must first
+> verify that the unit is not null (for example with `?~`).
 
 A `hiss` (all of the following terms are defined in `zuse`) is a
 pair of a `purl` and a `moth`.  A `purl` is a parsed url
 structure, which can be created with `++epur`, which is a
 function that takes a url as text and parses it into a `(unit
-purl)`.  The result is null iff the url is malformed.
+purl)`.  Thus, the result is null if and only if the url is malformed.
 
-A `moth` is a triple of a `meth`, a `math`, and `(unit octs)`.
+A `moth` is a treble of a `meth`, a `math`, and `(unit octs)`.
 `meth` is the HTTP method, in this case `%get`.  `math` is a map
 of HTTP headers.  The `(unit octs)` is a possible octet stream
 representing the body.  If it's null, then no body is sent (as in
 this case).
 
-> An octect stream is a pair of the lenght in bytes of the data
-> plus the data itself.  Recall that `++taco` takes text and
+> An octect stream is a pair of the length in bytes of the data
+> plus the data itself.  You can use `++taco` takes text and
 > turns it into an octet strem.
 
 When you send this request, you can expect a `%thou` with the
 response, which we handle later on in `++thou-request`.
 
-For `%wait`, you just pass a `@da` (absolute date), and arvo will
+For `%wait`, you just pass a [`@da`]() (absolute date), and arvo will
 produce a `%wake` when the time comes.
 
 > A timer is guaranteed to not be triggered before the given
-> time, but it's impossible to guarantee the timer will be
+> time, but it's currently impossible to guarantee the timer will be
 > triggered at exactly the requested time.
 
 Let's take a look at our state:
@@ -108,7 +110,7 @@ of `&` (true) and `|` false.  This type defaults to `&` (true).  In our
 case, we want both of these to default to `|` (false).  Because
 of that, we use `_|` as the type.  `_value` means "take the type
 of `value`, but make the default value be `value`".  Thus, our
-type is still booleans, just like `?`, but the default value is
+type is still a boolean, just like `?`, but the default value is
 `|` (false).
 
 > This is the same `_` used in `_+>.$`, which means "the same
@@ -138,7 +140,7 @@ If the argument is neither 'off' nor 'on', then we assume it's an
 actual url, so we save it in `target`.
 
 When the HTTP response comes back, we handle it with
-`++thou-request`, which, besides the wire the request was sent
+`++thou-request`, which, along with the wire the request was sent
 on, takes the status code, the response headers, and the response
 body.
 

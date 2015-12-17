@@ -76,8 +76,10 @@ is true.
 > innermost, nor the next innermost, but the next innermost".
 
 > `++jo` in `zuse` is a useful library for parsing complex json
-> into hoon structures.  Our case is actually simple enough that
-> the `?>` line could have been `?>  =([%s 'click'] jon)`.
+> into hoon structures. In this case, the `:` between `so` and
+> `jo` means 'inside of', because `so` is an arm contained within
+> the core `jo`.  Our case is actually simple enough that the
+> `?>` line could have been `?>  =([%s 'click'] jon)`.
 
 We can test this mark from the command line:
 
@@ -108,6 +110,10 @@ And `/mar/clicks.hoon`:
 
 `clicks` is just an atom.  We convert to json by creating an
 object with a single field "clicks" with our value.
+
+> Be sure to checkout section 3bD, JSON and XML, in zuse.hoon
+> `++joba` is just a function that takes a key-value pair and
+> produces a JSON object with one element.
 
 ```
 ~fintud-macrep:dojo> &json &clicks 6
