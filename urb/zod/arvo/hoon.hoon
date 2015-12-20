@@ -7962,7 +7962,7 @@
       [['.' ~] ['-' ~] ~ ~]
     [[%leaf (mesc (trip paz))] duck ~]
   ::
-  ++  fino
+  ++  find
     |=  {dep/@ud way/?($read $rite $both $free) cug/(unit term)}
     =+  gil=*(set type)
     |-  ^-  {p/@ud q/(unit post)}
