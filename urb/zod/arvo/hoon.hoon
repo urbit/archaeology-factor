@@ -7349,6 +7349,7 @@
       %duck   duck
       %dune   dune
       %dunk   dunk
+      %find   find
       %fire   fire
       %firm   firm
       %fish   fish
@@ -7497,8 +7498,13 @@
     =>  .(i.peh ?^(i.peh i.peh [%| p=0 q=`i.peh]))
     =+  ^=  poz  ^-  post
         ?-  -.i.peh
+<<<<<<< HEAD
           $&  [p.i.peh %& (peek %both p.i.peh)]
           $|  (finq p.i.peh %both +.q.i.peh)
+=======
+          &  [p.i.peh %& (peek %both p.i.peh)]
+          |  (finq p.i.peh %both q.i.peh)
+>>>>>>> 556b398
         ==
     |-  ^-  type
     ?:  =(1 p.poz)
@@ -7963,6 +7969,7 @@
     [[%leaf (mesc (trip paz))] duck ~]
   ::
   ++  find
+    ~/  %find
     |=  {dep/@ud way/?($read $rite $both $free) cug/(unit term)}
     =+  gil=*(set type)
     |-  ^-  {p/@ud q/(unit post)}
@@ -8045,8 +8052,8 @@
       $(gil (~(put in gil) sut), sut repo)
     ==
   ::
-  ++  finc
-    ~/  %finc
+  ++  fink
+    ~/  %fink
     |=  {dep/@ud way/?($read $rite $both $free) cug/(unit term)}
     ^-  port
     ::  ~_  (dunk 'type')
@@ -8057,11 +8064,11 @@
     (flee u.q.hoq)
   ::
   ++  finq
-    |=  {dep/@ud way/?($read $rite $both $free) cog/term}
+    |=  {dep+@ud way/?($read $rite $both $free) cug/(unit term)}
     ^-  post
     ::  ~_  (dunk 'type')
-    ~_  (show [%c 'find-limb'] ?:(=(%$ cog) '$' [%a cog]))
-    =+  hoq=(find dep way `cog)
+    ~_  (show [%c 'find-limb'] ?~(cug '*' ?:(=(%$ u.cug) '$' [%a u.cug])))
+    =+  hoq=(find dep way cug)
     ?~  q.hoq
       ~|(%find-none !!)
     u.q.hoq
@@ -8943,7 +8950,7 @@
     ::
         {$| *}
       =>  .(sut syp)
-      =+  hud=(finc p.i.hyp way q.i.hyp)
+      =+  hud=(fink p.i.hyp way q.i.hyp)
       [(peg p.zar p.hud) q.hud]
     ==
   ::
