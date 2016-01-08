@@ -1,0 +1,8 @@
+I. Larger talking points
+
+  1. When talking about a 'unit' such as a 'unit' that's not
+  directly a piece of code, don't need to include '++'.
+
+II. Need looking at
+
+  1. bind and lift explanations
