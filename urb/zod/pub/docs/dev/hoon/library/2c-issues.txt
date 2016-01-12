@@ -1,0 +1,21 @@
+Issues:
+
+1. The descriptions for both dis and con do not really explain
+what the arms produce.
+
+2. gor, hor, vor have 'XXrevisit'.
+
+3. mum has an 'XX document.'
+
+4. 2cG, the floating point section, has a 'rewriting interface
+section.'
+
+5. era, jes have an 'XX revisit.'
+
+6. Take a look at fe core and its contents.
+
+7. Cork one-liner needs help. 
+
+8. Corl has a XX revisit.
+
+9. hard, soft has some XXs that need to be dealt with.
