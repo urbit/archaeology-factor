@@ -6,3 +6,10 @@ I. Larger talking points
 II. Need looking at
 
   1. bind and lift explanations
+  2. How to you *technically* specify the product of ++reel,
+  ++roll
+
+III. Arms that have notes to delete them
+
+  1. wild
+
