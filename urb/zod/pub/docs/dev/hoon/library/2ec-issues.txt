@@ -1,0 +1,8 @@
+1. I assume inde produces a rule?
+2. Keep an eye on the 'Produces' section in this section. While I
+believe I got most of it right, there might be a few that I
+fucked up.
+2.5 What does stet produce.
+3. The produces section for stet needs to be written.
+4. Need help with stew in all areas.
+5. Check out the tug explanation.
