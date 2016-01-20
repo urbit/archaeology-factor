@@ -1,0 +1,3 @@
+I've formatted the whole section, but you'll have to go through
+every one in detail, as I don't understand crypto. Most of them
+don't have one-liners or examples.
