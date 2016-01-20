@@ -1,0 +1,8 @@
+Again, I know enough to complete practically this whole section,
+but you'll need to vet the descriptions.
+
+- the 'produces' section of ++loss has an XX and needs a look.
+
+- the 'produces' section of ++lore has an XX and needs a look. 
+
+- the 'produces' section of ++role has an XX and needs a look. 
