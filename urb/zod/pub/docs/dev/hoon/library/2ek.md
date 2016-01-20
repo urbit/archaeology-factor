@@ -162,9 +162,25 @@ Source
 
 Fit on one line test
 
-        ++  fit  (lte (lent ram) (sub edg tab))
-
 Determine whether `tac` fits on one line. Internal to `++win`
+
+Accepts
+-------
+
+Produces
+--------
+
+Source
+------
+
+++  fit  (lte (lent ram) (sub edg tab))
+
+
+Examples
+--------
+
+
+
 
 ----------------------------------------------------------------------
 
