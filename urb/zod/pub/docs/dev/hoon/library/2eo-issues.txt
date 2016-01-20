@@ -1,0 +1,5 @@
+I was able to complete pretty much all of these, but due to my
+limited knowledge of virtualization, I wasn't really able to vet
+all of the descriptions.
+
+- ++mule needs a 'Produces' line.
