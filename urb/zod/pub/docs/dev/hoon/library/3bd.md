@@ -103,7 +103,8 @@ Accepts
 Produces
 --------
 
-An [`++edge`]() of `++json`
+
+A `(like json)`.
 
 Source
 ------
@@ -137,7 +138,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of `++json`.
+A `(like json)`.
 
 Source
 ------
@@ -169,7 +170,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of `++json`.
+A `(like json)`.
 
 Source
 ------
@@ -218,7 +219,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `%a` [`++json`]() (an array).
+A `(like json)`.
 
 Source
 ------
@@ -249,7 +250,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of `++json`.
+A `(like json)`.
 
 Source
 ------
@@ -277,7 +278,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `%a` `++json` (an array) containing `%o` `++json` (objects).
+A `(like ,[%o p=(map ,@t json)])`
 
 Source
 ------
@@ -304,7 +305,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `%o` `++json` (an object).
+A `(like ,[%o p=(map ,@t json)])`
 
 Source
 ------
@@ -336,7 +337,8 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `%b` `++json` (a boolean).
+
+A `(like ,[%b p=?])`
 
 Source
 ------
@@ -373,7 +375,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `%s` `++json` (a string).
+A `(like ,[%s p=@t])`.
 
 Source
 ------
@@ -408,7 +410,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `++cord`.
+A `(like cord)`.
 
 Source
 ------
@@ -446,7 +448,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `++cord`.
+A `(like cord)`.
 
 Source
 ------
@@ -650,7 +652,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a `++tape`.
+A `(like tape)`.
 
 Source
 ------
@@ -1325,6 +1327,7 @@ Source
           ;~(less (jest '-->') hep)
         ==
       ::
+A [`++unit`]() of.
 
 Examples
 --------
@@ -1401,7 +1404,8 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a [`++manx`]().
+
+A `(like tape)`.
 
 Source
 ------
@@ -1437,7 +1441,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a [`++marx`]().
+A `(like marx)`.
 
 Source
 ------
@@ -1514,7 +1518,7 @@ A [`++nail`]().
 Produces
 --------
 
-An [`++edge`]() of a [`++mane`]().
+A `(like tail)`.
 
 Source
 ------
@@ -1541,9 +1545,12 @@ Parsing rule. Parses newlines, tabs, and spaces.
 Accepts
 -------
 
+A [`++nail`]().
 
 Produces
 --------
+
+A `(like char)`.
 
 Source
 ------
@@ -1571,11 +1578,23 @@ Examples
 
 JSON reparsing core
 
-Contains converters of ++json to [`++unit`]() well-typed structures.
+Contains converters of [`++json`]() to [`++unit`]()s of well-typed structures.
+
+Accepts
+-------
 
 A `fist` is a gate that produces a `grub`.
 
 A `grub` is a unit of some JSON value.
+
+Source
+------
+
+    ++  jo                                                  ::  json reparser
+      =>  |%  ++  grub  (unit ,*) 
+              ++  fist  $+(json grub)
+      |%
+
 
 ### `++ar`
 
@@ -1590,32 +1609,15 @@ Reparser modifier. Reparses an array to the [`++unit`]() of a homogenous
 Accepts
 -------
 
+A [`++fist`]().
 
 Produces
 --------
 
-Source
-------
-
-    ++  jo                                                  ::  json reparser
-      =>  |%  ++  grub  (unit ,*) 
-              ++  fist  $+(json grub)
-      |%
-
-Examples
---------
-
-
-Accepts
--------
-
-
-Produces
---------
+A [`++rule`]().
 
 Source
 ------
-
       ++  ar                                                ::  array as list
         |*  wit=fist
         |=  jon=json
@@ -1633,6 +1635,7 @@ Examples
     [~ u=~[1 2]]
     {[%~ u=it(@)] %~}
 
+
 ### `++at`
 
 Reparse array as tuple
@@ -1640,15 +1643,15 @@ Reparse array as tuple
 Reparser generator. Reparses an array as a fixed-length tuple of
 [`++unit`]()s, using a list of `++fist`s.
 
-`wil` is a [`++pole`]() a [`face`]()less list of [`++fist`]()s.
-
-
 Accepts
 -------
 
+`wil` is a [`++pole`](), a [`face`]()less list of [`++fist`]()s.
 
 Produces
 --------
+
+A [`++rule`]().
 
 Source
 ------
@@ -1676,18 +1679,17 @@ Examples
 
 Reparse array to tuple
 
-Reparser generator. Reparses a list of [`++json`]() to a tuple of
-[`++unit`]() using `wil`.
-
-`wil` is a [`++pole`](), a [face]()less list of [`++fist`]()s.
-
+Reparser generator. Reparses a list of [`++json`]() with `wil` to a tuple of [`++unit`]()s.
 
 Accepts
 -------
 
+`wil` is a [`++pole`](), a [face]()less list of [`++fist`]()s.
 
 Produces
 --------
+
+A [`++rule`]().
 
 Source
 ------
@@ -1711,15 +1713,17 @@ Examples
 Reparse boolean
 
 Reparser modifier. Reparses a boolean to the [`++unit`]() of a
-[`loobean`]().
-
+boolean.
 
 Accepts
 -------
 
+A [`++json`]().
 
 Produces
 --------
+
+A [`++fist`]().
 
 Source
 ------
@@ -1749,9 +1753,12 @@ of a loobean.
 Accepts
 -------
 
+A [`++json`]().
 
 Produces
 --------
+
+A [`++fist`]().
 
 Source
 ------
@@ -1777,17 +1784,17 @@ Reparse and transform
 Reparser modifier. Reparses `jon` and slams the result through `wit`,
 producing a [`++unit`]().
 
+Accepts
+-------
+
 `wit` is a [`++fist`]().
 
 `poq` is a [`gate`]() that accepts and returns a [noun]().
 
-
-Accepts
--------
-
-
 Produces
 --------
+
+A [`++fist`]().
 
 Source
 ------
@@ -1812,13 +1819,15 @@ Reparse UTC date
 
 Reparser modifier. Reparses a UTC date string to a [`++unit`]().
 
-
 Accepts
 -------
 
+`jon` is a [`++json`]().
 
 Produces
 --------
+
+A [`++fist`]().
 
 Source
 ------
@@ -1846,13 +1855,15 @@ Reparse millisecond date
 Reparser modifier. Reparses the javascript millisecond date integer to a
 [`++unit`]().
 
-
 Accepts
 -------
 
+`jon` is a [`++json`]().
 
 Produces
 --------
+
+A [`++fist`]().
 
 Source
 ------
@@ -1882,18 +1893,18 @@ Reparse unit
 
 Reparser modifier. Reparses `wit` to a [`++unit`]().
 
-A- JSON units are considered to be either JSON null or the requested
-value, and are reparsed to results of \~ or (some {value}) respectively
-
-`wit` is a [`++fist`]().
-
+JSON units are considered to be either JSON null or the requested
+value, and are reparsed to results of \~ or (some {value}) respectively.
 
 Accepts
 -------
 
+`wit` is a [`++fist`]().
 
 Produces
 --------
+
+A [`++fist`]().
 
 Source
 ------
@@ -1929,35 +1940,17 @@ interfaces for the latter are not currently stable.
 
 Reparse number as integer
 
-Reparser modifier. Reparses an integer representation to a [\`++unit]().
-
-
-Accepts
--------
-
-
-Produces
---------
-
-Source
-------
-
-      ++  ne                                                ::  number as real
-        |=  jon=json
-        ^-  (unit ,@rd)
-        !!
-      ::
-
-Examples
---------
-
+Reparser modifier. Reparses an integer representation to a [`++unit]().
 
 Accepts
 -------
 
+`jon` is a ++[`++json`]().
 
 Produces
 --------
+
+The `++unit` of an atom.
 
 Source
 ------
@@ -1992,13 +1985,15 @@ Reparse number as text
 
 Reparser modifier. Reparses a numeric representation to a [++cord]().
 
-
 Accepts
 -------
 
+`jon` is a `++json`.
 
 Produces
 --------
+
+The [`++unit`]() of a `++cord`.
 
 Source
 ------
@@ -2034,16 +2029,16 @@ Reparse object to frond
 Reparser generator. Reparses an object, succeeding if it corresponds to
 one of the key-value pairs in `wer`.
 
-`wer` is a [`++pole`](), a [`++face`]()less list of [`++cord`]() and
-[`++fist`]() key-value pairs.
-
-
 Accepts
 -------
 
+`wer` is a [`++pole`](), a [`++face`]()less list of [`++cord`]() and
+[`++fist`]() key-value pairs.
 
 Produces
 --------
+
+The [`++unit`]() of a cell of a.....
 
 Source
 ------
@@ -2089,15 +2084,16 @@ Reparser generator. For every key in `wer` that matches a key in the
 [`++edge`], the fist in `wer` is applied to the corresponding value in
 the [`++edge`](), the results of which are produced in a tuple.
 
-`wer` is a [`++pole`]() of [`++cord`]() to [`++fist`]() key-value pairs.
-
 
 Accepts
 -------
 
+`wer` is a [`++pole`]() of [`++cord`]() to [`++fist`]() key-value pairs.
 
 Produces
 --------
+
+A [`++unit`]() of a tuple XX?
 
 Source
 ------
@@ -2129,9 +2125,12 @@ in a tuple.
 Accepts
 -------
 
+`wer` is a [`++pole`]() of [`++cord`]() to [`++fist`]() key-value pairs.
 
 Produces
 --------
+
+A [`++unit`]() of.
 
 Source
 ------
@@ -2159,15 +2158,15 @@ Parse object to map
 Reparser modifier. Reparses a [`++json`]() object to a homogenous map
 using `wit`.
 
-`wit` is a [`++fist`]().
-
-
 Accepts
 -------
 
+`wit` is a [`++fist`]().
 
 Produces
 --------
+
+A [`++unit`]() of...
 
 Source
 ------
@@ -2194,15 +2193,15 @@ Add prefix
 Reparser modifier. Adds a static prefix `pre` to the parse result of
 `wit`. See also: [`++stag`]().
 
-`pre` is a prefix [`noun`]().
-
-
 Accepts
 -------
 
+`pre` is a prefix [`noun`]().
 
 Produces
 --------
+
+The [`++unit`]() of a cell of [noun]() and the result of parsing `wit`.
 
 Source
 ------
@@ -2230,13 +2229,15 @@ Reparse string to tape
 
 Reparser modifier. Reparses a [`++json`]() string to a [`++tape`]().
 
-
 Accepts
 -------
 
+`jon` is a [`++json`]().
 
 Produces
 --------
+
+The [`++unit`]() of a [`++tape`]().
 
 Source
 ------
@@ -2262,13 +2263,15 @@ Reparse string to cord
 
 Reparser modifier. Reparses a string to a [`++cord`]().
 
-
 Accepts
 -------
 
+`jon` is a [`++json`]().
 
 Produces
 --------
+
+The [`++unit`]() of a [`++cord`]().
 
 Source
 ------
@@ -2294,15 +2297,15 @@ Reparse string
 
 Reparser generator. Produces a reparser that applies `sab` to a string.
 
-`sab` is a [`++rule`]().
-
-
 Accepts
 -------
 
+`sab` is a [`++rule`].
 
 Produces
 --------
+
+A [`++rule`]().
 
 Source
 ------
@@ -2332,13 +2335,15 @@ Reparse null
 
 Reparser modifier. Reparses a null value.
 
-
 Accepts
 -------
 
+`jon` is a [`++json`]().
 
 Produces
 --------
+
+The [`++unit`]() of null.
 
 Source
 ------
@@ -2361,18 +2366,18 @@ Examples
 
 Pole of nonempty units
 
-Determines if `pod` contains no empty units, producing a loobean. Used
+Determines if `pod` contains all non-empty units, producing a boolean. Used
 internally.
-
-`pod` is a [`++pole`]() of [`++unit`]().
-
 
 Accepts
 -------
 
+`pod` is a [`++pole`]() of [`++unit`]().
 
 Produces
 --------
+
+A boolean.
 
 Source
 ------
@@ -2397,18 +2402,17 @@ Examples
 Collapse unit list
 
 Produces a unit of the values of `lut` if every unit in `lut` is
-nonempty. Otherwise, produces `~`. If any of the `++unit`s in `lut` are
-empty, produces null.
-
-`lut` is a [`++list`]() of [`++unit`]()s.
-
+nonempty. Otherwise, produces `~`. 
 
 Accepts
 -------
 
+`lut` is a [`++list`]() of [`++unit`]()s.
 
 Produces
 --------
+
+A boolean.
 
 Source
 ------
@@ -2436,19 +2440,19 @@ Examples
 
 ### `++zp`
 
-Parses a
+XX
 
 Collapses a `++pole` of `++unit`s `but`, producing a tuple.
-
-`but` is a [`++pole`]() of [`++unit`]().
-
 
 Accepts
 -------
 
+`but` is a [`++pole`]() of [`++unit`]().
 
 Produces
 --------
+
+??
 
 Source
 ------
@@ -2475,20 +2479,20 @@ Examples
 
 Collapse unit map
 
-Produces a `++unit` of the map `lum` of term to `++unit` key value
+Produces a [`++unit`]() of the [`++map`]() `lum` of term to `++unit` key value
 pairs, with all of the nonempty values stripped of their `++unit`
 wrappers. If any of the `++units` in `lum` are empty, `~` is produced.
 See also: [`++zp`](), [`++zl`]().
 
-`lum` is a map of [`++term`]() to [`++unit`]()s.
-
-
 Accepts
 -------
 
+`lum` is a map of [`++term`]() to [`++unit`]()s.
 
 Produces
 --------
+
+The `++unit` of a tuple of what were the key-value pairs of `lum`.
 
 Source
 ------
@@ -2520,19 +2524,19 @@ Examples
 
 `++json` from key-value pair
 
-Produces a ++json object with one key.
+Produces a ++json object with one key-value pair.
+
+Accepts
+-------
 
 `p` is a `@t` key.
 
 `q` is a [`++json`]().
 
-
-Accepts
--------
-
-
 Produces
 --------
+
+A [`++json`]().
 
 Source
 ------
@@ -2559,17 +2563,17 @@ Examples
 
 Object from key-value list
 
-Produces a `++json` object from a list `a` of key to `++json` values.
-
-`a` is a [`++list`]() of [`++cord`]() to [`++json`]() values.
-
+Produces a `++json` object from a [`++list`]() `a` of key to `++json` values.
 
 Accepts
 -------
 
+`a` is a [`++list`]() of [`++cord`]() to [`++json`]() values.
 
 Produces
 --------
+
+A `++json`.
 
 Source
 ------
@@ -2594,13 +2598,15 @@ Examples
 
 Produces a [`++json`]() string from a [`++tape`]().
 
-
 Accepts
 -------
 
+A [`++tape`]().
 
 Produces
 --------
+
+A `++json`.
 
 Source
 ------
@@ -2629,15 +2635,15 @@ Examples
 
 Produces a `++json` number from an unsigned atom.
 
-`a` is a [`@u`]().
-
-
 Accepts
 -------
 
+`a` is an atom of odor [`@u`]().
 
 Produces
 --------
+
+A [`++json`]().
 
 Source
 ------
@@ -2666,17 +2672,17 @@ Examples
 
 Escape JSON character
 
-Produces a `++tape` of an escaped [`++json`](/doc/hoon/library/3bi#++json) character `a`.
-
-`a` is an atom
-
+Produces a [`++tape`]() of an escaped [`++json`](/doc/hoon/library/3bi#++json) character `a`.
 
 Accepts
 -------
 
+`a` is an atom of odor [`@tD`](), aka a [`++char`]().
 
 Produces
 --------
+
+A [`++tape`]().
 
 Source
 ------
@@ -2702,7 +2708,7 @@ Examples
     ~zod/try=> (jesc '"')
     "\""
 
-### `++scanf`
+### `++scanf` XX
 
 Formatted scan
 
@@ -2734,7 +2740,7 @@ collapses the result list to a tuple, such that (scanf "foo 1 2 bar"
     ~zod/try=> `@da`(year `date`dat(- [%& -.dat], |6 ~[(div (mul |6.dat (bex 16)) 1.000)]))
     ~2014.8.12..23.10.58..ee56
 
-### `++parsf`
+### `++parsf` XX
 
     ++  parsf                                              ::  make parser from:
       |^  |*  a=(pole ,_:/(*$&(_rule tape)))               ::  ;"chars{rule}chars"
@@ -2751,7 +2757,7 @@ the embedded rules' results.
 
 Two intermediate arms are used:
 
-#### ++norm
+#### ++norm XX
 
       ::  .=  (norm [;"{n}, {n}"]:n=dim:ag)  ~[[& dim] [| ", "] [& dim]]:ag
       ++  norm                                             
@@ -2770,7 +2776,7 @@ Two intermediate arms are used:
 `norm` converts a `;"` pole of `[[%~. [%~. ?(tape _rule)] ~] ~]` into a
 more convenient list of discriminated tapes and rules.
 
-#### ++bill
+#### ++bill XX
 
       ::  .=  (bill ~[[& dim] [| ", "] [& dim]]:ag)
       ::  ;~(plug dim ;~(pfix com ace ;~(plug dim (easy)))):ag
@@ -2788,12 +2794,24 @@ sections and producing a list of the rules' results.
 
 ### `++taco`
 
+Converts an atom to an octet stream [`++octs`](), which contains a length, to
+encode trailing zeroes.
+
+Produces
+--------
+
+An `++octs`.
+
+Source
+------
+
     ++  taco                                                ::  atom to octstream
       |=  tam=@  ^-  octs
       [(met 3 tam) tam]
     ::
 
-An [octs] contains a length, to encode trailing zeroes.
+Examples
+--------
 
     ~zod/try=> (taco 'abc')
     [p=3 q=6.513.249]
@@ -2802,12 +2820,31 @@ An [octs] contains a length, to encode trailing zeroes.
 
 ### `++tact`
 
+tape to octs
+
+Converts a `++tape` to an octet stream ([`++octs`](), which contains a length
+to encode trailing zeroes.
+
+Accepts
+-------
+
+A `++tape`.
+
+Produces
+--------
+
+An [`++octs`]().
+
+Source
+------
+
     ++  tact                                                ::  tape to octstream
       |=  tep=tape  ^-  octs
       (taco (rap 3 tep))
     ::
 
-octs from tape
+Examples
+--------
 
     ~zod/try=> (tact "abc")
     [p=3 q=6.513.249]
@@ -2816,13 +2853,32 @@ octs from tape
 
 ### `++tell`
 
+octs from wall
+
+Converts a [`++wall`]() to an octet stream ([`++octs`](), which contains a length
+to encode trailing zeroes.
+
+Accepts
+-------
+
+`wol` is a [`++wall`]().
+
+Produces
+--------
+
+An `++octs`.
+
+Source
+------
+
     ++  tell                                                ::  wall to octstream
       |=  wol=wall  ^-  octs
       =+  buf=(rap 3 (turn wol |=(a=tape (crip (weld a `tape`[`@`10 ~])))))
       [(met 3 buf) buf]
     ::
 
-octs from wall
+Examples
+--------
 
     ~zod/try=> (tell ~["abc" "line" "3"])
     [p=11 q=12.330.290.663.108.538.769.039.969]
@@ -2835,12 +2891,30 @@ octs from wall
 
 ### `++txml`
 
+Tape to xml CDATA node
+
+Converts a [`++tape`]() to an xml CDATA node XX
+
+Accepts
+-------
+
+`tep` is a [`++tape`]().
+
+Produces
+--------
+
+A [`++manx`]().
+
+Source
+------
+
     ++  txml                                                ::  string to xml
       |=  tep=tape  ^-  manx
       [[%$ [%$ tep] ~] ~]
     ::
 
-Tape to xml CDATA node
+Examples
+--------
 
     ~zod/try=> (txml "hi")
     [g=[n=%$ a=~[[n=%$ v="hi"]]] c=~]

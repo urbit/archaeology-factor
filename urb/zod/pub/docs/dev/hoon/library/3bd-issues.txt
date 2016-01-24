@@ -1,0 +1,31 @@
+I am not as confident regarding my understanding of this
+section--please pay extra attention for mistakes.
+
+
+- need to go back and switch out 'an edge of a `++tape` to a
+  `++like`.
+
+- need to make sure 'an edge/the edge of a ____' is consistent.
+
+-need to link `(like ___)` to ++like tag.
+
+0. I canot find ++xmlp. I assume it's name was changed to ++poja?
+1. ++perk needs its 'produces' section filled.
+2. Should 'engine' arms have 'produce sections'? For example,
+++poja.
+3. apex:poja's description has an XX. Please review.
+4. ++numb's producing section needs a peak. See the XX.
+5. ++maybe needs help.
+6. ++abox's 'produces' section needs help.
+7. ++ ++obje's, and ++stri's 'produces' section needs help.
+8. ++ne has an 'XX, currently unimplemented'.
+9. the produces section of of ++of, ++ot, ++om needs help.
+10. ++zp has an XX.
+11.From ++scanf - ++bill, there are a lot of XXs.
+12. ++txml description needs a little more.
+
+Help:
+
+++mane
+
+
