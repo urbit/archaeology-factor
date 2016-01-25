@@ -1,0 +1,93 @@
+Big, general issues
+
+  1. Should we put in a 'composed of' section?
+
+  2. Do we need the 'see also section?' Check that everything is in
+  line for this.
+
+  3. If so, look at the git history and review all the ones you
+  previously deleted.
+
+IV. Specific issues
+
+  1. Don't understand how to explain qual, trel, pair, w/regard
+  to using mold/type
+
+  2. We need to explain with a %palm inside tank is. 
+
+  3. Currently no explanations for mold, twig, and type. They
+  have links to their own particular sections, which I don't
+  think yet exist. How should we handle this?
+
+  4. I think vase merits more of an explanation due to its
+  importance.
+
+  5. The line between examples
+
+
+Specific issues
+
+Vol 1
+
+I. Add to glossary
+
+1. odor
+2. noun
+3. tape
+4. *
+5. Subject
+6. Need to document all odors
+7. All of the vanes?
+8. Face
+9. Fork
+
+II. Arms that need to be looked at (or have XX's)
+  0. coil
+  1. abel
+  2. chum, chub
+  3. clue
+  4. each
+  5. edge
+  6. manx, mane, mars, mart either have poor explanations, or
+  none at all.
+  7. tree
+  8. port
+  9. regex - example doesn't explicitly use regex
+  10. rule (don't know what `_` means
+  11. trap, tyre, type, typo, vise (all need better examples)
+  12. udal, udon, umph, urge, upas (all need better *explanations*)
+  13. pass
+  14. dime example
+
+III. Arms that have notes saying they should be moved
+
+  1. wonk
+
+To ++ut:
+
+  1. limb
+  2. metl
+  3. port
+  4. post,
+  5. prop
+  6. tiki
+  7. toga
+
+IV. Arms that there are notes to get rid of with '?'
+
+  1. noun
+  2. null
+  3. numb
+  4. tang
+  5. tune
+  6. lone
+
+
+V. Checklist
+
+  1. Formatting
+    a. lines
+    b. sections
+    c. links
+
+  2. Sanity check
