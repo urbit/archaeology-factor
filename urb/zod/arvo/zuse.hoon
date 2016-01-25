@@ -139,9 +139,9 @@
                 [~ q.pig]
               (de p.pig q.gox)
           ?~  cow  ~
-          =>  .(cow (sure:as.her p.pig u.cow))
-          ?~  cow  ~
-          [~ p.pig u.cow]
+          =+  caf=(sure:as.her p.pig u.cow)
+          ?~  caf  ~
+          [~ p.pig u.caf]
     --
   ::
   ++  de

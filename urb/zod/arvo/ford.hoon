@@ -1,4 +1,4 @@
-::::::  
+!:::::  
 ::  ::  %ford, new execution control
 !?  164
 ::::
@@ -77,7 +77,7 @@
 --                                                      ::
 |%                                                      ::
 ++  calf                                                ::  reduce calx
-  |*  sem/*                                             ::  a spansystem hack
+  |*  sem/*                                             ::  a typesystem hack
   |=  cax/calx
   ?+  sem  !!
     $hood  ?>(?=($hood -.cax) r.cax)

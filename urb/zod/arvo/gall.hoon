@@ -29,12 +29,6 @@
 --                                                      ::
 |%  ::::::::::::::::::::::::::::::::::::::::::::::::::::::    %gall state
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-++  axle-n  ?(axle axle-1)                              ::  upgrade path
-++  axle-1  {$1 pol/(map ship mast-1)}                 ::
-++  mast-1                                              ::
-  (cork mast |=(mast +<(bum (~(run by bum) seat-1))))   ::
-++  seat-1                                              ::
-  (cork seat |=(seat +<+))                              ::
 ++  axle                                                ::  all state
   $:  $2                                                ::  state version
       pol/(map ship mast)                               ::  apps by ship
@@ -329,8 +323,10 @@
       ?-  -.q.+.sih
         $tabl  ~|(%made-tabl !!)
         $&    (mo-give %unto %diff p.q.+>.sih)
-        $|     =.  p.q.+>.sih  (turn p.q.+>.sih |=(a/tank rose+[~ "! " ~]^[a]~))
-              ~>  %slog.`%*(. >[%wh %y]< +> [>%mo-cyst-fail< (flop p.q.+>.sih)])
+        $|    =.  p.q.+>.sih  
+                (turn (flop p.q.+>.sih) |=(a/tank rose+[~ "! " ~]^[a]~))
+              ~&  %mo-cyst-fail
+              ~>  %slog.`p.q.+>.sih
               (mo-give %unto %quit ~)   ::  XX better errors pls
       ==
     ::
@@ -343,12 +339,12 @@
               dap=i.t.t.pax
               num=(slav %ud i.t.t.t.pax)
           ==
-      =>  .(pax `path`[%req t.pax])
+      =+  xap=`path`[%req t.pax]
       ?~  q.+>.sih 
-        (mo-pass [%sys pax] %g %deal [him our] dap %pump ~)
+        (mo-pass [%sys xap] %g %deal [him our] dap %pump ~)
       ~&  [%diff-bad-ack q.+>.sih]                      ::  should not happen
-      =.  +>.$  (mo-pass [%sys pax] %g %deal [him our] dap %pull ~)
-      (mo-pass [%sys pax] %a %wont [our him] [%g %gh dap ~] [num %x ~])
+      =.  +>.$  (mo-pass [%sys xap] %g %deal [him our] dap %pull ~)
+      (mo-pass [%sys xap] %a %wont [our him] [%g %gh dap ~] [num %x ~])
     ::
         $rep                                            ::  reverse request
       ?>  ?=({@ @ @ $~} t.pax)
@@ -1243,14 +1239,9 @@
   ~
 ::
 ++  load                                                ::  recreate vane
-  |=  old/axle-n
+  |=  old/axle
   ^+  ..^$
-  ?:  ?=($2 -.old)  ..^$(all old)
-  %=  $
-    old  =>  |=(seat-1 `seat`[*worm +<])
-         =>  |=(mast-1 +<(bum (~(run by bum) +>)))
-         old(- %2, pol (~(run by pol.old) .))
-  ==
+  ..^$(all old)
 ::
 ++  scry
   |=  {fur/(unit (set monk)) ren/@tas who/ship syd/desk lot/coin tyl/path}

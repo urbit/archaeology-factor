@@ -1,4 +1,4 @@
-::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+!:::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Preface                               ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ?>  ?=(@ .)                                             ::  atom subject 
@@ -6788,7 +6788,7 @@
         ?@  nag
           =+  luz=[%cnts [[%& 1] ~] [[[%& axe] ~] bunt(sec [%axil %cell])] ~]
           ?:  =(& nag)
-            [%tsgr [%wtpt [[%& axe] ~] luz [%$ 1]] (noy [& &])]
+            [%tsgr [%wtcl [%dtwt [%$ axe]] [%$ 1] luz] (noy [& &])]
           [%tsgr luz (noy [& &])]
         (noy nag)
     ^-  twig
@@ -7938,36 +7938,6 @@
       hag  q.dix
     ==
   ::
-  ++  ergo
-    |=  {lop/palo rig/(list (pair wing twig))}
-    ^-  (pair span nock)
-    =+  axe=(tend p.lop)
-    =|  hej/(list (pair axis nock))
-    ?:  ?=($& -.q.lop)
-      =-  [p.- (hike axe q.-)]
-      |-  ^-  (pair span (list (pair axis nock)))
-      ?~  rig
-        [p.q.lop hej]
-      =+  zil=(mint %noun q.i.rig)
-      =+  dar=(tack(sut p.q.lop) p.i.rig p.zil)
-      %=  $
-        rig      t.rig
-        p.q.lop  q.dar
-        hej      [[p.dar q.zil] hej]
-      ==
-    =+  hag=(~(tap in q.q.lop))
-    =-  [(fire p.-) [%9 p.q.lop (hike axe q.-)]]
-    |-  ^-  (pair (list (pair span foot)) (list (pair axis nock)))
-    ?~  rig
-      [hag hej]
-    =+  zil=(mint %noun q.i.rig)
-    =+  dix=(toss p.i.rig p.zil hag)
-    %=  $
-      rig  t.rig
-      hag  q.dix
-      hej  [[p.dix q.zil] hej]
-    ==
-  ::
   ++  endo
     |=  {lop/(pair palo palo) dox/span rig/(list (pair wing twig))}
     ^-  (pair span span)
@@ -8030,8 +8000,8 @@
       |%  +-  $
       =>  +<
       |%
-      ++  pord  |*(* (form +< *nock))                 ::  wrap mint formula
-      ++  rosh  |*(* (form +< *(list pock)))          ::  wrap mint changes
+      ++  pord  |*(* (form +< *nock))                   ::  wrap mint formula
+      ++  rosh  |*(* (form +< *(list pock)))            ::  wrap mint changes
       ++  fleg  _(pord *bath)                           ::  legmatch + code
       ++  fram  _(pord *claw)                           ::  armmatch + 
       ++  foat  _(rosh *bath)                           ::  leg with changes
@@ -8047,12 +8017,12 @@
         ++  vant
           |%  ++  trep  $+({bath wing bath} {axis bath})
               ++  tasp  $+({{axis bath} fleg foat} foat)
-              ++  tyle  $+(foat foat)
+              ++  tyle  $+({bath foat} foat)
           --
         ++  vunt  
           |%  ++  trep  $+({claw wing bath} {axis claw})
               ++  tasp  $+({{axis claw} fleg fult} fult)
-              ++  tyle  $+(fult foat)
+              ++  tyle  $+({claw fult} foat)
         --  --
       ::
       ++  make
@@ -8068,18 +8038,20 @@
               ++  tasp  |=  {a/(pair axis span) b/fleg c/foat}
                         ^-  foat
                         [q.a [[p.a (skin b)] (skin c)]]
-              ++  tyle  |=(foat +<)
+              ++  tyle  |=  {bath foat}
+                        ~?  !?|(!vet (nest(sut +<-) | +<+<))  %bad
+                        +<+
           --
         ++  vunt  
           |%  ++  trep  |=  {a/claw b/wing c/bath}
                         ^-  (pair axis claw)
                         (toss b c a)
-              ++  tasp  |~  {a/(pair axis claw) b/fleg c/fult}
+              ++  tasp  |=  {a/(pair axis claw) b/fleg c/fult}
                         ^-  fult
                         [q.a [[p.a (skin b)] (skin c)]]
-              ++  tyle  |~  fult
+              ++  tyle  |=  {claw fult}
                         ^-  foat
-                        [(fire +<-) +<+]
+                        [(fire +<+<) +<+>]
       --  --  --
     ::
     ++  bin
@@ -8107,7 +8079,7 @@
         =>  +<
         |=  {rum/clom rig/(list (pair wing twig))}
         ^-  foat
-        %-  tyle
+        %+  tyle  rum
         |-  ^-  ceut
         ?~  rig  (rosh rum)
         =+  mor=$(rig t.rig)
