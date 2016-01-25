@@ -1,0 +1,5 @@
+1. Not sure what 'ISO language code in ++glon is', see the 'XX'.
+2. ++gnow has an 'XX document'.
+3. ++hunt has an 'XX document'.
+
+
