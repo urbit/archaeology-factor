@@ -1,4 +1,4 @@
-::
+::  
 ::::  /hoon/task/work/mar
   ::
 /-    work
@@ -30,9 +30,9 @@
 ++  keen  |*({a/* b/rule} |=(c/nail `(like a)`(b c)))
 ++  parse
   |*  {hed/$?($~ $@(@tas tape)) tal/(pole)}   
-  ?~  hed  (..$ tal)
-  ?^  hed  ;~(pfix (just (crip hed)) (..$ tal))
-  =-  ?~(tal had ;~(plug had (..$ tal)))
+  ?~  hed  (..$ -.tal +.tal)
+  ?^  hed  ;~(pfix (just (crip hed)) (..$ -.tal +.tal))
+  =-  ?~(tal had ;~(plug had (..$ -.tal +.tal)))  
   =<  had=(sear . nuck:so)
   |=  a/coin  ^-  (unit (odo:raid hed))
   ?.  &(?=({$$ @ @} a) =(hed p.p.a))  ~
@@ -50,7 +50,7 @@
   |%  ++  txt
     |=  a/wain  ^+  taz
     =+  ~[id=%uv "_" date-created=%da " " version=%ud date-modified=%da]
-    =^  b  a  (advance a ;~(plug (parse -) (punt (parse " " %da ~))))
+    =^  b  a  (advance a ;~(plug (parse -< ->) (punt (parse " " %da ~))))
     =+  [-.b `date-due/(unit @da)`+.b]
     =^  tags   a  (undent a ~(gas in *(set cord)))
     =^  title  a  ?~(a !! a)
@@ -61,11 +61,13 @@
     :*  id  date-created  version   date-modified  creator
         doer  tags  date-due  done  title  description  ::  XX done
         |-  ^-  (list comment)
-        ?:  =(~ a)  ~
-        =^  b  a  (advance a (parse ship=%p " " date=%da ~))
-        =+  b
-        =^  body  a  (undent a role)
-        [[date ship body] $]
+        ~|  %dead-code-incomprehensible-and-doesnt-compile
+        !!
+        ::  ?:  =(~ a)  ~
+        ::  =^  b  a  (advance a (parse ship=%p " " date=%da ~))
+        ::  =+  b
+        ::  =^  body  a  (undent a role)
+        ::  [[date ship body] $]  
     ==
   --
 ++  grow

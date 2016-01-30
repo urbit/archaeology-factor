@@ -1,13 +1,13 @@
 ::                                                      ::  ::
-::::  /hoon+oct3/lib                                    ::::::  dependencies
+::::  /hoon+oct4/lib                               ::  ::  dependencies
   ::                                                    ::  ::
 /?    310                                               ::  arvo version
-/-    oct3                                              ::  structures
+/-    oct4                                             ::  structures
 ::                                                      ::  ::
-::::                                                    ::::::  semantics
+::::                                                    ::  ::  semantics
   !:                                                    ::  ::
-[. ^oct3]
-|%                                                      ::
+[. ^oct4]
+|%
 ++  icon   |=(? ?:(+< 'X' 'O'))                         ::  display at
 ++  bo                                                  ::  per board
   |_  bud/board                                         ::
@@ -16,8 +16,8 @@
   ++  jon  a+(turn (gulf 0 9) |=(@ b+(bit +<)))         ::  to json
   ++  off  |=(point (add x (mul 3 y)))                  ::  bitfield address
   ++  set  |=(point (con bud (bex (off +<))))           ::  set point
-  ++  win  %-  lien  :_  |=(a/@ =(a (dis a bud)))       ::  test for win
-           (rip 4 0wl04h0.4A0Aw.4A00s.0e070)            ::  with bitmasks
+  ++  win  %+  lien  (rip 4 0wl04h0.4A0Aw.4A00s.0e070)  ::  test for win
+           |=(a/@ =(a (dis a bud)))                     ::  
   --                                                    ::
 ++  go                                                  ::  play from
   |_  {src/ship game}                                   ::
@@ -38,7 +38,7 @@
            $(+< t.+<, aud ((stat ship) & i.+< aud))     ::
   ++  nam  =+  ?:  =(p.sag `src)  ['=' (icon &) ~]      ::  print name
                ?:  =(q.sag `src)  ['=' (icon |) ~]      ::
-           ""  (welp (scow %p src) `tape`-)             ::
+           ""  (weld (scow %p src) `tape`-)             ::
   ++  new  +<+(boo 0, box 0, who &, sag [~ ~])          ::  reset game
   ++  oth  own(who !who)                                ::  who owns other turn
   ++  own  ?:(who p.sag q.sag)                          ::  who owns this turn
