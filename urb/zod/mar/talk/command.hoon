@@ -20,14 +20,15 @@
         ==
     |%
     ++  op                                              ::  parse keys of map
-      |*  {fel/rule wit/fist}
-      %+  cu  mo
-      %-  ci  :_  (om wit)
-      |=  a/(map cord _(need *wit))
-      ^-  (unit (list _[(wonk *fel) (need *wit)]))
-      (zl (turn (~(tap by a)) (head-rush fel)))
+      |*  {fel/rule wit/fist}  
+      %+  cu  malt  
+      %+  ci
+        |=  a/(map cord _(need *wit))
+        ^-  (unit (list _[(wonk *fel) (need *wit)]))
+        (zl (turn (~(tap by a)) (head-rush fel)))
+      (om wit)
     ::
-    ++  ke                                              ::  callbacks
+    ++  ke                                              ::  callbacks  
       |*  {gar/* sef/_|.(fist)}
       |=  jon/json
       ^-  (unit _gar)
@@ -35,10 +36,8 @@
       ((sef) jon)
     ::
     ++  as                                              ::  array as set
-      :: |*(a=fist (cu sa (ar a)))  ::  XX  types
       |*  a/fist 
-      %-  cu  :_  (ar a)
-      ~(gas in *(set _(need *a)))
+      (cu ~(gas in *(set _(need *a))) (ar a))
     ::
     ++  lake  |*(a/_* $+(json (unit a)))
     ++  peach
@@ -50,24 +49,31 @@
     ::
     ++  head-rush
       |*  a/rule
-      |*  {b/cord c/*}
-      =+  nit=(rush b a) 
+      |*  {cord *}
+      =+  nit=(rush +<- a) 
       ?~  nit  ~
-      (some [u.nit c])
+      (some [u.nit +>->])  
     ::
     ::
     ++  thot
       ^-  $+(json (unit thought))
       %-  ot  :~
-        serial+(ci (slat %uv) so)
+        serial+ceri  
         audience+audi 
         statement+stam
       ==
     ::
-    ++  audi  (op parn memb)                            ::  audience
-    ++  auri  (op parn (ci (soft presence) so))
-    ++  memb  (ot envelope+lope delivery+(ci (soft delivery) so) ~)
-    ++  lope  (ot visible+bo sender+(mu (su parn)) ~)
+    ++  ceri
+      ^-  $+(json (unit serial))
+      (ci (slat %uv) so)
+    ::
+    ++  audi  
+      ^-  $+(json (unit audience))
+      (op parn memb) 
+    ::
+    ++  auri  (op parn (ci (soft presence) so))  
+    ++  memb  (ot [envelope+lope delivery+(ci (soft delivery) so) ~])
+    ++  lope  (ot [visible+bo sender+(mu (su parn)) ~])  
     ::
     ++  parn
       ^-  $+(nail (like partner))
