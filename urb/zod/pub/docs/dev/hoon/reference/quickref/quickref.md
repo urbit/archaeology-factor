@@ -235,50 +235,72 @@ produces a cell of a new value of `q`, and a new subject. XX
 
 ##### / : Library access
 
+`//` Load a file between twigs
+
+`/~` Cached computation, similar to a `=+` at the top of the file
+
+`/$` Pull in dynamic request data, slam it through a gate
+
+`/=` Horn form of `^=`. Puts a face on a cached computation
+
+`/^` Horn form of `^-`
+
+`/;` Apply gate to result of horn
+
+`/,` Appen path to current working beam before computing horn
+
+`/:` Replace beam
+
+`/%` Reifiy the 'heel' virtual path, letting any requested resource interpret it further
+
+`/.` Construct list of specified horns
+
+`/*` similar to `/.`, but produces a map instead
+
+`/_` descend into each available subdirectory, construct a map from all successfully building versions
+
+`/&` Parse directory name as `@da`
+
+`/|` Parse directory name as `@dr`
 
 ##### ~ : Compiler hints
 
-`~$`
+`~$` Label computation `q` as `p` for profiling
 
-`~|`
+`~|` `p` in stacktrace if `q` crashes
 
-`~_`
+`~_` Preformatted stackframe `p` (a trap producing a `++tank`) into stacktrace
 
-`~%`
+`~%` i.p i.t.p i.t.t.pRegister jet in core `s`
 
-`~/`
+`~/` XX
 
-`~<`
+`~<` Hint to product; applies arbitrary hint `p` to the product of `q`, which is computed beforehand
 
-`~>`
+`~>` Arbitrary hint `p` to `q`
 
-`~+`
+`~+` Memoize computation of `p`
 
-`~&`
+`~&` Printf
 
-`~=`
+`~=` Hint to avoid duplication
 
-`~?`
+`~?` PrintF if `q` is true
 
-`~!`
+`~!` Print type on compilation fail
 
 ##### ! : Special runes
 
-`!_`
+`!_` Path and range in stack trace
 
-`!,`
+`!>` Produces a cell of both the type and value of `p` (called a `++vase`).
+Useful for debugging.
 
-`!/`
+`!=` Show nock of `p`
 
-`!>`
+`!?` Enforce a Hon version restriction
 
-`!;`
-
-`!=`
-
-`!?`
-
-`!!`
+`!!` Crash
 
 - Most runes have a predetermined amount of children, and thus do not need to be closed.
 - Runes that accept an arbitrary number of children are typically closed with `==`.
