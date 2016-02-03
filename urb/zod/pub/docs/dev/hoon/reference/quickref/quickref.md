@@ -311,10 +311,6 @@ Useful for debugging.
   - Backstep pattern.
   - in some cases, the second glyph denotes how many 'children' a rune accepts.
 
-
-
-Include ford runes
-
 ####Data types
 
 #####Strings
@@ -384,12 +380,19 @@ Faces allow you to access specific axes within your context:
 
 ######Lists are null-terminated and have faces of `i` and `t`
 
-`++limo` makes a list out of a null terminated tuple.
+- Definition:
+
+`++  list  |*  a=_,*                                     ::  null-term list
+          $|(~ [i=a t=(list a)])                        ::
+`
+
+- Constructor: `++limo` makes a list out of a null terminated tuple.
+
 `(limo [67 55 201 ~])` > `[i=67 t=[i=55 t=[i=201 t=~]]]`
 
-``` `(list ,@t)``(list ,@)`~[67 55] ``` >  `<|C 7|>`
+``(list ,@t)`(list ,@)\`~[67 55] >  <|C 7|>``
 
-Functions:
+- Operations:
 
 `++weld`: concatenate
 `++scag`: slice up to (and including) index number args: (index, list)
@@ -401,19 +404,105 @@ Functions:
 
 ######Map
 
+- Definition:
+
+` ++  map  |*  [a=_,* b=_,*]                              ::  associative tree
+         $|(~ [n=[p=a q=b] l=(map a b) r=(map a b)])    ::
+`
+
+- Constructor: `++mo` produces a map of key-val pairs from left-right cell pairs of a list
+
+`
+    ~zod/try=> (mo \`(list ,[@t *])\`[[a 1] [b 2] ~])
+    {[p=a q=1] [p=b q=2]}
+`
+
+- Operations: contained within the `++by` core
+
+`++by` accepts a map, then we use `%~` to pull the desired arm, which we then
+pass the remainder of the arguments
+
+`
+> =m (mo \`(list ,[@t *])\`[['a' 1] ['b' 2] ~])
+> (~(got by m) 'a')
+1
+`
+
+`+-all:by`: logical 'AND'
+`+-any:by`: logical 'OR'
+`+-del:by`: delete at key
+`+-dig:by`: axis of key
+`+-gas:by`: concatenate: insert a list of key-value pairs into map
+`+-get:by`: pull out value at key as a unit
+`+-got:by`: assert: pull value at key, crash if key doesn't exist
+`+-has:by`: check if key exists
+`+-int:by`: intersection: if keys match, use value from `b`
+`+-put:by`: add key value pair
+`+-rep:by`: fold over map
+`+-run:by`: 'map' over map
+`+-tap:by`: convert map to list
+`+-uni:by`: produce union between keys; if both share keys, use value from `a`
+`+-urn:by`: 'map', with key included with value as input to mapping function
+`+-wyt:by`: produce depth of tree of map
+
 ######Set
+
+- Definition:
+
+` 
+    ++  set  |*  a=_,*                                      ::  set
+             $|(~ [n=a l=(set a) r=(set a)])                ::
+`
+
+- Constructor: `++sa`
+
+`
+    ~zod/try=> (sa \`(list ,@)\`[1 2 3 4 5 ~])
+    {5 4 1 3 2}
+`
+
+- Operations: contained within the `++in` core
+
+The `++in` core accepts a set, then we use `%~` to pull desired operation out
+of it, which we then pass the remainder of the arguments.
+
+    > =a (~(gas in `(set ,@t)`~) `(list ,@t)`[`a` `b` `c` ~])
+    > (~(has in a) `a`)
+    %.y
+
+
+`+-all:in`: logical 'AND'
+`+-any:in`: logical 'OR'
+`+-del:in`: delete val at key
+`+-dif:in`: difference between sets
+`+-dig:in`: produce axis `b` in set
+`+-gas:in`: concatenate: insert elements of list `b` into set
+`+-has:in`: check if element exists in set
+`+-int:in`: intersection
+`+-put:in`: add an element to set
+`+-rep:in`: fold over set
+`+-tap:in`: convert set to list
+`+-uni:in`: produces the union between two sets
+`+-wyt:in`: Produces the number of elements in set
 
 #####Addressing within nouns
 
-XXincomplete
-
 There are several ways you can address an axes of a noun:
 
-1. If it has a face: `[face].[noun]`
-2. `.face.+..`
-3. +>-<
-4. |[number]
-5. &[number]
+1. `[face].[variable-name]`
+
+2. `-.+.+.a`: 'the head, within the tail of the tail of `a`.'
+
+Can also intersperse faces: `+.a.b` reads 'the tail of `a` within `b`.
+
+3. `->+.a`: 'tail within the head of the head of `a`.'
+
+Must start with either `-` (head) or `+` (tail), and then follow with either `<` (head) or `>` (tail), so
+as to not repeat two symbols. 
+
+4. `|[number].[var]` returns the elements that follow the nth element in a list
+
+5. `&[number]` returns the nth element in a list. Cannot return the last element.
 
 ####Error messages
 
