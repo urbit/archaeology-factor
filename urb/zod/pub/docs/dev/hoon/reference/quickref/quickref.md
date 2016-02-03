@@ -12,6 +12,25 @@ column 57.
 
 ####Runes (Expressions)
 
+- Most runes have a predetermined amount of children, and thus do not need to be closed.
+
+- Runes that accept an arbitrary number of children are typically closed with
+  `==`, with the exception being the `|` runes, some of which are closed with
+  `--`.
+
+- In some cases, the second glyph denotes how many 'children' a rune accepts:
+
+  `-` two 
+  `+` three
+  `^` four
+
+- Backstep pattern: in order to avoid excess parentheses as well as code that
+  flows off the page, the last child of a rune should fall directly below it.
+  The first child should be the furthest to the right, with every subsequent
+  rune 'backstepping' two spaces towards the last child.
+  
+  XX
+
 The first glyph in a rune defines a rough semantic category of expressions:
 
 ##### ? : Conditional statements
@@ -302,14 +321,6 @@ Useful for debugging.
 
 `!!` Crash
 
-- Most runes have a predetermined amount of children, and thus do not need to be closed.
-- Runes that accept an arbitrary number of children are typically closed with `==`.
-  - Exception being the `|` runes, some of which are closed with `--`.
-
-- Tips
-
-  - Backstep pattern.
-  - in some cases, the second glyph denotes how many 'children' a rune accepts.
 
 ####Data types
 
