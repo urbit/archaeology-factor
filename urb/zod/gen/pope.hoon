@@ -4,7 +4,7 @@
 ::  Input twitter keys
 /-    sole
 !:
-=+  cryp=bruw                         ::  XX  change to ec2 ++brew eventually
+=+  cryp=brew
 =+  [sole]
 :-  %ask
 |=  $:  [now=@da eny=@uvI bec=beak]
@@ -18,7 +18,7 @@
 %+  sole-lo  [%| %pope-none "[press enter to compute]"]  :: XX oy
 %+  sole-go  (easy ~)
 |=  ~
-=+  bur=(shax (add who (shax fra)))
+=+  bur=(shaz (add who (shaz fra)))
 ~&  %computing-fingerprint
 =+  arc=(cryp 2.048 bur)
 %+  sole-so  %tang

@@ -72,8 +72,8 @@
 ++  poke-begin                                        ::  make/send keypair
   |=  hood-begin  =<  abet
   ?>  ?=(~ bur)
-  =+  buz=(shax :(mix (jam ges) eny))
-  =+  loy=(bruw 2.048 buz)
+  =+  buz=(shaz :(mix (jam ges) eny))
+  =+  loy=(brew 2.048 buz)
   %-  emit(bur `[his [0 sec:ex:loy]~])
   [%wont /helm/ticket [our (sein his)] /a/ta his tic ges pub:ex:loy]
 ::
