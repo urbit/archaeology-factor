@@ -2,7 +2,6 @@
 ::::  /hoon/urb/mar
   ::
 /?  314
-:: /=  dep  /$  |=([^ but=path] `@uvH`?>(?=([%dep @ ~] but) (slav %uv i.t.but)))
 !:
 |_  own/manx
 ::
@@ -14,7 +13,13 @@
 ++  grab  
   |%                                                    ::  convert from
   ++  noun  manx                                        ::  clam from %noun
+<<<<<<< HEAD
   ++  hymn                                              ::  inject into %hymn
     |=  old/manx  old                                   ::  moved to %eyre
+=======
+  ::  conversion from hymn is handled specially by %eyre,
+  ::  which injects dependency information
+  ::  ++  hymn  !!                                      ::  inject into %hymn
+>>>>>>> galenwp/factor
   --
 --

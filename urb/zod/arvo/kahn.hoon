@@ -1,6 +1,10 @@
 ::    %kahn, social state
 ::
+<<<<<<< HEAD
 ::::  /hoon+kahn
+=======
+::::  /hoon/kahn/arvo
+>>>>>>> galenwp/factor
   ::
 !?  164
 ::::

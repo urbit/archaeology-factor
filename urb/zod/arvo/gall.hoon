@@ -210,7 +210,7 @@
     ::  ~&  [%mo-boot dap how byk]
     %+  mo-pass  [%sys how dap (scot %p p.byk) q.byk (scot r.byk) ~]
     ^-  note-arvo
-    [%f %exec our `[byk %core [byk [dap %ape ~]]]]
+    [%f %exec our `[byk %core [byk [dap %app ~]]]]
   ::
   ++  mo-away                                           ::  foreign request
     |=  {him/ship caz/cush}                             ::  
@@ -1152,6 +1152,7 @@
       ^-  (unit @tas)
       ?+  sep  ~&  [%ap-vain sep]
                ~
+<<<<<<< HEAD
         $cash  `%a
         $conf  `%g
         $deal  `%g
@@ -1167,6 +1168,24 @@
         $want  `%a
         $wont  `%a                                      ::  XX for begin; remove
         $warp  `%c
+=======
+        %cash  `%a
+        %conf  `%g
+        %deal  `%g
+        %exec  `%f
+        %flog  `%d
+        %drop  `%c
+        %info  `%c
+        %merg  `%c
+        %mont  `%c
+        %ogre  `%c
+        %serv  `%e
+        %them  `%e
+        %wait  `%b
+        %want  `%a
+        %wont  `%a                                      ::  XX for begin; remove
+        %warp  `%c
+>>>>>>> galenwp/factor
       ==
     --
   --

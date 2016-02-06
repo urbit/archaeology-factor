@@ -1120,6 +1120,7 @@
   ?:(=(~ fyl) ~ [(crip (flop fyl)) ~])
 ::
 ++  fuel                                                ::  parse fcgi
+<<<<<<< HEAD
   |=  {bem/beam but/path}
   ^-  epic
   ?>  ?=({$web @ *} but)
@@ -1146,6 +1147,13 @@
       bem
       t.t.but
   ==
+=======
+  =+  packed-quay=|-($|(~ [p=@t q=@t t=$]))
+  |=  [bem=beam ced=noun:cred quy=packed-quay]
+  ^-  epic
+  =+  qix=|-(`quay`?~(quy quy [[p q]:quy $(quy t.quy)]))
+  [(mo qix) ((hard cred) ced) bem /]
+>>>>>>> galenwp/factor
 ::
 ++  sifo                                                ::  64-bit encode
   |=  tig/@
@@ -1256,10 +1264,17 @@
   =<  |=(pul/purl `tape`(apex %& pul))
   |%
   ++  apex
+<<<<<<< HEAD
     |=  qur/quri
     ?-  -.qur
       $&  (weld (head p.p.qur) `tape`['/' $(qur [%| +.p.qur])])
       $|  (weld (body p.qur) (tail q.qur))
+=======
+    |=  qur=quri  ^-  tape
+    ?-  -.qur
+      %&  (weld (head p.p.qur) $(qur [%| +.p.qur]))
+      %|  ['/' (weld (body p.qur) (tail q.qur))]
+>>>>>>> galenwp/factor
     ==
   ::
   ++  body
@@ -1284,7 +1299,7 @@
             ?~(rit ~ (weld (trip i.rit) ?~(t.rit "" `tape`['.' $(rit t.rit)])))
       ==
     ::
-      ?~(q.har ~ `tape`[':' (trip (rsh 3 2 (scot %ui u.q.har)))])
+      ?~(q.har ~ `tape`[':' ((d-co:co 1) u.q.har)])
     ==
   ::
   ++  tail
@@ -2142,6 +2157,7 @@
   ==                                                    ::
 ::::                                                    ::
 ++  kiss-eyre                                           ::  in request ->$
+<<<<<<< HEAD
           $%  {$born $~}                                ::  new unix process
               {$crud p/@tas q/(list tank)}              ::  XX rethink
               {$hiss p/mark q/cage}                     ::  outbound user req
@@ -2152,6 +2168,19 @@
               {$thud $~}                                ::  inbound cancel
               {$wegh $~}                                ::  report memory
               {$west p/sack q/fuz:gram}                 ::  network request
+=======
+          $%  [%born ~]                                 ::  new unix process
+              [%crud p=@tas q=(list tank)]              ::  XX rethink
+              [%hiss p=mark q=cage]                     ::  outbound user req
+              [%init p=@p]                              ::  report install
+              [%serv p=$|(desk beam)]                   ::  set serving root
+              [%them p=(unit hiss)]                     ::  outbound request
+              [%they p=@ud q=httr]                      ::  inbound response
+              [%this p=? q=clip r=httq]                 ::  inbound request
+              [%thud ~]                                 ::  inbound cancel
+              [%wegh ~]                                 ::  report memory
+              [%west p=sack q=fuz:gram]                 ::  network request
+>>>>>>> galenwp/factor
           ==                                            ::
 ++  gift-eyre                                           ::  out result <-$
           $%  {$mass p/mass}                            ::  memory usage
@@ -2178,6 +2207,7 @@
       {$| p/beam}                                       ::  resource location   
   ==                                                    ::
 ++  horn                                                ::  resource tree
+<<<<<<< HEAD
   $%  {$ape p/twig}                                     ::  /~  twig by hand
       {$arg p/twig}                                     ::  /$  argument
       {$day p/horn}                                     ::  /|  list by @dr
@@ -2241,6 +2271,48 @@
       {$tabl p/(list (pair silk silk))}                 ::  list
       {$vale p/mark q/*}                                ::  validate
       {$volt p/(cask *)}                                ::  unsafe add type
+=======
+  $%  [%ape p=twig]                                     ::  /~  twig by hand
+      [%arg p=twig]                                     ::  /$  argument
+      [%alt p=(list horn)]                              ::  /|  options
+      [%dub p=term q=horn]                              ::  /=  apply face
+      [%fan p=(list horn)]                              ::  /.  list
+      [%for p=(list (pair path:spur horn))]             ::  /,  switch by path
+      [%hel p=horn]                                     ::  /%  propagate args
+      [%lin p=(list mark) q=horn]                       ::  /&  translates
+      [%man p=(map span horn)]                          ::  /*  hetero map
+      [%nap p=horn]                                     ::  /_  homo map
+      [%now p=horn]                                     ::  /@  list by @da
+      [%saw p=twig q=horn]                              ::  /;  operate on
+      [%see p=beam q=horn]                              ::  /:  relative to
+      [%sic p=tile q=horn]                              ::  /^  cast
+      [%toy p=? q=mark]                                 ::  /mark/  static/hook
+  ==                                                    ::
+++  milk  (trel ship desk silk)                         ::  sourced silk
+++  silk                                                ::  construction layer
+  $&  [p=silk q=silk]                                   ::  cons
+  $%  [%$ p=cage]                                       ::  literal
+      [%alts p=(list silk)]                             ::  options
+      [%bake p=mark q=coin r=beam]                      ::  local synthesis
+      [%bunt p=mark]                                    ::  example of mark
+      [%call p=silk q=silk]                             ::  slam
+      [%cast p=mark q=silk]                             ::  translate
+      [%core p=beam]                                    ::  build program
+      [%diff p=silk q=silk]                             ::  diff
+      [%dude p=(trap tank) q=silk]                      ::  error wrap
+      [%file p=beam]                                    ::  from clay
+      [%flag p=(set $|(@uvH beam)) q=silk]              ::  add dependencies
+      [%join p=mark q=silk r=silk]                      ::  merge
+      [%mash p=mark q=milk r=milk]                      ::  annotate
+      [%mute p=silk q=(list (pair wing silk))]          ::  mutant
+      [%pact p=silk q=silk]                             ::  patch
+      [%plan p=beam q=coin r=hood]                      ::  structured assembly
+      [%reef ~]                                         ::  kernel reef
+      [%ride p=twig q=silk]                             ::  silk thru twig
+      [%tabl p=(list (pair silk silk))]                 ::  list
+      [%vale p=mark q=*]                                ::  validate
+      [%volt p=(cask ,*)]                               ::  unsafe add type
+>>>>>>> galenwp/factor
   ==                                                    ::
 ::::
 ++  bilk  (pair beak silk)                              ::  sourced request

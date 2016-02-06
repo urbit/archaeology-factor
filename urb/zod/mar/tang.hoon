@@ -1,5 +1,9 @@
 ::
+<<<<<<< HEAD
 ::::  /hoon+core+tang+mar
+=======
+::::  /hoon/tang/mar
+>>>>>>> galenwp/factor
   ::
 /?  314
 !:

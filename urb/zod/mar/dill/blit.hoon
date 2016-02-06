@@ -1,5 +1,9 @@
 ::
+<<<<<<< HEAD
 ::::  /hoon+dill-blit+mar
+=======
+::::  /hoon/blit/dill/mar
+>>>>>>> galenwp/factor
   ::
 /?    314
 /-    sole

@@ -4641,7 +4641,7 @@
   ^-  toon
   ?.  ?=({$2 *} ton)  ton
   :-  %2
-  =.  p.ton  (moop p.ton)
+  :: =.  p.ton  (moop p.ton)
   =+  yel=(lent p.ton)
   =.  p.ton
     ?.  (gth yel 256)  p.ton
@@ -8995,14 +8995,14 @@
       {$lead *}  (wrap(sut $(gen p.gen)) %lead)
       {$type *}  ~_(duck(sut ^$(gen p.gen)) $(gen q.gen))
       {$hint *}  $(gen q.gen)
-      {$per *}  $(gen q.gen, sut $(gen p.gen))
-      {$aka *}  $(gen r.gen, sut (buss p.gen q.gen))
-      {$if *}  =+  [fex=(gain p.gen) wux=(lose p.gen)]
+      {$per *}   $(gen q.gen, sut $(gen p.gen))
+      {$aka *}   $(gen r.gen, sut (buss p.gen q.gen))
+      {$if *}    =+  [fex=(gain p.gen) wux=(lose p.gen)]
                  %-  fork  :~
                    ?:(=(%void fex) %void $(sut fex, gen q.gen))
                    ?:(=(%void wux) %void $(sut wux, gen r.gen))
                  ==
-      {$fit *}  bool
+      {$fit *}   bool
       {$dbug *}  ~_((show %o p.gen) $(gen q.gen))
       {$twig *}  (play p.gen)
       {$wrap *}  %=    $

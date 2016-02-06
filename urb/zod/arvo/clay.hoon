@@ -575,7 +575,7 @@
       %+  skid  `(list (pair path miso))`ins
       |=  {pax/path mis/miso}
       ?>  ?=($ins -.mis)
-      ?&  ?=({$?($hoon $hook) *} (flop pax))
+      ?&  ?=({$hoon *} (flop pax))
           ?=($mime p.p.mis)
       ==
     =.  +>.$
@@ -1374,8 +1374,6 @@
         ?:  (~(has by hat) pax)  !!                     ::
         %+  ~(put by bar)  pax
         %-  make-direct
-        ?:  &(?=($mime -.p.mys) =([%hook ~] (slag (dec (lent pax)) pax)))
-          `page`[%hook +.+.q.q.p.mys]
         ?:  &(?=($mime -.p.mys) =([%hoon ~] (slag (dec (lent pax)) pax)))
           `page`[%hoon +.+.q.q.p.mys]
         [p q.q]:p.mys
@@ -1628,7 +1626,7 @@
       ?~  lob
         [~ ~]
       =+  mar=(lobe-to-mark u.lob)
-      ?.  ?=(?($hoon $hook) mar)
+      ?.  ?=($hoon mar)
         [~ ~ %| u.lob]
       :^  ~  ~  %&
       :+  mar  [%atom %t ~]
@@ -2651,10 +2649,8 @@
           |=  {a/path b/miso}
           ?&  ?=($ins -.b)
               ?=($mime p.p.b)
-              =+  (slag (dec (lent a)) a)
-              ?|  =([%hook ~] -)
-                  =([%hoon ~] -)
-          ==  ==
+              ?=({$hoon $~} (slag (dec (lent a)) a))
+          ==
       :~  [hen %pass /one %c %info p.bem q.bem %& one]
           [hen %pass /two %c %info p.bem q.bem %& two]
       ==

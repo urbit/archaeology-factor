@@ -32,13 +32,35 @@
 ::     pax/(cu deft (su fel:stab))
 ::     dat/(of json/some mime/(pe / (cu taco so)) ~)    ::  XX mite
 ::   ==
+++  poke-wipe
+  |=  sup=spur  ^+  abet                ::  XX determine extension, beak
+  =+  ext=%md
+  ?~  (file (tope beak-now [ext sup]))
+    ~|(not-found/[ext `path`(flop sup)] !!)
+  =-  abet:(emit %info write/~ our -)
+  (fray (tope beak-now [ext sup]))
+::
+++  poke-tree
+  |=  [sup=spur mim=mime]  ^+  abet     ::  XX determine extension, beak
+  (poke--data [`%md (flop sup)] %mime mim)
 ::
 ++  poke-paste
   |=  {typ/?($hoon $md $txt) txt/@t}  ^+  abet
   (poke-data [`typ /web/paste/(scot %da now)] %mime / (taco txt))
 ::
+<<<<<<< HEAD
 ++  poke-data
   |=  {{ext/(unit @t) pax/path} dat/data}  ^+  abet
+=======
+++  poke-comment
+  |=  [pax=path txt=@t]  ^+  abet
+  =.  pax  [%web (welp pax /(scot %da now))]
+  =.  txt  (rap 3 (scot %p src) ': ' txt ~)
+  (poke--data [`%comment-md pax] %mime / (taco txt))
+::
+++  poke--data
+  |=  [[ext=(unit ,@t) pax=path] dat=data]  ^+  abet
+>>>>>>> galenwp/factor
   ?~  ext  $(ext [~ -.dat])
   =+  cay=?-(-.dat $json [-.dat !>(+.dat)], $mime [-.dat !>(+.dat)])
   ?:  =(u.ext -.dat)  
@@ -48,12 +70,21 @@
   [our ~ beak-now %cast u.ext `cay]
 ::
 ++  made
+<<<<<<< HEAD
   |=  {pax/wire @ res/gage}  ^+  abet
   ?.  =(our src)
     ~|(foreign-write+[our=our src=src] !!)
   ?+  -.res  ~|(gage+-.res !!)
     $|  (mean p.res)
     $&  =-  abet:(emit %info write+~ our -)
+=======
+  |=  [pax=wire @ res=gage]  ^+  abet
+  :: ?.  =(our src)
+  ::   ~|(foreign-write/[our=our src=src] !!)
+  ?+  -.res  ~|(gage/-.res !!)
+    %|  (mean p.res)
+    %&  =-  abet:(emit %info write/~ our -)
+>>>>>>> galenwp/factor
         (foal :(welp (tope beak-now ~) pax /[-.p.res]) p.res)
   ==
 --
