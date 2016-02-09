@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-!:  
-=======
 ::
 ::::  /hoon/react/lib
   ::
@@ -52,15 +49,10 @@
     (jape v.i.a.g.src)
   =+  atr=(molt `(list (pair mane tape))`a.g.src)  
   ?:  (~(has by atr) [%urb %codemirror])
-<<<<<<< HEAD
-    ?>  ?=({{$pre *} _;/(**) $~} src)
-    $(src ;codemirror(value "{v.i.a.g.i.c.src}");)
-=======
-    ?>  ?=([[%pre *] _:/(**) ~] src)
+    ?>  ?=({{%pre *} _;/(**) $~} src)
     =.  a.g.src
-      [value/v.i.a.g.i.c.src (skip a.g.src |=([a=mane *] ?=(^ a)))]
+      [value+v.i.a.g.i.c.src (skip a.g.src |=({a/mane *} ?=(^ a)))]
     $(src [[%codemirror a.g.src] ~])
->>>>>>> galenwp/factor
   ?:  (~(has by atr) [%urb %exec])           ::  runnable code attribute tag
     ?>  ?=({{$pre *} _;/(**) $~} src)      ::  verify its only a text node
     =*  code  v.i.a.g.i.c.src  

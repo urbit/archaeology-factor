@@ -50,20 +50,12 @@
 =+  sez=(fall (~(get by hoc) ost) *helm-session)
 =>  |%                                                ::  arvo structures
     ++  card                                          ::
-<<<<<<< HEAD
-      $%  {$cash wire p/@p q/buck}                    ::
-          {$conf wire dock $load ship term}           ::
-          {$flog wire flog}                           ::
-          {$poke wire dock pear}                      ::
-          {$wont wire sock path *}                    ::  send message
-=======
-      $%  [%cash wire p=@p q=buck]                    ::
-          [%conf wire dock %load ship term]           ::
-          [%flog wire flog]                           ::
-          [%serv wire ?(desk beam)]                   ::
-          [%poke wire dock pear]                      ::
-          [%wont wire sock path *]                    ::  send message
->>>>>>> galenwp/factor
+      $%  {$cash wire p/@p q/buck]                    ::
+          {$conf wire dock $load ship term]           ::
+          {$flog wire flog]                           ::
+          {$serv wire ?(desk beam)]                   ::
+          {$poke wire dock pear]                      ::
+          {$wont wire sock path *]                    ::  send message
       ==                                              ::
     ++  move  (pair bone card)                        ::  user-level move
     ++  pear                                          ::  poke fruit
@@ -109,15 +101,11 @@
   %^  emit  %poke  /helm/ask/(scot %p ~doznec)
   [[~doznec %ask] %ask-mail mel]
 ::
-<<<<<<< HEAD
-++  poke-hi  |=(mes/@t abet:(emit %flog /di %text "< {<src>}: {(trip mes)}"))
-=======
 ++  poke-serve
-  |=  top=?(desk beam)  =<  abet
+  |=  top/?(desk beam)  =<  abet
   (emit %serv /helm/serv top)
 ::
-++  poke-hi  |=(mes=@t abet:(emit %flog /di %text "< {<src>}: {(trip mes)}"))
->>>>>>> galenwp/factor
+++  poke-hi  |=(mes/@t abet:(emit %flog /di %text "< {<src>}: {(trip mes)}"))
 ++  coup-hi
   |=  {pax/path cop/(unit tang)}  =<  abet
   ?>  ?=({@t $~} pax)

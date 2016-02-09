@@ -1,10 +1,5 @@
-<<<<<<< HEAD:urb/zod/ape/hood.hoon
-::                                                      ::  ::  
-::::  /hoon+hood+ape                                    ::  ::
-=======
 ::                                                      ::  ::
 ::::  /hoon/hood/app                                    ::  ::
->>>>>>> galenwp/factor:urb/zod/app/hood.hoon
   ::                                                    ::  ::
 /?  314                                                 ::  zuse version
 /+  sole, talk, helm, kiln, drum ::, write                 ::  libraries
@@ -112,11 +107,8 @@
 ++  poke-helm-reload          (wrap poke-reload):from-helm
 ++  poke-helm-reload-desk     (wrap poke-reload-desk):from-helm
 ++  poke-helm-reset           (wrap poke-reset):from-helm
-<<<<<<< HEAD:urb/zod/ape/hood.hoon
 ++  poke-helm-deset           (wrap poke-deset):from-helm
-=======
 ++  poke-helm-serve           (wrap poke-serve):from-helm
->>>>>>> galenwp/factor:urb/zod/app/hood.hoon
 ++  poke-helm-send-hi         (wrap poke-send-hi):from-helm
 ++  poke-helm-send-ask        (wrap poke-send-ask):from-helm
 ++  poke-helm-verb            (wrap poke-verb):from-helm
@@ -137,14 +129,11 @@
 ++  poke-kiln-overload        (wrap poke-overload):from-kiln
 ++  poke-kiln-unmount         (wrap poke-unmount):from-kiln
 ++  poke-kiln-unsync          (wrap poke-unsync):from-kiln
-<<<<<<< HEAD:urb/zod/ape/hood.hoon
 :: ++  poke-write-paste          (wrap poke-paste):from-write
-=======
-++  poke-write-comment        (wrap poke-comment):from-write
-++  poke-write-paste          (wrap poke-paste):from-write
-++  poke-write-tree           (wrap poke-tree):from-write
-++  poke-write-wipe           (wrap poke-wipe):from-write
->>>>>>> galenwp/factor:urb/zod/app/hood.hoon
+:: ++  poke-write-comment        (wrap poke-comment):from-write
+:: ++  poke-write-paste          (wrap poke-paste):from-write
+:: ++  poke-write-tree           (wrap poke-tree):from-write
+:: ++  poke-write-wipe           (wrap poke-wipe):from-write
 ++  poke-will                 (wrap poke-will):from-helm
 ++  quit-drum-phat            (wrap quit-phat):from-drum
 ++  reap-drum-phat            (wrap reap-phat):from-drum

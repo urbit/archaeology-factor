@@ -1,10 +1,6 @@
 ::  ConCATenate file listings
 ::  
-<<<<<<< HEAD
-::::  /hoon+gen+cat
-=======
 ::::  /hoon/cat/gen
->>>>>>> galenwp/factor
   ::
 //  /%%/ls+subdir
 //  /%/pretty

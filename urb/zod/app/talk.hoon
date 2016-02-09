@@ -2146,25 +2146,15 @@
   =+  grams:(~(got by stories) man)
   [ost.hid %info /jamfile our.hid (foal paf [%talk-telegrams !>(-)])]
 ::
-<<<<<<< HEAD:urb/zod/ape/talk.hoon
-++  poke-save
-  |=  man/knot
-=======
 ++  poke-talk-save
-  |=  man=span
->>>>>>> galenwp/factor:urb/zod/app/talk.hoon
+  |=  man/knot
   ^-  (quip move +>)
   =+  paf=/(scot %p our.hid)/home/(scot %da now.hid)/talk/[man]/talk-telegrams
   =+  grams:(~(got by stories) man)
   [[ost.hid %info /jamfile our.hid (foal paf [%talk-telegrams !>(-)])]~ +>.$]
 ::
-<<<<<<< HEAD:urb/zod/ape/talk.hoon
-++  poke-load
-  |=  man/knot
-=======
 ++  poke-talk-load
-  |=  man=span
->>>>>>> galenwp/factor:urb/zod/app/talk.hoon
+  |=  man/knot
   =+  ^=  grams
       .^  (list telegram)
           %cx
@@ -2173,25 +2163,15 @@
   =+  toy=(~(got by stories) man)
   [~ +>.$(stories (~(put by stories) man toy(grams grams, count (lent grams))))]
 ::
-<<<<<<< HEAD:urb/zod/ape/talk.hoon
-++  poke-log
-  |=  man/knot
-=======
 ++  poke-talk-log
-  |=  man=span
->>>>>>> galenwp/factor:urb/zod/app/talk.hoon
+  |=  man/knot
   ~&  %poke-log
   ^-  (quip move +>)
   :-  [(log-to-file man) ~]
   +>.$(log (~(put by log) man count:(~(got by stories) man)))
 ::
-<<<<<<< HEAD:urb/zod/ape/talk.hoon
-++  poke-unlog
-  |=  man/knot
-=======
 ++  poke-talk-unlog
-  |=  man=span
->>>>>>> galenwp/factor:urb/zod/app/talk.hoon
+  |=  man/knot
   ^-  (quip move +>)
   :-  ~
   +>.$(log (~(del by log) man))

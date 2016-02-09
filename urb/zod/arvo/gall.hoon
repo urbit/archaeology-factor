@@ -1152,7 +1152,6 @@
       ^-  (unit @tas)
       ?+  sep  ~&  [%ap-vain sep]
                ~
-<<<<<<< HEAD
         $cash  `%a
         $conf  `%g
         $deal  `%g
@@ -1163,29 +1162,12 @@
         $merg  `%c
         $mont  `%c
         $ogre  `%c
+        $serv  `%e
         $them  `%e
         $wait  `%b
         $want  `%a
         $wont  `%a                                      ::  XX for begin; remove
         $warp  `%c
-=======
-        %cash  `%a
-        %conf  `%g
-        %deal  `%g
-        %exec  `%f
-        %flog  `%d
-        %drop  `%c
-        %info  `%c
-        %merg  `%c
-        %mont  `%c
-        %ogre  `%c
-        %serv  `%e
-        %them  `%e
-        %wait  `%b
-        %want  `%a
-        %wont  `%a                                      ::  XX for begin; remove
-        %warp  `%c
->>>>>>> galenwp/factor
       ==
     --
   --

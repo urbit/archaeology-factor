@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD:urb/zod/ape/ask.hoon
-::::  /hoon+ask+ape
-=======
 ::::  /hoon/ask/app
->>>>>>> galenwp/factor:urb/zod/app/ask.hoon
   ::
 /?    314
 /+    sole

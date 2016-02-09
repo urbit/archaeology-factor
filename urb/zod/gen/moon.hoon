@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD
-::::  /hoon+ticket+gen
-=======
 ::::  /hoon/moon/gen
->>>>>>> galenwp/factor
   ::
 /?  314
 ::

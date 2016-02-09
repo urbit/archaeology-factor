@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-|%  
-=======
 ::
 ::::  /hoon/markdown/sur
   ::
 |%
->>>>>>> galenwp/factor
 ++  down  (list elem)
 ++  kids  (list inline)
 ++  inline

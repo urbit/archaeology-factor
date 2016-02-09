@@ -1,10 +1,6 @@
 ::    %lunt, fleet job control
 ::
-<<<<<<< HEAD
-::::  /hoon+lunt
-=======
 ::::  /hoon/lunt/arvo
->>>>>>> galenwp/factor
   ::
 !?  164
 ::::
