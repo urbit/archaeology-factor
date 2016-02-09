@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD:urb/zod/mar/index.hoon
-::::  /hoon+core+elem+mar
-=======
 ::::  /hoon/index/tree/mar
->>>>>>> galenwp/factor:urb/zod/mar/tree/index.hoon
   ::
 /?    314
 /+    tree,react

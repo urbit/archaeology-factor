@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD
-::::  /hoon+reload+hood+gen
-=======
 ::::  /hoon/reload-desk/hood/gen
->>>>>>> galenwp/factor
   ::
 /?  314
 ::

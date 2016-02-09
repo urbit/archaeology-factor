@@ -130,15 +130,9 @@
         =+  [hed=(add %h0 (lsh 3 1 p.a)) kid=(sung q.a)]
         [[hed id+(sanitize kid) ~] kid]
     ::
-<<<<<<< HEAD
       $hrul  ;hr;
       $meta  ?:  =(~ p.a)  ;/(~)
              =+  jon=`json`o+(~(run by p.a) |=(cord s++<))
-=======
-      %hrul  ;hr;
-      %meta  ?:  =(~ p.a)  :/(~)
-             =+  jon=`json`o/(~(run by p.a) |=(cord s/+<))
->>>>>>> galenwp/factor
              ;meta(value "{(pojo jon)}", name "frontmatter", urb_front "");
   ::     %html  
              ::=+  tex=(role (turn p.a crip))

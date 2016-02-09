@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD
-::::  /hoon+talk-command+mar
-=======
 ::::  /hoon/command/talk/mar
->>>>>>> galenwp/factor
   ::
 /?    314
 /-    talk

@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD
-::::  /hoon+link+hood+gen
-=======
 ::::  /hoon/unlink/hood/gen
->>>>>>> galenwp/factor
   ::
 /?  314
 ::

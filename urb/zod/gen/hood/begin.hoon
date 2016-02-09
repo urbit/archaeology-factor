@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD
-::::  /hoon+begin+hood+gun
-=======
 ::::  /hoon/begin/hood/gen
->>>>>>> galenwp/factor
   ::
 /?  314
 /-  sole

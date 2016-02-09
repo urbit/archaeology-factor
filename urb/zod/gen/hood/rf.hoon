@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD
-::::  /hoon+reload+hood+gen
-=======
 ::::  /hoon/rf/hood/gen
->>>>>>> galenwp/factor
   ::
 /?  314
 ::

@@ -1,9 +1,5 @@
 ::
-<<<<<<< HEAD
-::::  /hoon+dill-belt+mar
-=======
 ::::  /hoon/belt/dill/mar
->>>>>>> galenwp/factor
   ::
 /?    314
 /-    kyev, sole
