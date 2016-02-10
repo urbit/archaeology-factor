@@ -2158,46 +2158,46 @@
       {$| p/beam}                                       ::  resource location   
   ==                                                    ::
 ++  horn                                                ::  resource tree
-  $%  {%ape p/twig}                                     ::  /~  twig by hand
-      {%arg p/twig}                                     ::  /$  argument
-      {%alt p/(list horn)}                              ::  /|  options
-      {%dub p/term q/horn}                              ::  /=  apply face
-      {%fan p/(list horn)}                              ::  /.  list
-      {%for p/(list (pair path:spur horn))}             ::  /,  switch by path
-      {%hel p/horn}                                     ::  /%  propagate args
-      {%lin p/(list mark) q/horn}                       ::  /&  translates
-      {%man p/(map span horn)}                          ::  /*  hetero map
-      {%nap p/horn}                                     ::  /_  homo map
-      {%now p/horn}                                     ::  /@  list by @da
-      {%saw p/twig q/horn}                              ::  /;  operate on
-      {%see p/beam q/horn}                              ::  /:  relative to
-      {%sic p/tile q/horn}                              ::  /^  cast
-      {%toy p/? q/mark}                                 ::  /mark/  static/hook
+  $%  {$ape p/twig}                                     ::  /~  twig by hand
+      {$arg p/twig}                                     ::  /$  argument
+      {$alt p/(list horn)}                              ::  /|  options
+      {$dub p/term q/horn}                              ::  /=  apply face
+      {$fan p/(list horn)}                              ::  /.  list
+      {$for p/(list (pair path:spur horn))}             ::  /,  switch by path
+      {$hel p/horn}                                     ::  /%  propagate args
+      {$lin p/(list mark) q/horn}                       ::  /&  translates
+      {$man p/(map span horn)}                          ::  /*  hetero map
+      {$nap p/horn}                                     ::  /_  homo map
+      {$now p/horn}                                     ::  /@  list by @da
+      {$saw p/twig q/horn}                              ::  /;  operate on
+      {$see p/beam q/horn}                              ::  /:  relative to
+      {$sic p/tile q/horn}                              ::  /^  cast
+      {$toy p/? q/mark}                                 ::  /mark/  static/hook
   ==                                                    ::
 ++  milk  (trel ship desk silk)                         ::  sourced silk
 ++  silk                                                ::  construction layer
   $&  {p/silk q/silk}                                   ::  cons
-  $%  {%$ p/cage}                                       ::  literal
-      {%alts p/(list silk)}                             ::  options
-      {%bake p/mark q/coin r/beam}                      ::  local synthesis
-      {%bunt p/mark}                                    ::  example of mark
-      {%call p/silk q/silk}                             ::  slam
-      {%cast p/mark q/silk}                             ::  translate
-      {%core p/beam}                                    ::  build program
-      {%diff p/silk q/silk}                             ::  diff
-      {%dude p/(trap tank) q/silk}                      ::  error wrap
-      {%file p/beam}                                    ::  from clay
-      {%flag p/(set $@(@uvH beam)) q/silk}              ::  add dependencies
-      {%join p/mark q/silk r/silk}                      ::  merge
-      {%mash p/mark q/milk r/milk}                      ::  annotate
-      {%mute p/silk q/(list (pair wing silk))}          ::  mutant
-      {%pact p/silk q/silk]                             ::  patch
-      {%plan p/beam q/coin r/hood}                      ::  structured assembly
-      {%reef $~}                                        ::  kernel reef
-      {%ride p/twig q/silk}                             ::  silk thru twig
-      {%tabl p/(list (pair silk silk))}                 ::  list
-      {%vale p/mark q/*}                                ::  validate
-      {%volt p/(cask *)}                                ::  unsafe add type
+  $%  {$$ p/cage}                                       ::  literal
+      {$alts p/(list silk)}                             ::  options
+      {$bake p/mark q/coin r/beam}                      ::  local synthesis
+      {$bunt p/mark}                                    ::  example of mark
+      {$call p/silk q/silk}                             ::  slam
+      {$cast p/mark q/silk}                             ::  translate
+      {$core p/beam}                                    ::  build program
+      {$diff p/silk q/silk}                             ::  diff
+      {$dude p/(trap tank) q/silk}                      ::  error wrap
+      {$file p/beam}                                    ::  from clay
+      {$flag p/(set $@(@uvH beam)) q/silk}              ::  add dependencies
+      {$join p/mark q/silk r/silk}                      ::  merge
+      {$mash p/mark q/milk r/milk}                      ::  annotate
+      {$mute p/silk q/(list (pair wing silk))}          ::  mutant
+      {$pact p/silk q/silk]                             ::  patch
+      {$plan p/beam q/coin r/hood}                      ::  structured assembly
+      {$reef $~}                                        ::  kernel reef
+      {$ride p/twig q/silk}                             ::  silk thru twig
+      {$tabl p/(list (pair silk silk))}                 ::  list
+      {$vale p/mark q/*}                                ::  validate
+      {$volt p/(cask *)}                                ::  unsafe add type
   ==                                                    ::
 ::::
 ++  bilk  (pair beak silk)                              ::  sourced request

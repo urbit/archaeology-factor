@@ -50,12 +50,12 @@
 =+  sez=(fall (~(get by hoc) ost) *helm-session)
 =>  |%                                                ::  arvo structures
     ++  card                                          ::
-      $%  {$cash wire p/@p q/buck]                    ::
-          {$conf wire dock $load ship term]           ::
-          {$flog wire flog]                           ::
-          {$serv wire ?(desk beam)]                   ::
-          {$poke wire dock pear]                      ::
-          {$wont wire sock path *]                    ::  send message
+      $%  {$cash wire p/@p q/buck}                    ::
+          {$conf wire dock $load ship term}           ::
+          {$flog wire flog}                           ::
+          {$serv wire ?(desk beam)}                   ::
+          {$poke wire dock pear}                      ::
+          {$wont wire sock path *}                    ::  send message
       ==                                              ::
     ++  move  (pair bone card)                        ::  user-level move
     ++  pear                                          ::  poke fruit
