@@ -621,7 +621,7 @@
           [~ u=(^case a)]
         nuck:so
       ::
-      ++  hath  (sear plex:vez (stag %ray poor:vez))   ::  hood path
+      ++  hath  (sear plex:vez (stag %conl poor:vez))   ::  hood path
       ++  have  (sear tome ;~(pfix fas hath))           ::  hood beam
       ++  hood
         %+  ifix  [gay gay]
@@ -696,7 +696,7 @@
         ++  read
           |%  ++  ape
                 %+  rail
-                  (ifix [sel ser] (stag %all (most ace wide:vez)))
+                  (ifix [sel ser] (stag %conp (most ace wide:vez)))
                 ;~(pfix gap tall:vez)
           ::
               ++  alt
@@ -1497,7 +1497,7 @@
             $sic
           %+  cope  $(hon q.hon)
           |=  {cof/cafe mar/mark vax/vase}
-          %+  cope  (maim cof bax [%cold p.hon])
+          %+  cope  (maim cof bax [%bunt p.hon])
           |=  {cof/cafe tug/vase}
           ?.  (~(nest ut p.tug) | p.vax)
             (flaw cof [%leaf "type error: {<p.hon>} {<q.hon>}"]~)
