@@ -66,7 +66,7 @@
 --                                                      ::
 |%                                                      ::  models
 ++  bolo                                                ::  eyre state
-  $:  %4                                                ::  version
+  $:  $4                                                ::  version
       gub/@t                                            ::  random identity
       hov/(unit ship)                                   ::  master for remote
       top/beam                                          ::  ford serve prefix
@@ -139,7 +139,7 @@
 ::
 ++  pest                                                ::  result
   $@  $~
-  $%  {$$ p/httr]                                       ::  direct response
+  $%  {$$ p/httr}                                       ::  direct response
       {$red $~}                                          ::  parent redirect
       {$bake p/whir q/mark r/coin s/beam}               ::  ford request
       {$js p/@t}                                        ::  script
@@ -878,7 +878,7 @@
   ::
   ++  back                                              ::  %ford bounce
     |=  {tea/whir mar/mark cay/cage}
-    (pass-note tea (ford-req -.top [%cast mar `cay]))
+    (pass-note tea (ford-req -.top [%cast mar $+cay]))
   ::
   ++  del-deps
     |=  {a/@uvH b/(each duct ixor)}  ^+  +>.$
@@ -994,7 +994,7 @@
       ?~  pez  done
       ?-  -.pez
           $~     (give-thou (add-cookies cug p.pez))
-          $js    $(pez [~ (resp 200 text//javascript p.pez)])
+          $js    $(pez [%$ (resp 200 text+/javascript p.pez)])
           $json  (give-json 200 cug p.pez)
           $html  (give-html 200 cug p.pez)
           $htme  (give-html 401 cug p.pez)
@@ -1205,10 +1205,10 @@
         ?<  =([~ 0] (sky %cw (tope bem(+ ~, r [%da now]))))
         =+  wir=`whir`[%ha (tope -.bem ~)]
         =.  wir  ?+(mef !! $get wir, $head [%he wir])
-        =.  r.bem  ?+(r.bem r.bem [%ud %0] da+now)
+        =.  r.bem  ?+(r.bem r.bem {$ud $0} da+now)
         =+  arg=(fcgi quy fcgi-cred)
-        =+  [%& %bake wir ext arg bem]
-        ?.(aut - [%| (resolve -)])  ::  XX properly
+        =+  [%bake wir ext arg bem]
+        ?.(aut [%& -] [%| (resolve ~ -)])
       ::
           $bugs
         ?-  p.hem

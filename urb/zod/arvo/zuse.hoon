@@ -1120,8 +1120,7 @@
   ?:(=(~ fyl) ~ [(crip (flop fyl)) ~])
 ::
 ++  fuel                                                ::  parse fcgi
-  =+  packed-quay=|-($@($~ [p=@t q=@t t=$]))
-  |=  {bem/beam ced/noun:cred quy/packed-quay}
+  |=  {bem/beam ced/noun:cred quy/|-($@($~ {p/@t q/@t t/$}))}
   ^-  epic
   =+  qix=|-(`quay`?~(quy quy [[p q]:quy $(quy t.quy)]))
   [(malt qix) ((hard cred) ced) bem /]
@@ -2166,17 +2165,17 @@
       {$for p/(list (pair path:spur horn))}             ::  /,  switch by path
       {$hel p/horn}                                     ::  /%  propagate args
       {$lin p/(list mark) q/horn}                       ::  /&  translates
-      {$man p/(map span horn)}                          ::  /*  hetero map
+      {$man p/(map knot horn)}                          ::  /*  hetero map
       {$nap p/horn}                                     ::  /_  homo map
       {$now p/horn}                                     ::  /@  list by @da
       {$saw p/twig q/horn}                              ::  /;  operate on
       {$see p/beam q/horn}                              ::  /:  relative to
-      {$sic p/tile q/horn}                              ::  /^  cast
+      {$sic p/twig q/horn}                              ::  /^  cast
       {$toy p/? q/mark}                                 ::  /mark/  static/hook
   ==                                                    ::
 ++  milk  (trel ship desk silk)                         ::  sourced silk
 ++  silk                                                ::  construction layer
-  $&  {p/silk q/silk}                                   ::  cons
+  $^  {p/silk q/silk}                                   ::  cons
   $%  {$$ p/cage}                                       ::  literal
       {$alts p/(list silk)}                             ::  options
       {$bake p/mark q/coin r/beam}                      ::  local synthesis
@@ -2191,7 +2190,7 @@
       {$join p/mark q/silk r/silk}                      ::  merge
       {$mash p/mark q/milk r/milk}                      ::  annotate
       {$mute p/silk q/(list (pair wing silk))}          ::  mutant
-      {$pact p/silk q/silk]                             ::  patch
+      {$pact p/silk q/silk}                             ::  patch
       {$plan p/beam q/coin r/hood}                      ::  structured assembly
       {$reef $~}                                        ::  kernel reef
       {$ride p/twig q/silk}                             ::  silk thru twig
