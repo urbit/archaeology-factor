@@ -734,7 +734,8 @@
       =-  ?~(too - [%cast u.too -])
       :+  %ride  gen
       :-  [%$ dy-twig-head]
-      `silk`[%plan he-beam `coin`blob+** `hood`[zuse arc lib ~ ~]]
+      ::  `silk`[%plan he-beam `coin`blob+** `hood`[zuse arc lib ~ ~]]
+      `silk`[%plan he-beam / `hood`[zuse arc lib ~ ~]]
     ::
     ++  dy-step                                         ::  advance project
       |=  nex/@ud
