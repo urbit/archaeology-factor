@@ -1,5 +1,5 @@
 ::
-::::  /hoon+down+mar
+::::  /hoon/down/mar
   ::
 /?    314
 /-    markdown
@@ -20,7 +20,7 @@
 ::
 ++  grow                                                ::  convert into
   |%
-  ++  front  ?~(don ~ ?:(?=(%meta -.i.don) p.i.don front(don t.don)))
+  ++  front  ?~(don ~ ?:(?=($meta -.i.don) p.i.don front(don t.don)))
   ++  hymn                                          ::  convert to %hymn
       ;html
         ;head:title:"Untitled"

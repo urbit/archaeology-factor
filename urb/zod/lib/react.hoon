@@ -1,8 +1,6 @@
 ::
 ::::  /hoon/react/lib
   ::
-!:
->>>>>>> galenwp/factor
 |%
 ++  react-elems ::  XX /~
   ~+  %-  silt  ^-  (list term)
@@ -49,7 +47,7 @@
     (jape v.i.a.g.src)
   =+  atr=(molt `(list (pair mane tape))`a.g.src)  
   ?:  (~(has by atr) [%urb %codemirror])
-    ?>  ?=({{%pre *} _;/(**) $~} src)
+    ?>  ?=({{$pre *} _;/(**) $~} src)
     =.  a.g.src
       [value+v.i.a.g.i.c.src (skip a.g.src |=({a/mane *} ?=(^ a)))]
     $(src [[%codemirror a.g.src] ~])

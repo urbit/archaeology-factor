@@ -12,7 +12,7 @@
   (zing (turn c.ele ..$))
 ::
 ++  map-to-json                                         :: hoon data to json 
-  |*  {a=$-(* cord) b/$-(* json)}
+  |*  {a/$-(* cord) b/$-(* json)}
   |*  c/(map)  ^-  json               :: XX c=(map _+<.a _+<.b)
   ~!  c
   (jobe (turn (~(tap by c)) |*(* [(a +<-) (b +<+)])))
