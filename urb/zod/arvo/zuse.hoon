@@ -2474,10 +2474,11 @@
       [%hook ~]                                         ::  this term hung up
       [%harm ~]                                         ::  all terms hung up
       [%init p=ship]                                    ::  after gall ready
-      [%tick p=@p q=@p]                                 ::  initial ticket
+      [%lens p=@t]                                      ::  unix integration
       [%noop ~]                                         ::  no operation
       [%talk p=tank]                                    ::
       [%text p=tape]                                    ::
+      [%tick p=@p q=@p]                                 ::  initial ticket
       [%veer p=@ta q=path r=@t]                         ::  install vane
       [%vega p=path]                                    ::  reboot by path
       [%verb ~]                                         ::  verbose mode

@@ -10596,12 +10596,13 @@
   ::
   ++  dint                                              ::  input routing
     |=  hap=path  ^-  @tas
-    ?+  hap  !!
+    ?+  hap  ~|(%bad-dint !!)
       [@ %ames *]  %a
       [@ %boat *]  %c
       [@ %newt *]  %a
       [@ %sync *]  %c
       [@ %term *]  %d
+      [@ %lens *]  %d
       [@ %http *]  %e
       [@ %behn *]  %b
     ==

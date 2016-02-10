@@ -347,6 +347,7 @@ V_OFILES=\
        vere/behn.o \
        vere/cttp.o \
        vere/http.o \
+       vere/lens.o \
        vere/loop.o \
        vere/raft.o \
        vere/reck.o \

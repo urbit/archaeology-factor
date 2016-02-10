@@ -615,6 +615,7 @@
 #   define c3__lect   c3_s4('l','e','c','t')
 #   define c3__lee    c3_s3('l','e','e')
 #   define c3__leg    c3_s3('l','e','g')
+#   define c3__lens   c3_s4('l','e','n','s')
 #   define c3__lest   c3_s4('l','e','s','t')
 #   define c3__lg     c3_s2('l','g')
 #   define c3__lib    c3_s3('l','i','b')

@@ -188,6 +188,31 @@
         struct _u3_ccon* coc_u;             //  connection list
       } u3_cttp;
 
+    /* u3_lreq: lens request
+    */
+      typedef struct _u3_lreq {
+        c3_c*            dat_c;             //  buffer data
+        ssize_t          siz_w;             //  buffer size
+      } u3_lreq;
+
+    /* u3_lcon: lens connection.
+    */
+      typedef struct _u3_lcon {
+        uv_tcp_t         wax_u;             //  event handler state
+        c3_w             coq_w;             //  connection number
+        u3_lreq          leq_u;             //  request buffer
+        struct _u3_lcon* nex_u;             //  next in server's list
+      } u3_lcon;
+
+    /* u3_lens: lens tcp server.
+    */
+      typedef struct _u3_lens {
+        uv_tcp_t         wax_u;             //  event handler state
+        c3_w             coq_w;             //  next connection number
+        c3_w             por_w;             //  running port
+        struct _u3_lcon* lon_u;             //  connection list
+      } u3_lens;
+
     /* u3_apac: ames packet, coming or going.
     */
       typedef struct _u3_apac {
@@ -532,6 +557,7 @@
         c3_c*   raf_c;                      //  -r, raft flotilla
         c3_c*   who_c;                      //  -T, begin with ticket
         c3_c*   tic_c;                      //  -T, ticket value
+        c3_c*   exe_c;                        //  -e, execute command
         c3_w    kno_w;                      //  -k, kernel version
         c3_w    fuz_w;                      //  -f, fuzz testing
         c3_s    por_s;                      //  -p, ames port
@@ -563,6 +589,7 @@
         uv_loop_t* lup_u;                   //  libuv event loop
         u3_http*   htp_u;                   //  http servers
         u3_cttp    ctp_u;                   //  http clients
+        u3_lens    les_u;                   //  lens tcp server
         u3_utel    tel_u;                   //  telnet listener
         u3_utty*   uty_u;                   //  linked terminal list
         u3_ames    sam_u;                   //  packet interface
@@ -1045,6 +1072,18 @@
       */
         void
         u3_http_io_poll(void);
+
+    /** Lens tcp server.
+    **/
+      /* u3_lens_io_init(): iniialize tcp I/O.
+      */
+        void
+        u3_lens_io_init(void);
+
+      /* u3_lens_io_talk(): start lens tcp listener.
+      */
+        void
+        u3_lens_io_talk(void);
 
     /** Raft log syncing.
     **/

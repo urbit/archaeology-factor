@@ -412,6 +412,8 @@
     =^  moz  all  abet:(need (ax (need hey.all) [%flow %hood ~]))
     ?:  |((lth p.q.hic 256) (gte p.q.hic (bex 64)))  [moz ..^$] ::  XX HORRIBLE
     [:_(moz [(need hey.all) %give %init p.q.hic]) ..^$]
+  ?:  ?=(%lens -.q.hic)
+    ~&  [%through-the-looking-glass p.q.hic]  [~ ..^$]
   =+  nus=(ax hen q.hic)
   ?~  nus
     ~&  [%dill-no-flow q.hic]
