@@ -35,17 +35,31 @@ BIN=bin
 
 LIB=$(shell pwd)/urb
 
+# Only include/link with this if it exists.
+# (Mac OS X El Capitan clean install does not have /opt)
+ifneq (,$(wildcard /opt/local/.))
+  OPTLOCALINC=-I/opt/local/include
+  OPTLOCALLIB=-L/opt/local/lib
+endif
+
+# Only include/link with this if it exists.
+# (`brew install openssl` on Mac OS X El Capitan puts openssl here)
+ifneq (,$(wildcard /usr/local/opt/openssl/.))
+  OPENSSLINC=-I/usr/local/opt/openssl/include
+  OPENSSLLIB=-L/usr/local/opt/openssl/lib
+endif
+
 RM=rm -f
 ifneq ($(UNAME),FreeBSD)
 CC=gcc
 CXX=g++
 CXXFLAGS=$(CFLAGS)
-CLD=g++ -O3 -L/usr/local/lib -L/opt/local/lib
+CLD=g++ -O3 -L/usr/local/lib $(OPTLOCALLIB) $(OPENSSLLIB)
 else
 CC=cc
 CXX=c++
 CXXFLAGS=$(CFLAGS)
-CLD=c++ -O3 -L/usr/local/lib -L/opt/local/lib
+CLD=c++ -O3 -L/usr/local/lib $(OPTLOCALLIB) $(OPENSSLLIB)
 endif
 
 ifeq ($(OS),osx)
@@ -70,15 +84,34 @@ endif
 INCLUDE=include
 MDEFINES=-DU3_OS_$(OS) -DU3_OS_ENDIAN_$(ENDIAN) -D U3_LIB=\"$(LIB)\"
 
+DEBUG=no
+
+ifeq ($(DEBUG),yes)
+DEBUGFLAGS=-g
+else
+DEBUGFLAGS=-O3
+endif
+
+# libuv version
+LIBUV_VER=libuv_0.11
+#LIBUV_VER=libuv-v1.7.5
+
+ifeq ($(LIBUV_VER),libuv_0.11)
+LIBUV_CONFIGURE_OPTIONS=--disable-dtrace
+else
+LIBUV_CONFIGURE_OPTIONS=
+endif
+
 # NOTFORCHECKIN - restore -O3
-# 	-DGHETTO
+# 	-DGHETTO \
 #   -DHUSH
-CFLAGS= $(COSFLAGS) -O3 -msse3 -ffast-math \
+CFLAGS= $(COSFLAGS) $(DEBUGFLAGS) -ffast-math \
 	-funsigned-char \
 	-I/usr/local/include \
-	-I/opt/local/include \
+	$(OPTLOCALINC) \
+	$(OPENSSLINC) \
 	-I$(INCLUDE) \
-	-Ioutside/libuv_0.11/include \
+	-Ioutside/$(LIBUV_VER)/include \
 	-Ioutside/anachronism/include \
 	-Ioutside/bpt \
 	-Ioutside/re2 \
@@ -87,7 +120,7 @@ CFLAGS= $(COSFLAGS) -O3 -msse3 -ffast-math \
 	-Ioutside/commonmark/src \
 	-Ioutside/commonmark/build/src \
 	-Ioutside/scrypt \
-        -Ioutside/softfloat-3/source/include \
+	-Ioutside/softfloat-3/source/include \
 	$(DEFINES) \
 	$(MDEFINES)
 
@@ -148,9 +181,12 @@ J_B_OFILES=\
        jets/b/lent.o \
        jets/b/levy.o \
        jets/b/lien.o \
+       jets/b/murn.o \
        jets/b/need.o \
+       jets/b/reap.o \
        jets/b/reel.o \
        jets/b/roll.o \
+       jets/b/skid.o \
        jets/b/skim.o \
        jets/b/skip.o \
        jets/b/scag.o \
@@ -162,6 +198,7 @@ J_B_OFILES=\
 
 J_C_OFILES=\
        jets/c/bex.o \
+       jets/c/xeb.o \
        jets/c/can.o \
        jets/c/cap.o \
        jets/c/cat.o \
@@ -235,16 +272,13 @@ J_E_OFILES_ED=\
 J_F_OFILES=\
        jets/f/al.o \
        jets/f/ap.o \
-       jets/f/bull.o \
        jets/f/cell.o \
        jets/f/comb.o \
        jets/f/cons.o \
        jets/f/core.o \
-       jets/f/cube.o \
        jets/f/face.o \
        jets/f/fitz.o \
        jets/f/flan.o \
-       jets/f/flay.o \
        jets/f/flip.o \
        jets/f/flor.o \
        jets/f/fork.o \
@@ -254,19 +288,14 @@ J_F_OFILES=\
 J_F_OFILES_UT=\
        jets/f/ut.o \
        jets/f/ut_burn.o \
-       jets/f/ut_busk.o \
-       jets/f/ut_bust.o \
+			 jets/f/ut_buss.o \
        jets/f/ut_conk.o \
        jets/f/ut_crop.o \
-       jets/f/ut_cull.o \
-       jets/f/ut_find.o \
-       jets/f/ut_fink.o \
+			 jets/f/ut_find.o \
        jets/f/ut_fire.o \
-       jets/f/ut_firm.o \
        jets/f/ut_fish.o \
        jets/f/ut_fuse.o \
        jets/f/ut_gain.o \
-       jets/f/ut_heal.o \
        jets/f/ut_lose.o \
        jets/f/ut_mint.o \
        jets/f/ut_mull.o \
@@ -276,10 +305,8 @@ J_F_OFILES_UT=\
        jets/f/ut_play.o \
        jets/f/ut_repo.o \
        jets/f/ut_rest.o \
-       jets/f/ut_seek.o \
-       jets/f/ut_swab.o \
        jets/f/ut_tack.o \
-       jets/f/ut_tock.o \
+       jets/f/ut_toss.o \
        jets/f/ut_wrap.o
 
 J_G_OFILES=\
@@ -323,21 +350,12 @@ V_OFILES=\
 MAIN_FILE =\
        vere/main.o
 
-MEME_FILE =\
-       tests/test.o
-
 VERE_OFILES=\
        $(CRE2_OFILES) \
        $(OUT_OFILES) \
        $(BASE_OFILES) \
        $(MAIN_FILE) \
        $(V_OFILES)
-
-MEME_OFILES=\
-       $(CRE2_OFILES) \
-       $(OUT_OFILES) \
-       $(BASE_OFILES) \
-       $(MEME_FILE)
 
 VERE_DFILES=$(VERE_OFILES:%.o=.d/%.d)
 
@@ -357,10 +375,10 @@ VERE_DFILES=$(VERE_OFILES:%.o=.d/%.d)
 #    * Solution: make libuv not only depend on its own Makefile,
 #      but on a side effect of creating its own makefile.
 #
-LIBUV_MAKEFILE=outside/libuv_0.11/Makefile
-LIBUV_MAKEFILE2=outside/libuv_0.11/config.log
+LIBUV_MAKEFILE=outside/$(LIBUV_VER)/Makefile
+LIBUV_MAKEFILE2=outside/$(LIBUV_VER)/config.log
 
-LIBUV=outside/libuv_0.11/.libs/libuv.a
+LIBUV=outside/$(LIBUV_VER)/.libs/libuv.a
 
 LIBRE2=outside/re2/obj/libre2.a
 
@@ -374,6 +392,12 @@ LIBSCRYPT=outside/scrypt/scrypt.a
 
 LIBSOFTFLOAT=outside/softfloat-3/build/Linux-386-GCC/softfloat.a
 
+TAGS=\
+       .tags \
+       .etags \
+       GPATH GTAGS GRTAGS \
+       cscope.in.out cscope.po.out cscope.out
+
 all: urbit
 
 .MAKEFILE-VERSION: Makefile .make.conf
@@ -384,10 +408,9 @@ all: urbit
 	@echo "# Set custom configuration here, please!" > ".make.conf"
 
 urbit: $(BIN)/urbit
-meme: $(BIN)/meme
 
 $(LIBUV_MAKEFILE) $(LIBUV_MAKEFILE2):
-	cd outside/libuv_0.11 ; sh autogen.sh ; ./configure  --disable-dtrace
+	cd outside/$(LIBUV_VER) ; sh autogen.sh ; ./configure $(LIBUV_CONFIGURE_OPTIONS)
 
 # [h]act II: the plot thickens
 #
@@ -405,7 +428,7 @@ $(LIBUV_MAKEFILE) $(LIBUV_MAKEFILE2):
 $(LIBUV_MAKEFILE2): $(LIBUV_MAKEFILE)
 
 $(LIBUV): $(LIBUV_MAKEFILE) $(LIBUV_MAKEFILE2)
-	$(MAKE) -C outside/libuv_0.11 all-am -j1
+	$(MAKE) -C outside/$(LIBUV_VER) all-am -j1
 
 $(LIBRE2):
 	$(MAKE) -C outside/re2 obj/libre2.a
@@ -441,15 +464,19 @@ $(BIN)/urbit: $(LIBCRE) $(LIBCOMMONMARK) $(VERE_OFILES) $(LIBUV) $(LIBRE2) $(LIB
 	@$(CLD) $(CLDOSFLAGS) -o $(BIN)/urbit $(VERE_OFILES) $(LIBUV) $(LIBCRE) $(LIBRE2) $(LIBED25519) $(LIBANACHRONISM) $(LIBS) $(LIBCOMMONMARK) $(LIBSCRYPT) $(LIBSOFTFLOAT)
 endif
 
-$(BIN)/meme: $(LIBCRE) $(LIBCOMMONMARK) $(MEME_OFILES) $(LIBUV) $(LIBRE2) $(LIBED25519) $(LIBANACHRONISM) $(LIBSCRYPT) $(LIBSOFTFLOAT)
-	mkdir -p $(BIN)
-	$(CLD) $(CLDOSFLAGS) -o $(BIN)/meme $(MEME_OFILES) $(LIBUV) $(LIBCRE) $(LIBRE2) $(LIBED25519) $(LIBANACHRONISM) $(LIBS) $(LIBCOMMONMARK) $(LIBSCRYPT) $(LIBSOFTFLOAT)
+tags: ctags etags gtags cscope
 
-tags:
-	ctags -R -f .tags --exclude=root
+ctags:
+	@ctags -R -f .tags --exclude=root || true
 
 etags:
-	etags -f .etags $$(find -name '*.c' -or -name '*.h')
+	@etags -f .etags $$(find . -name '*.c' -or -name '*.h') || true
+
+gtags:
+	@gtags || true
+
+cscope:
+	@cscope -b -q -R || true
 
 osxpackage:
 	$(RM) -r inst
@@ -471,12 +498,13 @@ debinstall:
 	cp -R urb/zod $(DESTDIR)/usr/share/urb
 
 clean:
-	$(RM) $(VERE_OFILES) $(BIN)/urbit urbit.pkg $(VERE_DFILES)
+	$(RM) $(VERE_OFILES) $(BIN)/urbit urbit.pkg $(VERE_DFILES) $(TAGS)
+	$(RM) -r debian/files debian/urbit*
 
 # 'make distclean all -jn' ∀ n>1 still does not work because it is possible
 # Make will attempt to build urbit while it is also cleaning urbit..
 distclean: clean $(LIBUV_MAKEFILE)
-	$(MAKE) -C outside/libuv_0.11 distclean
+	$(MAKE) -C outside/$(LIBUV_VER) distclean
 	$(MAKE) -C outside/re2 clean
 	$(MAKE) -C outside/ed25519 clean
 	$(MAKE) -C outside/anachronism clean

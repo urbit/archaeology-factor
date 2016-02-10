@@ -3,7 +3,6 @@
 */
 #include "all.h"
 
-
 /* logic
 */
   static u3_noun
@@ -12,8 +11,7 @@
   _crop_sint(u3_noun, u3_noun, u3_noun, u3_noun);
 
   static u3_noun
-  _crop_repo(
-             u3_noun van,
+  _crop_repo(u3_noun van,
              u3_noun sut,
              u3_noun ref,
              u3_noun bix)
@@ -36,8 +34,33 @@
   }
 
   static u3_noun
-  _crop_dext(
-             u3_noun van,
+  _crop_dext_fork(u3_noun van, u3_noun p_sut, u3_noun ref, u3_noun bix)
+  {
+    if ( u3_nul == p_sut ) {
+      return u3_nul;
+    } 
+    else {
+      return u3nc(_crop_dext(van, u3h(p_sut), ref, bix),
+                  _crop_dext_fork(van, u3t(p_sut), ref, bix));
+    }
+  }
+  static u3_noun
+  _crop_sint_fork(u3_noun van, u3_noun sut, u3_noun p_ref, u3_noun bix)
+  {
+    if ( u3_nul == p_ref ) {
+      return u3k(sut);
+    } 
+    else {
+      u3_noun tuz = _crop_dext(van, sut, u3h(p_ref), bix);
+      u3_noun zat = _crop_sint_fork(van, tuz, u3t(p_ref), bix);
+
+      u3z(tuz);
+      return zat;
+    }
+  }
+
+  static u3_noun
+  _crop_dext(u3_noun van,
              u3_noun sut,
              u3_noun ref,
              u3_noun bix)
@@ -63,23 +86,33 @@
     else switch ( u3h(sut) ) {
       default: return u3m_bail(c3__fail);
 
-      case c3__atom:
+      case c3__atom: u3x_cell(u3t(sut), &p_sut, &q_sut);
       {
         if ( c3__atom == u3h(ref) ) {
-          return c3__void;
+          u3x_cell(u3t(ref), &p_ref, &q_ref);
+
+          if ( c3y == u3du(q_sut) ) {
+            if ( c3y == u3du(q_ref) ) {
+              if ( c3y == u3r_sing(q_sut, q_ref) ) {
+                return c3__void;
+              } else {
+                return u3k(sut);
+              }
+            } else {
+              return c3__void;
+            }
+          }
+          else {
+            if ( c3y == u3du(q_ref) ) {
+              return u3k(sut);
+            }
+            else return c3__void;
+          }
         }
         else if ( c3__cell == u3h(ref) ) {
           return u3k(sut);
         }
         else return _crop_sint(van, sut, ref, bix);
-      }
-      case c3__bull: u3x_cell(u3t(sut), &p_sut, &q_sut);
-      {
-        u3_noun foz = _crop_dext(van, q_sut, ref, bix);
-        u3_noun ret = u3qf_bull(p_sut, foz);
-
-        u3z(foz);
-        return ret;
       }
       case c3__cell: u3x_cell(u3t(sut), &p_sut, &q_sut);
       {
@@ -89,8 +122,7 @@
         else if ( c3__cell == u3h(ref) ) {
           u3x_cell(u3t(ref), &p_ref, &q_ref);
 
-          if ( c3y == u3qfu_nest
-                              (van, p_ref, c3n, p_sut) )
+          if ( c3y == u3qfu_nest(van, p_ref, c3n, p_sut) )
           {
             u3_noun foz = _crop_dext(van, q_sut, q_ref, bix);
             u3_noun ret = u3qf_cell(p_sut, foz);
@@ -104,29 +136,9 @@
       }
       case c3__core:
       {
-        if ( (c3__atom == u3h(ref)) || (c3__cell == u3h(ref)) ) {
+        if ( (c3__atom == u3h(ref)) || 
+             (c3__cell == u3h(ref)) ) {
           return u3k(sut);
-        }
-        else return _crop_sint(van, sut, ref, bix);
-      }
-      case c3__cube: u3x_cell(u3t(sut), &p_sut, &q_sut);
-      {
-        if ( (c3__cube == u3h(ref)) &&
-             (c3y == u3r_sing(p_sut, u3h(u3t(ref)))) )
-        {
-          return c3__void;
-        }
-        else if ( (c3__atom == u3h(ref)) || (c3__cell == u3h(ref)) ) {
-          u3_noun foz = _crop_dext(van, q_sut, ref, bix);
-          u3_noun ret;
-
-          if ( c3y == u3qfu_firm(van, foz, p_sut) ) {
-            ret = u3qf_cube(p_sut, foz);
-          }
-          else ret = c3__void;
-
-          u3z(foz);
-          return ret;
         }
         else return _crop_sint(van, sut, ref, bix);
       }
@@ -138,17 +150,15 @@
         u3z(foz);
         return ret;
       }
-      case c3__fork: u3x_cell(u3t(sut), &p_sut, &q_sut);
+      case c3__fork: p_sut = u3t(sut);
       {
-        u3_noun dis = _crop_dext(van, p_sut, ref, bix);
-        u3_noun dat = _crop_dext(van, q_sut, ref, bix);
-        u3_noun ret = u3qf_fork(dis, dat);
+        u3_noun yed = u3qdi_tap(p_sut, u3_nul);
+        u3_noun ret = u3kf_fork(_crop_dext_fork(van, yed, ref, bix));
 
-        u3z(dis);
-        u3z(dat);
+        u3z(yed);
         return ret;
       }
-      case c3__hold: p_sut = u3t(sut);
+      case c3__hold:
       {
         u3_noun hud = u3nc(u3k(sut), u3k(ref));
 
@@ -175,8 +185,7 @@
   }
 
   static u3_noun
-  _crop_sint(
-             u3_noun van,
+  _crop_sint(u3_noun van,
              u3_noun sut,
              u3_noun ref,
              u3_noun bix)
@@ -186,27 +195,20 @@
     switch ( u3h(ref) ) {
       default: return u3m_bail(c3__fail);
 
-      case c3__bull: u3x_cell(u3t(ref), &p_ref, &q_ref);
-      {
-        return _crop_dext(van, sut, q_ref, bix);
-      }
       case c3__core:
-      case c3__cube: {
-        return u3k(sut);
-      }
       case c3__face: u3x_cell(u3t(ref), &p_ref, &q_ref);
       {
         return _crop_dext(van, sut, q_ref, bix);
       }
-      case c3__fork: u3x_cell(u3t(ref), &p_ref, &q_ref);
+      case c3__fork: p_ref = u3t(ref);
       {
-        u3_noun hin = _crop_dext(van, sut, p_ref, bix);
-        u3_noun ret = _crop_dext(van, hin, q_ref, bix);
+        u3_noun yed = u3qdi_tap(p_ref, u3_nul);
+        u3_noun ret = _crop_sint_fork(van, sut, yed, bix);
 
-        u3z(hin);
+        u3z(yed);
         return ret;
       }
-      case c3__hold: p_ref = u3t(ref);
+      case c3__hold:
       {
         u3_noun rep = u3qfu_repo(van, ref);
         u3_noun ret = _crop_dext(van, sut, rep, bix);
@@ -218,10 +220,9 @@
   }
 
   u3_noun
-  _cqfu_crop(
-                        u3_noun van,
-                        u3_noun sut,
-                        u3_noun ref)
+  _cqfu_crop(u3_noun van,
+             u3_noun sut,
+             u3_noun ref)
   {
     return _crop_dext(van, sut, ref, u3_nul);
   }
@@ -229,8 +230,7 @@
 /* boilerplate
 */
   u3_noun
-  u3wfu_crop(
-                       u3_noun cor)
+  u3wfu_crop(u3_noun cor)
   {
     u3_noun sut, ref, van;
 
@@ -245,10 +245,10 @@
 
   u3_noun
   u3qfu_crop(u3_noun van,
-                        u3_noun sut,
-                        u3_noun ref)
+             u3_noun sut,
+             u3_noun ref)
   {
-    c3_m    fun_m = c3__crop;
+    c3_m    fun_m = c3__crop + !!u3r_at(u3qfu_van_vet, van);
     u3_noun pro   = u3z_find_2(fun_m, sut, ref);
 
     if ( u3_none != pro ) {

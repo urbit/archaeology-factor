@@ -9,6 +9,8 @@
 
 #include "all.h"
 
+#undef NO_OVERFLOW
+
       /* (u3_noun)setjmp(u3R->esc.buf): setjmp within road.
       */
 #if 0
@@ -73,7 +75,9 @@ static sigjmp_buf u3_Signal;
 #ifndef SIGSTKSZ
 # define SIGSTKSZ 16384
 #endif
+#ifndef NO_OVERFLOW
 static uint8_t Sigstk[SIGSTKSZ];
+#endif
 
 void u3_unix_ef_hold(void);         //  suspend system signal regime
 void u3_unix_ef_move(void);         //  restore system signal regime
@@ -131,11 +135,13 @@ _cm_signal_handle(c3_l sig_l)
   }
 }
 
+#ifndef NO_OVERFLOW
 static void
 _cm_signal_handle_over(int emergency, stackoverflow_context_t scp)
 {
   _cm_signal_handle(c3__over);
 }
+#endif
 
 static void
 _cm_signal_handle_term(int x)
@@ -294,7 +300,9 @@ _cm_signal_deep(c3_w sec_w)
 {
   u3_unix_ef_hold();
 
+#ifndef NO_OVERFLOW
   stackoverflow_install_handler(_cm_signal_handle_over, Sigstk, SIGSTKSZ);
+#endif
   signal(SIGINT, _cm_signal_handle_intr);
   signal(SIGTERM, _cm_signal_handle_term);
 
@@ -461,7 +469,7 @@ u3m_mark(void)
   c3_w tot_w = 0;
   tot_w += u3h_mark(u3R->jed.har_p);
   tot_w += u3a_mark_noun(u3R->jed.das);
-  tot_w += u3a_mark_noun(u3R->ski.flu);
+  tot_w += u3a_mark_noun(u3R->ski.gul);
   tot_w += u3a_mark_noun(u3R->bug.tax);
   tot_w += u3a_mark_noun(u3R->bug.mer);
   tot_w += u3a_mark_noun(u3R->pro.don);
@@ -593,21 +601,31 @@ u3m_bail(u3_noun how)
       str_c[2] = ((how >> 16) & 0xff);
       str_c[3] = ((how >> 24) & 0xff);
       str_c[4] = 0;
-      fprintf(stderr, "bail: %s\r\n", str_c);
+      fprintf(stderr, "\r\nbail: %s\r\n", str_c);
     } 
     else {
       c3_assert(_(u3ud(u3h(how))));
 
-      fprintf(stderr, "bail: %d\r\n", u3h(how));
+      fprintf(stderr, "\r\nbail: %d\r\n", u3h(how));
       u3m_p("bail", u3t(how));
     }
   }
 
   switch ( how ) {
-#if 0
+#if 1
     case c3__fail:
     case c3__meme:
 #endif
+    case c3__exit: {
+      static c3_w xuc_w = 0;
+
+      {
+        // fprintf(stderr, "exit %d\r\n", xuc_w);
+        // if ( 49 == xuc_w ) { abort(); }
+        xuc_w++;
+        break;
+      }
+    }
     case c3__foul:
     case c3__oops:
       abort();
@@ -950,7 +968,7 @@ u3m_soft_nock(u3_noun bus, u3_noun fol)
 /* u3m_soft_run(): descend into virtualization context.
 */
 u3_noun 
-u3m_soft_run(u3_noun fly,
+u3m_soft_run(u3_noun gul,
              u3_funq fun_f,
              u3_noun aga,
              u3_noun agb)
@@ -964,7 +982,7 @@ u3m_soft_run(u3_noun fly,
   /* Configure the new road.
   */
   {
-    u3R->ski.flu = u3nc(fly, u3to(u3_road, u3R->par_p)->ski.flu);
+    u3R->ski.gul = u3nc(gul, u3to(u3_road, u3R->par_p)->ski.gul);
     u3R->pro.don = u3to(u3_road, u3R->par_p)->pro.don;
     u3R->bug.tax = 0;
   }
@@ -1026,7 +1044,7 @@ u3m_soft_run(u3_noun fly,
   /* Release the arguments.
   */
   {
-    u3z(fly);
+    u3z(gul);
     u3z(aga);
     u3z(agb);
   }
@@ -1039,15 +1057,15 @@ u3m_soft_run(u3_noun fly,
 /* u3m_soft_esc(): namespace lookup.  Produces direct result.
 */
 u3_noun
-u3m_soft_esc(u3_noun sam)
+u3m_soft_esc(u3_noun ref, u3_noun sam)
 {
-  u3_noun why, fly, pro;
+  u3_noun why, gul, pro;
  
   /* Assert preconditions. 
   */
   {
-    c3_assert(0 != u3R->ski.flu);
-    fly = u3h(u3R->ski.flu);
+    c3_assert(0 != u3R->ski.gul);
+    gul = u3h(u3R->ski.gul);
   }
 
   /* Record the cap, and leap.
@@ -1057,7 +1075,7 @@ u3m_soft_esc(u3_noun sam)
   /* Configure the new road.
   */
   {
-    u3R->ski.flu = u3t(u3to(u3_road, u3R->par_p)->ski.flu);
+    u3R->ski.gul = u3t(u3to(u3_road, u3R->par_p)->ski.gul);
     u3R->pro.don = u3to(u3_road, u3R->par_p)->pro.don;
     u3R->bug.tax = 0;
   }
@@ -1065,7 +1083,7 @@ u3m_soft_esc(u3_noun sam)
   /* Trap for exceptions.
   */
   if ( 0 == (why = (u3_noun)_setjmp(u3R->esc.buf)) ) {
-    pro = u3n_slam_on(fly, sam);
+    pro = u3n_slam_on(gul, u3nc(ref, sam));
 
     /* Fall back to the old road, leaving temporary memory intact.
     */
@@ -1080,8 +1098,10 @@ u3m_soft_esc(u3_noun sam)
     u3m_bail(u3nc(4, u3m_love(why)));
   }
 
-  /* Release the sample.
+  /* Release the sample.  Note that we used it above, but in a junior
+  ** road, so its refcount is intact.
   */
+  u3z(ref);
   u3z(sam);
 
   /* Return the product.
@@ -1128,7 +1148,7 @@ u3m_soft(c3_w    sec_w,
 {
   u3_noun why;
  
-  why = u3m_soft_top(sec_w, (1 << 18), fun_f, arg);   // 512K pad
+  why = u3m_soft_top(sec_w, (1 << 20), fun_f, arg);   // 2MB pad
 
   if ( 0 == u3h(why) ) {
     return why;
@@ -1463,10 +1483,12 @@ _cm_init(c3_o chk_o)
                    MAP_ANON | MAP_PRIVATE,
                    -1, 0);
 
-      if ( -1 == (c3_ps)map_v ) {
-        fprintf(stderr, "boot: map failed twice\r\n");
-      } else {
-        fprintf(stderr, "boot: map failed - try U3_OS_LoomBase %p\r\n", map_v);
+      fprintf(stderr, "boot: mapping %dMB failed\r\n", (len_w / (1024 * 1024)));
+      fprintf(stderr, "see urbit.org/docs/user/install for adding swap space\r\n");
+      if ( -1 != (c3_ps)map_v ) {
+        fprintf(stderr, 
+                "if porting to a new platform, try U3_OS_LoomBase %p\r\n", 
+                map_v);
       }
       exit(1);
     }

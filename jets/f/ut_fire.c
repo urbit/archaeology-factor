@@ -7,6 +7,19 @@
 /* logic
 */
   static u3_noun
+  _fire_vet(u3_noun van)
+  {
+    // u3_noun vet = u3j_hook(u3k(van), "vet");
+    u3_noun vet = u3r_at(u3qfu_van_vet, van);
+
+    switch ( vet ) {
+      case c3n:
+      case c3y: return vet;
+      default: return u3m_bail(c3__fail);
+    }
+  }
+
+  static u3_noun
   _fire_mull(u3_noun van,
              u3_noun sut,
              u3_noun dox,
@@ -14,20 +27,27 @@
   {
     u3_noun rib = u3r_at(u3qfu_van_rib, van);
     u3_noun key = u3nt(u3k(sut),
-                               u3k(dox),
-                               u3k(gen));
+                       u3k(dox),
+                       u3k(gen));
     u3_noun ret;
 
+    if ( c3n == _fire_vet(van) ) {
+      ret = c3y;
+    }
     if ( c3y == u3qdi_has(rib, key) ) {
       ret = c3y;
     }
     else {
       u3_noun rob = u3qdi_put(rib, key);
       u3_noun von = u3i_molt(u3k(van),
-                                      u3qfu_van_rib, u3k(rob),
-                                      0);
-      ret = u3qfu_mull(von, sut, c3__noun, dox, gen);
+                             u3qfu_van_rib,
+                             u3k(rob),
+                             0);
+      u3_noun mul = u3qfu_mull(von, sut, c3__noun, dox, gen);
 
+      ret = c3y;
+  
+      u3z(mul);
       u3z(von);
       u3z(rob);
     }
@@ -58,8 +78,7 @@
 
       if ( c3__ash == u3h(gat) ) {
         if ( (c3y == vet) &&
-             (c3n == u3qfu_nest
-                (van, qq_typ, c3y, p_typ)) )
+             (c3n == u3qfu_nest(van, qq_typ, c3y, p_typ)) )
         {
 #if 0
           u3_noun dun = u3qfu_dunq(van, "need", qq_typ);
@@ -76,22 +95,24 @@
       }
       else {
         c3_assert(c3__elm == u3h(gat));
+#if 0
+        u3_noun dun = u3qfu_dunq(van, "wild", typ);
+        u3_noun niz = u3qfu_dunq(van, "tame", dox);
 
+        u3t_push(u3nc(c3__mean, dun));
+        u3t_push(u3nc(c3__mean, niz));
+#endif
         if ( (c3y == vet) &&
-             // (c3n == u3r_sing(p_typ, qq_typ)) &&
              (c3n == _fire_mull(van, typ, dox, t_gat)) )
         {
-#if 0
-          u3_noun dun = u3qfu_dunq(van, "wild", typ);
-          u3_noun niz = u3qfu_dunq(van, "tame", dox);
-
-          u3t_push(u3nc(c3__mean, dun));
-          u3t_push(u3nc(c3__mean, niz));
-#endif
           return u3m_error("fire-wet");
         }
         else {
           u3z(dox);
+#if 0
+          u3t_drop();
+          u3t_drop();
+#endif
           return u3nc(u3k(typ), u3k(t_gat));
         }
       }
@@ -99,8 +120,7 @@
   }
 
   static u3_noun
-  _fire_in(
-           u3_noun van,
+  _fire_in(u3_noun van,
            u3_noun vet,
            u3_noun hag)
   {
@@ -116,18 +136,18 @@
       } else {
         return u3nc
           (_fire_each(van, vet, u3h(i_hag), u3t(i_hag)),
-                  _fire_in(van, vet, t_hag));
+                      _fire_in(van, vet, t_hag));
       }
     }
   }
   u3_noun
-  _cqfu_fire(
-                        u3_noun van,
-                        u3_noun sut,
-                        u3_noun hag)
+  _cqfu_fire(u3_noun van,
+             u3_noun sut,
+             u3_noun hag)
   {
     u3_noun vet = u3r_at(u3qfu_van_vet, van);
 
+    c3_assert(!"not live");
     {
       if ( (c3y == u3du(hag)) && (u3_nul == u3t(hag)) ) {
         u3_noun i_hag = u3h(hag);
@@ -152,8 +172,7 @@
 /* boilerplate
 */
   u3_noun
-  u3wfu_fire(
-                       u3_noun cor)
+  u3wfu_fire(u3_noun cor)
   {
     u3_noun sut, hag, van;
 

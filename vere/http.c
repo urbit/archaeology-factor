@@ -134,7 +134,7 @@ _http_write_cb(uv_write_t* wri_u, c3_i sas_i)
 {
   _u3_write_t* ruq_u = (void *)wri_u;
 
-  if ( 0 != sas_i ) {
+  if ( (u3C.wag_w & u3o_verbose) && 0 != sas_i && UV__EPIPE != sas_i ) {
     uL(fprintf(uH, "http: write: ERROR %d\n", sas_i));
     uL(fprintf(uH, "  (%s)\n", uv_strerror(sas_i)));
   }
@@ -950,20 +950,26 @@ _http_respond(u3_hrep* rep_u)
   u3_hreq* req_u;
 
   if ( !(htp_u = _http_serv_find(rep_u->sev_l)) ) {
-    uL(fprintf(uH, "http: server not found: %x\r\n", rep_u->sev_l));
+    if ( (u3C.wag_w & u3o_verbose) ) {
+      uL(fprintf(uH, "http: server not found: %x\r\n", rep_u->sev_l));
+    }
     return;
   }
   if ( !(hon_u = _http_conn_find(htp_u, rep_u->coq_l)) ) {
-    uL(fprintf(uH, "http: connection not found: %x/%d\r\n",
-                   rep_u->sev_l,
-                   rep_u->coq_l));
+    if ( (u3C.wag_w & u3o_verbose) ) {
+      uL(fprintf(uH, "http: connection not found: %x/%d\r\n",
+                     rep_u->sev_l,
+                     rep_u->coq_l));
+    }
     return;
   }
   if ( !(req_u = _http_req_find(hon_u, rep_u->seq_l)) ) {
-    uL(fprintf(uH, "http: request not found: %x/%d/%d\r\n",
+    if ( (u3C.wag_w & u3o_verbose) ) {
+      uL(fprintf(uH, "http: request not found: %x/%d/%d\r\n",
                     rep_u->sev_l,
                     rep_u->coq_l,
                     rep_u->seq_l));
+    }
     return;
   }
 #if 0
@@ -1054,9 +1060,11 @@ _http_start(u3_http* htp_u)
         uL(fprintf(uH, "http: listen: %s\n", uv_strerror(ret)));
       }
     }
+#if 1
     uL(fprintf(uH, "http: live (%s) on %d\n",
                    (c3y == htp_u->sec) ? "\"secure\"" : "insecure",
                    htp_u->por_w));
+#endif
     break;
   }
 }

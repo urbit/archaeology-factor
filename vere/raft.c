@@ -1856,7 +1856,7 @@ _raft_grab(u3_noun ova)
 {
   if ( u3_nul != u3A->sac ) {
     c3_w usr_w = 0, ova_w = 0, sac_w = 0, utv_w = 0, utm_w = 0, wep_w = 0,
-         har_w = 0, das_w = 0, flu_w = 0, tax_w = 0, mer_w = 0, don_w = 0,
+         har_w = 0, das_w = 0, gul_w = 0, tax_w = 0, mer_w = 0, don_w = 0,
          day_w = 0, car_w = 0;
 
     c3_assert( u3R == &(u3H->rod_u) );
@@ -1886,9 +1886,9 @@ _raft_grab(u3_noun ova)
     fprintf(stderr, "  cold jet state: ");
     _raft_print_memory(das_w);
 
-    flu_w = u3a_mark_noun(u3R->ski.flu);
+    gul_w = u3a_mark_noun(u3R->ski.gul);
     fprintf(stderr, "  namespace: ");
-    _raft_print_memory(flu_w);
+    _raft_print_memory(gul_w);
 
     tax_w = u3a_mark_noun(u3R->bug.tax);
     fprintf(stderr, "  trace stack list: ");
@@ -1910,7 +1910,7 @@ _raft_grab(u3_noun ova)
     fprintf(stderr, "  memoization: ");
     _raft_print_memory(car_w);
      
-    utm_w = har_w + das_w + flu_w + tax_w + mer_w + don_w + day_w + car_w;
+    utm_w = har_w + das_w + gul_w + tax_w + mer_w + don_w + day_w + car_w;
     fprintf(stderr, "total road stuff: ");
     _raft_print_memory(utm_w);
 
@@ -1981,12 +1981,22 @@ u3_raft_work(void)
       ova = u3kb_flop(u3A->roe);
       u3A->roe = u3_nul;
 
+      u3_noun hed = (u3_nul == ova) ? u3_nul : u3h(ova);
+
+      if ( u3_nul != hed ) {
+        u3_term_ef_blit(0, u3nc(u3nc(c3__bee, u3k(hed)), u3_nul));
+      }
+
       while ( u3_nul != ova ) {
         _raft_punk(u3k(u3t(u3h(ova))));
         c3_assert(u3_nul == u3h(u3h(ova)));
 
         nex = u3k(u3t(ova));
         u3z(ova); ova = nex;
+      }
+
+      if ( u3_nul != hed ) {
+        u3_term_ef_blit(0, u3nc(u3nc(c3__bee, u3_nul), u3_nul));
       }
     }
 

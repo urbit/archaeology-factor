@@ -17,6 +17,7 @@
 #include <termios.h>
 #include <term.h>
 #include <dirent.h>
+#include <openssl/ssl.h>
 
 #define U3_GLOBAL
 #define C3_GLOBAL
@@ -71,38 +72,41 @@ _main_getopt(c3_i argc, c3_c** argv)
   u3_Host.ops_u.dem = c3n;
   u3_Host.ops_u.fog = c3n;
   u3_Host.ops_u.fak = c3n;
+  u3_Host.ops_u.tex = c3n;
   u3_Host.ops_u.pro = c3n;
   u3_Host.ops_u.dry = c3n;
   u3_Host.ops_u.veb = c3n;
   u3_Host.ops_u.qui = c3n;
   u3_Host.ops_u.nuu = c3n;
   u3_Host.ops_u.mem = c3n;
+  u3_Host.ops_u.rep = c3n;
   u3_Host.ops_u.kno_w = DefaultKernel;
 
-  while ( (ch_i = getopt(argc, argv, "I:w:t:X:f:k:l:n:p:r:LabcdgqvFMPD")) != -1 ) {
+  while ( (ch_i=getopt(argc, argv,"I:w:t:f:k:l:n:p:r:LabcdgqvxFMPDXR")) != -1 ) {
     switch ( ch_i ) {
       case 'M': {
         u3_Host.ops_u.mem = c3y;
         break;
       }
       case 'I': {
-        u3_Host.ops_u.imp_c = strdup(optarg);
+        u3_Host.ops_u.imp_c = _main_presig(optarg);
         break;
       }
       case 'w': {
         u3_Host.ops_u.who_c = _main_presig(optarg);
         u3_Host.ops_u.nuu = c3y;
-        u3_Host.dir_c = strdup(1 + u3_Host.ops_u.who_c);
         break;
       }
       case 't': {
         u3_Host.ops_u.tic_c = _main_presig(optarg);
         break;
       }
+      case 'x': {
+        u3_Host.ops_u.tex = c3y;
+        break;
+      }
       case 'X': {
-        if ( 0 != strcmp("wtf", optarg) ) {
-          return c3n;
-        } else u3_Host.ops_u.fog = c3y;
+        u3_Host.ops_u.fog = c3y;
         break;
       }
       case 'f': {
@@ -137,6 +141,10 @@ _main_getopt(c3_i argc, c3_c** argv)
         u3_Host.ops_u.raf_c = strdup(optarg);
         break;
       }
+      case 'R': {
+        u3_Host.ops_u.rep = c3y;
+        return c3y;
+      }
       case 'L': { u3_Host.ops_u.loh = c3y; break; }
       case 'F': {
         u3_Host.ops_u.loh = c3y;
@@ -163,6 +171,13 @@ _main_getopt(c3_i argc, c3_c** argv)
     return c3n;
   }
 
+  if ( u3_Host.ops_u.tic_c == 0 && u3_Host.ops_u.who_c != 0 ) {
+      c3_c tic_c[29];
+      printf("your ticket: ~");
+      scanf("%28s",tic_c);
+      u3_Host.ops_u.tic_c = _main_presig(tic_c);
+  }
+
   if ( c3y == u3_Host.ops_u.bat ) {
     u3_Host.ops_u.dem = c3y;
     u3_Host.ops_u.nuu = c3y;
@@ -180,6 +195,10 @@ _main_getopt(c3_i argc, c3_c** argv)
         exit(1);
       }
     }
+  }
+
+  if ( argc != (optind + 1) && u3_Host.ops_u.who_c != 0 ) {
+    u3_Host.dir_c = strdup(1 + u3_Host.ops_u.who_c);
   }
 
   if ( argc != (optind + 1) ) {
@@ -203,8 +222,45 @@ _main_getopt(c3_i argc, c3_c** argv)
 static void
 u3_ve_usage(c3_i argc, c3_c** argv)
 {
-  fprintf(stderr, "%s: usage: [-v] [-k stage] [-p ames_port] computer\n",
-                  argv[0]);
+#if 0
+  c3_c *use_c[] = {"Usage: %s [options...] computer\n",
+    "-c pier       Create a new urbit in pier/\n",
+    "-w name       Immediately upgrade to ~name\n",
+    "-t ticket     Use ~ticket automatically\n",
+    "-I galaxy     Start as ~galaxy\n",
+    "-F            Fake keys\n",
+    "-L            Local-only network\n",
+    "-n host       Set unix hostname\n",
+    "-p ames_port  Set the HTTP port to bind to\n",
+    "-v            Verbose\n",
+    "-q            Quiet\n",
+    "-D            Recompute from events\n",
+    "-P            Profiling\n",
+    "-b            Batch create\n",
+    "-d            Daemon mode\n",
+    "-g            Set GC flag\n",
+    "-x            Exit immediately\n",
+    "-r host       Initial peer address\n",
+    "-l port       Initial peer port\n",
+    "-M            Memory madness\n",
+    "-f            Fuzz testing\n",
+    "-k stage      Start at Hoon kernel version stage\n",
+    "-R            Report urbit build info\n",
+    "-Xwtf         Skip last event\n"};
+#else
+  c3_c *use_c[] = {
+    "simple usage: \n",
+    "   %s -c <mycomet> to create a comet (anonymous urbit)\n",
+    "   %s -w <myplanet> -t <myticket> if you have a ticket\n",
+    "   %s <myplanet or mycomet> to restart an existing urbit\n",
+    0
+  };
+#endif
+
+  c3_i i;
+  for ( i=0; use_c[i]; i++ ) {
+    fprintf(stderr, use_c[i], argv[0]);
+  }
   exit(1);
 }
 
@@ -304,6 +360,24 @@ interrupt_handler(int x)
 
 #define GRAB
 
+static void
+report(void)
+{
+  printf("---------\nLibraries\n---------\n");
+  printf("gmp: %s\n", gmp_version);
+  printf("sigsegv: %d.%d\n", (libsigsegv_version >> 8) & 0xff, libsigsegv_version & 0xff);
+  printf("openssl: %s\n", SSLeay_version(SSLEAY_VERSION));
+  printf("curses: %s\n", curses_version());
+  printf("libuv: %s\n", uv_version_string());
+}
+
+void
+_stop_exit(c3_i int_i)
+{
+  fprintf(stderr, "\r\n[received keyboard stop signal, exiting]\r\n");
+  u3_lo_bail();
+}
+
 c3_i
 main(c3_i   argc,
      c3_c** argv)
@@ -315,7 +389,50 @@ main(c3_i   argc,
     return 1;
   }
 
+  if ( c3y == u3_Host.ops_u.rep ) {
+    report();
+    return 0;
+  }
+
+  if ( c3y == u3_Host.ops_u.nuu ) {
+    struct stat s;
+    if ( !stat(u3_Host.dir_c, &s) ) {
+      fprintf(stderr, "tried to create, but %s already exists\n", u3_Host.dir_c);
+      fprintf(stderr, "normal usage: %s %s\n", argv[0], u3_Host.dir_c);
+      exit(1);
+    }
+  } else {
+    struct stat s;
+    if ( -1 == stat(u3_Host.dir_c, &s) ) {
+      fprintf(stderr, "%s: urbit not found\n", u3_Host.dir_c);
+      u3_ve_usage(argc, argv);
+    }
+  }
+
+#if 0
+  if ( 0 == getuid() ) {
+    chroot(u3_Host.dir_c);
+    u3_Host.dir_c = "/";
+  }
+#endif
   u3_ve_sysopt();
+
+  //  Block profiling signal, which should be delievered to exactly one thread.
+  //
+  if ( _(u3_Host.ops_u.pro) ) {
+    sigset_t set;
+
+    sigemptyset(&set);
+    sigaddset(&set, SIGPROF);
+    if ( 0 != pthread_sigmask(SIG_BLOCK, &set, NULL) ) {
+      perror("pthread_sigmask");
+      exit(1);
+    }
+  }
+
+  //  Handle SIGTSTP as if it was SIGTERM.
+  //
+  signal(SIGTSTP, _stop_exit);
 
   printf("~\n");
   //  printf("welcome.\n");

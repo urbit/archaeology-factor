@@ -253,6 +253,15 @@
           c3_w len_w;                       //  present length
           c3_w wid_w;                       //  total width
         } fut;
+
+        struct {
+          uv_thread_t* sit_u;               //  spinner thread
+          c3_o         diz_o;               //  spinner activated
+          c3_d         eve_d;               //  spinner start tick (unix μs)
+          c3_c*        why_c;               //  spinner event wire (root only)
+        } sun;
+
+        uv_mutex_t     mex_u;               //  mutex for non-daemon term state
       } u3_utat;
 
     /* u3_uled: event log header.
@@ -532,7 +541,8 @@
         c3_o    gab;                        //  -g
         c3_o    dem;                        //  -d, daemon
         c3_o    dry;                        //  -D, dry compute  
-        c3_o    fog;                        //  -Xwtf, skip last event
+        c3_o    tex;                        //  -x, exit after loading
+        c3_o    fog;                        //  -X, skip last event
         c3_o    fak;                        //  -F, fake carrier
         c3_o    loh;                        //  -L, local-only networking
         c3_o    pro;                        //  -P, profile
@@ -541,6 +551,7 @@
         c3_o    qui;                        //  -q, quiet
         c3_o    vno;                        //  -V, turn on +verb
         c3_o    mem;                        //  -M, memory madness
+        c3_o    rep;                        //  -R, report build info
       } u3_opts;
 
     /* u3_host: entire host.
@@ -819,7 +830,7 @@
         void
         u3_term_ef_bake(u3_noun  fav);
 
-      /* u3_term_ef_blit(): send %blit effect to to terminal.
+      /* u3_term_ef_blit(): send %blit effect to terminal.
       */
         void
         u3_term_ef_blit(c3_l    tid_l,
@@ -950,7 +961,7 @@
         void
         u3_unix_ef_ogre(u3_noun mon);
 
-      /* u3_unix_ef_ogre(): delete mount point
+      /* u3_unix_ef_hill(): enumerate mount points
       */
         void
         u3_unix_ef_hill(u3_noun hil);
