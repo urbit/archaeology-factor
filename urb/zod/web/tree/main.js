@@ -85,7 +85,7 @@ module.exports = {
 };
 
 
-},{"../dispatcher/Dispatcher.coffee":18,"../persistence/TreePersistence.coffee":20}],2:[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":19,"../persistence/TreePersistence.coffee":21}],2:[function(require,module,exports){
 var BodyComponent, Dpad, Nav, Sibs, TreeActions, TreeStore, a, button, clas, div, li, query, reactify, recl, ref, rend, ul, util;
 
 clas = require('classnames');
@@ -357,7 +357,7 @@ module.exports = query({
 }));
 
 
-},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":21,"../utils/util.coffee":23,"./Async.coffee":3,"./BodyComponent.coffee":4,"./DpadComponent.coffee":7,"./Reactify.coffee":13,"./SibsComponent.coffee":16,"classnames":24}],3:[function(require,module,exports){
+},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":22,"../utils/util.coffee":24,"./Async.coffee":3,"./BodyComponent.coffee":4,"./DpadComponent.coffee":8,"./Reactify.coffee":14,"./SibsComponent.coffee":17,"classnames":25}],3:[function(require,module,exports){
 var TreeActions, TreeStore, _load, code, div, recl, ref, span;
 
 _load = require('./LoadComponent.coffee');
@@ -473,8 +473,8 @@ module.exports = function(queries, Child, load) {
 };
 
 
-},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":21,"./LoadComponent.coffee":11}],4:[function(require,module,exports){
-var Comment, TreeActions, a, clas, div, extras, img, input, load, p, query, reactify, recl, ref, rele, util;
+},{"../actions/TreeActions.coffee":1,"../stores/TreeStore.coffee":22,"./LoadComponent.coffee":12}],4:[function(require,module,exports){
+var Comments, TreeActions, a, clas, div, extras, img, input, load, p, query, reactify, recl, ref, rele, util;
 
 clas = require('classnames');
 
@@ -486,6 +486,8 @@ reactify = require('./Reactify.coffee');
 
 TreeActions = require('../actions/TreeActions.coffee');
 
+Comments = require('./CommentsComponent.coffee');
+
 util = require('../utils/util.coffee');
 
 recl = React.createClass;
@@ -493,12 +495,6 @@ recl = React.createClass;
 rele = React.createElement;
 
 ref = React.DOM, div = ref.div, p = ref.p, img = ref.img, a = ref.a, input = ref.input;
-
-Comment = function(arg) {
-  var body, time;
-  time = arg.time, body = arg.body;
-  return div({}, "" + (new Date(time)), reactify(body));
-};
 
 extras = {
   spam: recl({
@@ -567,44 +563,7 @@ extras = {
       return div({}, "");
     }
   })),
-  comments: query({
-    comt: 'j',
-    path: 't'
-  }, recl({
-    displayName: "Comments",
-    getInitialState: function() {
-      return {
-        loading: false
-      };
-    },
-    componentDidUpdate: function(_props) {
-      if (this.props.comt.length > _props.comt.length) {
-        return this.setState({
-          loading: false
-        });
-      }
-    },
-    onKeyDown: function(e) {
-      if ("Enter" === e.key) {
-        this.setState({
-          loading: true
-        });
-        return TreeActions.addComment(this.props.path, this.refs["in"].value);
-      }
-    },
-    render: function() {
-      return div({}, "Add comment:", (this.state.loading ? rele(load) : input({
-        className: "comment",
-        type: "text",
-        ref: "in",
-        onKeyDown: this.onKeyDown
-      })), this.props.comt.map(function(props, key) {
-        return rele(Comment, _.extend({
-          key: key
-        }, props));
-      }));
-    }
-  })),
+  comments: Comments,
   footer: recl({
     displayName: "Footer",
     render: function() {
@@ -658,7 +617,7 @@ module.exports = query({
 }));
 
 
-},{"../actions/TreeActions.coffee":1,"../utils/util.coffee":23,"./Async.coffee":3,"./LoadComponent.coffee":11,"./Reactify.coffee":13,"classnames":24}],5:[function(require,module,exports){
+},{"../actions/TreeActions.coffee":1,"../utils/util.coffee":24,"./Async.coffee":3,"./CommentsComponent.coffee":6,"./LoadComponent.coffee":12,"./Reactify.coffee":14,"classnames":25}],5:[function(require,module,exports){
 var div, recl, ref, textarea;
 
 recl = React.createClass;
@@ -682,6 +641,101 @@ module.exports = recl({
 
 
 },{}],6:[function(require,module,exports){
+var Comment, TreeActions, a, clas, div, form, img, input, load, p, query, reactify, recl, ref, rele, textarea, util;
+
+clas = require('classnames');
+
+load = require('./LoadComponent.coffee');
+
+query = require('./Async.coffee');
+
+reactify = require('./Reactify.coffee');
+
+TreeActions = require('../actions/TreeActions.coffee');
+
+util = require('../utils/util.coffee');
+
+recl = React.createClass;
+
+rele = React.createElement;
+
+ref = React.DOM, div = ref.div, p = ref.p, img = ref.img, a = ref.a, form = ref.form, textarea = ref.textarea, input = ref.input;
+
+Comment = function(arg) {
+  var body, time;
+  time = arg.time, body = arg.body;
+  return div({
+    className: "comment"
+  }, "" + (window.urb.util.toDate(new Date(time))), reactify(body));
+};
+
+module.exports = query({
+  comt: 'j',
+  path: 't'
+}, recl({
+  displayName: "Comments",
+  getInitialState: function() {
+    return {
+      loading: false,
+      value: ""
+    };
+  },
+  componentDidUpdate: function(_props) {
+    if (this.props.comt.length > _props.comt.length) {
+      return this.setState({
+        loading: false
+      });
+    }
+  },
+  onSubmit: function(e) {
+    TreeActions.addComment(this.props.path, this.refs["in"].comment.value);
+    this.setState({
+      loading: true,
+      value: ""
+    });
+    return e.preventDefault();
+  },
+  onChange: function(e) {
+    return this.setState({
+      value: e.target.value
+    });
+  },
+  render: function() {
+    var _attr, inputAttr, textareaAttr;
+    _attr = {};
+    if (this.state.loading === true) {
+      _attr.disabled = "true";
+    }
+    textareaAttr = _.create(_attr, {
+      type: "text",
+      name: "comment",
+      value: this.state.value,
+      onChange: this.onChange
+    });
+    inputAttr = _.create(_attr, {
+      type: "submit",
+      value: "Add comment",
+      className: "btn btn-primary"
+    });
+    return div({}, div({
+      className: "add-comment"
+    }, [
+      form({
+        ref: "in",
+        onSubmit: this.onSubmit
+      }, [textarea(textareaAttr), input(inputAttr)])
+    ]), (this.state.loading === true ? rele(load) : ""), div({
+      className: "comments"
+    }, this.props.comt.map(function(props, key) {
+      return rele(Comment, _.extend({
+        key: key
+      }, props));
+    })));
+  }
+}));
+
+
+},{"../actions/TreeActions.coffee":1,"../utils/util.coffee":24,"./Async.coffee":3,"./LoadComponent.coffee":12,"./Reactify.coffee":14,"classnames":25}],7:[function(require,module,exports){
 var div, recl;
 
 recl = React.createClass;
@@ -705,7 +759,7 @@ module.exports = {
 };
 
 
-},{"./CodeMirror.coffee":5,"./EmailComponent.coffee":8,"./KidsComponent.coffee":9,"./ListComponent.coffee":10,"./ModuleComponent.coffee":12,"./ScriptComponent.coffee":14,"./SearchComponent.coffee":15,"./TocComponent.coffee":17}],7:[function(require,module,exports){
+},{"./CodeMirror.coffee":5,"./EmailComponent.coffee":9,"./KidsComponent.coffee":10,"./ListComponent.coffee":11,"./ModuleComponent.coffee":13,"./ScriptComponent.coffee":15,"./SearchComponent.coffee":16,"./TocComponent.coffee":18}],8:[function(require,module,exports){
 var a, div, recl, ref, util;
 
 util = require('../utils/util.coffee');
@@ -763,7 +817,7 @@ module.exports = React.createFactory(recl({
 }));
 
 
-},{"../utils/util.coffee":23}],8:[function(require,module,exports){
+},{"../utils/util.coffee":24}],9:[function(require,module,exports){
 var button, div, input, p, reactify, recl, ref;
 
 reactify = require('./Reactify.coffee');
@@ -844,7 +898,7 @@ module.exports = recl({
 });
 
 
-},{"./Reactify.coffee":13}],9:[function(require,module,exports){
+},{"./Reactify.coffee":14}],10:[function(require,module,exports){
 var a, div, hr, li, query, reactify, recl, ref, ul;
 
 reactify = require('./Reactify.coffee');
@@ -925,7 +979,7 @@ module.exports = query({
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":13}],10:[function(require,module,exports){
+},{"./Async.coffee":3,"./Reactify.coffee":14}],11:[function(require,module,exports){
 var a, clas, div, h1, li, pre, query, reactify, recl, ref, span, ul, util;
 
 clas = require('classnames');
@@ -1082,7 +1136,7 @@ module.exports = query({
 }));
 
 
-},{"../utils/util.coffee":23,"./Async.coffee":3,"./Reactify.coffee":13,"classnames":24}],11:[function(require,module,exports){
+},{"../utils/util.coffee":24,"./Async.coffee":3,"./Reactify.coffee":14,"classnames":25}],12:[function(require,module,exports){
 var div, recl, ref, span;
 
 recl = React.createClass;
@@ -1120,7 +1174,7 @@ module.exports = recl({
 });
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var TreeActions, div, recl;
 
 recl = React.createClass;
@@ -1154,7 +1208,7 @@ module.exports = recl({
 });
 
 
-},{"../actions/TreeActions.coffee":1}],13:[function(require,module,exports){
+},{"../actions/TreeActions.coffee":1}],14:[function(require,module,exports){
 var TreeStore, Virtual, div, load, reactify, recl, ref, rele, span, walk;
 
 recl = React.createClass;
@@ -1242,7 +1296,7 @@ module.exports = _.extend(reactify, {
 });
 
 
-},{"../stores/TreeStore.coffee":21,"./LoadComponent.coffee":11}],14:[function(require,module,exports){
+},{"../stores/TreeStore.coffee":22,"./LoadComponent.coffee":12}],15:[function(require,module,exports){
 var recl, rele;
 
 recl = React.createClass;
@@ -1268,7 +1322,7 @@ module.exports = recl({
 });
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var a, div, input, query, reactify, recl, ref,
   slice = [].slice;
 
@@ -1406,7 +1460,7 @@ module.exports = query({
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":13}],16:[function(require,module,exports){
+},{"./Async.coffee":3,"./Reactify.coffee":14}],17:[function(require,module,exports){
 var a, clas, li, reactify, recl, ref, ul, util;
 
 util = require('../utils/util.coffee');
@@ -1467,7 +1521,7 @@ module.exports = React.createFactory(recl({
 }));
 
 
-},{"../utils/util.coffee":23,"./Reactify.coffee":13,"classnames":24}],17:[function(require,module,exports){
+},{"../utils/util.coffee":24,"./Reactify.coffee":14,"classnames":25}],18:[function(require,module,exports){
 var div, query, reactify, recl,
   slice = [].slice;
 
@@ -1595,7 +1649,7 @@ module.exports = query({
 }));
 
 
-},{"./Async.coffee":3,"./Reactify.coffee":13}],18:[function(require,module,exports){
+},{"./Async.coffee":3,"./Reactify.coffee":14}],19:[function(require,module,exports){
 module.exports = _.extend(new Flux.Dispatcher(), {
   handleServerAction: function(action) {
     return this.dispatch({
@@ -1612,7 +1666,7 @@ module.exports = _.extend(new Flux.Dispatcher(), {
 });
 
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var rend;
 
 rend = ReactDOM.render;
@@ -1640,7 +1694,7 @@ $(function() {
 });
 
 
-},{"./actions/TreeActions.coffee":1,"./components/AnchorComponent.coffee":2,"./components/BodyComponent.coffee":4,"./components/Components.coffee":6,"./utils/scroll.coffee":22,"./utils/util.coffee":23}],20:[function(require,module,exports){
+},{"./actions/TreeActions.coffee":1,"./components/AnchorComponent.coffee":2,"./components/BodyComponent.coffee":4,"./components/Components.coffee":7,"./utils/scroll.coffee":23,"./utils/util.coffee":24}],21:[function(require,module,exports){
 var dedup, util;
 
 util = require('../utils/util.coffee');
@@ -1716,7 +1770,7 @@ module.exports = {
 };
 
 
-},{"../utils/util.coffee":23}],21:[function(require,module,exports){
+},{"../utils/util.coffee":24}],22:[function(require,module,exports){
 var EventEmitter, MessageDispatcher, QUERIES, TreeStore, _curr, _data, _nav, _tree, _virt, clog;
 
 EventEmitter = require('events').EventEmitter.EventEmitter;
@@ -1985,7 +2039,7 @@ TreeStore.dispatchToken = MessageDispatcher.register(function(p) {
 module.exports = TreeStore;
 
 
-},{"../dispatcher/Dispatcher.coffee":18,"events":25}],22:[function(require,module,exports){
+},{"../dispatcher/Dispatcher.coffee":19,"events":26}],23:[function(require,module,exports){
 var scroll;
 
 scroll = {
@@ -2079,7 +2133,7 @@ scroll.init();
 module.exports = scroll;
 
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var _basepath;
 
 _basepath = window.urb.util.basepath("/");
@@ -2128,7 +2182,7 @@ module.exports = {
 };
 
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -2178,7 +2232,7 @@ module.exports = {
 	}
 }());
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2478,4 +2532,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},[19]);
+},{}]},{},[20]);

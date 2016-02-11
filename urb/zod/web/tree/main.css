@@ -64,7 +64,8 @@ img.logo.first {
 @media (max-width: 767px) {
   #head {
     top: 0;
-    z-index: 10; }
+    z-index: 10;
+    width: 100%; }
   #head.m-down,
   #head.m-up {
     position: absolute; }
@@ -127,20 +128,20 @@ img.logo.first {
     -webkit-transition: max-height 0.2s ease-in-out;
     -moz-transition: max-height 0.2s ease-in-out;
     transition: max-height 0.2s ease-in-out; }
+    .ctrl ul.nav {
+      line-height: 2rem;
+      margin: 0 0 2rem 0.9375rem; }
   .ctrl.open,
   .ctrl:hover {
     width: inherit;
     max-width: inherit; }
-  ul.nav {
-    line-height: 2rem;
-    margin-bottom: 2rem; }
+  .ctrl.open {
+    max-height: 12rem; }
   a.nav-link {
     font-size: 1rem; }
   .ctrl.open ul.nav {
     max-height: 9rem;
-    overflow-y: scroll; }
-  ul.nav {
-    margin-top: 1rem; } }
+    overflow-y: scroll; } }
 
 .navbar-toggler {
   font-size: 24px;
@@ -383,3 +384,41 @@ img.logo.first {
 .list.children h1 {
   font-weight: 500;
   font-size: 1.4rem; }
+
+.add-comment {
+  width: 100%;
+  border-top: 3px dotted #000;
+  margin-top: 6rem; }
+  .add-comment .btn {
+    font-size: .8rem; }
+  .add-comment textarea {
+    width: 66%;
+    display: block;
+    height: 12rem;
+    background-color: #F7F7F7;
+    border-bottom: 0;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    padding: .3rem; }
+
+.comments {
+  padding-top: 3rem; }
+  .comments .comment {
+    margin-top: 2rem; }
+    .comments .comment h3,
+    .comments .comment > span {
+      font-family: 'scp'; }
+    .comments .comment > span {
+      font-size: .8rem;
+      color: #B1B7BD; }
+    .comments .comment h3 {
+      padding-top: 0;
+      font-size: 1rem;
+      font-weight: 500; }
+    .comments .comment p {
+      width: 66%; }
+
+@media (max-width: 767px) {
+  .add-comment textarea,
+  .comments .comment p {
+    width: 100%; } }
