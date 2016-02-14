@@ -58,11 +58,14 @@ _t_ghetto(void)
       printf("%6d.%02dms: %9d ", 
               ms_w, (int) (d0.tv_usec % 1000) / 10,
               ((int) (u3R->pro.nox_d - b4_d)));
+      gettimeofday(&b4, 0);
+      b4_d = u3R->pro.nox_d;
 #else
       printf("%6d.%02dms ", 
               ms_w, (int) (d0.tv_usec % 1000) / 10);
       gettimeofday(&b4, 0);
       b4_d = u3R->pro.nox_d;
+#endif
     }
     else {
       printf("            ");
@@ -103,8 +106,9 @@ u3t_slog(u3_noun hod)
 void 
 u3t_shiv(u3_noun hod)
 {
+#ifdef GHETTO
   _t_ghetto();
-
+#endif
   if ( c3n == u3ud(hod) ) {
   }
   else {

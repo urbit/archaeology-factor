@@ -2156,12 +2156,12 @@
 ++  rump  ,[p=care q=case r=@tas s=path]                ::  relative path
 ++  saba  ,[p=ship q=@tas r=moar s=dome]                ::  patch/merge
 ++  sack  ,[p=ship q=ship]                              ::  incoming [our his]
+++  salt  ,@uv                                          ::  entropy
 ++  scar                                                ::  opaque duct
   $:  p=@ud                                             ::  bone sequence
       q=(map duct bone)                                 ::  by duct
       r=(map bone duct)                                 ::  by bone
   ==                                                    ::
-++  salt  ,@uv                                          ::  entropy
 ++  seal                                                ::  auth conversation
           $:  whu=(unit ship)                           ::  client identity
               pul=purl                                  ::  destination url
