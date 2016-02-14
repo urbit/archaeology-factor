@@ -23,6 +23,20 @@ else
   $(error unknown unix)
 endif
 
+# Only include/link with this if it exists.
+# (Mac OS X El Capitan clean install does not have /opt)
+ifneq (,$(wildcard /opt/local/.))
+  OPTLOCALINC=-I/opt/local/include
+  OPTLOCALLIB=-L/opt/local/lib
+endif
+
+# Only include/link with this if it exists.
+# (`brew install openssl` on Mac OS X El Capitan puts openssl here)
+ifneq (,$(wildcard /usr/local/opt/openssl/.))
+  OPENSSLINC=-I/usr/local/opt/openssl/include
+  OPENSSLLIB=-L/usr/local/opt/openssl/lib
+endif
+
 # Pick one of:
 #   little
 #   big
@@ -40,12 +54,12 @@ ifneq ($(UNAME),FreeBSD)
 CC=gcc
 CXX=g++
 CXXFLAGS=$(CFLAGS)
-CLD=g++ -O3 -L/usr/local/lib -L/opt/local/lib
+CLD=g++ -O3 -L/usr/local/lib  $(OPTLOCALLIB) $(OPENSSLLIB)
 else
 CC=cc
 CXX=c++
 CXXFLAGS=$(CFLAGS)
-CLD=c++ -O3 -L/usr/local/lib -L/opt/local/lib
+CLD=c++ -O3 -L/usr/local/lib  $(OPTLOCALLIB) $(OPENSSLLIB)
 endif
 
 ifeq ($(OS),osx)
@@ -75,7 +89,8 @@ MDEFINES=-DU3_OS_$(OS) -DU3_OS_ENDIAN_$(ENDIAN) -D U3_LIB=\"$(LIB)\"
 CFLAGS= $(COSFLAGS) -O3 -msse3 -ffast-math \
 	-funsigned-char \
 	-I/usr/local/include \
-	-I/opt/local/include \
+	$(OPTLOCALINC) \
+	$(OPENSSLINC) \
 	-I$(INCLUDE) \
 	-Ioutside/libuv_0.11/include \
 	-Ioutside/anachronism/include \
